@@ -172,6 +172,9 @@ body{min-height:100vh;min-height:100dvh}
 @media (max-height:760px){#stage .blk{width:min(var(--b,44px),5.4vh);height:min(var(--b,44px),5.4vh);width:min(var(--b,44px),5.4dvh);height:min(var(--b,44px),5.4dvh)}#stage{gap:16px}}
 @media (max-width:440px),(max-height:700px){#bctl .big{font-size:22px;padding:12px 18px;min-height:56px}}
 .rb.takeb{width:auto;min-width:120px;height:auto;min-height:72px;border-radius:40px;padding:10px 24px;font-size:clamp(24px,5vw,32px);white-space:nowrap}
+.five{display:inline-block;white-space:nowrap;margin:0 12px 6px 0}.tf2{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.nchip{display:inline-flex;align-items:center;justify-content:center;min-width:64px;min-height:64px;padding:0 14px;border-radius:20px;background:#ffe680;color:#4a2a00;font-weight:bold;cursor:pointer;vertical-align:middle}
+@media (max-height:700px){#start .hero{font-size:52px!important}#start h1{margin:6px 0}#start .big{margin:6px}}
 @media (max-height:480px){#stage .blk{width:min(var(--b,44px),8vh);height:min(var(--b,44px),8vh)}#stage{min-height:0}}
 </style></head><body>
 <div id="stars"></div><div id="burst"></div>
@@ -180,10 +183,10 @@ body{min-height:100vh;min-height:100dvh}
   <div style="display:flex;justify-content:flex-end"><button id="instStart" style="display:none;margin-right:auto;align-self:center;font-size:18px;padding:10px 16px;border-radius:22px;border:2px solid #fff6;background:#ffffff22;color:#fff;font-family:inherit">📲 Install app</button><button class="icon hold" id="gearBtn" aria-label="Grown-ups: press and hold for 2 seconds">⚙️</button></div>
   <div id="gearTip"></div>
   <h1>👸🚀 Space Princess</h1>
-  <div style="font-size:80px">🪐⭐🌙</div>
+  <div class="hero" style="font-size:80px">🪐⭐🌙</div>
+  <button class="big" id="advBtn" style="background:linear-gradient(#ffd36b,#f29a1a);box-shadow:0 8px 0 #9a5a05;font-size:clamp(30px,7vw,48px);padding:20px 34px">🗺️ Today's Adventure</button><br>
   <button class="big" id="playBtn">▶ Play!</button><br>
-  <button class="big alt" id="collBtn1">👑 My Stickers</button><br>
-  <button class="big" id="advBtn" style="background:linear-gradient(#ffd36b,#f29a1a);box-shadow:0 8px 0 #9a5a05">🗺️ Today's Adventure</button>
+  <button class="big alt" id="collBtn1">👑 My Stickers</button>
   <div id="days" style="font-size:clamp(20px,4.4vw,30px);color:#ffe680;margin:8px 0;min-height:1.3em"></div>
 </section>
 
@@ -334,6 +337,7 @@ const OBJ=["⭐","🌙","🪐","🚀","👑","💎","🦄","🌸","🍓","🧁"]
 const NAMES={"⭐":"stars","🌙":"moons","🪐":"planets","🚀":"rockets","👑":"crowns","💎":"gems","🦄":"unicorns","🌸":"flowers","🍓":"strawberries","🧁":"cupcakes"};
 const rep=(e,n)=>Array(n).fill(e).join("");
 const tapRep=(e,n)=>Array(n).fill(`<span class="tapme">${e}</span>`).join(""); // tappable count-along objects
+const tap5=(e,n)=>{let h="";for(let i=0;i<n;i+=5)h+=`<span class="five">${tapRep(e,Math.min(5,n-i))}</span>`;return h}; // rows of five with a gap after each five
 const NUMW=["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"];
 const an=n=>/^(eight|eleven|eighteen)/.test(NUMW[n])?"an":"a"; // "an eight", "an eleven", "an eighteen"
 const PICS=[["A","🍎","apple"],["B","🦋","butterfly"],["C","🐱","cat"],["D","🐶","dog"],["E","🥚","egg"],["F","🐟","fish"],["G","🍇","grapes"],["H","🎩","hat"],
@@ -371,23 +375,38 @@ function frame(n,o={}){const c=o.cells||10;let h='<div class="tf">';for(let i=0;
 const budH=(n,t)=>{const z=t===10?Math.max(12,Math.min(20,Math.floor(window.innerHeight*.2/10))):26;return `<div style="display:inline-flex;flex-direction:column;align-items:center">${buddy(n,{size:z,label:false}).outerHTML}<b class="bnum">${n}</b></div>`};
 const flashBox=h=>`<div class="qlook"><div class="qin">${h}</div><button class="peek big alt">👀 Peek</button></div>`;
 // ---------- challenges: each returns {say, show, prompt, choices:[{label,val}], ans, hint} ----------
+const MAXL=5; // levels 0-5; planets without maxl stay at 0-3
 const PLANETS=[
- {id:"count",name:"Counting",icon:"⭐",col:"#ff9a3c",gen(l){const max=[5,7,10,10][l];const n=R(1,max),e=pick(OBJ);
-   return {prompt:"How many?",show:tapRep(e,n),say:`How many ${NAMES[e]} can you count?`,choices:numOpts(n,1,max,l<1?3:4),ans:n,item:`C:${n}`,cheer:"count",
-   hint:`Let's tap each one and count together: ${Array.from({length:n},(_,i)=>NUMW[i+1]).join(", ")}!`}}},
- {id:"add",name:"Adding",icon:"➕",col:"#3cc9ff",gen(l){if(l>=1&&Math.random()<(l>=2?.5:.3)){const a=R(2,l>=2?10:6),b=R(1,a-1),e=pick(OBJ); // Take away: she taps b objects to float them away, then counts what is left
+ {id:"count",name:"Counting",icon:"⭐",col:"#ff9a3c",maxl:MAXL,gen(l){const max=[5,7,10,10,15,20][l];const n=R(1,max),e=pick(OBJ);const nums=Array.from({length:n},(_,i)=>NUMW[i+1]);
+   return {prompt:"How many?",show:max>10?tap5(e,n):tapRep(e,n),say:`How many ${NAMES[e]} can you count?`,choices:numOpts(n,1,max,l<1?3:4),ans:n,item:`C:${n}`,cheer:"count",
+   hint:`Let's tap each one and count together: ${nums.join(", ")}!`,...(n>10?{hintParts:["Let's tap each one and count together:",...nums]}:{})}}},
+ {id:"add",name:"Adding",icon:"➕",col:"#3cc9ff",maxl:MAXL,gen(l){const top=[6,6,10,10,15,20][l];if(l>=1&&Math.random()<(l>=2?.5:.3)){const a=R(2,top),b=R(1,a-1),e=pick(OBJ); // Take away: she taps b objects to float them away, then counts what is left
    return {take:true,b,prompt:`${a} − ${b} = ?`,show:`<div>${Array(a).fill(`<span class="tk">${e}</span>`).join("")}</div><div id="tacount" style="font-size:clamp(20px,4vw,30px);color:#ffe680;min-height:1.3em"></div>`,
-   say:`${NUMW[a]} take away ${NUMW[b]}. How many are left?`,choices:numOpts(a-b,Math.max(0,a-b-3),Math.min(10,a-b+3),l<1?3:4),ans:a-b,item:`T:${a}-${b}`,cheer:"take",hint:"Let's float some away, then count what's left!"}}
-   const max=[5,6,8,10][l];const a=R(1,max-1),b=R(1,max-a),e=pick(OBJ);
-   return {prompt:`${a} + ${b} = ?`,show:`${tapRep(e,a)} <span style="color:#ffe680">+</span> ${tapRep(e,b)}`,say:`${NUMW[a]} plus ${NUMW[b]}. How many altogether?`,
-   choices:numOpts(a+b,Math.max(1,a+b-3),Math.min(10,a+b+3),l<1?3:4),ans:a+b,item:`A:${a}+${b}`,cheer:"add",hint:`Tap all the ${NAMES[e]} and count together, starting at one!`}}},
+   say:`${NUMW[a]} take away ${NUMW[b]}. How many are left?`,choices:numOpts(a-b,Math.max(0,a-b-3),Math.min(top,a-b+3),l<1?3:4),ans:a-b,item:`T:${a}-${b}`,cheer:"take",hint:"Let's float some away, then count what's left!"}}
+   const max=[5,6,8,10,15,20][l];const a=R(1,max-1),b=R(1,max-a),e=pick(OBJ),tr=max>10?tap5:tapRep;
+   const o={prompt:`${a} + ${b} = ?`,show:`${tr(e,a)} <span style="color:#ffe680">+</span> ${tr(e,b)}`,say:`${NUMW[a]} plus ${NUMW[b]}. How many altogether?`,
+   choices:numOpts(a+b,Math.max(1,a+b-3),Math.min(Math.max(10,max),a+b+3),l<1?3:4),ans:a+b,item:`A:${a}+${b}`,cheer:"add",hint:`Tap all the ${NAMES[e]} and count together, starting at one!`};
+   if(l>=2){const big=Math.max(a,b),sm=Math.min(a,b),ten=big<10&&a+b>10; // level 2+: count on from the bigger number; crossing ten: make ten first
+    o.hint=ten?`Make ten first! ${NUMW[big]} and ${NUMW[10-big]} make ten. Then count on!`:`Start with the bigger number, ${NUMW[big]}. Now count on!`;
+    o.hintParts=ten?["Make ten first!",`${NUMW[big]} and ${NUMW[10-big]} make ten.`,"Then count on!"]:["Start with the bigger number:",NUMW[big],"Now count on!"];
+    o.onHint=()=>{o.countFrom=big;$("visual").innerHTML=`<span class="nchip" role="button" aria-label="${big}">${big}</span> <span style="color:#ffe680">+</span> ${tr(e,sm)}`;$("visual").querySelector(".nchip").onclick=()=>say(NUMW[big]);wireTaps()}}
+   return o}},
  {id:"num",name:"Numbers",icon:"🔢",col:"#8b5cf6",gen(l){const max=[5,10,10,20][l];const n=R(0+(l<2?1:0),max);
    return {prompt:"Find the number!",show:"🔊",say:`Can you find the number ${NUMW[n]}?`,choices:numOpts(n,0,max,l<1?3:4),ans:n,item:`N:${n}`,hint:`Listen again: ${NUMW[n]}. Look carefully!`}}},
- {id:"more",name:"More or Less",icon:"⚖️",col:"#ff5fa2",gen(l){const max=[6,8,10,10][l];let a=R(1,max),b=R(1,max);while(a===b||(l<1&&Math.abs(a-b)<2))b=R(1,max);
-   const more=l<1||Math.random()<.5,e=pick(OBJ),f=pick(OBJ.filter(x=>x!==e));const ans=more?(a>b?"L":"R"):(a<b?"L":"R");
-   return {prompt:more?"Which has MORE?":"Which has FEWER?",show:"",say:more?"Which group has more?":"Which group has fewer?",
-   choices:[{label:rep(e,a),val:"L",small:true},{label:rep(f,b),val:"R",small:true}],ans,hint:more?"More means the bigger group. Count each side!":"Fewer means the smaller group. Count each side!"}}},
- {id:"quick",name:"Quick Look",icon:"👀",col:"#06b6d4",gen(l){const k=pick([["sub","sub","tf"],["sub","tf","k5"],["sub","more","k5","tf"],["sub","more","k10","k10"]][l]),e=pick(OBJ),nc=l<1?3:4;
+ {id:"more",name:"More or Less",icon:"⚖️",col:"#ff5fa2",maxl:MAXL,gen(l){const max=[6,8,10,10,15,20][l];
+   if(l>=4&&Math.random()<.5){const up=Math.random()<.5,n=up?R(1,max-1):R(2,max),ans=up?n+1:n-1; // one more / one less
+    return {prompt:up?`One more than ${n}?`:`One less than ${n}?`,show:`<div class="seq">${n}</div>`,say:up?`What is one more than ${NUMW[n]}?`:`What is one less than ${NUMW[n]}?`,
+    choices:numOpts(ans,Math.max(0,ans-3),Math.min(max,ans+3),4),ans,cheer:"more",hint:up?`One more means count on one: ${NUMW[n]}, ${NUMW[n+1]}!`:`One less means count back one: ${NUMW[n]}, ${NUMW[n-1]}!`,
+    hintParts:up?["One more means count on one:",NUMW[n],NUMW[n+1]]:["One less means count back one:",NUMW[n],NUMW[n-1]]}}
+   let v=null;for(let g=0;g<80&&!v;g++){const t=shuffle(Array.from({length:max},(_,i)=>i+1)).slice(0,3);if(l>=1||t.every((x,i)=>t.every((y,j)=>i===j||Math.abs(x-y)>=2)))v=t}if(!v)v=shuffle([1,3,5]);
+   const more=l<1||Math.random()<.5,em=shuffle(OBJ).slice(0,3),best=more?Math.max(...v):Math.min(...v),dig=l>=4; // three groups (no 50/50 guess); levels 4-5 compare numbers to 20
+   return {prompt:dig?(more?"Which number is more?":"Which number is less?"):more?"Which has MORE?":"Which has FEWER?",show:"",say:dig?(more?"Which number is more?":"Which number is less?"):more?"Which group has more?":"Which group has fewer?",
+   choices:v.map((x,i)=>({label:dig?`<span style="font-size:clamp(40px,9vw,64px)">${x}</span>`:rep(em[i],x),val:"ABC"[i],small:!dig})),ans:"ABC"[v.indexOf(best)],
+   hint:dig?(more?"The number we say later when we count is more!":"The number we say first when we count is less!"):more?"More means the bigger group. Count each group!":"Fewer means the smaller group. Count each group!"}}},
+ {id:"quick",name:"Quick Look",icon:"👀",col:"#06b6d4",gen(l){const k=pick([["sub","sub","tf"],["sub","tf","k5"],["sub","more","k5","tf"],["sub","more","k10","k10"],["sub","big","k10","near"],["big","big","near","k10"]][l]),e=pick(OBJ),nc=l<1?3:4;
+   const two10=n=>n>10?`<div class="tf2">${frame(10)}${frame(n-10)}</div>`:frame(n);
+   if(k==="big"){const hi=l>=5?20:15,n=R(11,hi);return {flash:true,prompt:"Quick look! How many?",show:flashBox(two10(n)),say:"Quick look! How many do you see?",choices:numOpts(n,Math.max(10,n-3),Math.min(hi,n+3),4),ans:n,item:`Q:${n}`,cheer:"quick",hint:"One full ten-frame is ten. Count on from ten!",hintParts:["One full ten-frame is ten.","Count on from ten!"]}}
+   if(k==="near"){const hi=l>=5?20:15,up=Math.random()<.5,n=up?R(2,hi-1):R(3,hi),ans=up?n+1:n-1;return {prompt:up?"One more?":"One less?",show:two10(n),say:`${NUMW[n]}. ${up?"What is one more?":"What is one less?"}`,sayParts:[NUMW[n],up?"What is one more?":"What is one less?"],choices:numOpts(ans,Math.max(1,ans-3),Math.min(hi,ans+3),4),ans,cheer:"frame",hint:up?"One more: add one dot and count on!":"One less: take one dot away and count back!"}}
    if(k==="sub"){const n=l>=2&&Math.random()<.5?R(6,10):R(1,5),hi=l>=2?10:5; // flash 1-5 (dice pattern), later 6-10 in a ten-frame (two rows of five)
     return {flash:true,prompt:"Quick look! How many?",show:flashBox(n<=5&&(l<1||Math.random()<.7)?dice(n,e):frame(n)),say:"Quick look! How many do you see?",choices:numOpts(n,1,hi,nc),ans:n,item:`Q:${n}`,cheer:"quick",hint:"Look again! Can you see little groups?"}}
    if(k==="tf"){const n=R(1,l<1?5:10);return {prompt:"How many?",show:frame(n,{tap:true}),say:"How many dots are in the ten-frame?",choices:numOpts(n,1,l<1?5:10,nc),ans:n,item:`F:${n}`,cheer:"frame",
@@ -413,10 +432,10 @@ const PLANETS=[
  {id:"blend",name:"Sound Blending",icon:"🧩",col:"#f97316",gen(l){const un=unlocked().map(x=>x.toLowerCase());
    const ok=BLEND.filter(w=>[...w[0]].every(c=>un.includes(c)));const w=pickLetterItem(ok,x=>[...x[0]].find(c=>GROUPS[LP.g].includes(c.toUpperCase()))?.toUpperCase());
    const snd=[...w[0]].map(c=>PHON[c.toUpperCase()]);if(Math.random()<.4)return Object.assign(segQ(w,snd),{item:`BL:${w[0]}`}); // 40% Segmenting (sound boxes), 60% Blending
-   const n=Math.min(ok.length,[2,3,4,4][l]);const ch=shuffle([w,...shuffle(ok.filter(x=>x!==w)).slice(0,n-1)]).map(x=>({label:x[1],val:x[0]}));
+   const n=Math.min(ok.length,[3,3,4,4,4,4][l]);const ch=shuffle([w,...shuffle(ok.filter(x=>x!==w)).slice(0,n-1)]).map(x=>({label:x[1],val:x[0]}));
    return {prompt:"Listen and blend!",show:tiles(w[0]),say:`Listen: ${snd.join("... ")}... What word is it?`,sayParts:["Listen:",...snd,"What word is it?"],choices:ch,ans:w[0],blend:snd,item:`BL:${w[0]}`,
    hint:`Listen: ${snd.join("... ")}. Put them together!`,hintParts:["Listen:",...snd,"Put them together!"]}}},
- {id:"rhyme",name:"Rhymes",icon:"🎵",col:"#14b8a6",gen(l){const r=pick(RHYME);const others=shuffle(RHYME.filter(x=>x!==r)).slice(0,l<1?1:2).map(x=>x[2]);
+ {id:"rhyme",name:"Rhymes",icon:"🎵",col:"#14b8a6",gen(l){const r=pick(RHYME);const others=shuffle(RHYME.filter(x=>x!==r)).slice(0,2).map(x=>x[2]);
    const ch=shuffle([r[2],...others]).map(x=>({label:x[1],val:x[0]}));
    return {prompt:`What rhymes with ${r[0]}?`,show:r[1],say:`What rhymes with ${r[0]}? ${ch.map(c=>c.val).join(", or ")}?`,choices:ch,ans:r[2][0],item:`R:${r[0]}`,hint:`Rhymes sound the same at the end, like ${r[0]} and... listen: ${ch.map(c=>c.val).join(", ")}.`,
    sayParts:[`What rhymes with ${r[0]}?`,...ch.map((c,i)=>i?`or ${c.val}`:c.val)],hintParts:[`Rhymes sound the same at the end, like ${r[0]} and... listen:`,...ch.map(c=>c.val)]}}}
@@ -447,11 +466,11 @@ let cur=null,q=null,round=0,tries=0,locked=false;let ROUNDS=5;
 let marks=[],pStars0=0,lastFin="",sameRuns=0; // marks: ⭐ first try / ✨ after a hint, per round
 let lastItem="",sinceRev=9; // review: only when >=3 questions since the last review (so at most 1 in 4); never the same item twice in a row
 const sig=x=>x.item||x.prompt+"|"+x.show+"|"+JSON.stringify(x.choices);
-function genQ(l){let x=null;
+function genQ(l){let x=null;l=Math.max(0,Math.min(l|0,cur.maxl??3)); // 4-level planets never see l>3
  if(sinceRev>=3&&MP[cur.id]&&Math.random()<.8){for(const id of mReview(MP[cur.id],lastItem).slice(0,3)){for(let i=0;i<60&&!x;i++){const y=cur.gen(l);if(y.item===id)x=y}if(x)break}} // weak/due item, if this level can make it
  if(x){x.review=1;sinceRev=0}else{sinceRev++;for(let i=0;i<20;i++){x=cur.gen(l);if(sig(x)!==lastItem)break}}
  lastItem=sig(x);return x}
-function lvl(){return S.level[cur.id]||(S.level[cur.id]={l:0,streak:0})}
+function lvl(){const L=S.level[cur.id]||(S.level[cur.id]={l:0,streak:0});L.l=Math.max(0,Math.min(MAXL,cur.maxl??3,L.l|0));L.streak=L.streak|0;return L}
 let nextT=0;function startPlanet(p){clearTimeout(nextT);ROUNDS=(typeof JR!=="undefined"&&JR)?4:5;cur=p;round=0;marks=[];pStars0=S.stars;show("game");preloadVoice([...CHEERS,...KIND,...ALMOST,...(CHEER_BY[p.id]||[]),...(p.id==="add"?CHEER_BY.take:[]),...(p.id==="quick"?[...CHEER_BY.frame,...CHEER_BY.bond]:[]),...NUMW.slice(1),...(p.id==="count"||p.id==="add"||p.id==="quick"?NUMW.slice(1).map(n=>`That's ${n}!`):[])]);next()}
 function next(){if(round>=ROUNDS)return finish();if(timeUp())return restScreen();locked=false;tries=0;vHook=null;clearBlendT();q=genQ(lvl().l);
  $("prog").textContent=marks.join("")+"☆".repeat(ROUNDS-round);
@@ -490,18 +509,18 @@ function answer(b,v){if(locked||b.classList.contains("no"))return;const L=lvl();
  if(q.item&&!q.mrec){q.mrec=1;mRec(q.item,v===q.ans&&tries===0)}
  if(v===q.ans){locked=true;b.classList.add("yes");sfx.yes();burst(b);const sk=CHEER_BY[q.cheer||cur.id],c=tries===0?(sk&&Math.random()<.6?pick(sk):pick(CHEERS)):pick(ALMOST);$("hint").textContent=c+(tries===0?" 🌟":" ✨");
   if(q.unlocked){$("hint").textContent=`${c} New letters: ${q.unlocked.join(" ").toLowerCase()} ✨`;say(c+" New letter sounds unlocked!",[c,"New letter sounds unlocked!"]);burst(b,24,true)}else say(c);
-  if(tries===0){L.streak++;if(L.streak>=3&&L.l<3){L.l++;L.streak=0}run++;if(run===3||run===5){burst(b,run===5?36:24,true);sfx["streak"+run]()}}
+  if(tries===0){L.streak++;if(L.streak>=3&&L.l<Math.min(MAXL,cur.maxl??3)){L.l++;L.streak=0}run++;if(run===3||run===5){burst(b,run===5?36:24,true);sfx["streak"+run]()}}
   if(tries===0){S.stars++;marks.push("⭐")}else{S.half=(S.half||0)+1;if(S.half>=2){S.half=0;S.stars++}marks.push("✨")}round++;save();$("princess").classList.remove("cheer");nextT=setTimeout(next,q.unlocked?3200:1700)}
  else{tries++;b.classList.add("no");sfx.no();L.streak=0;run=0;shake();if(tries>=2&&L.l>0&&tries===2)L.l--;
   if(q.flash){q.peekOff=1;const w=$("visual").querySelector(".qlook");if(w)w.classList.remove("hid")}if(q.onHint&&!q.hinted){q.hinted=1;q.onHint()} // run resets silently, no message
   const k=pick(KIND),t=k+" "+q.hint;$("hint").textContent=t;say(t,[k,...(q.hintParts||[q.hint])]);save()}}
 let run=0; // first-try correct answers in a row (this session)
 function shake(){const g=$("game");g.classList.remove("shake");void g.offsetWidth;g.classList.add("shake")}
-function wireTaps(){const it=[...$("visual").querySelectorAll(".tapme")];let k=0; // each object is counted ONCE (teaches one-to-one counting)
+function wireTaps(){const it=[...$("visual").querySelectorAll(".tapme")];const k0=(q&&q.countFrom)||0;let k=k0; // count on from a number chip when set; each object is counted ONCE (teaches one-to-one counting)
  it.forEach(s=>s.onclick=()=>{s.classList.remove("bounce");void s.offsetWidth;s.classList.add("bounce");
   if(s.dataset.n){say(NUMW[+s.dataset.n]);return} // already counted (✓): just replay its number
   k++;s.dataset.n=k;s.classList.add("done");tone(400+k*40,0,.15,"triangle");
-  if(k===it.length)say(`${NUMW[k]}! That's ${NUMW[k]}!`,[NUMW[k],`That's ${NUMW[k]}!`]);else say(NUMW[k])})}
+  if(k===k0+it.length)say(`${NUMW[k]}! That's ${NUMW[k]}!`,[NUMW[k],`That's ${NUMW[k]}!`]);else say(NUMW[k])})}
 function finish(){S.gems++;save();sfx.win();const before=Math.floor(pStars0/5),after=Math.floor(S.stars/5);
  const newSt=after>before?stickerFor(after):null;sameRuns=cur.id===lastFin?sameRuns+1:1;lastFin=cur.id;
  $("prompt").textContent="Planet complete! 💎";$("visual").innerHTML=`👸✨${newSt?"<br>New sticker: "+newSt:""}`;$("hint").textContent="";
@@ -597,7 +616,7 @@ function award(el,msg){S.stars++;const before=Math.floor((S.stars-1)/5),after=Ma
  const st=after>before?stickerFor(after):null;
  const m=msg||pick(CHEERS),t=m+(st?` New sticker: ${st}!`:"");if(st)buzz(HAPT.big);award.t=t;award.parts=st?[m,"New sticker!"]:null;$("bhint").textContent=t+" 🌟";return t}
 const BMODES=[{id:"build",name:"🧱 Build"},{id:"join",name:"🤝 Join"},{id:"split",name:"✂️ Split"},{id:"make",name:"👸 Make me!"},{id:"oddeven",name:"👯 Pairs"},{id:"stairs",name:"🪜 Stairs"}];
-let bmode="build",bN=1,bTarget=0,bSay="",bMax=()=>(S.blockMax||10);
+let bmode="build",bN=1,bTarget=0,bSay="",bMax=()=>(S.blockMax||20);
 let bParts=null;function bspeak(t){bSay=t;bParts=t===award.t?award.parts:null;say(t,bParts)}
 function openBlocks(m){show("blocks");preloadVoice([...NUMW.slice(1),...CHEERS]);$("bStar").textContent=S.stars;const tb=$("tabs");tb.innerHTML="";
  BMODES.forEach(x=>{const b=document.createElement("button");b.className="tab"+(x.id===(m||bmode)?" on":"");b.textContent=x.name;b.dataset.m=x.id;
@@ -746,7 +765,7 @@ function makePattern(){const ids=shuffle([0,1,2,3,4]).slice(0,R(2,3));const qq={
 function patternGen(l){if(l>=3&&Math.random()<.25)return makePattern();
  const type=pick([["AB"],["AB","AAB","ABB"],["AAB","ABB","ABC"],["AB","AAB","ABB","ABC","AABB"]][l]),ids=shuffle([0,1,2,3,4]);
  const core=[...type].map(ch=>ids[ch.charCodeAt(0)-65]),len=R(Math.max(4,core.length+2),Math.min(9,core.length*2+2)),seq=Array.from({length:len},(_,i)=>core[i%core.length]),ans=core[len%core.length];
- const others=[...new Set([...core,ids[3]])].filter(x=>x!==ans);const ch=shuffle([ans,...shuffle(others).slice(0,l<1?1:2)]).map(i=>({label:tokSVG(i,64),val:String(i)}));
+ const others=[...new Set([...core,ids[3]])].filter(x=>x!==ans);const ch=shuffle([ans,...shuffle(others).slice(0,2)]).map(i=>({label:tokSVG(i,64),val:String(i)}));
  const cw=seq.map(i=>TOK[i][0]);
  return {prompt:"What comes next?",show:`<div class="ptn">${seq.map(i=>tokSVG(i)).join("")}<span class="qm" style="font-size:44px">?</span></div>`,say:"What comes next in the pattern?",choices:ch,ans:String(ans),item:`PT:${type}`,cheer:"pattern",
   hint:`Say it with me: ${cw.join(", ")}... What comes next?`,hintParts:["Say it with me:",...cw,"What comes next?"]}}
@@ -757,21 +776,26 @@ function scaleSVG(a,b,left){const t=left?12:-12;return `<svg width="min(320px,86
  <g transform="rotate(${-t} 110 70)"><line x1="20" y1="70" x2="200" y2="70" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M5 72 Q35 100 65 72" fill="#7ad7ff"/><path d="M155 72 Q185 100 215 72" fill="#7ad7ff"/>
  <text x="35" y="66" font-size="34" text-anchor="middle">${a}</text><text x="185" y="66" font-size="34" text-anchor="middle">${b}</text></g></svg>`}
 const MOBJ=["🍎","🧸","📦","🎁","🪀","🧁","🍉","🎈"];
-function measureGen(l){const k=pick([["long","tall"],["long","tall","big","heavy"],["long","tall","big","heavy","order"],["long","tall","big","heavy","order"]][l]),[c1,c2,c3]=shuffle(SCOL);
+function measureGen(l){const k=pick([["long","tall"],["long","tall","big","heavy"],["long","tall","big","heavy","order"],["long","tall","big","heavy","order"]][l]),[c1,c2,c3]=shuffle(SCOL);const cs=[c1,c2,c3];
  const two=(lo,hi)=>{let a=R(lo,hi),b=R(lo,hi);while(Math.abs(a-b)<(hi-lo)/3)b=R(lo,hi);return [a,b]};const most=l<1||Math.random()<.5;
- if(k==="long"){const [a,b]=two(30,160);return {prompt:most?"Which is longer?":"Which is shorter?",show:"",say:most?"Which is longer?":"Which is shorter?",choices:[{label:bar(a,c1),val:"A"},{label:bar(b,c2),val:"B"}],ans:(a>b)===most?"A":"B",item:"MS:long",cheer:"measure",hint:"Line them up and look at the ends!"}}
- if(k==="tall"){const [a,b]=two(30,150);return {prompt:most?"Which is taller?":"Which is shorter?",show:"",say:most?"Which is taller?":"Which is shorter?",choices:[{label:tower(a,c1),val:"A"},{label:tower(b,c2),val:"B"}],ans:(a>b)===most?"A":"B",item:"MS:tall",cheer:"measure",hint:"Look at the tops! Which one reaches higher?"}}
- if(k==="big"){const s=pick(SH1),[a,b]=two(40,130);return {prompt:most?"Which is bigger?":"Which is smaller?",show:"",say:most?"Which is bigger?":"Which is smaller?",choices:[{label:shapeSVG(s,c1,a),val:"A"},{label:shapeSVG(s,c2,b),val:"B"}],ans:(a>b)===most?"A":"B",item:"MS:big",cheer:"measure",hint:"Look at how much space each one takes!"}}
+ const three=(lo,hi)=>{const d=(hi-lo)/3;return shuffle([R(lo,Math.round(lo+d*.6)),R(Math.round(lo+d),Math.round(lo+d*1.6)),R(Math.round(lo+d*2),hi)])},pk=v=>"ABC"[v.indexOf(most?Math.max(...v):Math.min(...v))]; // three items, clearly different
+ if(k==="long"){const v=three(30,160),t=most?"Which is the longest?":"Which is the shortest?";return {prompt:t,show:"",say:t,choices:v.map((w,i)=>({label:bar(w,cs[i]),val:"ABC"[i]})),ans:pk(v),item:"MS:long",cheer:"measure",hint:"Line them up and look at the ends!"}}
+ if(k==="tall"){const v=three(30,150),t=most?"Which is the tallest?":"Which is the shortest?";return {prompt:t,show:"",say:t,choices:v.map((w,i)=>({label:tower(w,cs[i]),val:"ABC"[i]})),ans:pk(v),item:"MS:tall",cheer:"measure",hint:"Look at the tops! Which one reaches highest?"}}
+ if(k==="big"){const s=pick(SH1),v=three(40,130),t=most?"Which is the biggest?":"Which is the smallest?";return {prompt:t,show:"",say:t,choices:v.map((w,i)=>({label:shapeSVG(s,cs[i],w),val:"ABC"[i]})),ans:pk(v),item:"MS:big",cheer:"measure",hint:"Look at how much space each one takes!"}}
  if(k==="heavy"){const [x,y]=shuffle(MOBJ).slice(0,2),leftHeavy=Math.random()<.5;return {prompt:most?"Which is heavier?":"Which is lighter?",show:scaleSVG(x,y,leftHeavy),say:most?"Which is heavier?":"Which is lighter?",
   choices:[{label:x,val:"A"},{label:y,val:"B"}],ans:leftHeavy===most?"A":"B",item:"MS:heavy",cheer:"measure",hint:"The heavy side of the scale goes down!"}}
- const ls=shuffle([R(30,60),R(75,105),R(120,160)]),order=ls.map((v,i)=>[v,i]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]),cs=[c1,c2,c3];
+ const ls=shuffle([R(30,60),R(75,105),R(120,160)]),order=ls.map((v,i)=>[v,i]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
  const qq={prompt:"Tap from shortest to longest!",show:`<div class="ordr">${ls.map((w,i)=>`<button data-i="${i}" aria-label="bar">${bar(w,cs[i])}</button>`).join("")}</div>`,say:"Tap from shortest to longest!",choices:[],ans:"ok",order,item:"MS:order",cheer:"measure",hint:"Find the shortest one first!",
   wire(){let k2=0;$("visual").querySelectorAll(".ordr button").forEach(b=>b.onclick=()=>{if(q!==qq||locked||b.classList.contains("done"))return;
    if(+b.dataset.i===order[k2]){b.classList.add("done");tone(500+k2*120,0,.15,"triangle");say(k2===0?"Shortest!":k2===2?"Longest!":"Next!");k2++;if(k2===3)setTimeout(()=>{if(q===qq)answer(dummyBtn(),"ok")},600)}
    else{tries++;sfx.no();shake();const t=pick(KIND)+" "+qq.hint;$("hint").textContent=t;say(t,[pick(KIND),qq.hint])}})}};return qq}
 // ---------- tens and ones ----------
 const pvHTML=n=>{const t=Math.floor(n/10),o=n%10;return `<div class="pv">${Array(t).fill(`<div class="pvrod">${"<i></i>".repeat(10)}<b>10</b></div>`).join("")}${o?`<div class="ones">${'<span class="pvone"></span>'.repeat(o)}</div>`:""}</div>`};
-function tensGen(l){const k=pick([["teen"],["teen","next","before"],["teen","next","before","tens","fives"],["tens","fives","next","before","teen"]][l]),nc=l<1?3:4;
+function tensGen(l){const k=pick([["teen"],["teen","next","before"],["teen","next","before","tens","fives"],["tens","fives","next","before","teen"],["build","build","twos","teen","next"],["build","twos","twos","tens","before"]][l]),nc=l<1?3:4;
+ if(k==="build"){const t=l>=5?R(1,4):1,o=R(1,9),n=t*10+o,ch=opts(n,[n-1,n+1,n+10,n-10,o*10+t].filter(x=>x>0&&x!==n&&x<100),nc);
+  return {prompt:`${t*10} + ${o} = ?`,show:pvHTML(n),say:`${NW(t*10)} and ${NW(o)}. What number is that?`,choices:ch,ans:n,item:`P:${n}`,cheer:"tens",hint:`${NW(t*10)} and ${NW(o)} makes ${NW(n)}!`}}
+ if(k==="twos"){const s=2*R(0,l>=5?7:4),sq=[s+2,s+4,s+6],ans=s+8,w=sq.map(NW),ch=opts(ans,[ans-2,ans-1,ans+1,ans+2,ans+4],nc);
+  return {prompt:"Count by twos!",show:`<div class="seq">${sq.join(", ")}, ❓</div>`,say:"Count by twos! What comes next?",choices:ch,ans,item:`SK:twos to ${ans}`,cheer:"tens",hint:`Count by twos: ${w.join(", ")}... What comes next?`,hintParts:["Count by twos:",...w,"What comes next?"]}}
  if(k==="teen"){const n=R(11,20);return {prompt:"How many?",show:pvHTML(n),say:"How many? Count the ten and the ones!",choices:numOpts(n,10,20,nc),ans:n,item:`P:${n}`,cheer:"tens",hint:n<20?`One ten and ${NUMW[n-10]} ones makes ${NUMW[n]}!`:"Two tens make twenty!"}}
  if(k==="next"){const a=R(1,l<2?8:18),w=[NUMW[a],NUMW[a+1]];return {prompt:"What comes next?",show:`<div class="seq">${a}, ${a+1}, ❓</div>`,say:"What number comes next?",choices:numOpts(a+2,Math.max(0,a-1),Math.min(20,a+5),nc),ans:a+2,item:`O:after ${a+1}`,cheer:"tens",
   hint:`Let's count together: ${w.join(", ")}... What comes next?`,hintParts:["Let's count together:",...w,"What comes next?"]}}
@@ -842,7 +866,7 @@ function traceGen(l){const un=unlocked().map(x=>x.toLowerCase());const digits=Ma
 const SIGHT=["the","a","is","I","to","and","my","we","go","no","he","she","me","be"];
 const SIGHTP={id:"sight",name:"Sight Word Stars",icon:"🌟",col:"#eab308",gen(l){const pool=SIGHT.slice(0,[6,10,14,14][l]),w=pick(pool);
  return {prompt:"Find the word!",show:"🔊",say:`Find the word ${w}!`,choices:opts(w,pool,l<1?3:4).map(x=>({label:x,val:x})),ans:w,item:`SW:${w}`,cheer:"sight",hint:`Listen again: ${w}.`,hintParts:["Listen again:",w]}}};
-PLANETS.push({id:"tens",name:"Tens and Ones",icon:"🔟",col:"#0ea5e9",gen:tensGen},{id:"shape",name:"Shape Sparkles",icon:"🔷",col:"#ec4899",gen:shapeGen},
+PLANETS.push({id:"tens",name:"Tens and Ones",icon:"🔟",col:"#0ea5e9",maxl:MAXL,gen:tensGen},{id:"shape",name:"Shape Sparkles",icon:"🔷",col:"#ec4899",gen:shapeGen},
  {id:"pattern",name:"Pattern Parade",icon:"🎨",col:"#84cc16",gen:patternGen},{id:"measure",name:"Measure Magic",icon:"📏",col:"#f59e0b",gen:measureGen},{id:"trace",name:"Trace",icon:"✏️",col:"#6366f1",gen:traceGen});
 // ---------- Block Buddies: Take away (M6), Join prediction (M7), skip counting (X5) ----------
 let takeRound=0;
@@ -869,7 +893,7 @@ const AREA_OF={count:"Counting",add:"Adding & Take away",num:"Numbers",quick:"Qu
 function planetScore(id,now){const pre=MP[id],ks=Object.keys(M).filter(k=>pre.some(p=>k.startsWith(p)));if(!ks.length)return .45; // not started: middle priority
  const str=ks.reduce((s,k)=>s+M[k].b/4,0)/ks.length,due=ks.filter(k=>mDue(M[k],now)).length;return str-.05*Math.min(due,6)} // weak and due areas first
 function pickJourney(now){now=now||Date.now();const sc={};[...MATHS,...ENG].forEach(id=>sc[id]=planetScore(id,now)+Math.random()*.03);const by=a=>a.slice().sort((x,y)=>sc[x]-sc[y]);
- const m=by(MATHS),e=by(ENG),third=sc[m[1]]<=sc[e[1]]?m[1]:e[1];return [m[0],e[0],third]} // always one maths + one English, then the next weakest of either
+ const m=by(MATHS),rd=by(ENG.filter(x=>x!=="trace")),e=by(ENG).filter(x=>x!==rd[0]),third=sc[m[1]]<=sc[e[0]]?m[1]:e[0];return [m[0],rd[0],third]} // always one maths + one English, then the next weakest of either
 const PL=id=>PLANETS.find(p=>p.id===id);
 function journeyCard(html,btns){show("game");$("prog").textContent="🗺️";$("prompt").textContent="🗺️ Today's Adventure";$("visual").innerHTML=html;$("hint").textContent="";const c=$("choices");c.innerHTML="";
  btns.forEach(([t,cls,fn])=>{const b=document.createElement("button");b.className=cls;b.textContent=t;b.onclick=fn;c.appendChild(b)})}
@@ -886,16 +910,16 @@ const BADGES=["🗺️","🧭","🏵️","🎖️","🌟","🪐"];
 $("advBtn").onclick=()=>{sfx.tap();startJourney()};$("backBtn").addEventListener("click",()=>{JR=null});
 // ---------- Story corner (X2) ----------
 const STORIES=[
- {t:"Pip the Ant",g:0,i:"🐜",p:[["🐜","Pip is an ant."],["🐜💫","Pip spins and spins."],["🐜👏","Tap, tap, tap!"],["🥫🐜","Pip sits in a tin."],["😴🐜","Pip naps."]],q:["Where did Pip sit?",[["🥫 in a tin","tin"],["🍳 in a pan","pan"]],"tin"]},
- {t:"Nan Taps",g:0,i:"👵",p:[["👵","Nan sits."],["🥫👵","Nan taps a tin."],["🍳👵","Nan taps a pan."],["🎶","Tap, tap, tap, pat!"],["👧👵","I sit and tap."],["😴👵","Nan naps!"]],q:["Who naps?",[["👵 Nan","nan"],["🐜 Pip","pip"]],"nan"]},
- {t:"Sam the Dog",g:1,i:"🐶",p:[["🐶","Sam is my dog."],["🐶⛏️","Sam digs and digs."],["🐶🟫","Sam got a mat."],["🐶","Sam sits on the mat."],["😴🐶","Sam naps on the mat."]],q:["What is Sam?",[["🐶 a dog","dog"],["🐱 a cat","cat"]],"dog"]},
- {t:"Dad and the Map",g:1,i:"🗺️",p:[["👨🗺️","Dad got a map."],["👨👧","Dad and I go."],["🏞️","We go to a pond."],["🐶","I spot a dog."],["🐶🏖️","The dog digs in the sand."],["👧🐶","We pat the dog."]],q:["What did I spot?",[["🐶 a dog","dog"],["🐱 a cat","cat"]],"dog"]},
- {t:"The Red Cup",g:2,i:"🥤",p:[["👧🥤","Meg got a red cup."],["🥤","The cup is on the rug."],["🐶","Pup runs to the rug."],["🐶🥤","Pup tips the cup!"],["🐶","No, Pup, no!"],["👧🐶","Meg pets Pup."],["💖","Meg is not cross."]],q:["What did Pup tip?",[["🥤 the cup","cup"],["🎩 a hat","hat"]],"cup"]},
- {t:"Kit the Cat",g:2,i:"🐱",p:[["🐱","Kit is my cat."],["🐱☀️","She sits in the sun."],["🐱💨","Kit can run."],["👦🐱","Kit runs to Ted."],["👦","He pets Kit."],["😺","Kit is snug."]],q:["Who is Kit?",[["🐱 a cat","cat"],["🐶 a dog","dog"]],"cat"]},
- {t:"The Big Bus",g:3,i:"🚌",p:[["🚌","The bus is big and red."],["👦🚌","Bob gets on the bus."],["👧🚌","Lil gets on the bus."],["🚌⛰️","The bus gets to the hill."],["👦👧","Bob and Lil hop off."],["🎉","It is fun!"]],q:["What colour was the bus?",[["🔴 red","red"],["🔵 blue","blue"]],"red"]},
- {t:"Fin and the Hat",g:3,i:"🎩",p:[["👦🎩","Fin has a big hat."],["👦👧","Fin and Bel go up the hill."],["💨🎩","The hat flips off!"],["👧","Bel runs and gets it."],["👧🎩","Let me help!"],["😊","Fin is glad."]],q:["What flipped off?",[["🎩 the hat","hat"],["🥤 a cup","cup"]],"hat"]},
- {t:"Jen and Max",g:4,i:"🚐",p:[["👧🚐","Jen has a red van."],["👧👦","Jen and Max zip to the vet."],["🐶","The vet helps a sick pup."],["🐶💖","Yes! The pup is well."],["🚐","Jen and Max zip back."]],q:["Who did the vet help?",[["🐶 a pup","pup"],["🦊 a fox","fox"]],"pup"]},
- {t:"Zak and the Web",g:4,i:"🦊",p:[["🦊","Zak is a fox."],["🕸️","Zak spots a web."],["🐛🕸️","A bug is stuck in the web!"],["🦊🐛","Zak lifts the bug."],["🐛💨","The bug zips off."],["🦊😊","Zak can be a pal."]],q:["Who did Zak help?",[["🐛 a bug","bug"],["🐱 a cat","cat"]],"bug"]}];
+ {t:"Pip the Ant",g:0,i:"🐜",p:[["🐜","Pip is an ant."],["🐜💫","Pip spins and spins."],["🐜👏","Tap, tap, tap!"],["🥫🐜","Pip sits in a tin."],["😴🐜","Pip naps."]],q:["Where did Pip sit?",[["🥫 in a tin","tin"],["🍳 in a pan","pan"],["🎩 in a hat","hat"]],"tin"]},
+ {t:"Nan Taps",g:0,i:"👵",p:[["👵","Nan sits."],["🥫👵","Nan taps a tin."],["🍳👵","Nan taps a pan."],["🎶","Tap, tap, tap, pat!"],["👧👵","I sit and tap."],["😴👵","Nan naps!"]],q:["Who naps?",[["👵 Nan","nan"],["🐜 Pip","pip"],["🐶 a dog","dog"]],"nan"]},
+ {t:"Sam the Dog",g:1,i:"🐶",p:[["🐶","Sam is my dog."],["🐶⛏️","Sam digs and digs."],["🐶🟫","Sam got a mat."],["🐶","Sam sits on the mat."],["😴🐶","Sam naps on the mat."]],q:["What is Sam?",[["🐶 a dog","dog"],["🐱 a cat","cat"],["🦊 a fox","fox"]],"dog"]},
+ {t:"Dad and the Map",g:1,i:"🗺️",p:[["👨🗺️","Dad got a map."],["👨👧","Dad and I go."],["🏞️","We go to a pond."],["🐶","I spot a dog."],["🐶🏖️","The dog digs in the sand."],["👧🐶","We pat the dog."]],q:["What did I spot?",[["🐶 a dog","dog"],["🐱 a cat","cat"],["🐛 a bug","bug"]],"dog"]},
+ {t:"The Red Cup",g:2,i:"🥤",p:[["👧🥤","Meg got a red cup."],["🥤","The cup is on the rug."],["🐶","Pup runs to the rug."],["🐶🥤","Pup tips the cup!"],["🐶","No, Pup, no!"],["👧🐶","Meg pets Pup."],["💖","Meg is not cross."]],q:["What did Pup tip?",[["🥤 the cup","cup"],["🎩 a hat","hat"],["🥫 a tin","tin"]],"cup"]},
+ {t:"Kit the Cat",g:2,i:"🐱",p:[["🐱","Kit is my cat."],["🐱☀️","She sits in the sun."],["🐱💨","Kit can run."],["👦🐱","Kit runs to Ted."],["👦","He pets Kit."],["😺","Kit is snug."]],q:["Who is Kit?",[["🐱 a cat","cat"],["🐶 a dog","dog"],["🦊 a fox","fox"]],"cat"]},
+ {t:"The Big Bus",g:3,i:"🚌",p:[["🚌","The bus is big and red."],["👦🚌","Bob gets on the bus."],["👧🚌","Lil gets on the bus."],["🚌⛰️","The bus gets to the hill."],["👦👧","Bob and Lil hop off."],["🎉","It is fun!"]],q:["What colour was the bus?",[["🔴 red","red"],["🔵 blue","blue"],["🟢 green","green"]],"red"]},
+ {t:"Fin and the Hat",g:3,i:"🎩",p:[["👦🎩","Fin has a big hat."],["👦👧","Fin and Bel go up the hill."],["💨🎩","The hat flips off!"],["👧","Bel runs and gets it."],["👧🎩","Let me help!"],["😊","Fin is glad."]],q:["What flipped off?",[["🎩 the hat","hat"],["🥤 a cup","cup"],["🥫 a tin","tin"]],"hat"]},
+ {t:"Jen and Max",g:4,i:"🚐",p:[["👧🚐","Jen has a red van."],["👧👦","Jen and Max zip to the vet."],["🐶","The vet helps a sick pup."],["🐶💖","Yes! The pup is well."],["🚐","Jen and Max zip back."]],q:["Who did the vet help?",[["🐶 a pup","pup"],["🦊 a fox","fox"],["🐱 a cat","cat"]],"pup"]},
+ {t:"Zak and the Web",g:4,i:"🦊",p:[["🦊","Zak is a fox."],["🕸️","Zak spots a web."],["🐛🕸️","A bug is stuck in the web!"],["🦊🐛","Zak lifts the bug."],["🐛💨","The bug zips off."],["🦊😊","Zak can be a pal."]],q:["Who did Zak help?",[["🐛 a bug","bug"],["🐱 a cat","cat"],["🐶 a dog","dog"]],"bug"]}];
 const SKEY="spacePrincessStoriesV1";let SP={done:{},mode:"me"};try{Object.assign(SP,JSON.parse(localStorage.getItem(SKEY))||{})}catch(e){}
 const saveSP=()=>{try{localStorage.setItem(SKEY,JSON.stringify(SP))}catch(e){}};
 const words=s=>s.split(/\s+/).map(w=>w.replace(/[^A-Za-z']/g,"")).filter(Boolean);
@@ -963,9 +987,15 @@ window.__test3={NW,shapeGen,patternGen,measureGen,tensGen,traceGen,SIGHTP,GLYPH,
   ["Story time! Pick a story.","Learn more letter sounds to open this story!","Let's look back at the story!","Decorate your castle! Tap a sticker to add it.","Wow, so many! Take one off to add more."].forEach(x=>add(x,"ui"));
   STORIES.forEach(s=>{s.p.forEach(([,t])=>{add(t,"story-sentences");words(t).forEach(w=>add(w==="I"?"I":w.toLowerCase(),"story-words"))});add(s.q[0],"story-sentences")});
   SIGHT.forEach(w=>add(w,"story-words"));Object.values(CHEER_BY).flat().forEach(c=>add(c,"cheers"));
-  for(const p of [...PLANETS.filter(p=>["tens","shape","pattern","measure","trace"].includes(p.id)),SIGHTP])for(let l=0;l<4;l++)for(let i=0;i<3000;i++){const q=p.gen(l);
+  for(const p of [...PLANETS.filter(p=>["count","add","more","quick","tens","shape","pattern","measure","trace"].includes(p.id)),SIGHTP])for(let l=0;l<6;l++)for(let i=0;i<3000;i++){const q=p.gen(Math.min(l,p.maxl??3));
+   if(q.onHint&&q.hintParts)q.hintParts.forEach(x=>add(x,p.id));
    if(q.sayParts)q.sayParts.forEach(x=>add(x,p.id));else add(q.say,p.id);if(q.hintParts)q.hintParts.forEach(x=>add(x,p.id));else add(q.hint,p.id);add(`Hooray! You finished ${p.name} planet and won a gem!`,"ui");add(`Hooray! You finished ${p.name} planet and won a gem! And a brand new sticker!`,"ui")}
-  return L}};
+  return L},
+ selfCheck(N=20000){const bad={},cnt={},EXC2=["MS:heavy"];const T=window.__test;T.setLP({g:4});const plist=[...PLANETS,SIGHTP];
+  for(const p of plist){T.setCur(p);for(let l=0;l<=MAXL;l++){const lc=Math.min(l,p.maxl??3);let n=0;for(let i=0;i<N;i++){let q;try{q=p.gen(lc)}catch(e){(bad[p.id]=bad[p.id]||[]).push([l,"throw",String(e)]);break}n++;
+   if(!q.choices.length)continue;const vals=q.choices.map(c=>typeof c==="object"?c.val:c),f=m=>{const a=bad[p.id]=bad[p.id]||[];if(a.length<5)a.push([l,m,q.prompt,JSON.stringify(vals)])};
+   if(!vals.some(v=>v==q.ans))f("ans not in choices");if(vals.length<3&&!EXC2.includes(q.item))f("fewer than 3 choices");if(new Set(vals.map(String)).size!==vals.length)f("duplicate choice");
+   if(vals.some(v=>RUDE.has(String(v).toLowerCase())))f("rude word")}cnt[p.id+":"+l]=n}}return {bad,cnt}}};
 </script>
 <div id="iosCard" role="dialog" aria-label="Install on iPhone or iPad" style="display:none;position:fixed;inset:0;z-index:99;background:#0b0630ee;align-items:center;justify-content:center;padding:16px"><div style="background:#fff;color:#2a1650;border-radius:24px;padding:22px;max-width:420px;width:100%;font-size:22px;line-height:1.5"><div style="font-size:26px;font-weight:bold;margin-bottom:8px">Install on iPhone/iPad</div><ol style="padding-left:28px;margin:0"><li>Tap the Share button <svg width="30" height="34" viewBox="0 0 30 34" style="vertical-align:middle"><rect x="4" y="12" width="22" height="20" rx="3" fill="none" stroke="#4da3ff" stroke-width="3"/><path d="M15 3v18M9 9l6-6 6 6" fill="none" stroke="#4da3ff" stroke-width="3" stroke-linecap="round"/></svg> in Safari</li><li>Tap <b>Add to Home Screen</b> ➕</li><li>Tap <b>Add</b></li></ol><button class="big" id="iosClose" style="margin-top:14px;font-size:22px">OK</button></div></div>
 <script id="batch4">
