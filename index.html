@@ -164,7 +164,7 @@ button,.tk,.tc{touch-action:manipulation} /* zoom is allowed again; this only st
 <div id="stars"></div><div id="burst"></div>
 
 <section id="start" class="screen on">
-  <div style="display:flex;justify-content:flex-end"><button class="icon hold" id="gearBtn" aria-label="Grown-ups: press and hold for 2 seconds">⚙️</button></div>
+  <div style="display:flex;justify-content:flex-end"><button id="instStart" style="display:none;margin-right:auto;align-self:center;font-size:18px;padding:10px 16px;border-radius:22px;border:2px solid #fff6;background:#ffffff22;color:#fff;font-family:inherit">📲 Install app</button><button class="icon hold" id="gearBtn" aria-label="Grown-ups: press and hold for 2 seconds">⚙️</button></div>
   <div id="gearTip"></div>
   <h1>👸🚀 Space Princess</h1>
   <div style="font-size:80px">🪐⭐🌙</div>
@@ -177,7 +177,8 @@ button,.tk,.tc{touch-action:manipulation} /* zoom is allowed again; this only st
 <section id="parentS" class="screen">
   <div class="top"><button class="icon" id="pBack">🏠</button><div>For grown-ups 👋</div><span style="width:72px"></span></div>
   <div class="parent">
-    <button class="big" id="progBtn" style="font-size:22px;padding:14px 22px;min-width:0;margin:0 0 10px">📊 Progress report</button><br>
+    <button class="big" id="progBtn" style="font-size:22px;padding:14px 22px;min-width:0;margin:0 0 10px">📊 Progress report</button><br><div style="margin:0 0 10px" id="instBox"><button class="big alt" style="font-size:20px;padding:12px 20px;min-width:0;display:none" id="instBtn">📲 Install app</button><button class="big alt" style="font-size:20px;padding:12px 20px;min-width:0;display:none" id="instIOS">📲 Install on iPhone/iPad</button><div id="instMsg" style="font-size:16px;opacity:.85"></div></div>
+
     A gentle learning game for ages 4–6. Each planet is a short challenge: counting, adding, numbers, more/fewer, letters, first sounds, 3-letter words, rhymes and <b>Sound Blending</b> (blend sounds into a word, and tap sound boxes to split a word into sounds). Letters and sounds come in school order (s a t p i n → m d g o → c k e u r → h b f l → j v w x y z q); the next group unlocks when she gets 8 of the last 10 right first time, or after 30 tries anyway. <b>Quick Look</b> planet: see small amounts at a glance, ten-frames, and pairs that make 5 and 10. Adding includes <b>take away</b> at higher levels. The game quietly tracks each letter, number, word and fact and brings weaker ones back now and then (at most 1 question in 4). A first-try answer earns a star ⭐; an answer after a hint earns a sparkle ✨ (two sparkles make a star). <b>Block Buddies</b> planet: build, join, split, make, odd/even pairs and number stairs. Every prompt is read aloud (tap 🔊 to repeat). There's no way to fail — wrong taps get a kind hint. Progress is saved on this device only.
     <label><input type="checkbox" id="optSpeech" checked> Spoken prompts</label>
     <label><input type="checkbox" id="optSound" checked> Sound effects</label>
@@ -952,4 +953,23 @@ window.__test3={NW,shapeGen,patternGen,measureGen,tensGen,traceGen,SIGHTP,GLYPH,
   for(const p of [...PLANETS.filter(p=>["tens","shape","pattern","measure","trace"].includes(p.id)),SIGHTP])for(let l=0;l<4;l++)for(let i=0;i<3000;i++){const q=p.gen(l);
    if(q.sayParts)q.sayParts.forEach(x=>add(x,p.id));else add(q.say,p.id);if(q.hintParts)q.hintParts.forEach(x=>add(x,p.id));else add(q.hint,p.id);add(`Hooray! You finished ${p.name} planet and won a gem!`,"ui");add(`Hooray! You finished ${p.name} planet and won a gem! And a brand new sticker!`,"ui")}
   return L}};
+</script>
+<div id="iosCard" role="dialog" aria-label="Install on iPhone or iPad" style="display:none;position:fixed;inset:0;z-index:99;background:#0b0630ee;align-items:center;justify-content:center;padding:16px"><div style="background:#fff;color:#2a1650;border-radius:24px;padding:22px;max-width:420px;width:100%;font-size:22px;line-height:1.5"><div style="font-size:26px;font-weight:bold;margin-bottom:8px">Install on iPhone/iPad</div><ol style="padding-left:28px;margin:0"><li>Tap the Share button <svg width="30" height="34" viewBox="0 0 30 34" style="vertical-align:middle"><rect x="4" y="12" width="22" height="20" rx="3" fill="none" stroke="#4da3ff" stroke-width="3"/><path d="M15 3v18M9 9l6-6 6 6" fill="none" stroke="#4da3ff" stroke-width="3" stroke-linecap="round"/></svg> in Safari</li><li>Tap <b>Add to Home Screen</b> ➕</li><li>Tap <b>Add</b></li></ol><button class="big" id="iosClose" style="margin-top:14px;font-size:22px">OK</button></div></div>
+<script id="batch4">
+// ---------- Batch 4: install app (text-only, no voice) ----------
+(function(){let deferred=null,dismissed=false,installed=false;
+ const ua=navigator.userAgent||"",isIOS=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+ const isStandalone=()=>(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone===true;
+ const g=id=>document.getElementById(id);
+ function refresh(){const st=g("instStart"),pb=g("instBtn"),ib=g("instIOS"),msg=g("instMsg");if(!pb)return;
+  const can=!!deferred&&!dismissed&&!installed&&!isStandalone();
+  st.style.display=can?"":"none";pb.style.display=can?"":"none";
+  ib.style.display=(isIOS&&!isStandalone()&&!installed)?"":"none";
+  msg.textContent=isStandalone()||installed?"✅ The app is installed on this device.":(can||isIOS||dismissed)?"":"Open this page in Chrome or Safari to install it as an app."}
+ async function doInstall(){if(!deferred)return;const e=deferred;deferred=null;try{e.prompt();const r=await e.userChoice;if(r&&r.outcome==="accepted")installed=true;else dismissed=true}catch(_){dismissed=true}refresh()}
+ window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;refresh()});
+ window.addEventListener("appinstalled",()=>{installed=true;deferred=null;refresh()});
+ g("instStart").addEventListener("click",doInstall);g("instBtn").addEventListener("click",doInstall);
+ g("instIOS").addEventListener("click",()=>{g("iosCard").style.display="flex"});g("iosClose").addEventListener("click",()=>{g("iosCard").style.display="none"});
+ window.__test4={refresh,isIOS,isStandalone};refresh()})();
 </script></body></html>
