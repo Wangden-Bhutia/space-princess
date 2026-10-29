@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Space Princess Adventure</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0b0630">
@@ -71,7 +71,27 @@ background:#fff;color:#5a1d8c;box-shadow:0 8px 0 #b48ae0;font-family:inherit;fon
 .p.bigp{font-size:58px;animation-duration:1.7s}
 .shake{animation:shk .32s ease-in-out}
 @keyframes shk{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
-@media (prefers-reduced-motion:reduce){.shake{animation:none}.p{animation-duration:.8s}}
+button,.tk,.tc{touch-action:manipulation} /* zoom is allowed again; this only stops accidental double-tap zoom on tap targets */
+.tf{--c:clamp(44px,12vw,64px);display:inline-grid;grid-template-columns:repeat(5,var(--c));gap:5px;padding:6px;border:3px solid #ffe680;border-radius:14px;background:rgba(255,255,255,.08);vertical-align:middle;margin:6px}
+.tc{width:var(--c);height:var(--c);border-radius:9px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;border:none;padding:0;font:inherit;color:#fff}
+.tc i,.tc .dot{display:block;width:72%;height:72%;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd1ec,#ff5fa2 60%);min-width:0;min-height:0;padding:0}
+.tc i.add{background:radial-gradient(circle at 35% 35%,#e3ffe9,#3fd16a 60%);animation:pop .4s}
+.tc.e{cursor:pointer;border:3px dashed rgba(255,230,128,.75)}
+.dice{display:inline-grid;grid-template-columns:repeat(3,clamp(50px,15vw,84px));grid-auto-rows:clamp(50px,15vw,84px);gap:4px;padding:10px;background:rgba(255,255,255,.1);border-radius:24px;font-size:clamp(36px,10vw,60px);line-height:1}
+.dice span{display:flex;align-items:center;justify-content:center}
+.qlook{position:relative;display:inline-block;min-height:120px;min-width:200px}
+.qlook .peek{position:absolute;inset:0;margin:auto;width:max-content;height:max-content;min-width:0;font-size:clamp(24px,5vw,34px);padding:18px 28px;visibility:hidden}
+.qlook.hid .qin{visibility:hidden}.qlook.hid .peek{visibility:visible}
+.bond{display:flex;align-items:flex-end;justify-content:center;gap:10px;flex-wrap:wrap}.bond .eq{font-size:clamp(32px,7vw,56px);align-self:center}
+.qm{font-size:clamp(50px,12vw,80px);color:#ffe680;align-self:center;font-weight:bold}
+.tk{display:inline-block;cursor:pointer;padding:2px 4px;min-width:48px;min-height:48px;transition:transform .9s,opacity .9s}
+.tk.gone{transform:translateY(-120px) scale(.5);opacity:0;pointer-events:none}
+.tk.done{position:relative;filter:drop-shadow(0 0 8px #ffe680)}.tk.done:after{content:"✓";position:absolute;right:-4px;top:-6px;font-size:20px;color:#7dff9a;text-shadow:0 0 4px #000}
+.pbar{height:14px;border-radius:8px;background:rgba(255,255,255,.15);margin:4px 0;overflow:hidden}.pbar i{display:block;height:100%;background:linear-gradient(90deg,#7ad7ff,#9dffb0);border-radius:8px}
+.prow{margin:12px 0}.pline{font-size:16px;opacity:.9}.plet{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.pl{width:34px;height:34px;line-height:34px;text-align:center;border-radius:10px;background:rgba(255,255,255,.12)}.pl.l2{background:#2fa857}.pl.l1{background:#c99a12}
+@media print{body{background:#fff;color:#000;padding:0}#stars,#burst,.noprint,#progS .top button{display:none!important}.parent{background:none;border:1px solid #999;color:#000}.pbar{border:1px solid #666}.pbar i{background:#666}.pl{border:1px solid #999}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}.p{animation-duration:.8s}.tc i.add,.tk,.ch.no,.qlook *{animation:none!important;transition:none!important}.tk.gone{transform:none}}
 /* ---- Block Buddies ---- */
 #tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:8px 0}
 .tab{font-size:clamp(18px,3.4vw,26px);padding:14px 18px;border:none;border-radius:24px;cursor:pointer;font-family:inherit;color:#fff;background:rgba(255,255,255,.15);min-height:64px}
@@ -124,7 +144,8 @@ background:#fff;color:#5a1d8c;box-shadow:0 8px 0 #b48ae0;font-family:inherit;fon
 <section id="parentS" class="screen">
   <div class="top"><button class="icon" id="pBack">🏠</button><div>For grown-ups 👋</div><span style="width:72px"></span></div>
   <div class="parent">
-    A gentle learning game for ages 4–6. Each planet is a short challenge: counting, adding, numbers, more/fewer, letters, first sounds, 3-letter words, rhymes and <b>Sound Blending</b> (blend sounds into a word, and tap sound boxes to split a word into sounds). Letters and sounds come in school order (s a t p i n → m d g o → c k e u r → h b f l → j v w x y z q); the next group unlocks when she gets 8 of the last 10 right first time, or after 30 tries anyway. <b>Block Buddies</b> planet: build, join, split, make, odd/even pairs and number stairs. Every prompt is read aloud (tap 🔊 to repeat). There's no way to fail — wrong taps get a kind hint. Progress is saved on this device only.
+    <button class="big" id="progBtn" style="font-size:22px;padding:14px 22px;min-width:0;margin:0 0 10px">📊 Progress report</button><br>
+    A gentle learning game for ages 4–6. Each planet is a short challenge: counting, adding, numbers, more/fewer, letters, first sounds, 3-letter words, rhymes and <b>Sound Blending</b> (blend sounds into a word, and tap sound boxes to split a word into sounds). Letters and sounds come in school order (s a t p i n → m d g o → c k e u r → h b f l → j v w x y z q); the next group unlocks when she gets 8 of the last 10 right first time, or after 30 tries anyway. <b>Quick Look</b> planet: see small amounts at a glance, ten-frames, and pairs that make 5 and 10. Adding includes <b>take away</b> at higher levels. The game quietly tracks each letter, number, word and fact and brings weaker ones back now and then (at most 1 question in 4). A first-try answer earns a star ⭐; an answer after a hint earns a sparkle ✨ (two sparkles make a star). <b>Block Buddies</b> planet: build, join, split, make, odd/even pairs and number stairs. Every prompt is read aloud (tap 🔊 to repeat). There's no way to fail — wrong taps get a kind hint. Progress is saved on this device only.
     <label><input type="checkbox" id="optSpeech" checked> Spoken prompts</label>
     <label><input type="checkbox" id="optSound" checked> Sound effects</label>
     <label><input type="checkbox" id="optVibe" checked> Vibration (Android; iPhone ignores it)</label>
@@ -133,8 +154,15 @@ background:#fff;color:#5a1d8c;box-shadow:0 8px 0 #b48ae0;font-family:inherit;fon
     <div id="limInfo" style="font-size:16px;opacity:.85"></div>
     <div style="margin-top:10px"><b>Letter sounds unlocked:</b> <span id="letInfo"></span></div>
     <button class="big alt" style="font-size:20px;padding:12px 20px;min-width:0" id="resetBtn">Reset progress</button>
-    <div style="font-size:16px;opacity:.8">Reset clears stars, gems, stickers, days played, letter progress and today's play time. Settings stay.</div>
+    <div style="font-size:16px;opacity:.8">Reset clears stars, sparkles, gems, stickers, days played, letter progress, skill progress (the report) and play time. Settings stay.</div>
   </div>
+</section>
+
+<section id="progS" class="screen">
+  <div class="top"><button class="icon" id="progBack" aria-label="Back to grown-ups">⬅️</button><div>📊 Progress</div><span style="width:72px"></span></div>
+  <div id="progBody"></div>
+  <div class="noprint"><button class="big alt" id="copyBtn" style="font-size:20px;padding:12px 20px;min-width:0">📋 Copy summary</button><button class="big alt" id="printBtn" style="font-size:20px;padding:12px 20px;min-width:0">🖨️ Print</button>
+  <div id="copyMsg" style="font-size:18px;color:#ffe680;min-height:1.3em"></div></div>
 </section>
 
 <section id="restS" class="screen">
@@ -188,9 +216,20 @@ const $=id=>document.getElementById(id);
 // ---------- state ----------
 const KEY="spacePrincessV1";
 const STICKERS=["👑","🦄","🌈","🌟","🧚","🏰","💖","🪐","🚀","🌙","🐱","🦋","🌸","💎","🎀","🍭","🐬","☄️","🛸","👽","🌻","🐶","🧁","🎠"];
-let S={stars:0,gems:0,level:{},speech:true,sound:true,vibe:true,days:[],bonusDay:"",limit:0,tms:0,tday:""}; // limit: minutes per day (0 = off); tms: active play ms today
+const STICKERS2=["🌍","🌕","🌠","🔭","🛰️","🌌","🪄","💫","🌞","🧸","🎈","🍰","🐉","🦢","🐠","🍩","🎶","🦚","🌺","🎁","🏆","🐰","🦊","🌷"]; // Royal Collection II
+const ALLST=[...STICKERS,...STICKERS2],stickerFor=n=>n<1?null:n<=ALLST.length?ALLST[n-1]:"🏅"; // after 48 stickers: an endless royal medal every 5 stars
+let S={stars:0,gems:0,level:{},speech:true,sound:true,vibe:true,days:[],bonusDay:"",limit:0,tms:0,tday:"",half:0,pm:{}}; // limit: minutes per day (0 = off); tms: active play ms today
 try{Object.assign(S,JSON.parse(localStorage.getItem(KEY))||{})}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+// ---------- per-item mastery (Batch 2): Leitner box 0-4 per item; drives gentle review; never shown to the child ----------
+// item ids: C:n count, A:a+b add, T:a-b take away, N:n numbers, Q:n quick look, F:n ten-frame, F10:n more-to-ten, K5:a/K10:a bonds, L:X letter, S:X sound, W:w word, BL:w blend, R:w rhyme
+const MKEY="spacePrincessMasteryV1",MCAP=400,MINT=[20e3,90e3,6e5,864e5,2592e5]; // review after: box0 20 s, box1 90 s, box2 10 min, box3 1 day, box4 3 days (weak items return sooner)
+let M={};try{M=JSON.parse(localStorage.getItem(MKEY))||{};if(typeof M!=="object"||Array.isArray(M))M={}}catch(e){M={}}
+const saveM=()=>{try{localStorage.setItem(MKEY,JSON.stringify(M))}catch(e){}};
+function mRec(id,first){if(!id)return;const m=M[id]||(M[id]={a:0,f:0,t:0,b:0});m.a++;if(first){m.f++;m.b=Math.min(4,m.b+1)}else m.b=0;m.t=Date.now(); // a: attempts, f: first-try correct, t: last seen, b: box
+ const ks=Object.keys(M);if(ks.length>MCAP)ks.sort((x,y)=>M[x].t-M[y].t).slice(0,ks.length-MCAP).forEach(k=>delete M[k]);saveM()} // bounded: oldest items dropped first
+const mDue=(m,now)=>now-m.t>=MINT[Math.min(4,m.b|0)];
+function mReview(pre,avoid,now){now=now||Date.now();return Object.keys(M).filter(k=>k!==avoid&&pre.some(p=>k.startsWith(p))&&mDue(M[k],now)).sort((x,y)=>M[x].b-M[y].b||M[x].t-M[y].t)} // weakest, then longest-unseen first
 // ---------- stars bg ----------
 for(let i=0;i<70;i++){const d=document.createElement("div");d.className="s";const z=Math.random()*3+1;
  d.style.cssText=`width:${z}px;height:${z}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*2}s`;$("stars").appendChild(d)}
@@ -277,46 +316,67 @@ function recordLetter(L,ok){const p=LP.per[L]||(LP.per[L]={n:0,ok:0});p.n++;if(o
 const tiles=w=>[...w].map((c,i)=>`<span class="ltile" data-i="${i}">${c}</span>`).join("");
 function segQ(w,snd){return {seg:true,prompt:"Tap the sound boxes!",show:`<div>${w[1]}</div><div>${[...w[0]].map((c,i)=>`<button class="ebox" data-i="${i}"></button>`).join("")}</div>`,
  say:`${w[0]}. Tap the boxes and say the sounds!`,sayParts:[w[0],"Tap the boxes and say the sounds!"],choices:[],ans:w[0],word:w[0],snd,hint:"Tap the box that is glowing!"}}
+function dice(n,e){const P={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8]}[n];let h='<div class="dice">';for(let i=0;i<9;i++)h+=`<span>${P.includes(i)?e:""}</span>`;return h+"</div>"}
+function frame(n,o={}){const c=o.cells||10;let h='<div class="tf">';for(let i=0;i<c;i++)h+=i<n?`<div class="tc">${o.tap?'<span class="tapme dot"></span>':"<i></i>"}</div>`:o.empty?'<button class="tc e" aria-label="empty box"></button>':'<div class="tc"></div>';return h+"</div>"}
+const budH=(n,t)=>{const z=t===10?Math.max(12,Math.min(20,Math.floor(window.innerHeight*.2/10))):26;return `<div style="display:inline-flex;flex-direction:column;align-items:center">${buddy(n,{size:z,label:false}).outerHTML}<b class="bnum">${n}</b></div>`};
+const flashBox=h=>`<div class="qlook"><div class="qin">${h}</div><button class="peek big alt">👀 Peek</button></div>`;
 // ---------- challenges: each returns {say, show, prompt, choices:[{label,val}], ans, hint} ----------
 const PLANETS=[
  {id:"count",name:"Counting",icon:"⭐",col:"#ff9a3c",gen(l){const max=[5,7,10,10][l];const n=R(1,max),e=pick(OBJ);
-   return {prompt:"How many?",show:tapRep(e,n),say:`How many ${NAMES[e]} can you count?`,choices:numOpts(n,1,max,l<1?3:4),ans:n,
+   return {prompt:"How many?",show:tapRep(e,n),say:`How many ${NAMES[e]} can you count?`,choices:numOpts(n,1,max,l<1?3:4),ans:n,item:`C:${n}`,cheer:"count",
    hint:`Let's tap each one and count together: ${Array.from({length:n},(_,i)=>NUMW[i+1]).join(", ")}!`}}},
- {id:"add",name:"Adding",icon:"➕",col:"#3cc9ff",gen(l){const max=[5,6,8,10][l];const a=R(1,max-1),b=R(1,max-a),e=pick(OBJ);
+ {id:"add",name:"Adding",icon:"➕",col:"#3cc9ff",gen(l){if(l>=1&&Math.random()<(l>=2?.5:.3)){const a=R(2,l>=2?10:6),b=R(1,a-1),e=pick(OBJ); // Take away: she taps b objects to float them away, then counts what is left
+   return {take:true,b,prompt:`${a} − ${b} = ?`,show:`<div>${Array(a).fill(`<span class="tk">${e}</span>`).join("")}</div><div id="tacount" style="font-size:clamp(20px,4vw,30px);color:#ffe680;min-height:1.3em"></div>`,
+   say:`${NUMW[a]} take away ${NUMW[b]}. How many are left?`,choices:numOpts(a-b,Math.max(0,a-b-3),Math.min(10,a-b+3),l<1?3:4),ans:a-b,item:`T:${a}-${b}`,cheer:"take",hint:"Let's float some away, then count what's left!"}}
+   const max=[5,6,8,10][l];const a=R(1,max-1),b=R(1,max-a),e=pick(OBJ);
    return {prompt:`${a} + ${b} = ?`,show:`${tapRep(e,a)} <span style="color:#ffe680">+</span> ${tapRep(e,b)}`,say:`${NUMW[a]} plus ${NUMW[b]}. How many altogether?`,
-   choices:numOpts(a+b,Math.max(1,a+b-3),Math.min(10,a+b+3),l<1?3:4),ans:a+b,hint:`Tap all the ${NAMES[e]} and count together, starting at one!`}}},
+   choices:numOpts(a+b,Math.max(1,a+b-3),Math.min(10,a+b+3),l<1?3:4),ans:a+b,item:`A:${a}+${b}`,cheer:"add",hint:`Tap all the ${NAMES[e]} and count together, starting at one!`}}},
  {id:"num",name:"Numbers",icon:"🔢",col:"#8b5cf6",gen(l){const max=[5,10,10,20][l];const n=R(0+(l<2?1:0),max);
-   return {prompt:"Find the number!",show:"🔊",say:`Can you find the number ${NUMW[n]}?`,choices:numOpts(n,0,max,l<1?3:4),ans:n,hint:`Listen again: ${NUMW[n]}. Look carefully!`}}},
+   return {prompt:"Find the number!",show:"🔊",say:`Can you find the number ${NUMW[n]}?`,choices:numOpts(n,0,max,l<1?3:4),ans:n,item:`N:${n}`,hint:`Listen again: ${NUMW[n]}. Look carefully!`}}},
  {id:"more",name:"More or Less",icon:"⚖️",col:"#ff5fa2",gen(l){const max=[6,8,10,10][l];let a=R(1,max),b=R(1,max);while(a===b||(l<1&&Math.abs(a-b)<2))b=R(1,max);
    const more=l<1||Math.random()<.5,e=pick(OBJ),f=pick(OBJ.filter(x=>x!==e));const ans=more?(a>b?"L":"R"):(a<b?"L":"R");
    return {prompt:more?"Which has MORE?":"Which has FEWER?",show:"",say:more?"Which group has more?":"Which group has fewer?",
    choices:[{label:rep(e,a),val:"L",small:true},{label:rep(f,b),val:"R",small:true}],ans,hint:more?"More means the bigger group. Count each side!":"Fewer means the smaller group. Count each side!"}}},
+ {id:"quick",name:"Quick Look",icon:"👀",col:"#06b6d4",gen(l){const k=pick([["sub","sub","tf"],["sub","tf","k5"],["sub","more","k5","tf"],["sub","more","k10","k10"]][l]),e=pick(OBJ),nc=l<1?3:4;
+   if(k==="sub"){const n=l>=2&&Math.random()<.5?R(6,10):R(1,5),hi=l>=2?10:5; // flash 1-5 (dice pattern), later 6-10 in a ten-frame (two rows of five)
+    return {flash:true,prompt:"Quick look! How many?",show:flashBox(n<=5&&(l<1||Math.random()<.7)?dice(n,e):frame(n)),say:"Quick look! How many do you see?",choices:numOpts(n,1,hi,nc),ans:n,item:`Q:${n}`,cheer:"quick",hint:"Look again! Can you see little groups?"}}
+   if(k==="tf"){const n=R(1,l<1?5:10);return {prompt:"How many?",show:frame(n,{tap:true}),say:"How many dots are in the ten-frame?",choices:numOpts(n,1,l<1?5:10,nc),ans:n,item:`F:${n}`,cheer:"frame",
+    hint:n>5?"The top row has five. Count on from five!":"Tap each dot and count!"}}
+   if(k==="more"){const n=R(1,9);return {tf:true,prompt:"How many more to make 10?",show:frame(n,{empty:true}),say:"How many more to make ten?",choices:numOpts(10-n,1,9,nc),ans:10-n,item:`F10:${n}`,cheer:"frame",hint:"Tap the empty boxes and count them!"}}
+   const t=k==="k5"?5:10,a=R(1,t-1); // partner bonds: buddy a + buddy ? = buddy t, with a frame whose empty boxes she can fill
+   return {tf:true,prompt:`${a} + ? = ${t}`,show:`<div class="bond">${budH(a,t)}<span class="eq">+</span><span class="qm">?</span><span class="eq">=</span>${budH(t,t)}</div>${frame(a,{empty:true,cells:t})}`,
+    say:`${NUMW[a]} and how many more make ${NUMW[t]}?`,choices:numOpts(t-a,1,t-1,nc),ans:t-a,item:`K${t}:${a}`,cheer:"bond",hint:"Let's fill the empty boxes and count them!"}}},
  {id:"letter",name:"Letters",icon:"🔤",col:"#22c55e",gen(l){const un=unlocked(),L=pickLetterItem(un,x=>x);const lower=l>=2&&Math.random()<.5;
    const ch=opts(L,un,l<1?3:4).map(x=>({label:lower?x.toLowerCase():x,val:x}));
-   return {prompt:"Find the letter!",show:"🔊",say:`Can you find the letter ${L}?`,choices:ch,ans:L,hint:`Listen again: ${L}. You've got this!`,rec:L}}},
+   return {prompt:"Find the letter!",show:"🔊",say:`Can you find the letter ${L}?`,choices:ch,ans:L,hint:`Listen again: ${L}. You've got this!`,rec:L,item:`L:${L}`}}},
  {id:"sound",name:"First Sounds",icon:"🍎",col:"#f43f5e",gen(l){const un=unlocked(),pk=PICS.filter(x=>un.includes(x[0])),p=pickLetterItem(pk,x=>x[0]),s=PHON[p[0]];
    const pool=pk.map(x=>x[0]).filter(x=>x===p[0]||PHON[x]!==s); // C and K make the same sound: never both as choices
    const ch=[p[0]],used=new Set([s]);shuffle(pool).forEach(x=>{if(ch.length<(l<1?3:4)&&!used.has(PHON[x])){ch.push(x);used.add(PHON[x])}});
-   return {prompt:"What sound does it start with?",show:p[1],say:`${p[2]}. What sound does ${p[2]} start with?`,choices:shuffle(ch),ans:p[0],rec:p[0],
+   return {prompt:"What sound does it start with?",show:p[1],say:`${p[2]}. What sound does ${p[2]} start with?`,choices:shuffle(ch),ans:p[0],rec:p[0],item:`S:${p[0]}`,
    hint:`Say it slowly: ${s}, ${s}, ${p[2]}! Which letter makes that sound?`,hintParts:["Say it slowly:",s,s,p[2],"Which letter makes that sound?"]}}},
  {id:"word",name:"Words",icon:"🐱",col:"#eab308",gen(l){const w=pick(WORDS);const pos=l<2?2:R(0,2);const miss=w[0][pos]; // same case as the shown word (lowercase)
    const shown=w[0].split("").map((c,i)=>i===pos?"_":c).join(" ");const swap=c=>w[0].slice(0,pos)+c+w[0].slice(pos+1);
    const pool="abcdefghijklmnopqrstuvwxyz".split("").filter(c=>c===miss||(!REALW.has(swap(c))&&!RUDE.has(swap(c))&&PHON[c.toUpperCase()]!==PHON[miss.toUpperCase()]));
    const snd=w[0].split("").map(c=>PHON[c.toUpperCase()]);
-   return {prompt:shown,show:w[1],say:`${w[0]}. Which letter is missing in ${w[0]}?`,choices:opts(miss,pool,l<1?3:4),ans:miss,
+   return {prompt:shown,show:w[1],say:`${w[0]}. Which letter is missing in ${w[0]}?`,choices:opts(miss,pool,l<1?3:4),ans:miss,item:`W:${w[0]}`,
    hint:`Sound it out: ${snd.join(", ")}... ${w[0]}!`,hintParts:["Sound it out:",...snd,w[0]]}}},
  {id:"blend",name:"Sound Blending",icon:"🧩",col:"#f97316",gen(l){const un=unlocked().map(x=>x.toLowerCase());
    const ok=BLEND.filter(w=>[...w[0]].every(c=>un.includes(c)));const w=pickLetterItem(ok,x=>[...x[0]].find(c=>GROUPS[LP.g].includes(c.toUpperCase()))?.toUpperCase());
-   const snd=[...w[0]].map(c=>PHON[c.toUpperCase()]);if(Math.random()<.4)return segQ(w,snd); // 40% Segmenting (sound boxes), 60% Blending
+   const snd=[...w[0]].map(c=>PHON[c.toUpperCase()]);if(Math.random()<.4)return Object.assign(segQ(w,snd),{item:`BL:${w[0]}`}); // 40% Segmenting (sound boxes), 60% Blending
    const n=Math.min(ok.length,[2,3,4,4][l]);const ch=shuffle([w,...shuffle(ok.filter(x=>x!==w)).slice(0,n-1)]).map(x=>({label:x[1],val:x[0]}));
-   return {prompt:"Listen and blend!",show:tiles(w[0]),say:`Listen: ${snd.join("... ")}... What word is it?`,sayParts:["Listen:",...snd,"What word is it?"],choices:ch,ans:w[0],blend:snd,
+   return {prompt:"Listen and blend!",show:tiles(w[0]),say:`Listen: ${snd.join("... ")}... What word is it?`,sayParts:["Listen:",...snd,"What word is it?"],choices:ch,ans:w[0],blend:snd,item:`BL:${w[0]}`,
    hint:`Listen: ${snd.join("... ")}. Put them together!`,hintParts:["Listen:",...snd,"Put them together!"]}}},
  {id:"rhyme",name:"Rhymes",icon:"🎵",col:"#14b8a6",gen(l){const r=pick(RHYME);const others=shuffle(RHYME.filter(x=>x!==r)).slice(0,l<1?1:2).map(x=>x[2]);
    const ch=shuffle([r[2],...others]).map(x=>({label:x[1],val:x[0]}));
-   return {prompt:`What rhymes with ${r[0]}?`,show:r[1],say:`What rhymes with ${r[0]}? ${ch.map(c=>c.val).join(", or ")}?`,choices:ch,ans:r[2][0],hint:`Rhymes sound the same at the end, like ${r[0]} and... listen: ${ch.map(c=>c.val).join(", ")}.`,
+   return {prompt:`What rhymes with ${r[0]}?`,show:r[1],say:`What rhymes with ${r[0]}? ${ch.map(c=>c.val).join(", or ")}?`,choices:ch,ans:r[2][0],item:`R:${r[0]}`,hint:`Rhymes sound the same at the end, like ${r[0]} and... listen: ${ch.map(c=>c.val).join(", ")}.`,
    sayParts:[`What rhymes with ${r[0]}?`,...ch.map((c,i)=>i?`or ${c.val}`:c.val)],hintParts:[`Rhymes sound the same at the end, like ${r[0]} and... listen:`,...ch.map(c=>c.val)]}}}
 ];
 const CHEERS=["Amazing, princess!","Super star!","Wonderful!","You did it!","Brilliant!","Out of this world!","Sparkly smart!"];
+const CHEER_BY={count:["You counted every one!","Great counting!"],add:["Super adding!","You put them together!"],take:["Great taking away!","You counted what was left!"],
+ quick:["Quick eyes, princess!","You saw it in a flash!"],frame:["Nice ten-frame!","Ten-frame star!"],bond:["You found the partner!","Perfect pair!"],num:["You know your numbers!"],more:["Great comparing!"],
+ letter:["You know your letters!"],sound:["Great listening!","You heard the sound!"],word:["You spelled it!"],blend:["Super blending!"],rhyme:["Great rhyming ears!"]};
+const ALMOST=["You worked it out! Here's a sparkle!","You kept trying! A sparkle for you!","You got there! Sparkle time!"]; // correct after a hint: a sparkle (half star)
+const MP={count:["C:"],add:["A:","T:"],num:["N:"],quick:["Q:","F:","F10:","K5:","K10:"],letter:["L:"],sound:["S:"],word:["W:"],blend:["BL:"],rhyme:["R:"]};
 const KIND=["Nice try! Let's look again.","Ooh, so close! Try another one.","That's okay, you're learning! Try again."];
 // ---------- screens ----------
 function stopSpeech(){stopVoice()} // Phase 1 behaviour kept: cancels speechSynthesis, and now also stops any playing clip
@@ -328,20 +388,44 @@ function drawMap(){$("starN").textContent=S.stars;$("gemN").textContent=S.gems;c
  const bb=document.createElement("button");bb.className="planet";bb.id="blockPlanet";bb.style.background="radial-gradient(circle at 30% 30%,#fff8,#ff3b3b 30%,#ffe23b 55%,#3b8bff 80%)";
  bb.innerHTML="<span>🧱</span>Block Buddies";bb.onclick=()=>{sfx.tap();say("Welcome to Block Buddy planet!");openBlocks()};m.prepend(bb)}
 function drawColl(){$("starN2").textContent=S.stars;const c=$("coll");c.innerHTML="";const got=Math.floor(S.stars/5);
- STICKERS.forEach((s,i)=>{const d=document.createElement("div");d.className="stk"+(i<got?"":" lock");d.textContent=i<got?s:"❔";c.appendChild(d)})}
+ const head=t=>{const h=document.createElement("div");h.style.cssText="grid-column:1/-1;font-size:24px;color:#ffe680;text-align:left;margin-top:8px";h.textContent=t;c.appendChild(h)};
+ ALLST.forEach((s,i)=>{if(i===0)head("👑 Royal Collection");if(i===STICKERS.length)head("🌌 Royal Collection II");
+  const d=document.createElement("div");d.className="stk"+(i<got?"":" lock");d.textContent=i<got?s:"❔";c.appendChild(d)});
+ if(got>ALLST.length){head(`🏅 Royal medals: ${got-ALLST.length}`);const d=document.createElement("div");d.className="stk";d.textContent="🏅";c.appendChild(d)}}
 // ---------- game loop ----------
 let cur=null,q=null,round=0,tries=0,locked=false;const ROUNDS=5;
+let marks=[],pStars0=0,lastFin="",sameRuns=0; // marks: ⭐ first try / ✨ after a hint, per round
+let lastItem="",sinceRev=9; // review: only when >=3 questions since the last review (so at most 1 in 4); never the same item twice in a row
+const sig=x=>x.item||x.prompt+"|"+x.show+"|"+JSON.stringify(x.choices);
+function genQ(l){let x=null;
+ if(sinceRev>=3&&MP[cur.id]&&Math.random()<.8){for(const id of mReview(MP[cur.id],lastItem).slice(0,3)){for(let i=0;i<60&&!x;i++){const y=cur.gen(l);if(y.item===id)x=y}if(x)break}} // weak/due item, if this level can make it
+ if(x){x.review=1;sinceRev=0}else{sinceRev++;for(let i=0;i<20;i++){x=cur.gen(l);if(sig(x)!==lastItem)break}}
+ lastItem=sig(x);return x}
 function lvl(){return S.level[cur.id]||(S.level[cur.id]={l:0,streak:0})}
-let nextT=0;function startPlanet(p){clearTimeout(nextT);cur=p;round=0;show("game");preloadVoice([...CHEERS,...KIND,...NUMW.slice(1),...(p.id==="count"||p.id==="add"?NUMW.slice(1).map(n=>`That's ${n}!`):[])]);next()}
-function next(){if(round>=ROUNDS)return finish();if(timeUp())return restScreen();locked=false;tries=0;vHook=null;clearBlendT();q=cur.gen(lvl().l);
- $("prog").textContent="⭐".repeat(round)+"☆".repeat(ROUNDS-round);
+let nextT=0;function startPlanet(p){clearTimeout(nextT);cur=p;round=0;marks=[];pStars0=S.stars;show("game");preloadVoice([...CHEERS,...KIND,...ALMOST,...(CHEER_BY[p.id]||[]),...(p.id==="add"?CHEER_BY.take:[]),...(p.id==="quick"?[...CHEER_BY.frame,...CHEER_BY.bond]:[]),...NUMW.slice(1),...(p.id==="count"||p.id==="add"||p.id==="quick"?NUMW.slice(1).map(n=>`That's ${n}!`):[])]);next()}
+function next(){if(round>=ROUNDS)return finish();if(timeUp())return restScreen();locked=false;tries=0;vHook=null;clearBlendT();q=genQ(lvl().l);
+ $("prog").textContent=marks.join("")+"☆".repeat(ROUNDS-round);
  $("prompt").textContent=q.prompt;$("visual").innerHTML=q.show;$("hint").textContent="";wireTaps();
  const box=$("choices");box.innerHTML="";
  q.choices.map(c=>typeof c==="object"?c:{label:String(c),val:c}).forEach(c=>{const b=document.createElement("button");b.className="ch";
   b.innerHTML=c.label;if(c.small){b.style.fontSize="clamp(28px,5vw,46px)";b.style.maxWidth="420px";b.style.padding="16px"}
   b.onclick=()=>answer(b,c.val);box.appendChild(b)});
- preloadVoice([q.say,q.hint,...(q.sayParts||[]),...(q.hintParts||[])]);if(q.blend)lightTiles();if(q.seg)wireSeg();setTimeout(()=>say(q.say,q.sayParts),250)}
+ preloadVoice([q.say,q.hint,...(q.sayParts||[]),...(q.hintParts||[])]);if(q.blend)lightTiles();if(q.seg)wireSeg();if(q.flash)wireFlash();if(q.tf)wireFill();if(q.take)wireTake();setTimeout(()=>say(q.say,q.sayParts),250)}
 let blendT=[];function clearBlendT(){blendT.forEach(clearTimeout);blendT=[]}
+const FLASH_MS=1800;function wireFlash(){const w=$("visual").querySelector(".qlook");if(!w)return;const qq=q;let t=0;const hide=()=>{clearTimeout(t);t=setTimeout(()=>{if(q===qq&&!qq.peekOff)w.classList.add("hid")},FLASH_MS);blendT.push(t)};
+ hide();w.querySelector(".peek").onclick=()=>{w.classList.remove("hid");tone(660,0,.1,"sine");hide()}} // tap 👀 Peek any number of times; after a wrong try it stays visible
+function wireFill(){const es=[...$("visual").querySelectorAll(".tc.e")];let k=0;
+ es.forEach(c=>c.onclick=()=>{if(c.dataset.f)return;k++;c.dataset.f=k;c.innerHTML='<i class="add"></i>';tone(400+k*40,0,.15,"triangle");
+  if(k===es.length)say(`${NUMW[k]}! That's ${NUMW[k]}!`,[NUMW[k],`That's ${NUMW[k]}!`]);else say(NUMW[k])});
+ const qq=q;q.onHint=()=>{let d=0;es.forEach(c=>{if(!c.dataset.f)blendT.push(setTimeout(()=>{if(q===qq&&!c.dataset.f)c.click()},3500+d++*800))})}} // hint: the boxes fill themselves, counting
+function wireTake(){const it=[...$("visual").querySelectorAll(".tk")];let gone=0,k=0;const qq=q,left=()=>it.filter(s=>!s.dataset.g);
+ const upd=()=>{const tc=$("tacount");if(tc)tc.textContent=gone<qq.b?`🫧 ${gone} of ${qq.b} floated away`:"Now count what's left! 👆"};upd();
+ it.forEach(s=>s.onclick=()=>{if(s.dataset.g)return;
+  if(gone<qq.b){s.dataset.g=1;s.classList.add("gone");gone++;tone(760-gone*40,0,.15,"sine");upd();if(gone===qq.b)say("Now count what's left!");else say(NUMW[gone]);return}
+  s.classList.remove("bounce");void s.offsetWidth;s.classList.add("bounce");if(s.dataset.n){say(NUMW[+s.dataset.n]);return}
+  k++;s.dataset.n=k;s.classList.add("done");tone(400+k*40,0,.15,"triangle");if(k===left().length)say(`${NUMW[k]}! That's ${NUMW[k]}!`,[NUMW[k],`That's ${NUMW[k]}!`]);else say(NUMW[k])});
+ q.onHint=()=>{const ng=left(),rm=ng.slice(ng.length-(qq.b-gone)),cn=ng.slice(0,ng.length-(qq.b-gone)).filter(s=>!s.dataset.n);
+  [...rm,...cn].forEach((s,i)=>blendT.push(setTimeout(()=>{if(q===qq)s.click()},3500+i*800)))}} // hint: float the rest away, then count the remaining
 function lightTiles(){const tl=[...$("visual").querySelectorAll(".ltile")],lit=i=>{const t=tl[i];if(t&&!t.classList.contains("lit"))t.classList.add("lit")};let i=0;
  tl.forEach((t,j)=>{t.onclick=()=>{lit(j);say(q.blend[j])};blendT.push(setTimeout(()=>{lit(j);i=Math.max(i,j+1)},1500+j*1000))}); // timers = fallback for the device voice
  vHook=k=>{if(i<tl.length&&k===slug(q.blend[i]))lit(i++)}} // recorded clips: light each letter exactly when its sound starts
@@ -353,11 +437,13 @@ function wireSeg(){const bx=[...$("visual").querySelectorAll(".ebox")];let k=0;c
   if(k<bx.length)say(q.snd[i]);else{say(`${q.snd.join(", ")}... ${q.word}!`,[...q.snd,q.word]);locked=true;const qq=q;setTimeout(()=>{if(q!==qq||!$("game").classList.contains("on"))return;locked=false;answer(b,q.ans)},2600)}})}
 function answer(b,v){if(locked||b.classList.contains("no"))return;const L=lvl();
  if(q.rec&&!q.recd){q.recd=1;const up=recordLetter(q.rec,v===q.ans&&tries===0);if(up)q.unlocked=up}
- if(v===q.ans){locked=true;b.classList.add("yes");sfx.yes();burst(b);const c=pick(CHEERS);$("hint").textContent=c+" 🌟";
+ if(q.item&&!q.mrec){q.mrec=1;mRec(q.item,v===q.ans&&tries===0)}
+ if(v===q.ans){locked=true;b.classList.add("yes");sfx.yes();burst(b);const sk=CHEER_BY[q.cheer||cur.id],c=tries===0?(sk&&Math.random()<.6?pick(sk):pick(CHEERS)):pick(ALMOST);$("hint").textContent=c+(tries===0?" 🌟":" ✨");
   if(q.unlocked){$("hint").textContent=`${c} New letters: ${q.unlocked.join(" ").toLowerCase()} ✨`;say(c+" New letter sounds unlocked!",[c,"New letter sounds unlocked!"]);burst(b,24,true)}else say(c);
   if(tries===0){L.streak++;if(L.streak>=3&&L.l<3){L.l++;L.streak=0}run++;if(run===3||run===5){burst(b,run===5?36:24,true);sfx["streak"+run]()}}
-  S.stars++;round++;save();$("princess").classList.remove("cheer");nextT=setTimeout(next,q.unlocked?3200:1700)}
- else{tries++;b.classList.add("no");sfx.no();L.streak=0;run=0;shake();if(tries>=2&&L.l>0&&tries===2)L.l--; // run resets silently, no message
+  if(tries===0){S.stars++;marks.push("⭐")}else{S.half=(S.half||0)+1;if(S.half>=2){S.half=0;S.stars++}marks.push("✨")}round++;save();$("princess").classList.remove("cheer");nextT=setTimeout(next,q.unlocked?3200:1700)}
+ else{tries++;b.classList.add("no");sfx.no();L.streak=0;run=0;shake();if(tries>=2&&L.l>0&&tries===2)L.l--;
+  if(q.flash){q.peekOff=1;const w=$("visual").querySelector(".qlook");if(w)w.classList.remove("hid")}if(q.onHint&&!q.hinted){q.hinted=1;q.onHint()} // run resets silently, no message
   const k=pick(KIND),t=k+" "+q.hint;$("hint").textContent=t;say(t,[k,...(q.hintParts||[q.hint])]);save()}}
 let run=0; // first-try correct answers in a row (this session)
 function shake(){const g=$("game");g.classList.remove("shake");void g.offsetWidth;g.classList.add("shake")}
@@ -366,12 +452,14 @@ function wireTaps(){const it=[...$("visual").querySelectorAll(".tapme")];let k=0
   if(s.dataset.n){say(NUMW[+s.dataset.n]);return} // already counted (✓): just replay its number
   k++;s.dataset.n=k;s.classList.add("done");tone(400+k*40,0,.15,"triangle");
   if(k===it.length)say(`${NUMW[k]}! That's ${NUMW[k]}!`,[NUMW[k],`That's ${NUMW[k]}!`]);else say(NUMW[k])})}
-function finish(){S.gems++;save();sfx.win();const before=Math.floor((S.stars-ROUNDS)/5),after=Math.floor(S.stars/5);
- const newSt=after>before&&after<=STICKERS.length?STICKERS[after-1]:null;
+function finish(){S.gems++;save();sfx.win();const before=Math.floor(pStars0/5),after=Math.floor(S.stars/5);
+ const newSt=after>before?stickerFor(after):null;sameRuns=cur.id===lastFin?sameRuns+1:1;lastFin=cur.id;
  $("prompt").textContent="Planet complete! 💎";$("visual").innerHTML=`👸✨${newSt?"<br>New sticker: "+newSt:""}`;$("hint").textContent="";
- say(`Hooray! You finished ${cur.name} planet and won a gem!${newSt?" And a brand new sticker!":""}`);
+ const hz=`Hooray! You finished ${cur.name} planet and won a gem!${newSt?" And a brand new sticker!":""}`,SUG="You're so good at this! Want to try a new planet?";
+ if(sameRuns>=3)say(hz+" "+SUG,[hz,SUG]);else say(hz);
  $("choices").innerHTML="";const b1=document.createElement("button");b1.className="big";b1.textContent="🚀 Fly on!";b1.onclick=()=>{show("mapS");drawMap()};
  const b2=document.createElement("button");b2.className="big alt";b2.textContent="🔁 Again";b2.onclick=()=>startPlanet(cur);$("choices").append(b1,b2);
+ if(sameRuns>=3){const o=pick(PLANETS.filter(p=>p!==cur)),b3=document.createElement("button");b3.className="big";b3.id="tryNew";b3.textContent=`✨ Try a new planet: ${o.icon} ${o.name}?`;b3.onclick=()=>{sameRuns=0;startPlanet(o)};$("choices").prepend(b3)}
  for(let i=0;i<3;i++)setTimeout(()=>burst(document.body),i*300)}
 function burst(el,n=12,big=false){const r=el.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+Math.min(r.height/2,300),sp=big?520:300;
  for(let i=0;i<n;i++){const p=document.createElement("div");p.className="p"+(big?" bigp":"");p.textContent=pick(big?["⭐","✨","💖","🌟","💎","👑","🦄","🌈"]:["⭐","✨","💖","🌟","💎"]);
@@ -402,9 +490,9 @@ $("pBack").onclick=()=>{show("start");showDays();$("gearTip").textContent=""};
 // ---------- gentle play-time limit: counts ACTIVE play only (game/blocks screen visible + a tap in the last 60 s), per day ----------
 let lastAct=Date.now();document.addEventListener("pointerdown",()=>{lastAct=Date.now()},{capture:true,passive:true});
 const timeUp=()=>S.limit>0&&(S.tday===dkey(new Date()))&&(S.tms||0)>=S.limit*60000;
-function tickTime(){const t=dkey(new Date());if(S.tday!==t){S.tday=t;S.tms=0}
+function tickTime(){const t=dkey(new Date());if(S.tday!==t){S.tday=t;S.tms=0;if(S.pm&&typeof S.pm==="object")Object.keys(S.pm).sort().slice(0,-14).forEach(k=>delete S.pm[k])}
  const playing=($("game").classList.contains("on")||$("blocks").classList.contains("on"))&&document.visibilityState!=="hidden";
- if(playing&&Date.now()-lastAct<60000){S.tms=(S.tms||0)+1000;if(S.tms%15000===0)save()}
+ if(playing&&Date.now()-lastAct<60000){S.tms=(S.tms||0)+1000;(S.pm&&typeof S.pm==="object"?S.pm:(S.pm={}))[t]=S.tms;if(S.tms%15000===0)save()}
  if(timeUp()&&$("blocks").classList.contains("on")&&(bmode==="build"||bmode==="stairs"))restScreen()} // open-ended modes have no "question end"
 setInterval(tickTime,1000);
 function restScreen(){stopCount();clearBlendT();show("restS");save();$("restTip").textContent="";say("Time to rest, princess! You played so well today. See you next time!");
@@ -425,7 +513,7 @@ $("playBtn").onclick=()=>{sfx.win();const bonus=markPlayed();show("mapS");drawMa
 $("collBtn1").onclick=$("collBtn2").onclick=()=>{sfx.tap();drawColl();show("collS")};
 $("homeBtn").onclick=()=>{show("start");showDays()};$("backBtn").onclick=()=>{show("mapS");drawMap()};$("back2").onclick=()=>{show("mapS");drawMap()};
 $("sayBtn").onclick=()=>q&&say(q.say,q.sayParts);
-$("resetBtn").onclick=()=>{if(confirm("Reset progress? This clears stars, gems, stickers, days played, letter progress and today's play time. Settings stay.")){S.stars=0;S.gems=0;S.level={};S.days=[];S.bonusDay="";S.tms=0;LP=freshLP();saveLP();save();showDays();drawParent();alert("Progress reset: stars, gems, stickers, days played, letter progress and play time are cleared.")}};
+$("resetBtn").onclick=()=>{if(confirm("Reset progress? This clears stars, sparkles, gems, stickers, days played, letter progress, skill progress and play time. Settings stay.")){S.stars=0;S.half=0;S.gems=0;S.level={};S.days=[];S.bonusDay="";S.tms=0;S.pm={};LP=freshLP();saveLP();M={};saveM();save();showDays();drawParent();alert("Progress reset: stars, sparkles, gems, stickers, days played, letter progress, skill progress and play time are cleared.")}};
 // ---------- Block Buddies (number characters) ----------
 const BCOL=["#999","#ff3b3b","#ff9a1f","#ffe23b","#3fd16a","#3b8bff","#a55cff","rainbow","#ff6fc8","#8fa3b8","#ffffff"];
 const RAIN=["#ff3b3b","#ff9a1f","#ffe23b","#3fd16a","#3b8bff","#4b3bd6","#a55cff"];
@@ -456,7 +544,7 @@ function countAlong(el,done){stopCount();const bl=[...el.querySelectorAll(".blk"
  countT.push(setTimeout(()=>{if(done)done()},bl.length*750+200))}
 function award(el,msg){S.stars++;const before=Math.floor((S.stars-1)/5),after=Math.floor(S.stars/5);
  if(S.stars%5===0)S.gems++;save();sfx.yes();burst(el||$("stage"));$("bStar").textContent=S.stars;
- const st=after>before&&after<=STICKERS.length?STICKERS[after-1]:null;
+ const st=after>before?stickerFor(after):null;
  const m=msg||pick(CHEERS),t=m+(st?` New sticker: ${st}!`:"");if(st)buzz(HAPT.big);award.t=t;award.parts=st?[m,"New sticker!"]:null;$("bhint").textContent=t+" 🌟";return t}
 const BMODES=[{id:"build",name:"🧱 Build"},{id:"join",name:"🤝 Join"},{id:"split",name:"✂️ Split"},{id:"make",name:"👸 Make me!"},{id:"oddeven",name:"👯 Pairs"},{id:"stairs",name:"🪜 Stairs"}];
 let bmode="build",bN=1,bTarget=0,bSay="",bMax=()=>(S.blockMax||10);
@@ -526,7 +614,37 @@ function modeStairs(){const st=resetStage();st.classList.add("stairs");st.style.
  btn("🎵 Climb the stairs!","big alt",()=>{stopCount();all.forEach((b,i)=>countT.push(setTimeout(()=>{b.classList.remove("merge");void b.offsetWidth;b.classList.add("merge");tone(400+i*60,0,.2,"triangle");say(NUMW[i+1])},i*800)))})}
 $("bBack").onclick=()=>{stopCount();show("mapS");drawMap()};$("bSay").onclick=()=>say(bSay,bParts);
 let fitT=0;window.addEventListener("resize",()=>{clearTimeout(fitT);fitT=setTimeout(()=>{if(!$("blocks").classList.contains("on"))return;if(bmode==="stairs")modeStairs();else if(bmode==="build")drawBuild()},200)});
-window.__test={PLANETS,S,openBlocks,setMode,say,slug,buzz,markPlayed,showDays,VMISS,get run(){return run},stopSpeech,CHEERS,KIND,NUMW,PICS,PHON,WORDS,RHYME,ABC,BNAME,bname,STICKERS,setVList:v=>{VLIST=v},GROUPS,UNLOCK,BLEND,REALW,RUDE,an,unlocked,recordLetter,get LP(){return LP},setLP:v=>{LP=Object.assign(freshLP(),v);saveLP()},timeUp,tickTime,restScreen,parentGate,drawParent,segQ,setActive:()=>{lastAct=Date.now()},setMakeRound:v=>{makeRound=v}};
+// ---------- parent progress report (Batch 2): only reachable from the gated grown-ups screen; nothing leaves the device ----------
+const AREAS=[["Counting",["C:"],"num"],["Adding & Take away",["A:","T:"],"fact"],["Numbers",["N:"],"num"],["Quick Look",["Q:","F:","F10:","K5:","K10:"],"fact"],["Letters",["L:"],"let"],["Sounds",["S:"],"let"],["Blending",["BL:"],"w"],["Words",["W:"],"w"],["Rhymes",["R:"],"w"]];
+const OFF={"Counting":"Count steps out loud as you climb the stairs together.","Adding & Take away":"Snack maths: 3 grapes and 2 more, how many? Eat one, how many are left?","Numbers":"Spot numbers on doors, buses and clocks on a walk.",
+ "Quick Look":"Roll a dice and say the number without counting the dots.","Letters":"Find the letters of her name on signs and packets.","Sounds":"Play I-spy with sounds: I spy something that starts with 'sss'.",
+ "Blending":"Say a word in sounds (c-a-t) and let her guess the word.","Words":"Make 3-letter words with magnetic letters, or write them in sand.","Rhymes":"Make up silly rhymes at bath time: cat, hat, bat…"};
+const lab=k=>k.slice(k.indexOf(":")+1);
+function rangeTxt(ns){ns=[...new Set(ns.map(Number))].sort((a,b)=>a-b);const o=[];for(let i=0;i<ns.length;i++){let j=i;while(j+1<ns.length&&ns[j+1]===ns[j]+1)j++;o.push(j>i+1?`${ns[i]}–${ns[j]}`:j>i?`${ns[i]}, ${ns[j]}`:`${ns[i]}`);i=j}return o.join(", ")}
+function itemTxt(k){const p=k.slice(0,k.indexOf(":")),v=lab(k);return p==="K5"?`${v}+?=5`:p==="K10"||p==="F10"?`${v}+?=10`:p==="Q"?`sees ${v}`:p==="F"?`frame ${v}`:p==="L"||p==="S"?v.toLowerCase():v}
+function areaStats(pre){const ks=Object.keys(M).filter(k=>pre.some(p=>k.startsWith(p))).sort((x,y)=>x.localeCompare(y,undefined,{numeric:true}));
+ return {ks,known:ks.filter(k=>M[k].b>=2),learn:ks.filter(k=>M[k].b<2),str:ks.length?ks.reduce((s,k)=>s+M[k].b/4,0)/ks.length:0}} // known = 2+ first-try answers in a row
+function lineFor(a,st){if(!st.ks.length)return "Not started yet.";const f=a[2]==="num"?ks=>rangeTxt(ks.map(lab)):ks=>ks.slice(0,8).map(itemTxt).join(", ")+(ks.length>8?` and ${ks.length-8} more`:"");
+ return (st.known.length?`Knows: ${f(st.known)}`:"Knows: still learning")+(st.learn.length?`. Working on: ${f(st.learn)}`:"")+"."}
+function progData(){const now=new Date(),wk=[...Array(7)].map((_,i)=>dkey(new Date(now.getFullYear(),now.getMonth(),now.getDate()-i,12)));
+ const pm=S.pm||{},mins=Math.round(wk.reduce((s,d)=>s+(+pm[d]||0),0)/60000),daysW=wk.filter(d=>(S.days||[]).includes(d)).length,daysAll=new Set(S.days||[]).size;
+ const rows=AREAS.map(a=>{const st=areaStats(a[1]);return {name:a[0],st,line:lineFor(a,st)}});
+ const lk={};ABC.forEach(L=>{const bs=["L:","S:"].map(p=>M[p+L]).filter(Boolean);lk[L]=!bs.length?0:Math.max(...bs.map(m=>m.b))>=2?2:1});
+ const sug=[...rows.filter(r=>r.st.ks.length).sort((x,y)=>x.st.str-y.st.str),...rows.filter(r=>!r.st.ks.length)].slice(0,3).map(r=>OFF[r.name]); // weakest areas first
+ return {mins,daysW,daysAll,rows,lk,sug}}
+function drawProgress(){const d=progData(),bar=s=>`<div class="pbar"><i style="width:${Math.round(s*100)}%"></i></div>`;
+ $("progBody").innerHTML=`<div class="parent"><b>This week:</b> played on ${d.daysW} day${d.daysW===1?"":"s"}, about ${d.mins} min of active play. Days played in total: ${d.daysAll}.</div>`+
+ `<div class="parent">${d.rows.map(r=>`<div class="prow"><b>${r.name}</b>${bar(r.st.str)}<div class="pline">${r.line}</div></div>`).join("")}</div>`+
+ `<div class="parent"><b>Letters</b> (names and sounds)<div class="plet">${ABC.map(L=>`<span class="pl l${d.lk[L]}">${L.toLowerCase()}</span>`).join("")}</div><small>green: knows · gold: learning · grey: not yet</small></div>`+
+ `<div class="parent"><b>Things to try together offline</b><ul>${d.sug.map(s=>`<li>${s}</li>`).join("")}</ul><small>The bars grow with first-try answers. She never sees this page.</small></div>`;$("copyMsg").textContent="";return d}
+function progSummary(){const d=progData(),L=n=>ABC.filter(x=>d.lk[x]===n).map(x=>x.toLowerCase()).join(" ")||"none";
+ return [`Space Princess progress (${dkey(new Date())})`,`This week: ${d.daysW} day(s), about ${d.mins} min. Days played in total: ${d.daysAll}.`,...d.rows.map(r=>`${r.name}: ${Math.round(r.st.str*100)}%. ${r.line}`),
+  `Letters known: ${L(2)}. Learning: ${L(1)}.`,"Try together: "+d.sug.join(" ")].join("\n")}
+$("progBtn").onclick=()=>{show("progS");drawProgress()};$("progBack").onclick=()=>{show("parentS");drawParent()};
+$("copyBtn").onclick=()=>{const t=progSummary(),ok=()=>{$("copyMsg").textContent="Copied ✓"};
+ try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,()=>{});else{const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();if(document.execCommand("copy"))ok();a.remove()}}catch(e){}}; // fails silently
+$("printBtn").onclick=()=>{try{window.print()}catch(e){}};
+window.__test={mRec,mReview,mDue,genQ,get M(){return M},setM:v=>{M=v;saveM()},MKEY,MCAP,MINT,MP,progData,progSummary,drawProgress,CHEER_BY,ALMOST,ALLST,stickerFor,STICKERS2,frame,dice,setCur:p=>{cur=p},get q(){return q},get marks(){return marks},get lastItem(){return lastItem},PLANETS,S,openBlocks,setMode,say,slug,buzz,markPlayed,showDays,VMISS,get run(){return run},stopSpeech,CHEERS,KIND,NUMW,PICS,PHON,WORDS,RHYME,ABC,BNAME,bname,STICKERS,setVList:v=>{VLIST=v},GROUPS,UNLOCK,BLEND,REALW,RUDE,an,unlocked,recordLetter,get LP(){return LP},setLP:v=>{LP=Object.assign(freshLP(),v);saveLP()},timeUp,tickTime,restScreen,parentGate,drawParent,segQ,setActive:()=>{lastAct=Date.now()},setMakeRound:v=>{makeRound=v}};
 // PWA: register the service worker (offline play + home-screen install). Fails silently.
 if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("./sw.js").catch(()=>{})})}
 </script></body></html>

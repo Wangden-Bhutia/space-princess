@@ -5,7 +5,8 @@
 // Also: audio/index.json is network-first (new clips are seen without a version bump);
 // mp3s are cache-first; Range requests (iOS Safari <audio>) are answered with a 206 slice of the cached file,
 // or passed straight to the network if not cached yet; only full 200 responses are ever cached.
-const CACHE = 'space-princess-v4';
+// v5 (Batch 2): Quick Look planet, take away, per-item review, sparkles, Royal Collection II, parent progress report, 94 new clips.
+const CACHE = 'space-princess-v5';
 
 // Core files, relative so it works under a GitHub Pages subpath like /space-princess/
 const CORE = [
