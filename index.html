@@ -160,6 +160,19 @@ button,.tk,.tc{touch-action:manipulation} /* zoom is allowed again; this only st
 .card.grown{font-size:18px;text-align:left;background:rgba(255,230,128,.15)}
 @media (prefers-reduced-motion:reduce){.wd,.ordr button{transition:none!important}#deco .it{transition:none!important}}
 .bud.lit .blk{filter:brightness(1.25) drop-shadow(0 0 6px #ffe680)}
+/* Batch 5: layout fix - answer bars in normal flow, compact mode bar, dynamic viewport units */
+body{min-height:100vh;min-height:100dvh}
+.screen{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+#bctl{position:static;background:none;padding:8px 0 6px;margin-top:10px}
+#tabs{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 4px 4px;gap:8px;scroll-padding:0 16px}
+#tabs::-webkit-scrollbar{display:none}
+#tabs .tab{flex:0 0 auto;min-height:48px;padding:8px 14px;font-size:17px;white-space:nowrap}
+@media (min-width:900px){#tabs{flex-wrap:wrap;justify-content:center;overflow:visible}}
+@media (max-height:800px){#stage{min-height:min(440px,34vh);min-height:min(440px,34dvh)}}
+@media (max-height:760px){#stage .blk{width:min(var(--b,44px),5.4vh);height:min(var(--b,44px),5.4vh);width:min(var(--b,44px),5.4dvh);height:min(var(--b,44px),5.4dvh)}#stage{gap:16px}}
+@media (max-width:440px),(max-height:700px){#bctl .big{font-size:22px;padding:12px 18px;min-height:56px}}
+.rb.takeb{width:auto;min-width:120px;height:auto;min-height:72px;border-radius:40px;padding:10px 24px;font-size:clamp(24px,5vw,32px);white-space:nowrap}
+@media (max-height:480px){#stage .blk{width:min(var(--b,44px),8vh);height:min(var(--b,44px),8vh)}#stage{min-height:0}}
 </style></head><body>
 <div id="stars"></div><div id="burst"></div>
 
@@ -591,7 +604,7 @@ function openBlocks(m){show("blocks");preloadVoice([...NUMW.slice(1),...CHEERS])
   b.onclick=()=>{sfx.tap();openBlocks(x.id)};tb.appendChild(b)});setMode(m||bmode)}
 function resetStage(){stopCount();const st=$("stage");st.innerHTML="";st.className="";st.style.gap="";st.style.removeProperty("--b");st.dataset.done="";$("bctl").innerHTML="";$("bhint").textContent="";return st}
 function bTimeUp(){if(timeUp()){restScreen();return true}return false}
-function setMode(m){if(bTimeUp())return;bmode=m;document.querySelectorAll("#tabs .tab").forEach(t=>t.classList.toggle("on",t.dataset.m===m));stopSpeech();resetStage();
+function setMode(m){if(bTimeUp())return;bmode=m;document.querySelectorAll("#tabs .tab").forEach(t=>t.classList.toggle("on",t.dataset.m===m));{const on=document.querySelector("#tabs .tab.on");if(on&&on.scrollIntoView)try{on.scrollIntoView({block:"nearest",inline:"nearest"})}catch(_){}}stopSpeech();resetStage();
  ({build:modeBuild,join:modeJoin,split:modeSplit,make:modeMake,oddeven:modeOdd,stairs:modeStairs,...(typeof BEXTRA!=="undefined"?BEXTRA:{})})[m]()}
 function btn(txt,cls,fn){const b=document.createElement("button");b.className=cls;b.innerHTML=txt;b.onclick=fn;$("bctl").appendChild(b);return b}
 // --- Build ---
@@ -840,7 +853,7 @@ function modeTake(){if(bTimeUp())return;const st=resetStage();const a=R(2,takeRo
  function take(){if(st.dataset.done==="1"||left<=a-b)return;left--;tone(760-(a-left)*40,0,.15,"sine");draw();info();
   if(left===a-b){st.dataset.done="1";$("bctl").innerHTML="";takeRound++;mRec(`BT:${a}-${b}`,true);$("bprompt").textContent=`${a} − ${b} = ${a-b}`;
    const t=award(st.firstChild,`${NUMW[a]} take away ${NUMW[b]} is ${NUMW[a-b]}!`);bspeak(t);setTimeout(()=>{if(st.firstChild)countAlong(st.firstChild)},2600);btn("➡️ More!","big",modeTake)}else say(NUMW[a-left])}
- draw();info();btn("➖ Take one","rb minus",take)}
+ draw();info();btn("➖ Take one","rb minus takeb",take)}
 const BEXTRA={takeaway:modeTake};BMODES.push({id:"takeaway",name:"➖ Take away"});
 function joinPredict(a,b){const c=a+b,st=$("stage");$("bprompt").textContent="How many will there be?";const base=`${NUMW[a]} and ${NUMW[b]} want to join together! Drag one onto the other.`;
  bSay=base+" How many will there be?";bParts=[base,"How many will there be?"];say(bSay,bParts);let tr=0;
