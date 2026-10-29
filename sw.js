@@ -6,7 +6,8 @@
 // mp3s are cache-first; Range requests (iOS Safari <audio>) are answered with a 206 slice of the cached file,
 // or passed straight to the network if not cached yet; only full 200 responses are ever cached.
 // v5 (Batch 2): Quick Look planet, take away, per-item review, sparkles, Royal Collection II, parent progress report, 94 new clips.
-const CACHE = 'space-princess-v5';
+// v6 (Batch 3): Tens and Ones, Shape Sparkles, Pattern Parade, Measure Magic, Trace, Story Corner, journey, decorate, 441 new clips.
+const CACHE = 'space-princess-v6';
 
 // Core files, relative so it works under a GitHub Pages subpath like /space-princess/
 const CORE = [
