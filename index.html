@@ -601,7 +601,7 @@ $("pBack").onclick=()=>{show("start");showDays();$("gearTip").textContent=""};
 let lastAct=Date.now();document.addEventListener("pointerdown",()=>{lastAct=Date.now()},{capture:true,passive:true});
 const timeUp=()=>S.limit>0&&(S.tday===dkey(new Date()))&&(S.tms||0)>=S.limit*60000;
 function tickTime(){const t=dkey(new Date());if(S.tday!==t){S.tday=t;S.tms=0;if(S.pm&&typeof S.pm==="object")Object.keys(S.pm).sort().slice(0,-14).forEach(k=>delete S.pm[k])}
- const playing=["game","blocks","storyS","decoS"].some(id=>$(id)&&$(id).classList.contains("on"))&&document.visibilityState!=="hidden";
+ const playing=["game","blocks","storyS","decoS","epS"].some(id=>$(id)&&$(id).classList.contains("on"))&&document.visibilityState!=="hidden";
  if(playing&&Date.now()-lastAct<60000){S.tms=(S.tms||0)+1000;(S.pm&&typeof S.pm==="object"?S.pm:(S.pm={}))[t]=S.tms;if(S.tms%15000===0)save()}
  if(timeUp()&&$("blocks").classList.contains("on")&&(bmode==="build"||bmode==="stairs"))restScreen()} // open-ended modes have no "question end"
 setInterval(tickTime,1000);
@@ -1072,6 +1072,190 @@ window.__test3={checkStories,checkWords,STORD,SIGHT_AT,get stTr(){return stTr},N
   T.setLP({g:4});const cs=checkStories(),cw=checkWords();if(cs.length)bad.checkStories=cs;if(cw.length)bad.checkWords=cw;return {bad,cnt}}};
 </script>
 <div id="iosCard" role="dialog" aria-label="Install on iPhone or iPad" style="display:none;position:fixed;inset:0;z-index:99;background:#0b0630ee;align-items:center;justify-content:center;padding:16px"><div style="background:#fff;color:#2a1650;border-radius:24px;padding:22px;max-width:420px;width:100%;font-size:22px;line-height:1.5"><div style="font-size:26px;font-weight:bold;margin-bottom:8px">Install on iPhone/iPad</div><ol style="padding-left:28px;margin:0"><li>Tap the Share button <svg width="30" height="34" viewBox="0 0 30 34" style="vertical-align:middle"><rect x="4" y="12" width="22" height="20" rx="3" fill="none" stroke="#4da3ff" stroke-width="3"/><path d="M15 3v18M9 9l6-6 6 6" fill="none" stroke="#4da3ff" stroke-width="3" stroke-linecap="round"/></svg> in Safari</li><li>Tap <b>Add to Home Screen</b> ➕</li><li>Tap <b>Add</b></li></ol><button class="big" id="iosClose" style="margin-top:14px;font-size:22px">OK</button></div></div>
+<script id="pass3">
+// ---------- Pass 3: "Meet it" episodes (teaching layer) ----------
+// Each episode: Problem (a Buddy says one line) → Show (animated demo) → Try together (2-3 guided questions, hints on, no stars) → Recap (one sentence + an original chant)
+// steps: {b:"problem"|"show"|"try"|"recap", say, d:[draw op,...args]}; try: {q, h (hint), ch (>=3 choices), a (answer)}; recap: {say, chant:[lines]}
+const EPISODES=[
+ {id:"count",skill:"Counting",title:"Touch and count",steps:[
+  {b:"problem",say:"Hello! I'm Rainbow. I need seven blocks for my bridge. Can you help me count them?",d:["bud",7]},
+  {b:"show",say:"I touch each block once, and say one number for each block.",d:["count",7]},
+  {b:"show",say:"The last number I said was seven. So there are seven blocks!",d:["bud",7]},
+  {b:"try",q:"Let's count Quadra's blocks together. How many?",h:"Tap each block once. The last number tells you how many.",d:["bud",4],ch:[3,4,5],a:4},
+  {b:"try",q:"How many blocks does Hexa have?",h:"Touch each one once, and say one number for each.",d:["bud",6],ch:[5,6,8],a:6},
+  {b:"try",q:"Count Starfive's blocks with me. How many?",h:"One number for each block. Say the last one again.",d:["bud",5],ch:[4,5,6],a:5},
+  {b:"recap",say:"Touch each one once, and the last number tells you how many!",chant:["Touch and count,","one by one,","the last number says","how many, done!"],d:["bud",7]}]},
+ {id:"join",skill:"Adding",title:"Join them together",steps:[
+  {b:"problem",say:"I'm Tri-Star! My friend Twinkle wants to join me. How many blocks will we be?",d:["pair",3,2]},
+  {b:"show",say:"Three and two join together. We count them all, and we get five!",d:["join",3,2]},
+  {b:"try",q:"Two and two join together. How many altogether?",h:"Push them together, then count them all.",d:["pair",2,2],ch:[3,4,5],a:4},
+  {b:"try",q:"Four and one join together. How many altogether?",h:"Count every block, starting at one.",d:["pair",4,1],ch:[4,5,6],a:5},
+  {b:"try",q:"Three and three join together. How many altogether?",h:"Join them up and count them all.",d:["pair",3,3],ch:[5,6,7],a:6},
+  {b:"recap",say:"When we add, we join the groups and count them all.",chant:["Push them close,","join as one,","count them all,","adding is fun!"],d:["bud",5]}]},
+ {id:"on",skill:"Counting on",title:"Count on from the big one",steps:[
+  {b:"problem",say:"I'm Hexa, and I have six blocks. Twinkle brings two more. Do we count from one again?",d:["pair",6,2]},
+  {b:"show",say:"No! Keep six in your head, then count on: seven, eight. Eight blocks!",d:["on",6,2]},
+  {b:"try",q:"Five, and two more. Start at five and count on. How many?",h:"Say five, then count on: six, seven.",d:["pair",5,2],ch:[6,7,8],a:7},
+  {b:"try",q:"Seven, and three more. Start at seven and count on. How many?",h:"Say seven, then count on three more.",d:["pair",7,3],ch:[9,10,11],a:10},
+  {b:"try",q:"Eight, and two more. Start at eight and count on. How many?",h:"Say eight, then count on: nine, ten.",d:["pair",8,2],ch:[9,10,12],a:10},
+  {b:"recap",say:"Start with the big number, then count on!",chant:["Big number first,","keep it in your head,","count on, count on,","that's what we said!"],d:["bud",8]}]},
+ {id:"take",skill:"Take away",title:"Float away, count what's left",steps:[
+  {b:"problem",say:"I'm Starfive, and I have five blocks. Two of them want to float away! How many will stay?",d:["bud",5]},
+  {b:"show",say:"Two floated away. We count what is left: three. Five take away two is three!",d:["take",5,2]},
+  {b:"try",q:"Four blocks, and one floats away. How many are left?",h:"Count only the blocks that are still there.",d:["taken",4,1],ch:[2,3,4],a:3},
+  {b:"try",q:"Six blocks, and two float away. How many are left?",h:"Skip the faded blocks. Count the bright ones.",d:["taken",6,2],ch:[3,4,5],a:4},
+  {b:"try",q:"Five blocks, and three float away. How many are left?",h:"Count the bright blocks that stayed.",d:["taken",5,3],ch:[1,2,3],a:2},
+  {b:"recap",say:"Take some away, then count what is left.",chant:["Float away,","wave goodbye,","count what's left,","reach for the sky!"],d:["bud",3]}]},
+ {id:"maketen",skill:"Make ten",title:"Fill up to ten",steps:[
+  {b:"problem",say:"I'm Queen Ten, and I stand tall! Octo has eight blocks. How many more to make me?",d:["pair",8,2]},
+  {b:"show",say:"Eight and two make ten! Ten stands tall with a crown.",d:["ten",8]},
+  {b:"try",q:"Rainbow has seven. How many more make ten?",h:"Count on from seven until you reach ten.",d:["tenq",7],ch:[2,3,4],a:3},
+  {b:"try",q:"Hexa has six. How many more make ten?",h:"Six, then count on to ten: seven, eight, nine, ten.",d:["tenq",6],ch:[3,4,5],a:4},
+  {b:"try",q:"Nova has nine. How many more make ten?",h:"Nine is one away from ten.",d:["tenq",9],ch:[1,2,3],a:1},
+  {b:"recap",say:"Fill up to ten first. Ten is a friendly number!",chant:["Ten stands tall,","crown on top,","fill up to ten,","and then we stop!"],d:["bud",10]}]},
+ {id:"teen",skill:"Teen numbers",title:"One ten and some ones",steps:[
+  {b:"problem",say:"I'm Lucky, and I'm thirteen. I am one ten and some ones. Can you see my ten?",d:["bud",13]},
+  {b:"show",say:"Here is one ten, and three ones. One ten and three ones make thirteen!",d:["teen",13]},
+  {b:"show",say:"One ten and six ones make sixteen!",d:["teen",16]},
+  {b:"try",q:"One ten and four ones. What number is that?",h:"Start at ten and count the ones: eleven, twelve, thirteen, fourteen.",d:["bud",14],ch:[12,14,15],a:14},
+  {b:"try",q:"Seventeen is one ten and how many ones?",h:"Count the little blocks next to the ten.",d:["bud",17],ch:[6,7,8],a:7},
+  {b:"recap",say:"A teen number is one ten and some ones.",chant:["One tall ten","and ones beside,","that makes a teen","with ten inside!"],d:["bud",13]}]},
+ {id:"evenodd",skill:"Even and odd",title:"Pairs, or one left over",steps:[
+  {b:"problem",say:"I'm Octo! My blocks love to hold hands in pairs. Does every block get a partner?",d:["pairs",8,1]},
+  {b:"show",say:"Eight: every block has a partner. Eight is even!",d:["pairs",8]},
+  {b:"show",say:"Seven: one block is left over. Seven is odd!",d:["pairs",7]},
+  {b:"try",q:"Six blocks make pairs. How many are left over?",h:"Look for a block with no partner.",d:["pairs",6,1],ch:[0,1,2],a:0},
+  {b:"try",q:"Five blocks make pairs. How many are left over?",h:"Every pair has two. Is one block alone?",d:["pairs",5,1],ch:[0,1,2],a:1},
+  {b:"try",q:"Nine blocks make pairs. How many are left over?",h:"Odd numbers have one spare block.",d:["pairs",9,1],ch:[0,1,2],a:1},
+  {b:"recap",say:"Even numbers make pairs. Odd numbers have one left over.",chant:["Two by two,","we pair up neat,","one left over?","Odd! Tap your feet!"],d:["pairs",7,1]}]},
+ {id:"blend",skill:"Blending",title:"Slide the sounds together",steps:[
+  {b:"problem",say:"I'm Zippy! These letter sounds are sitting far apart. Let's slide them together!",d:["tiles","sun"]},
+  {b:"show",say:"Slowly, then fast. The sounds slide together and make sun!",d:["blend","sun"]},
+  {b:"show",say:"Slowly, then fast again. The sounds make cat!",d:["blend","cat"]},
+  {b:"try",q:"Slide these sounds together. Which word is it?",h:"Tap each letter to hear its sound, then say them fast.",d:["tiles","pig"],ch:[["🐷 pig","pig"],["🐶 dog","dog"],["🐱 cat","cat"]],a:"pig"},
+  {b:"try",q:"Slide these sounds together. Which word is it?",h:"Say each sound, then push them close together.",d:["tiles","map"],ch:[["🗺️ map","map"],["🍳 pan","pan"],["🚰 tap","tap"]],a:"map"},
+  {b:"recap",say:"Say each sound, then slide them together fast!",chant:["Sounds far apart,","slide, slide, slide,","push them together,","the word's inside!"],d:["tiles","sun"]}]}];
+const EPI=Object.fromEntries(EPISODES.map(e=>[e.id,e]));
+// Block Buddies cast: one line each, tied to the number (even Buddies pair up, odd Buddies have a spare, Ten stands tall)
+const BUDDY_PERS=["","I'm the smallest, and I always go first!","Two of us make a perfect pair!","A pair, and one spare to share!","Two pairs, all holding hands!","Like the fingers on one hand, with one spare!","Three happy pairs!","Seven colours, and one spare block!","Four pairs, and nobody left out!","Just one away from ten, with one spare!","I stand tall with my crown!",
+ "A ten and one spare!","A ten and a pair!","A ten and three, so one is spare!","A ten and two pairs!","A ten and five, with one spare!","A ten and three pairs!","A ten and seven, so one is spare!","A ten and four pairs!","One away from twenty, with one spare!","Two tall tens, side by side!"];
+// BUDDY_ART: empty by default. To use a picture for a Buddy, put the file in icons/ (e.g. icons/buddy7.png), set BUDDY_ART[7]="icons/buddy7.png",
+// and ADD THE FILE TO THE PRECACHE LIST IN sw.js (and bump its cache name) so it works offline. If the image fails to load, the drawn Buddy is shown.
+const BUDDY_ART={};
+// ---------- Pass 3: episode engine ----------
+const epFresh=()=>({seen:{},done:{},mb:{}}); // seen: plays started, done: played to the end, mb: misses at the last play (weak-skill replay needs 3 more)
+if(!S.ep||typeof S.ep!=="object"||Array.isArray(S.ep))S.ep=epFresh();["seen","done","mb"].forEach(k=>{if(!S.ep[k]||typeof S.ep[k]!=="object")S.ep[k]={}}); // old saves: safe defaults
+const EP_WMS=400,EP_GAP=900; // device-voice estimate: 400 ms per word, then a short pause
+const epWords=t=>String(t||"").split(/\s+/).filter(Boolean).length;
+function epAnim(d){const [op,a,b]=d||[];return op==="count"?a*750+200:op==="join"?1400+(a+b)*750+200:op==="on"?1200+b*900+300:op==="take"?b*900+600+(a-b)*750+200:
+ op==="ten"?2800:op==="teen"?1200+(a-10)*750+300:op==="pairs"&&!b?Math.ceil(a/2)*500+400:op==="blend"?a.length*1000+3200:0} // ms of the animated demo
+function epDur(st){return st.b==="try"?(epWords(st.q)+epWords(st.h))*EP_WMS+4000+1800: // try: question + hint, about 4 s to think, cheer
+ epAnim(st.d)+(epWords(st.say)+epWords((st.chant||[]).join(" ")))*EP_WMS+EP_GAP}
+const epTotal=e=>e.steps.reduce((s,x)=>s+epDur(x),0);
+let EP=null,epAutoDone=false,EPAUTO=!navigator.webdriver; // at most one automatic episode per session; automated test browsers turn auto-play on explicitly
+document.head.insertAdjacentHTML("beforeend",`<style>#epS .top{flex-wrap:nowrap}#epTitle{font-size:clamp(18px,4.4vw,28px);flex:1;text-align:center}#epBeat{font-size:18px;color:#ffe680;opacity:.9}
+#epLine{font-size:clamp(22px,5.6vw,36px);margin:8px auto;max-width:640px;min-height:2.6em}#epStage{display:flex;justify-content:center;align-items:flex-end;gap:14px;flex-wrap:wrap;min-height:160px;margin:6px 0}
+#epCh{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}#epHint{color:#ffe680;font-size:clamp(18px,4.4vw,26px);min-height:1.3em;margin:8px auto;max-width:620px}
+.blk.held{filter:brightness(1.3) drop-shadow(0 0 7px #ffe680)}.blk.away{opacity:.15;transform:translateY(-26px);transition:all .6s}
+.ch.glow{animation:glow 1s ease-in-out infinite;box-shadow:0 0 0 6px #ffe680}@keyframes glow{50%{transform:scale(1.08)}}
+.eptiles{display:flex;justify-content:center;font-size:clamp(48px,12vw,80px);transition:gap 1.2s;gap:60px}.eptiles .ltile{margin:0}
+.prs{display:flex;gap:10px;align-items:flex-end}.prs .pc{display:flex;flex-direction:column;gap:4px}.prs .pc.spare{animation:glow 1s infinite}.prs .blk{--b:40px}
+.chant{font-size:clamp(22px,5.4vw,34px);color:#ffe680;line-height:1.35}.chant div{animation:pop .5s both}
+.bud img.bart{display:block;object-fit:contain}.bud.art .cols{display:none}
+#bldRow{margin:6px 0}#bldRow .big,#bRet{font-size:clamp(20px,4.6vw,28px);padding:10px 20px;min-height:48px}
+#meetBtn,#bMeet{font-size:clamp(24px,5vw,34px)}#game .top,#blocks .top{flex-wrap:nowrap}#game .top #prog{min-width:0;overflow:hidden;white-space:nowrap}
+#epS .blk{width:min(var(--b,44px),4.4vh);height:min(var(--b,44px),4.4vh);width:min(var(--b,44px),4.4dvh);height:min(var(--b,44px),4.4dvh)}#epS .ch{min-width:92px;min-height:92px;width:auto;height:auto;padding:10px 16px;font-size:clamp(30px,8vw,48px)}#epStage{min-height:120px}</style>`);
+document.body.insertAdjacentHTML("beforeend",`<section id="epS" class="screen"><div class="top"><button class="icon" id="epSkip" aria-label="Skip">⏭</button><div id="epTitle">🎬</div><button class="icon" id="epRe" aria-label="Play again">🔁</button></div>
+<div id="epBeat"></div><div id="epLine"></div><div id="epStage"></div><div id="epCh"></div><div id="epHint"></div></section>`);
+function epDraw(d){const st=$("epStage");st.innerHTML="";const T=EP?EP.T:[],at=(ms,f)=>T.push(setTimeout(()=>{if(EP)f()},ms));if(!d)return;const [op,a,b]=d;
+ const bud=n=>{const x=buddy(n);x.onclick=()=>countAlong(x);return x},plus=()=>{const e=document.createElement("div");e.className="eq";e.textContent="+";return e};
+ const blks=x=>[...x.querySelectorAll(".blk")].sort((p,q)=>p.dataset.i-q.dataset.i),hop=(k,i,w)=>{k.classList.remove("hop");void k.offsetWidth;k.classList.add("hop");tone(400+i*40,0,.15,"triangle");if(w)say(w)};
+ if(op==="bud"||op==="count"){const x=bud(a);st.appendChild(x);if(op==="count")at(100,()=>countAlong(x))}
+ else if(op==="pair"||op==="join"){st.append(bud(a),plus(),bud(b));if(op==="join")at(1400,()=>{st.innerHTML="";const x=bud(a+b);st.appendChild(x);countAlong(x)})}
+ else if(op==="on"){const x=bud(a+b),k=blks(x);st.appendChild(x);k.slice(0,a).forEach(e=>e.classList.add("held"));at(100,()=>say(NUMW[a]));k.slice(a).forEach((e,i)=>at(1200+i*900,()=>hop(e,a+i,NUMW[a+i+1])))}
+ else if(op==="take"||op==="taken"){const x=bud(a),k=blks(x),gone=k.slice(a-b);st.appendChild(x);
+  if(op==="taken")gone.forEach(e=>e.classList.add("away"));else{gone.reverse().forEach((e,i)=>at(i*900,()=>{e.classList.add("away");tone(760-i*40,0,.15,"sine")}));k.slice(0,a-b).forEach((e,j)=>at(b*900+600+j*750,()=>hop(e,j,NUMW[j+1])))}}
+ else if(op==="ten"){st.append(bud(a),plus(),bud(10-a));at(1500,()=>{st.innerHTML="";const x=bud(10);st.appendChild(x);burst(x);say("ten!")})}
+ else if(op==="tenq"){const q=document.createElement("div");q.className="eq";q.textContent="+ ?";st.append(bud(a),q)}
+ else if(op==="teen"){const x=bud(a),k=blks(x);st.appendChild(x);k.slice(0,10).forEach(e=>e.classList.add("held"));at(100,()=>say("ten"));k.slice(10).forEach((e,i)=>at(1200+i*750,()=>hop(e,10+i,NUMW[11+i])))}
+ else if(op==="pairs"){const w=document.createElement("div");w.className="prs";st.appendChild(w);const col=a===7?BCOL[5]:BCOL[Math.min(a,10)]||BCOL[3];
+  for(let i=0;i<Math.ceil(a/2);i++){const c=document.createElement("div");c.className="pc"+(i*2+1===a?" spare":"");for(let j=0;j<2&&i*2+j<a;j++)c.appendChild(makeBlock(col));if(b)w.appendChild(c);else{c.style.visibility="hidden";w.appendChild(c);at(i*500,()=>{c.style.visibility="";tone(500+i*60,0,.15,"triangle")})}}}
+ else if(op==="tiles"||op==="blend"){const w=document.createElement("div");w.className="eptiles";const ts=[...a].map(c=>{const t=document.createElement("span");t.className="ltile";t.textContent=c;t.onclick=()=>{t.classList.add("lit");say(PHON[c.toUpperCase()])};w.appendChild(t);return t});st.appendChild(w);
+  if(op==="blend"){ts.forEach((t,i)=>at(i*1000,()=>{t.classList.add("lit");say(PHON[a[i].toUpperCase()])}));at(a.length*1000,()=>{w.style.gap="24px";say([...a].map(c=>PHON[c.toUpperCase()]).join(", "))});at(a.length*1000+1600,()=>{w.style.gap="0px";say(a)})}}}
+const BEATS={problem:"🧱 Problem",show:"👀 Watch",try:"🤝 Try together",recap:"🎵 Remember"};
+function epClear(){if(EP){EP.T.forEach(clearTimeout);EP.T=[]}stopCount();stopSpeech()}
+function epMiss(id){const f=EPH[id];return f?Object.keys(M).filter(f).reduce((s,k)=>s+Math.max(0,(M[k].a|0)-(M[k].f|0)),0):0} // tries that were not first-try right
+function playEpisode(id,done,auto){const e=EPI[id];if(!e){if(done)done();return false}epClear();EP={e,i:0,done,T:[],auto:!!auto};
+ S.ep.seen[id]=(S.ep.seen[id]|0)+1;S.ep.mb[id]=epMiss(id);save();show("epS");$("epTitle").textContent="🎬 "+e.title;epStep();return true}
+function epStep(){const E=EP;if(!E)return;epClear();const st=E.e.steps[E.i];if(!st)return epEnd(true);
+ $("epBeat").textContent=BEATS[st.b];$("epCh").innerHTML="";$("epHint").textContent="";epDraw(st.d);const nxt=ms=>E.T.push(setTimeout(()=>{if(EP===E){E.i++;epStep()}},ms));
+ if(st.b==="try"){$("epLine").textContent=st.q;$("epHint").textContent="💡 "+st.h;let wrong=0,done=false;stLast2=[st.q+" "+st.h,[st.q,st.h]];say(st.q+" "+st.h,[st.q,st.h]); // hints on from the start
+  const bs=st.ch.map(c=>{const [lab,v]=Array.isArray(c)?c:[String(c),c];const b=document.createElement("button");b.className="ch";b.textContent=lab;b.dataset.v=v;
+   b.onclick=()=>{if(done||b.classList.contains("no"))return;if(v===st.a){done=true;b.classList.remove("glow");b.classList.add("yes");sfx.yes();burst(b);const c=wrong?pick(ALMOST):pick(CHEERS);$("epHint").textContent=c+" ✨";say(c);nxt(1800)}
+    else{wrong++;b.classList.add("no");const r=bs.find(x=>x.dataset.v==String(st.a));r.classList.add("glow");$("epHint").textContent="✨ Look, this one! "+st.h;say("Look, this one! "+st.h,["Look, this one!",st.h])}}; // no stars, no penalty: show the right answer
+   $("epCh").appendChild(b);return b})}
+ else{$("epLine").innerHTML=st.say+(st.chant?`<div class="chant">${st.chant.map((l,i)=>`<div style="animation-delay:${1+i*.6}s">${l}</div>`).join("")}</div>`:"");
+  const sp=[st.say,...(st.chant||[])],t=sp.join(" ");stLast2=[t,sp];E.T.push(setTimeout(()=>{if(EP===E)say(t,sp)},epAnim(st.d)));nxt(epDur(st))}}
+let stLast2=["",null];
+function epEnd(full){const E=EP;if(!E)return;if(full){S.ep.done[E.e.id]=(S.ep.done[E.e.id]|0)+1;save()}epClear();EP=null;if(E.done)E.done();else{show("mapS");drawMap()}}
+$("epSkip").onclick=()=>{sfx.tap();epEnd(false)};$("epRe").onclick=()=>{if(!EP)return;sfx.tap();EP.i=0;epStep()};
+// ---------- Pass 3: wiring (triggers, Meet it, Build it, cast, report) ----------
+const EPH={count:k=>k.startsWith("C:"),join:k=>k.startsWith("A:"),take:k=>k.startsWith("T:"),on:k=>{const m=k.match(/^A:(\d+)\+(\d+)$/);return !!m&&+m[1]+ +m[2]>6},
+ maketen:k=>/^(F10|K10):/.test(k)||(m=>!!m&&+m[1]+ +m[2]>10)(k.match(/^A:(\d+)\+(\d+)$/)),teen:k=>/^P:1[1-9]$/.test(k),evenodd:()=>false,blend:k=>k.startsWith("BL:")}; // which mastery items count as history for each skill
+function epFor(pid,l){l=l|0;return pid==="count"?["count"]:pid==="add"?(l>=4?["maketen","on","take"]:l>=2?["on","take"]:l>=1?["join","take"]:["join"]):pid==="tens"?["teen"]:pid==="quick"?(l>=2?["maketen"]:["count"]):pid==="blend"||pid==="word"?["blend"]:
+ pid==="build"||pid==="make"||pid==="stairs"?["count"]:pid==="join"||pid==="split"?["join"]:pid==="oddeven"?["evenodd"]:pid==="takeaway"?["take"]:[]} // first = the "Meet it" episode; planets with none hide the button
+function epWants(id){const hist=Object.keys(M).some(EPH[id]||(()=>false));return (!S.ep.seen[id]&&!hist)||(!!S.ep.seen[id]&&epMiss(id)-(S.ep.mb[id]|0)>=3)} // first time at a skill, or 3+ new misses since it last played
+function epAuto(ids,done){if(!EPAUTO||epAutoDone||(typeof JR!=="undefined"&&JR)||timeUp())return false; // deferred during Today's Adventure; never past the time limit
+ const id=ids.find(epWants);if(!id)return false;epAutoDone=true;return playEpisode(id,done,true)}
+let epCheck=false;const _startPlanet=startPlanet,_next=next;
+startPlanet=function(p){epCheck=true;_startPlanet(p)};
+next=function(){if(epCheck){epCheck=false;if(cur&&epAuto(epFor(cur.id,lvl().l),()=>{show("game");next()}))return}_next();epAfterQ()};
+const _jcard=journeyCard,_finish=finish;journeyCard=function(...a){_jcard(...a);epAfterQ(true)};finish=function(){epAfterQ(true);return _finish()};
+$("sayBtn").insertAdjacentHTML("beforebegin",`<button class="icon" id="meetBtn" aria-label="Meet it" title="Meet it">🎬</button>`);
+$("bSay").insertAdjacentHTML("beforebegin",`<button class="icon" id="bMeet" aria-label="Meet it" title="Meet it">🎬</button>`);
+$("choices").insertAdjacentHTML("afterend",`<div id="bldRow"></div>`);
+function epAfterQ(off){const on=!off&&$("game").classList.contains("on")&&cur&&round<ROUNDS;const ids=on?epFor(cur.id,lvl().l):[];$("meetBtn").style.display=ids.length?"":"none";
+ const r=$("bldRow");r.innerHTML="";if(on&&q&&(cur.id==="count"||cur.id==="add")){const b=document.createElement("button");b.className="big alt";b.id="buildBtn";b.textContent="🧱 Build it";b.onclick=buildIt;r.appendChild(b)}}
+$("meetBtn").onclick=()=>{const ids=cur?epFor(cur.id,lvl().l):[];if(!ids.length)return;sfx.tap();const fin=round>=ROUNDS,wasLocked=locked;
+ playEpisode(ids[0],()=>{show("game");if(fin)return;if(wasLocked)next();else say(q.say,q.sayParts)})}; // same question when she comes back
+$("bMeet").onclick=()=>{const ids=epFor(bmode);if(!ids.length)return;sfx.tap();playEpisode(ids[0],()=>openBlocks(bmode))};
+// Build it: Block Buddies with the number pre-set; tabs hidden (no star modes); back returns to the same question
+let buildRet=null;
+function buildIt(){if(!q)return;sfx.tap();const qq=q,n=cur.id==="count"?qq.ans:+((qq.prompt.match(/\d+/)||[1])[0]);buildRet={q:qq};clearBlendT();
+ bN=Math.max(1,Math.min(20,n));openBlocks("build");$("tabs").style.display="none";$("bMeet").style.display="none";
+ const b2=(qq.prompt.match(/\d+\D+(\d+)/)||[])[1];if(cur.id==="add"&&b2)$("bprompt").textContent=qq.take?`Tap − ${b2} times. How many are left?`:`Tap ➕ ${b2} more. How many now?`;
+ const r=btn("↩️ Back to my question","big",bldReturn);r.id="bRet"}
+function bldReturn(){if(!buildRet)return;const qq=buildRet.q;buildRet=null;stopCount();$("tabs").style.display="";$("bMeet").style.display="";show("game");if(q===qq&&!locked)say(q.say,q.sayParts)}
+const _bBack=$("bBack").onclick;$("bBack").onclick=()=>{if(buildRet)return bldReturn();_bBack()};
+const _setMode=setMode;setMode=function(m){if(m==="oddeven"&&!buildRet&&epAuto(["evenodd"],()=>openBlocks("oddeven")))return;$("bMeet").style.display=buildRet||!epFor(m).length?"none":"";return _setMode(m)};
+// cast: personality line after the count-along; optional art
+const _drawBuild=drawBuild;drawBuild=function(isNew){_drawBuild(isNew);const b=$("stage").firstChild;if(b&&bN>0)b.onclick=()=>{const n=bN;countAlong(b,()=>{const t=`${NUMW[n]}! I'm ${bname(n)}!`;say(t+" "+BUDDY_PERS[n],[t,BUDDY_PERS[n]]);$("bhint").textContent=`${bname(n)}: ${BUDDY_PERS[n]}`})}};
+const _buddy=buddy;buddy=function(n,o){const d=_buddy(n,o);const src=BUDDY_ART[n];if(src){const im=document.createElement("img");im.className="bart";im.alt=bname(n);const sz=parseFloat(d.style.getPropertyValue("--b"))||44;
+ im.style.height=sz*Math.min(Math.max(n,1),10)+"px";im.style.maxWidth=sz*4+"px";im.onerror=()=>{im.remove();d.classList.remove("art")};d.classList.add("art");d.insertBefore(im,d.firstChild);im.src=src}return d}; // same height as the drawn tower; drawn Buddy if the file fails
+// report + reset
+const _drawProgress=drawProgress,_progSummary=progSummary;
+const epRows=()=>EPISODES.map(e=>({t:e.title,s:e.skill,n:S.ep.seen[e.id]|0,f:S.ep.done[e.id]|0}));
+drawProgress=function(){const d=_drawProgress();const r=epRows();$("progBody").insertAdjacentHTML("beforeend",`<div class="parent" id="epRep"><b>🎬 "Meet it" lessons watched</b> (${r.filter(x=>x.n).length} of ${r.length})<ul>${r.map(x=>`<li>${x.s} – ${x.t}: ${x.n?`watched ${x.n} time${x.n===1?"":"s"}, to the end ${x.f}`:"not yet"}</li>`).join("")}</ul><small>Short lessons that show a skill before she practises it.</small></div>`);return d};
+progSummary=function(){return _progSummary()+"\nMeet it lessons: "+epRows().map(x=>`${x.s} ${x.n}x`).join(", ")+"."};
+const _resetB3=typeof resetB3==="function"?resetB3:()=>{};resetB3=function(){_resetB3();S.ep=epFresh()};
+// tests: phrases + self-check
+const _ph=__test3.phrases,_sc=__test3.selfCheck;
+__test3.phrases=function(){const L=_ph.call(this),add=(p,c)=>L.push([p,c]);EPISODES.forEach(e=>e.steps.forEach(s=>{[s.say,s.q,s.h,...(s.chant||[])].forEach(x=>x&&add(x,"episodes"));if(s.say&&s.chant)add([s.say,...s.chant].join(" "),"episodes");if(s.q)add(s.q+" "+s.h,"episodes")}));
+ add("Look, this one!","episodes");["ten!","ten"].forEach(x=>add(x,"episodes"));for(let n=1;n<=20;n++){add(BUDDY_PERS[n],"block-buddies");add(`${NUMW[n]}! I'm ${bname(n)}! ${BUDDY_PERS[n]}`,"block-buddies")}
+ ["sun","cat","pig","map"].forEach(w=>add([...w].map(c=>PHON[c.toUpperCase()]).join(", "),"episodes"));return L};
+__test3.checkEpisodes=function(){const bad=[],O=["problem","show","try","recap"];EPISODES.forEach(e=>{const f=m=>bad.push(`${e.id}: ${m}`);if(!e.id||!e.skill||!e.title||!Array.isArray(e.steps))return f("missing fields");
+ const bs=e.steps.map(s=>s.b),ix=bs.map(b=>O.indexOf(b));if(ix.some(i=>i<0))f("unknown beat");if(ix.some((v,i)=>i&&v<ix[i-1]))f("beats out of order");O.forEach(b=>{if(!bs.includes(b))f("no "+b)});
+ if(bs[0]!=="problem"||bs.filter(b=>b==="problem").length!==1)f("one problem line first");if(bs[bs.length-1]!=="recap"||!e.steps[bs.length-1].chant||e.steps[bs.length-1].chant.length<2)f("recap with a chant last");
+ const tr=e.steps.filter(s=>s.b==="try");if(tr.length<2||tr.length>3)f("2-3 try questions");
+ tr.forEach((s,i)=>{const v=s.ch.map(c=>Array.isArray(c)?c[1]:c);if(v.length<3)f(`try ${i}: fewer than 3 choices`);if(!v.some(x=>x===s.a))f(`try ${i}: answer not in choices`);if(new Set(v.map(String)).size!==v.length)f(`try ${i}: duplicate choice`);if(!s.h)f(`try ${i}: no hint`);
+  if(v.some(x=>RUDE.has(String(x).toLowerCase())))f(`try ${i}: rude word`)});
+ e.steps.forEach((s,i)=>{if(s.b!=="try"&&!s.say)f(`step ${i}: no line`);if(s.d&&!["bud","count","pair","join","on","take","taken","ten","tenq","teen","pairs","tiles","blend"].includes(s.d[0]))f(`step ${i}: unknown draw ${s.d[0]}`)});
+ const t=epTotal(e)/1000;if(t<60||t>90)f(`length ${t.toFixed(1)} s (want 60-90)`)});
+ for(let n=1;n<=20;n++)if(!BUDDY_PERS[n])bad.push(`buddy ${n}: no line`);return bad};
+__test3.selfCheck=function(N){const r=_sc.call(this,N);const ce=__test3.checkEpisodes();if(ce.length)r.bad.checkEpisodes=ce;r.cnt["episodes"]=EPISODES.length;
+ for(let i=0;i<3000;i++){const e=pick(EPISODES),s=pick(e.steps.filter(x=>x.b==="try"));const ch=shuffle(s.ch.slice());if(!ch.some(c=>(Array.isArray(c)?c[1]:c)===s.a)){(r.bad.epTry=r.bad.epTry||[]).push(e.id);break}}return r};
+Object.assign(__test3,{EPISODES,EPI,BUDDY_PERS,BUDDY_ART,epFor,epWants,epMiss,epDur,epTotal,playEpisode,epEnd,setEpAuto:v=>{EPAUTO=v},resetEpSession:()=>{epAutoDone=false}});Object.defineProperties(__test3,{EP:{get:()=>EP},buildRet:{get:()=>buildRet}}); // live getters
+</script>
 <script id="batch4">
 // ---------- Batch 4: install app (text-only, no voice) ----------
 (function(){let deferred=null,dismissed=false,installed=false;
