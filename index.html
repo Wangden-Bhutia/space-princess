@@ -44,6 +44,17 @@ background:#fff;color:#5a1d8c;box-shadow:0 8px 0 #b48ae0;font-family:inherit;fon
 .ch.yes{background:#9dffb0}
 @keyframes wob{25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
 .tapme{display:inline-block;cursor:pointer;padding:2px 4px;min-width:48px;min-height:48px;touch-action:manipulation}.tapme.done{filter:drop-shadow(0 0 8px #ffe680)}.tapme.bounce{animation:hop .45s}
+.tapme.done{position:relative}.tapme.done:after{content:"✓";position:absolute;right:-4px;top:-6px;font-size:20px;color:#7dff9a;text-shadow:0 0 4px #000}
+.hold{background:conic-gradient(#ffe680 calc(var(--p,0)*1turn),rgba(255,255,255,.15) 0);touch-action:none;-webkit-touch-callout:none}
+#gate{position:fixed;inset:0;z-index:20;background:rgba(11,6,48,.94);display:none;align-items:center;justify-content:center;padding:16px}
+#gate.on{display:flex}.gbox{background:rgba(255,255,255,.1);border-radius:30px;padding:20px;max-width:520px;text-align:center}
+#gopts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0}#gopts .ch{min-width:0;min-height:96px;font-size:36px}
+#gearTip{font-size:18px;color:#ffe680;min-height:1.3em;opacity:.9}
+.sleepy{font-size:90px;animation:float 3s ease-in-out infinite}.zz span{display:inline-block;font-size:40px;animation:tw 1.4s infinite alternate}
+.ltile{display:inline-block;width:1.5em;height:1.5em;line-height:1.5em;margin:0 6px;border-radius:18px;background:rgba(255,255,255,.15);cursor:pointer;transition:transform .2s,background .2s}
+.ltile.lit{background:#ffe680;color:#5a1d8c;transform:scale(1.12)}
+.ebox{width:clamp(76px,22vw,110px);height:clamp(76px,22vw,110px);margin:8px;border-radius:18px;border:4px dashed #ffe680;background:rgba(255,255,255,.1);color:#fff;font-size:clamp(40px,10vw,64px);font-family:inherit;cursor:pointer;vertical-align:middle}
+.ebox.next{box-shadow:0 0 22px #ffe680}.ebox.lit{background:#ffe680;color:#5a1d8c;border-style:solid}.ebox.bounce{animation:hop .45s}
 #hint{font-size:clamp(22px,4vw,32px);min-height:1.4em;color:#ffe680;margin-top:12px}
 #princess{font-size:70px;display:inline-block;transition:transform .5s}
 .cheer{animation:jump .6s}
@@ -101,21 +112,47 @@ background:#fff;color:#5a1d8c;box-shadow:0 8px 0 #b48ae0;font-family:inherit;fon
 <div id="stars"></div><div id="burst"></div>
 
 <section id="start" class="screen on">
+  <div style="display:flex;justify-content:flex-end"><button class="icon hold" id="gearBtn" aria-label="Grown-ups: press and hold for 2 seconds">⚙️</button></div>
+  <div id="gearTip"></div>
   <h1>👸🚀 Space Princess</h1>
   <div style="font-size:80px">🪐⭐🌙</div>
   <button class="big" id="playBtn">▶ Play!</button><br>
   <button class="big alt" id="collBtn1">👑 My Stickers</button>
   <div id="days" style="font-size:clamp(20px,4.4vw,30px);color:#ffe680;margin:8px 0;min-height:1.3em"></div>
+</section>
+
+<section id="parentS" class="screen">
+  <div class="top"><button class="icon" id="pBack">🏠</button><div>For grown-ups 👋</div><span style="width:72px"></span></div>
   <div class="parent">
-    <b>For grown-ups 👋</b><br>
-    A gentle learning game for ages 4–6. Each planet is a short challenge: counting, adding, numbers, more/less, letters, first sounds, 3-letter words and rhymes. <b>Block Buddies</b> planet: build numbers block by block, drag buddies together to add, tap to split (number bonds), "Make me a number", odd/even pairs, and number stairs. Every prompt is read aloud (tap 🔊 to repeat). There's no way to fail — wrong taps get a kind hint. Difficulty rises slowly after several correct answers in a row and eases off after mistakes. Progress is saved on this device only.
+    A gentle learning game for ages 4–6. Each planet is a short challenge: counting, adding, numbers, more/fewer, letters, first sounds, 3-letter words, rhymes and <b>Sound Blending</b> (blend sounds into a word, and tap sound boxes to split a word into sounds). Letters and sounds come in school order (s a t p i n → m d g o → c k e u r → h b f l → j v w x y z q); the next group unlocks when she gets 8 of the last 10 right first time, or after 30 tries anyway. <b>Block Buddies</b> planet: build, join, split, make, odd/even pairs and number stairs. Every prompt is read aloud (tap 🔊 to repeat). There's no way to fail — wrong taps get a kind hint. Progress is saved on this device only.
     <label><input type="checkbox" id="optSpeech" checked> Spoken prompts</label>
     <label><input type="checkbox" id="optSound" checked> Sound effects</label>
     <label><input type="checkbox" id="optVibe" checked> Vibration (Android; iPhone ignores it)</label>
+    <div style="margin-top:10px"><b>Play time each day</b> (active play only; she finishes the current question first)</div>
+    <div id="limBtns" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+    <div id="limInfo" style="font-size:16px;opacity:.85"></div>
+    <div style="margin-top:10px"><b>Letter sounds unlocked:</b> <span id="letInfo"></span></div>
     <button class="big alt" style="font-size:20px;padding:12px 20px;min-width:0" id="resetBtn">Reset progress</button>
-    <div style="font-size:16px;opacity:.8">Reset clears stars, gems, stickers and days played. Settings stay.</div>
+    <div style="font-size:16px;opacity:.8">Reset clears stars, gems, stickers, days played, letter progress and today's play time. Settings stay.</div>
   </div>
 </section>
+
+<section id="restS" class="screen">
+  <h1>🌙 Time to rest, princess!</h1>
+  <div class="sleepy">👸💤</div>
+  <div class="zz"><span>✨</span><span style="animation-delay:.4s">⭐</span><span style="animation-delay:.8s">🌙</span><span style="animation-delay:1.2s">⭐</span><span style="animation-delay:.2s">✨</span></div>
+  <p style="font-size:clamp(22px,4.6vw,32px)">You played so well today. See you next time!</p>
+  <button class="big alt" id="restHome">🏠 Home</button><br>
+  <button class="big hold" id="restMore" style="font-size:20px;padding:14px 20px">⚙️ Grown-ups: hold for more time</button>
+  <div id="restTip" style="font-size:18px;color:#ffe680;min-height:1.3em"></div>
+</section>
+
+<div id="gate"><div class="gbox">
+  <div style="font-size:22px">For grown-ups 👋</div>
+  <div id="gq" style="font-size:clamp(26px,6vw,36px);margin-top:8px"></div>
+  <div id="gopts"></div><div id="gmsg" style="font-size:20px;color:#ffe680;min-height:1.3em"></div>
+  <button class="big alt" id="gCancel" style="font-size:22px;padding:14px 24px;min-width:0">Not now</button>
+</div></div>
 
 <section id="mapS" class="screen">
   <div class="top"><button class="icon" id="homeBtn">🏠</button><div>⭐ <b id="starN">0</b> &nbsp; 💎 <b id="gemN">0</b></div><button class="icon" id="collBtn2">👑</button></div>
@@ -151,7 +188,7 @@ const $=id=>document.getElementById(id);
 // ---------- state ----------
 const KEY="spacePrincessV1";
 const STICKERS=["👑","🦄","🌈","🌟","🧚","🏰","💖","🪐","🚀","🌙","🐱","🦋","🌸","💎","🎀","🍭","🐬","☄️","🛸","👽","🌻","🐶","🧁","🎠"];
-let S={stars:0,gems:0,level:{},speech:true,sound:true,vibe:true,days:[],bonusDay:""};
+let S={stars:0,gems:0,level:{},speech:true,sound:true,vibe:true,days:[],bonusDay:"",limit:0,tms:0,tday:""}; // limit: minutes per day (0 = off); tms: active play ms today
 try{Object.assign(S,JSON.parse(localStorage.getItem(KEY))||{})}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 // ---------- stars bg ----------
@@ -188,7 +225,8 @@ let VLIST,vAud=null,vGen=0; // VLIST: Set from audio/index.json; undefined while
 fetch("audio/index.json",{cache:"no-cache"}).then(r=>r.ok?r.json():Promise.reject()).then(j=>{VLIST=new Set(Array.isArray(j)?j:[])}).catch(()=>{VLIST=false});
 const hasAud=k=>!!k&&!VMISS.has(k)&&(VLIST instanceof Set?VLIST.has(k):VLIST===false);
 function stopVoice(){vGen++;if(vAud){try{vAud.onerror=vAud.onended=null;vAud.pause()}catch(e){}vAud=null}try{if("speechSynthesis" in window)speechSynthesis.cancel()}catch(e){}}
-function playKeys(ks,g,onFail){const k=ks[0],a=new Audio("audio/"+k+".mp3");vAud=a;let done=false;
+let vHook=null; // optional (key)=>{} called when a recorded clip starts playing (used to light up blending tiles)
+function playKeys(ks,g,onFail){const k=ks[0],a=new Audio("audio/"+k+".mp3");vAud=a;let done=false;a.onplaying=()=>{if(g===vGen&&vHook)try{vHook(k)}catch(e){}};
  const fail=mark=>{if(done||g!==vGen)return;done=true;if(mark)VMISS.add(k);onFail()};
  a.onerror=()=>fail(true);a.onended=()=>{if(g===vGen&&ks.length>1)playKeys(ks.slice(1),g,onFail)};
  try{const p=a.play();if(p&&p.catch)p.catch(e=>fail(!e||e.name!=="NotAllowedError"))}catch(e){fail(true)}}
@@ -208,15 +246,37 @@ const NAMES={"⭐":"stars","🌙":"moons","🪐":"planets","🚀":"rockets","�
 const rep=(e,n)=>Array(n).fill(e).join("");
 const tapRep=(e,n)=>Array(n).fill(`<span class="tapme">${e}</span>`).join(""); // tappable count-along objects
 const NUMW=["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"];
+const an=n=>/^(eight|eleven|eighteen)/.test(NUMW[n])?"an":"a"; // "an eight", "an eleven", "an eighteen"
 const PICS=[["A","🍎","apple"],["B","🦋","butterfly"],["C","🐱","cat"],["D","🐶","dog"],["E","🥚","egg"],["F","🐟","fish"],["G","🍇","grapes"],["H","🎩","hat"],
  ["I","🐛","insect"],["J","🧃","juice"],["K","🪁","kite"],["L","🦁","lion"],["M","🌙","moon"],["N","👃","nose"],["O","🐙","octopus"],["P","🐷","pig"],
- ["Q","👑","queen"],["R","🚀","rocket"],["S","☀️","sun"],["T","🌳","tree"],["U","☂️","umbrella"],["V","🎻","violin"],["W","🐋","whale"],["Y","🪀","yo-yo"],["Z","🦓","zebra"]];
+ ["Q","👸","queen"],["R","🚀","rocket"],["S","☀️","sun"],["T","🌳","tree"],["U","☂️","umbrella"],["V","🎻","violin"],["W","🐋","whale"],["Y","🪀","yo-yo"],["Z","🦓","zebra"]];
 const WORDS=[["cat","🐱"],["sun","☀️"],["dog","🐶"],["hat","🎩"],["pig","🐷"],["bus","🚌"],["bed","🛏️"],["cup","🥤"],["fox","🦊"],
  ["egg","🥚"],["map","🗺️"],["pen","🖊️"],["box","📦"],["bat","🦇"],["car","🚗"],["ant","🐜"]]; // clear CVC-style words only
+// Real 3-letter words: a Words distractor must not make another real word (e.g. bus -> "bum"). RUDE words never appear anywhere.
+const REALW=new Set("bad bag ban bat bed beg bet bib bid big bin bit bob bog box bud bug bum bun bus but cab can cap car cat cob cod cog cop cot cow cub cud cup cut dab dad dam den dig dim din dip dog dot dug dun ear eat egg fan far fat fed fen fib fig fin fit fix fog fox fun fur gap gas gel get god got gum gun gut had ham has hat hen her hid him hip his hit hob hog hop hot hug hum hut jab jam jar jet jig job jog jot jug jut keg kid kin kit lab lad lap leg let lid lip lit log lot lug mad man map mat men met mix mob mom mop mud mug mum nab nag nap net nib nip nod not nut pad pal pan pat peg pen pet pig pin pit pod pop pot pub pug pun pup pus put rag ram ran rap rat red rib rid rig rim rip rob rod rot rub rug rum run rut sad sag sap sat set sin sip sit six sob sod son sub sum sun tab tag tan tap tar ten tin tip ton top tot tub tug van vat vet wag war was web wed wet wig win wit yak yam yap yen yes yet yum zap zip pee poo wee ant art arm bar cap pox sex".split(" "));
+const RUDE=new Set("bum pee poo wee fat gun pus pox sex god die kill poop butt".split(" "));
+// Sound Blending words: CVC only, each with a clear picture (words without a clear emoji, like sit/sat/nap, are skipped)
+const BLEND=[["pan","🍳"],["tap","🚰"],["pin","📌"],["tin","🥫"],["map","🗺️"],["dog","🐶"],["pig","🐷"],["man","👨"],["cat","🐱"],["cup","🥤"],["sun","☀️"],["nut","🥜"],["net","🥅"],["pen","🖊️"],
+ ["ten","🔟"],["rat","🐀"],["red","🔴"],["run","🏃"],["hat","🎩"],["bat","🦇"],["bed","🛏️"],["bus","🚌"],["hen","🐔"],["log","🪵"],["leg","🦵"],["box","📦"],["fox","🦊"],["van","🚐"],["web","🕸️"]];
 const RHYME=[["cat","🐱",["hat","🎩"]],["dog","🐶",["log","🪵"]],["moon","🌙",["spoon","🥄"]],["star","⭐",["car","🚗"]],["bee","🐝",["tree","🌳"]],
  ["cake","🎂",["snake","🐍"]],["fish","🐟",["dish","🍽️"]],["bear","🐻",["chair","🪑"]],["goat","🐐",["boat","⛵"]],["king","🤴",["ring","💍"]],["mouse","🐭",["house","🏠"]],["sock","🧦",["clock","🕰️"]]];
 const ABC="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-const PHON={A:"aah",B:"buh",C:"kuh",D:"duh",E:"eh",F:"fff",G:"guh",H:"hhh",I:"ih",J:"juh",K:"kuh",L:"lll",M:"mmm",N:"nnn",O:"aw",P:"puh",Q:"kwuh",R:"rrr",S:"sss",T:"tuh",U:"uh",V:"vvv",W:"wuh",X:"ks",Y:"yuh",Z:"zzz"}; // phonics sounds for speech
+const PHON={A:"aah",B:"buh",C:"kuh",D:"duh",E:"eh",F:"fff",G:"guh",H:"hhh",I:"ih",J:"juh",K:"kuh",L:"lll",M:"mmm",N:"nnn",O:"aw",P:"puh",Q:"kwuh",R:"rrr",S:"sss",T:"tuh",U:"uh",V:"vvv",W:"wuh",X:"ks",Y:"yuh",Z:"zzz"}; // phonics sound labels (display + audio key). Batch 1: the recorded clips audio/<label>.mp3 are PURE sounds (b, k, t without an added "uh"; a as in apple, o as in orange/hot); the device-voice fallback can only approximate them.
+// ---------- letter-sound progression (school order); per-letter progress in its own localStorage key ----------
+const GROUPS=["satpin","mdgo","ckeur","hbfl","jvwxyzq"].map(g=>g.toUpperCase().split(""));
+const LKEY="spacePrincessLettersV1",UNLOCK={window:10,need:8,fallback:30}; // unlock next group: >=8 of last 10 first-try correct on the newest group, or after 30 tries on it anyway
+const freshLP=()=>({g:0,hist:[],n:0,per:{}});
+let LP=freshLP();try{Object.assign(LP,JSON.parse(localStorage.getItem(LKEY))||{})}catch(e){}
+const saveLP=()=>{try{localStorage.setItem(LKEY,JSON.stringify(LP))}catch(e){}};
+const unlocked=()=>GROUPS.slice(0,LP.g+1).flat();
+function pickLetterItem(items,key){const nw=items.filter(x=>GROUPS[LP.g].includes(key(x)));return pick(nw.length&&Math.random()<.6?nw:items)} // 60% newest group, 40% review
+function recordLetter(L,ok){const p=LP.per[L]||(LP.per[L]={n:0,ok:0});p.n++;if(ok)p.ok++;let up=null;
+ if(GROUPS[LP.g].includes(L)&&LP.g<GROUPS.length-1){LP.hist.push(ok?1:0);if(LP.hist.length>UNLOCK.window)LP.hist.shift();LP.n++;
+  const sum=LP.hist.reduce((a,b)=>a+b,0);if((LP.hist.length>=UNLOCK.window&&sum>=UNLOCK.need)||LP.n>=UNLOCK.fallback){LP.g++;LP.hist=[];LP.n=0;up=GROUPS[LP.g]}}
+ saveLP();return up}
+const tiles=w=>[...w].map((c,i)=>`<span class="ltile" data-i="${i}">${c}</span>`).join("");
+function segQ(w,snd){return {seg:true,prompt:"Tap the sound boxes!",show:`<div>${w[1]}</div><div>${[...w[0]].map((c,i)=>`<button class="ebox" data-i="${i}"></button>`).join("")}</div>`,
+ say:`${w[0]}. Tap the boxes and say the sounds!`,sayParts:[w[0],"Tap the boxes and say the sounds!"],choices:[],ans:w[0],word:w[0],snd,hint:"Tap the box that is glowing!"}}
 // ---------- challenges: each returns {say, show, prompt, choices:[{label,val}], ans, hint} ----------
 const PLANETS=[
  {id:"count",name:"Counting",icon:"⭐",col:"#ff9a3c",gen(l){const max=[5,7,10,10][l];const n=R(1,max),e=pick(OBJ);
@@ -229,16 +289,28 @@ const PLANETS=[
    return {prompt:"Find the number!",show:"🔊",say:`Can you find the number ${NUMW[n]}?`,choices:numOpts(n,0,max,l<1?3:4),ans:n,hint:`Listen again: ${NUMW[n]}. Look carefully!`}}},
  {id:"more",name:"More or Less",icon:"⚖️",col:"#ff5fa2",gen(l){const max=[6,8,10,10][l];let a=R(1,max),b=R(1,max);while(a===b||(l<1&&Math.abs(a-b)<2))b=R(1,max);
    const more=l<1||Math.random()<.5,e=pick(OBJ),f=pick(OBJ.filter(x=>x!==e));const ans=more?(a>b?"L":"R"):(a<b?"L":"R");
-   return {prompt:more?"Which has MORE?":"Which has LESS?",show:"",say:more?"Which group has more?":"Which group has less?",
-   choices:[{label:rep(e,a),val:"L",small:true},{label:rep(f,b),val:"R",small:true}],ans,hint:more?"More means the bigger group. Count each side!":"Less means the smaller group. Count each side!"}}},
- {id:"letter",name:"Letters",icon:"🔤",col:"#22c55e",gen(l){const L=pick(ABC);const lower=l>=2&&Math.random()<.5;
-   const ch=opts(L,ABC,l<1?3:4).map(x=>({label:lower?x.toLowerCase():x,val:x}));
-   return {prompt:"Find the letter!",show:"🔊",say:`Can you find the letter ${L}?`,choices:ch,ans:L,hint:`Listen again: ${L}. You've got this!`}}},
- {id:"sound",name:"First Sounds",icon:"🍎",col:"#f43f5e",gen(l){const p=pick(PICS);const ch=opts(p[0],PICS.map(x=>x[0]),l<1?3:4);
-   return {prompt:"What sound does it start with?",show:p[1],say:`${p[2]}. What sound does ${p[2]} start with?`,choices:ch,ans:p[0],hint:`Say it slowly: ${PHON[p[0]]}, ${PHON[p[0]]}, ${p[2]}! Which letter makes ${PHON[p[0]]}?`}}},
+   return {prompt:more?"Which has MORE?":"Which has FEWER?",show:"",say:more?"Which group has more?":"Which group has fewer?",
+   choices:[{label:rep(e,a),val:"L",small:true},{label:rep(f,b),val:"R",small:true}],ans,hint:more?"More means the bigger group. Count each side!":"Fewer means the smaller group. Count each side!"}}},
+ {id:"letter",name:"Letters",icon:"🔤",col:"#22c55e",gen(l){const un=unlocked(),L=pickLetterItem(un,x=>x);const lower=l>=2&&Math.random()<.5;
+   const ch=opts(L,un,l<1?3:4).map(x=>({label:lower?x.toLowerCase():x,val:x}));
+   return {prompt:"Find the letter!",show:"🔊",say:`Can you find the letter ${L}?`,choices:ch,ans:L,hint:`Listen again: ${L}. You've got this!`,rec:L}}},
+ {id:"sound",name:"First Sounds",icon:"🍎",col:"#f43f5e",gen(l){const un=unlocked(),pk=PICS.filter(x=>un.includes(x[0])),p=pickLetterItem(pk,x=>x[0]),s=PHON[p[0]];
+   const pool=pk.map(x=>x[0]).filter(x=>x===p[0]||PHON[x]!==s); // C and K make the same sound: never both as choices
+   const ch=[p[0]],used=new Set([s]);shuffle(pool).forEach(x=>{if(ch.length<(l<1?3:4)&&!used.has(PHON[x])){ch.push(x);used.add(PHON[x])}});
+   return {prompt:"What sound does it start with?",show:p[1],say:`${p[2]}. What sound does ${p[2]} start with?`,choices:shuffle(ch),ans:p[0],rec:p[0],
+   hint:`Say it slowly: ${s}, ${s}, ${p[2]}! Which letter makes that sound?`,hintParts:["Say it slowly:",s,s,p[2],"Which letter makes that sound?"]}}},
  {id:"word",name:"Words",icon:"🐱",col:"#eab308",gen(l){const w=pick(WORDS);const pos=l<2?2:R(0,2);const miss=w[0][pos]; // same case as the shown word (lowercase)
-   const shown=w[0].split("").map((c,i)=>i===pos?"_":c).join(" ");const pool="abcdefghijklmnopqrstuvwxyz".split("");
-   return {prompt:shown,show:w[1],say:`${w[0]}. Which letter is missing in ${w[0]}?`,choices:opts(miss,pool,l<1?3:4),ans:miss,hint:`Sound it out: ${w[0].split("").join(", ")}... ${w[0]}!`}}},
+   const shown=w[0].split("").map((c,i)=>i===pos?"_":c).join(" ");const swap=c=>w[0].slice(0,pos)+c+w[0].slice(pos+1);
+   const pool="abcdefghijklmnopqrstuvwxyz".split("").filter(c=>c===miss||(!REALW.has(swap(c))&&!RUDE.has(swap(c))&&PHON[c.toUpperCase()]!==PHON[miss.toUpperCase()]));
+   const snd=w[0].split("").map(c=>PHON[c.toUpperCase()]);
+   return {prompt:shown,show:w[1],say:`${w[0]}. Which letter is missing in ${w[0]}?`,choices:opts(miss,pool,l<1?3:4),ans:miss,
+   hint:`Sound it out: ${snd.join(", ")}... ${w[0]}!`,hintParts:["Sound it out:",...snd,w[0]]}}},
+ {id:"blend",name:"Sound Blending",icon:"🧩",col:"#f97316",gen(l){const un=unlocked().map(x=>x.toLowerCase());
+   const ok=BLEND.filter(w=>[...w[0]].every(c=>un.includes(c)));const w=pickLetterItem(ok,x=>[...x[0]].find(c=>GROUPS[LP.g].includes(c.toUpperCase()))?.toUpperCase());
+   const snd=[...w[0]].map(c=>PHON[c.toUpperCase()]);if(Math.random()<.4)return segQ(w,snd); // 40% Segmenting (sound boxes), 60% Blending
+   const n=Math.min(ok.length,[2,3,4,4][l]);const ch=shuffle([w,...shuffle(ok.filter(x=>x!==w)).slice(0,n-1)]).map(x=>({label:x[1],val:x[0]}));
+   return {prompt:"Listen and blend!",show:tiles(w[0]),say:`Listen: ${snd.join("... ")}... What word is it?`,sayParts:["Listen:",...snd,"What word is it?"],choices:ch,ans:w[0],blend:snd,
+   hint:`Listen: ${snd.join("... ")}. Put them together!`,hintParts:["Listen:",...snd,"Put them together!"]}}},
  {id:"rhyme",name:"Rhymes",icon:"🎵",col:"#14b8a6",gen(l){const r=pick(RHYME);const others=shuffle(RHYME.filter(x=>x!==r)).slice(0,l<1?1:2).map(x=>x[2]);
    const ch=shuffle([r[2],...others]).map(x=>({label:x[1],val:x[0]}));
    return {prompt:`What rhymes with ${r[0]}?`,show:r[1],say:`What rhymes with ${r[0]}? ${ch.map(c=>c.val).join(", or ")}?`,choices:ch,ans:r[2][0],hint:`Rhymes sound the same at the end, like ${r[0]} and... listen: ${ch.map(c=>c.val).join(", ")}.`,
@@ -248,7 +320,7 @@ const CHEERS=["Amazing, princess!","Super star!","Wonderful!","You did it!","Bri
 const KIND=["Nice try! Let's look again.","Ooh, so close! Try another one.","That's okay, you're learning! Try again."];
 // ---------- screens ----------
 function stopSpeech(){stopVoice()} // Phase 1 behaviour kept: cancels speechSynthesis, and now also stops any playing clip
-function show(id){stopSpeech();document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===id));window.scrollTo(0,0)}
+function show(id){stopSpeech();if(id!=="game"&&typeof nextT!=="undefined")clearTimeout(nextT);document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===id));window.scrollTo(0,0)}
 function drawMap(){$("starN").textContent=S.stars;$("gemN").textContent=S.gems;const m=$("map");m.innerHTML="";
  PLANETS.forEach((p,i)=>{const b=document.createElement("button");b.className="planet";b.style.background=`radial-gradient(circle at 30% 30%,#fff8,${p.col} 45%)`;
   b.style.animationDelay=(i*.3)+"s";const lv=(S.level[p.id]||{l:0}).l;b.innerHTML=`<span>${p.icon}</span>${p.name}<small>${"⭐".repeat(lv+1)}</small>`;
@@ -260,25 +332,40 @@ function drawColl(){$("starN2").textContent=S.stars;const c=$("coll");c.innerHTM
 // ---------- game loop ----------
 let cur=null,q=null,round=0,tries=0,locked=false;const ROUNDS=5;
 function lvl(){return S.level[cur.id]||(S.level[cur.id]={l:0,streak:0})}
-function startPlanet(p){cur=p;round=0;show("game");preloadVoice([...CHEERS,...KIND,...NUMW.slice(1)]);next()}
-function next(){if(round>=ROUNDS)return finish();locked=false;tries=0;q=cur.gen(lvl().l);
+let nextT=0;function startPlanet(p){clearTimeout(nextT);cur=p;round=0;show("game");preloadVoice([...CHEERS,...KIND,...NUMW.slice(1),...(p.id==="count"||p.id==="add"?NUMW.slice(1).map(n=>`That's ${n}!`):[])]);next()}
+function next(){if(round>=ROUNDS)return finish();if(timeUp())return restScreen();locked=false;tries=0;vHook=null;clearBlendT();q=cur.gen(lvl().l);
  $("prog").textContent="⭐".repeat(round)+"☆".repeat(ROUNDS-round);
  $("prompt").textContent=q.prompt;$("visual").innerHTML=q.show;$("hint").textContent="";wireTaps();
  const box=$("choices");box.innerHTML="";
  q.choices.map(c=>typeof c==="object"?c:{label:String(c),val:c}).forEach(c=>{const b=document.createElement("button");b.className="ch";
   b.innerHTML=c.label;if(c.small){b.style.fontSize="clamp(28px,5vw,46px)";b.style.maxWidth="420px";b.style.padding="16px"}
   b.onclick=()=>answer(b,c.val);box.appendChild(b)});
- preloadVoice([q.say,q.hint,...(q.sayParts||[]),...(q.hintParts||[])]);setTimeout(()=>say(q.say,q.sayParts),250)}
+ preloadVoice([q.say,q.hint,...(q.sayParts||[]),...(q.hintParts||[])]);if(q.blend)lightTiles();if(q.seg)wireSeg();setTimeout(()=>say(q.say,q.sayParts),250)}
+let blendT=[];function clearBlendT(){blendT.forEach(clearTimeout);blendT=[]}
+function lightTiles(){const tl=[...$("visual").querySelectorAll(".ltile")],lit=i=>{const t=tl[i];if(t&&!t.classList.contains("lit"))t.classList.add("lit")};let i=0;
+ tl.forEach((t,j)=>{t.onclick=()=>{lit(j);say(q.blend[j])};blendT.push(setTimeout(()=>{lit(j);i=Math.max(i,j+1)},1500+j*1000))}); // timers = fallback for the device voice
+ vHook=k=>{if(i<tl.length&&k===slug(q.blend[i]))lit(i++)}} // recorded clips: light each letter exactly when its sound starts
+function wireSeg(){const bx=[...$("visual").querySelectorAll(".ebox")];let k=0;const mark=()=>bx.forEach((b,i)=>b.classList.toggle("next",i===k));mark();
+ bx.forEach((b,i)=>b.onclick=()=>{if(locked||k>=bx.length)return;
+  if(i<k){say(q.snd[i]);return} // filled box: replay its sound
+  if(i>k){tries++;const nb=bx[k];nb.classList.remove("bounce");void nb.offsetWidth;nb.classList.add("bounce");$("hint").textContent=q.hint+" ✨";say(q.hint);return} // kind nudge, no fail
+  b.textContent=q.word[i];b.classList.add("lit");tone(500+i*80,0,.15,"triangle");k++;mark();$("hint").textContent="";
+  if(k<bx.length)say(q.snd[i]);else{say(`${q.snd.join(", ")}... ${q.word}!`,[...q.snd,q.word]);locked=true;const qq=q;setTimeout(()=>{if(q!==qq||!$("game").classList.contains("on"))return;locked=false;answer(b,q.ans)},2600)}})}
 function answer(b,v){if(locked||b.classList.contains("no"))return;const L=lvl();
- if(v===q.ans){locked=true;b.classList.add("yes");sfx.yes();burst(b);const c=pick(CHEERS);$("hint").textContent=c+" 🌟";say(c);
+ if(q.rec&&!q.recd){q.recd=1;const up=recordLetter(q.rec,v===q.ans&&tries===0);if(up)q.unlocked=up}
+ if(v===q.ans){locked=true;b.classList.add("yes");sfx.yes();burst(b);const c=pick(CHEERS);$("hint").textContent=c+" 🌟";
+  if(q.unlocked){$("hint").textContent=`${c} New letters: ${q.unlocked.join(" ").toLowerCase()} ✨`;say(c+" New letter sounds unlocked!",[c,"New letter sounds unlocked!"]);burst(b,24,true)}else say(c);
   if(tries===0){L.streak++;if(L.streak>=3&&L.l<3){L.l++;L.streak=0}run++;if(run===3||run===5){burst(b,run===5?36:24,true);sfx["streak"+run]()}}
-  S.stars++;round++;save();$("princess").classList.remove("cheer");setTimeout(next,1700)}
+  S.stars++;round++;save();$("princess").classList.remove("cheer");nextT=setTimeout(next,q.unlocked?3200:1700)}
  else{tries++;b.classList.add("no");sfx.no();L.streak=0;run=0;shake();if(tries>=2&&L.l>0&&tries===2)L.l--; // run resets silently, no message
   const k=pick(KIND),t=k+" "+q.hint;$("hint").textContent=t;say(t,[k,...(q.hintParts||[q.hint])]);save()}}
 let run=0; // first-try correct answers in a row (this session)
 function shake(){const g=$("game");g.classList.remove("shake");void g.offsetWidth;g.classList.add("shake")}
-function wireTaps(){const it=[...$("visual").querySelectorAll(".tapme")];let k=0;
- it.forEach(s=>s.onclick=()=>{if(k>=it.length){k=0;it.forEach(x=>x.classList.remove("done"))}k++;s.classList.add("done");s.classList.remove("bounce");void s.offsetWidth;s.classList.add("bounce");tone(400+k*40,0,.15,"triangle");say(NUMW[k])})}
+function wireTaps(){const it=[...$("visual").querySelectorAll(".tapme")];let k=0; // each object is counted ONCE (teaches one-to-one counting)
+ it.forEach(s=>s.onclick=()=>{s.classList.remove("bounce");void s.offsetWidth;s.classList.add("bounce");
+  if(s.dataset.n){say(NUMW[+s.dataset.n]);return} // already counted (✓): just replay its number
+  k++;s.dataset.n=k;s.classList.add("done");tone(400+k*40,0,.15,"triangle");
+  if(k===it.length)say(`${NUMW[k]}! That's ${NUMW[k]}!`,[NUMW[k],`That's ${NUMW[k]}!`]);else say(NUMW[k])})}
 function finish(){S.gems++;save();sfx.win();const before=Math.floor((S.stars-ROUNDS)/5),after=Math.floor(S.stars/5);
  const newSt=after>before&&after<=STICKERS.length?STICKERS[after-1]:null;
  $("prompt").textContent="Planet complete! 💎";$("visual").innerHTML=`👸✨${newSt?"<br>New sticker: "+newSt:""}`;$("hint").textContent="";
@@ -294,6 +381,36 @@ function burst(el,n=12,big=false){const r=el.getBoundingClientRect(),x=r.left+r.
 $("optSpeech").checked=S.speech;$("optSound").checked=S.sound;
 $("optSpeech").onchange=e=>{S.speech=e.target.checked;save()};$("optSound").onchange=e=>{S.sound=e.target.checked;save()};
 $("optVibe").checked=S.vibe;$("optVibe").onchange=e=>{S.vibe=e.target.checked;save();buzz(HAPT.yes)};
+// ---------- parent gate: hold 2 s, then answer an adult maths question with big buttons ----------
+function holdToOpen(el,ms,cb,tip){let t=0,raf=0,st=0;const stop=()=>{clearTimeout(t);cancelAnimationFrame(raf);el.style.setProperty("--p",0)};
+ el.addEventListener("pointerdown",e=>{e.preventDefault();stop();st=performance.now();const tick=()=>{el.style.setProperty("--p",Math.min(1,(performance.now()-st)/ms));raf=requestAnimationFrame(tick)};tick();
+  t=setTimeout(()=>{stop();st=0;cb()},ms)});
+ ["pointerup","pointerleave","pointercancel"].forEach(ev=>el.addEventListener(ev,()=>{const quick=st>0;stop();st=0;if(quick&&tip)tip.textContent="Grown-ups: press and hold for 2 seconds"}));
+ el.addEventListener("contextmenu",e=>e.preventDefault())} // a quick tap or click never opens it
+function parentGate(onPass){stopVoice();const a=R(6,9),b=R(6,9),ans=a*b,o=new Set([ans]);while(o.size<4)o.add(ans+pick([-a,a,-b,b,-2,2,10,-10]));
+ $("gq").textContent=`What is ${a} × ${b}?`;$("gmsg").textContent="";const g=$("gopts");g.innerHTML="";
+ shuffle([...o]).forEach(v=>{const bt=document.createElement("button");bt.className="ch";bt.textContent=v;bt.onclick=()=>{
+  if(v===ans){$("gate").classList.remove("on");onPass()}else{$("gmsg").textContent="Not quite. Ask a grown-up! 🙂";g.innerHTML="";setTimeout(()=>$("gate").classList.remove("on"),1400)}};g.appendChild(bt)});
+ $("gate").classList.add("on")}
+$("gCancel").onclick=()=>$("gate").classList.remove("on");
+function drawParent(){$("optSpeech").checked=S.speech;$("optSound").checked=S.sound;$("optVibe").checked=S.vibe;const lb=$("limBtns");lb.innerHTML="";
+ [[0,"Off"],[10,"10 min"],[15,"15 min"],[20,"20 min"]].forEach(([m,t])=>{const b=document.createElement("button");b.className="tab"+((S.limit||0)===m?" on":"");b.textContent=t;b.onclick=()=>{S.limit=m;save();drawParent()};lb.appendChild(b)});
+ $("limInfo").textContent=`Played today: ${Math.round((S.tday===dkey(new Date())?S.tms||0:0)/60000)} min`+(S.limit?` of ${S.limit}`:"");
+ $("letInfo").textContent=GROUPS.map((g,i)=>(i<=LP.g?"✅ ":"🔒 ")+g.join(" ").toLowerCase()).join("  |  ")+(LP.g<GROUPS.length-1?`  (newest group: ${LP.hist.reduce((a,b)=>a+b,0)} of last ${LP.hist.length} right first time, ${LP.n} tries)`:"")}
+holdToOpen($("gearBtn"),2000,()=>parentGate(()=>{show("parentS");drawParent()}),$("gearTip"));
+$("pBack").onclick=()=>{show("start");showDays();$("gearTip").textContent=""};
+// ---------- gentle play-time limit: counts ACTIVE play only (game/blocks screen visible + a tap in the last 60 s), per day ----------
+let lastAct=Date.now();document.addEventListener("pointerdown",()=>{lastAct=Date.now()},{capture:true,passive:true});
+const timeUp=()=>S.limit>0&&(S.tday===dkey(new Date()))&&(S.tms||0)>=S.limit*60000;
+function tickTime(){const t=dkey(new Date());if(S.tday!==t){S.tday=t;S.tms=0}
+ const playing=($("game").classList.contains("on")||$("blocks").classList.contains("on"))&&document.visibilityState!=="hidden";
+ if(playing&&Date.now()-lastAct<60000){S.tms=(S.tms||0)+1000;if(S.tms%15000===0)save()}
+ if(timeUp()&&$("blocks").classList.contains("on")&&(bmode==="build"||bmode==="stairs"))restScreen()} // open-ended modes have no "question end"
+setInterval(tickTime,1000);
+function restScreen(){stopCount();clearBlendT();show("restS");save();$("restTip").textContent="";say("Time to rest, princess! You played so well today. See you next time!");
+ for(let i=0;i<4;i++)setTimeout(()=>burst(document.querySelector("#restS .sleepy"),14,true),400+i*600)}
+$("restHome").onclick=()=>{show("start");showDays()};
+holdToOpen($("restMore"),2000,()=>parentGate(()=>{S.tms=0;save();show("mapS");drawMap()}),$("restTip")); // grown-up grants another full period
 // ---------- gentle daily streak: never resets, never scolds ----------
 const dkey=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); // LOCAL date, not UTC
 function markPlayed(){const now=new Date(),t=dkey(now),y=dkey(new Date(now.getFullYear(),now.getMonth(),now.getDate()-1,12));
@@ -308,11 +425,11 @@ $("playBtn").onclick=()=>{sfx.win();const bonus=markPlayed();show("mapS");drawMa
 $("collBtn1").onclick=$("collBtn2").onclick=()=>{sfx.tap();drawColl();show("collS")};
 $("homeBtn").onclick=()=>{show("start");showDays()};$("backBtn").onclick=()=>{show("mapS");drawMap()};$("back2").onclick=()=>{show("mapS");drawMap()};
 $("sayBtn").onclick=()=>q&&say(q.say,q.sayParts);
-$("resetBtn").onclick=()=>{if(confirm("Reset progress? This clears stars, gems, stickers and days played. Settings stay.")){S.stars=0;S.gems=0;S.level={};S.days=[];S.bonusDay="";save();showDays();alert("Progress reset: stars, gems, stickers and days played are cleared.")}};
+$("resetBtn").onclick=()=>{if(confirm("Reset progress? This clears stars, gems, stickers, days played, letter progress and today's play time. Settings stay.")){S.stars=0;S.gems=0;S.level={};S.days=[];S.bonusDay="";S.tms=0;LP=freshLP();saveLP();save();showDays();drawParent();alert("Progress reset: stars, gems, stickers, days played, letter progress and play time are cleared.")}};
 // ---------- Block Buddies (number characters) ----------
 const BCOL=["#999","#ff3b3b","#ff9a1f","#ffe23b","#3fd16a","#3b8bff","#a55cff","rainbow","#ff6fc8","#8fa3b8","#ffffff"];
 const RAIN=["#ff3b3b","#ff9a1f","#ffe23b","#3fd16a","#3b8bff","#4b3bd6","#a55cff"];
-const BNAME=["","Zippy","Twinkle","Tri-Star","Quadra","Starfive","Hexa","Rainbow","Octo","Nova","Queen Ten","Comet","Twelvy","Lucky","Fourteenie","Fifty-Fizz","Sixteen Sparkle","Seventeen Swirl","Eighteen Glow","Ninetina","Twenty Twinkle"];
+const BNAME=["","Zippy","Twinkle","Tri-Star","Quadra","Starfive","Hexa","Rainbow","Octo","Nova","Queen Ten","Comet","Twelvy","Lucky","Fourteenie","Shimmer","Sixteen Sparkle","Seventeen Swirl","Eighteen Glow","Moonbeam","Twenty Twinkle"]; // 15 was "Fifty-Fizz", 19 was "Ninetina" (sound like fifty/ninety)
 const bname=n=>`Block Buddy ${n}`+(BNAME[n]?` · ${BNAME[n]}`:"");
 function blkColor(n,i){ // i = 0-based index within its column-group
  if(n>10)return null; if(n===7)return RAIN[i%7]; return BCOL[n]}
@@ -348,16 +465,17 @@ function openBlocks(m){show("blocks");preloadVoice([...NUMW.slice(1),...CHEERS])
  BMODES.forEach(x=>{const b=document.createElement("button");b.className="tab"+(x.id===(m||bmode)?" on":"");b.textContent=x.name;b.dataset.m=x.id;
   b.onclick=()=>{sfx.tap();openBlocks(x.id)};tb.appendChild(b)});setMode(m||bmode)}
 function resetStage(){stopCount();const st=$("stage");st.innerHTML="";st.className="";st.style.gap="";st.style.removeProperty("--b");st.dataset.done="";$("bctl").innerHTML="";$("bhint").textContent="";return st}
-function setMode(m){bmode=m;document.querySelectorAll("#tabs .tab").forEach(t=>t.classList.toggle("on",t.dataset.m===m));stopSpeech();resetStage();
+function bTimeUp(){if(timeUp()){restScreen();return true}return false}
+function setMode(m){if(bTimeUp())return;bmode=m;document.querySelectorAll("#tabs .tab").forEach(t=>t.classList.toggle("on",t.dataset.m===m));stopSpeech();resetStage();
  ({build:modeBuild,join:modeJoin,split:modeSplit,make:modeMake,oddeven:modeOdd,stairs:modeStairs})[m]()}
 function btn(txt,cls,fn){const b=document.createElement("button");b.className=cls;b.innerHTML=txt;b.onclick=fn;$("bctl").appendChild(b);return b}
 // --- Build ---
-function drawBuild(isNew){const st=$("stage");st.innerHTML="";const b=buddy(bN,{newLast:isNew});b.onclick=()=>countAlong(b,()=>say(`${NUMW[bN]}! I'm ${bname(bN)}!`));st.appendChild(b)}
+function drawBuild(isNew){const st=$("stage");st.innerHTML="";const b=buddy(bN,{newLast:isNew});b.onclick=()=>{if(bN>0)countAlong(b,()=>say(`${NUMW[bN]}! I'm ${bname(bN)}!`));else say("zero! all gone")};st.appendChild(b)}
 function modeBuild(){bN=Math.max(1,Math.min(bN,20));drawBuild();$("bprompt").textContent="Tap ➕ to add a block!";bspeak("Tap the plus button to add a block! Tap me to count along.");
  btn("−","rb minus",()=>{if(bN>0){bN--;tone(500,0,.1);drawBuild();say(bN?NUMW[bN]:"zero! all gone")}});
  btn("+","rb",()=>{if(bN<20){bN++;tone(500+bN*30,0,.15,"triangle");drawBuild(true);say(NUMW[bN]);if(bN===10){burst($("stage"));say("Ten! A royal ten with a crown!")}}else say("Twenty is my biggest!")});}
 // --- Join (drag to add) ---
-function modeJoin(){resetStage();const max=bMax();const a=R(1,max-1),b=R(1,Math.min(max-a,9));$("bprompt").textContent="Drag one buddy onto the other!";
+function modeJoin(){if(bTimeUp())return;resetStage();const max=bMax();const a=R(1,max-1),b=R(1,Math.min(max-a,9));$("bprompt").textContent="Drag one buddy onto the other!";
  bspeak(`${NUMW[a]} and ${NUMW[b]} want to join together! Drag one onto the other.`);const st=$("stage");
  const A=buddy(a),B=buddy(b);const eq=document.createElement("div");eq.className="eq";eq.textContent="+";st.append(A,eq,B);
  [A,B].forEach(el=>dragify(el,()=>el===A?B:A,()=>mergeJoin(a,b)));
@@ -372,7 +490,7 @@ function mergeJoin(a,b){const st=$("stage");if(st.dataset.done==="1")return;st.d
  $("bprompt").textContent=`${a} + ${b} = ${c}`;const t=award(n,`${NUMW[a]} plus ${NUMW[b]} makes ${NUMW[c]}!`);bspeak(t);
  setTimeout(()=>countAlong(n),2600);btn("➡️ More!","big",()=>{st.dataset.done="";modeJoin()})}
 // --- Split (number bonds) ---
-function modeSplit(n){n=n||R(3,bMax());const st=resetStage();$("bprompt").textContent=`Tap a block to split ${n}!`;
+function modeSplit(n){if(bTimeUp())return;n=n||R(3,bMax());const st=resetStage();$("bprompt").textContent=`Tap a block to split ${n}!`;
  bspeak(`Tap a block to split ${NUMW[n]} into two parts!`);const b=buddy(n,{cut:true});st.appendChild(b);
  b.querySelectorAll(".blk").forEach(k=>k.onclick=()=>{const top=+k.dataset.i+1;if(top>=n)return;const lo=top,hi=n-top;st.innerHTML="";
   const L=buddy(lo),H=buddy(hi);L.classList.add("merge");H.classList.add("merge");const e1=document.createElement("div");e1.className="eq";e1.textContent="+";st.append(L,e1,H);
@@ -381,8 +499,8 @@ function modeSplit(n){n=n||R(3,bMax());const st=resetStage();$("bprompt").textCo
  btn("➡️ New number","big",()=>modeSplit())}
 // --- Make me a number ---
 let makeRound=0,makeDone=false;
-function modeMake(){resetStage();makeDone=false;bTarget=R(1,Math.min(bMax(),makeRound>=3?10:7));bN=0;$("bprompt").innerHTML=`👸 Build a <b style="font-size:1.4em">${bTarget}</b>!`;
- bspeak(`The princess says: build a ${NUMW[bTarget]}!`);draw();
+function modeMake(){if(bTimeUp())return;resetStage();makeDone=false;bTarget=R(1,Math.min(bMax(),makeRound>=3?10:7));bN=0;$("bprompt").innerHTML=`👸 Build ${an(bTarget)} <b style="font-size:1.4em">${bTarget}</b>!`;
+ bspeak(`The princess says: build ${an(bTarget)} ${NUMW[bTarget]}!`);draw();
  function draw(isNew){const st=$("stage");st.innerHTML="";st.appendChild(buddy(bN,{newLast:isNew}))}
  const check=()=>{if(makeDone)return;if(bN===bTarget){makeDone=true;$("bctl").innerHTML="";makeRound++;const t=award($("stage"),`You built ${NUMW[bTarget]}! ${pick(CHEERS)}`);bspeak(t);
    setTimeout(()=>countAlong($("stage").firstChild),2200);btn("➡️ Next!","big",modeMake)}
@@ -390,7 +508,7 @@ function modeMake(){resetStage();makeDone=false;bTarget=R(1,Math.min(bMax(),make
  btn("−","rb minus",()=>{if(bN>0){bN--;tone(500,0,.1);draw();say(NUMW[bN]||"zero");check()}});
  btn("+","rb",()=>{if(bN<20){bN++;tone(500+bN*30,0,.15,"triangle");draw(true);say(NUMW[bN]);setTimeout(check,500)}})}
 // --- Odd / even pairs ---
-function modeOdd(){const n=R(2,bMax());const st=resetStage();const col=n===7?null:BCOL[Math.min(n,10)];
+function modeOdd(){if(bTimeUp())return;const n=R(2,bMax());const st=resetStage();const col=n===7?null:BCOL[Math.min(n,10)];
  $("bprompt").textContent=`Can ${n} make pairs?`;bspeak(`Here is ${NUMW[n]}. Tap Pair up to give every block a partner!`);
  const row=document.createElement("div");row.style.cssText="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:600px";row.style.setProperty("--b","48px");
  for(let i=0;i<n;i++)row.appendChild(makeBlock(col||RAIN[i%7],true));st.appendChild(row);
@@ -408,7 +526,7 @@ function modeStairs(){const st=resetStage();st.classList.add("stairs");st.style.
  btn("🎵 Climb the stairs!","big alt",()=>{stopCount();all.forEach((b,i)=>countT.push(setTimeout(()=>{b.classList.remove("merge");void b.offsetWidth;b.classList.add("merge");tone(400+i*60,0,.2,"triangle");say(NUMW[i+1])},i*800)))})}
 $("bBack").onclick=()=>{stopCount();show("mapS");drawMap()};$("bSay").onclick=()=>say(bSay,bParts);
 let fitT=0;window.addEventListener("resize",()=>{clearTimeout(fitT);fitT=setTimeout(()=>{if(!$("blocks").classList.contains("on"))return;if(bmode==="stairs")modeStairs();else if(bmode==="build")drawBuild()},200)});
-window.__test={PLANETS,S,openBlocks,setMode,say,slug,buzz,markPlayed,showDays,VMISS,get run(){return run},stopSpeech,CHEERS,KIND,NUMW,PICS,PHON,WORDS,RHYME,ABC,BNAME,bname,STICKERS,setVList:v=>{VLIST=v}};
+window.__test={PLANETS,S,openBlocks,setMode,say,slug,buzz,markPlayed,showDays,VMISS,get run(){return run},stopSpeech,CHEERS,KIND,NUMW,PICS,PHON,WORDS,RHYME,ABC,BNAME,bname,STICKERS,setVList:v=>{VLIST=v},GROUPS,UNLOCK,BLEND,REALW,RUDE,an,unlocked,recordLetter,get LP(){return LP},setLP:v=>{LP=Object.assign(freshLP(),v);saveLP()},timeUp,tickTime,restScreen,parentGate,drawParent,segQ,setActive:()=>{lastAct=Date.now()},setMakeRound:v=>{makeRound=v}};
 // PWA: register the service worker (offline play + home-screen install). Fails silently.
 if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("./sw.js").catch(()=>{})})}
 </script></body></html>
