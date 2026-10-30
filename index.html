@@ -1338,7 +1338,7 @@ function sortQ(l){const oe=l>=3&&Math.random()<.5;let nums,bins,key,p=0;
 const sWords=s=>s.replace(/[.!?]$/,"").split(" "),capT=(w,first)=>first?w[0].toUpperCase()+w.slice(1):w.toLowerCase();
 function sentGen(l){const pool=SENT.filter(s=>s[3]<=(LP.g|0)),nw=pool.filter(s=>s[3]===(LP.g|0)),s=pick(nw.length&&Math.random()<.6?nw:pool),W=sWords(s[0]),end=s[0].slice(-1);
  const order=l>=2&&(l===2||Math.random()<.6);let filled=0;
- if(order){let t=W.map((_,i)=>i);for(let g=0;g<12&&t.every((x,i)=>x===i);g++)t=shuffle(t);const tiles=t.map(i=>W[i]);
+ if(order){let t=W.map((_,i)=>i);for(let g=0;g<12&&t.every((x,i)=>x===i);g++)t=shuffle(t);if(t.every((x,i)=>x===i))t.reverse();const tiles=t.map(i=>W[i]);
   return {prompt:"Make the sentence!",show:`<div class="dz"><div>${s[1]}</div><div class="sline">${W.map((w,i)=>`<div class="dtg slot" data-w="${w}" data-i="${i}">${i+1}</div>`).join("")}<span class="w">${end}</span></div><div class="dtray">${tiles.map(w=>`<button class="dit" data-v="${w}" data-say="${w.toLowerCase()==="i"?"I":w.toLowerCase()}">${w}</button>`).join("")}</div></div>`,
    ...(l>=3?{say:"Make the sentence!",quiet:true}:{say:`Make the sentence: ${s[0]}`,sayParts:["Make the sentence:",s[0]]}),choices:[],ans:"ok",item:`SB:${s[0]}`,dnd:"order",v:{W,tiles,s},
    hint:`Say it slowly and put the words in order: ${s[0]}`,hintParts:["Say it slowly and put the words in order:",s[0]],
@@ -1404,7 +1404,7 @@ const _drawMap4=drawMap;drawMap=function(){_drawMap4();const b=[...document.quer
 const _startPlanet4=startPlanet;startPlanet=function(p){if(p&&p.id==="dg"&&!dgUnlocked()){say(DG_LOCK);return}return _startPlanet4(p)};
 const _pickJourney=pickJourney;pickJourney=function(now){const i=ENG.indexOf("dg"),lk=!dgUnlocked()&&i>=0;if(lk)ENG.splice(i,1);try{return _pickJourney(now)}finally{if(lk)ENG.splice(i,0,"dg")}};__test3.pickJourney=pickJourney;
 // E: guiding story. Every Adventure: one story line + one home piece; 4 pieces = a new home sticker (into the castle tray via S.badges)
-const _jcard4=journeyCard;journeyCard=function(html,btns){if(/Three things to do today|visit three planets today|visits three planets today/.test(html))html+=`<div class="card">🏡 Help Zippet get home before dark!</div>`;
+const _jcard4=journeyCard;journeyCard=function(html,btns){if(/Three things to do today|visit three planets today|visits three planets today/.test(html))html=jIntro()+html; // 6H: who Zippet is and why home before dark, before the list
  let beat=null;if(/What an adventure/.test(html)){S.adv=(S.adv|0)+1;const pc=(S.adv-1)%4+1,st=pc===4?HOME_ST[(S.adv/4-1)%HOME_ST.length]:null;if(st)S.badges=(S.badges||[]).concat(st).slice(-200);save();
   beat=BEATS4[(S.adv-1)%BEATS4.length];html+=`<div class="card" id="beat4">🌄 ${beat}<br>🧩 Home piece ${pc} of 4${st?` · New home sticker: <span style="font-size:48px">${st}</span>`:""}</div>`}
  _jcard4(html,btns);if(beat){const c=$("beat4");setTimeout(()=>{if(c.isConnected&&$("game").classList.contains("on"))say(beat)},7000)}}; // spoken after the end-card line
@@ -1932,6 +1932,23 @@ __test3.checkPairs6G=function(){const bad=[],f=m=>{if(bad.length<30)bad.push(m)}
   $("stage").querySelectorAll(".blk").forEach((b,i)=>{if(b.style.background!=="var(--gold)")f(`pairs ${n}: block ${i} ${b.style.background}`)})}}catch(e){f("error "+e.message)}finally{Math.random=MR;show("start")}return bad};
 const _sc6g=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6g.call(this,N);[["checkFill6G",()=>__test3.checkFill6G()],["checkGap6G",()=>__test3.checkGap6G(300)],["checkBkEnd6G",()=>__test3.checkBkEnd6G()],["checkSay6G",()=>__test3.checkSay6G(100)],["checkPics6G",()=>__test3.checkPics6G()],["checkPairs6G",()=>__test3.checkPairs6G()]].forEach(([k,fn])=>{const b=fn();if(b.length)r.bad[k]=b});return r};
 Object.assign(__test3,{bkClear,jDots,JDOTS,PAIR_COL});
+</script>
+<script id="p6h">
+// ---------- Part 6H: Adventure intro that makes sense without the book; grown-ups hold button contrast ----------
+const JINTRO=["This is Zippet, a little puppy.","The sun is going down.","Play three games to get him home before dark!"]; // shown, not spoken
+function jIntro(){return `<div class="card jintro">${art("zippet","happy",64)}<div class="jit">${JINTRO.map(t=>`<span>${t}</span>`).join(" ")}</div></div>`}
+document.head.insertAdjacentHTML("beforeend",`<style>.jintro{display:flex;align-items:center;gap:12px;text-align:left}.jintro .jit{flex:1;min-width:0}.jintro .jit span{display:block}.jintro{font-size:clamp(17px,4.2vw,24px);padding:10px 14px}@media (max-height:700px){.jintro{font-size:16px;margin:6px auto}.jintro .art{zoom:.75}}
+.big.hold{color:var(--ink)}</style>`); // 6H: navy text on the pale hold button (was cream, 1.3:1)
+__test3.check6H=function(){const bad=[],sn=bk6eSnap();
+ try{if(JINTRO.join(" ").split(/\s+/).length>20)bad.push("intro too long");JINTRO.forEach(t=>{if(t.split(/\s+/).length>10)bad.push("intro sentence over 10 words: "+t)});
+  if(!/Zippet/.test(JINTRO[0])||!/puppy/.test(JINTRO[0]))bad.push("intro must say who Zippet is");
+  const T=window.__test;startJourney&&startJourney();const v=$("visual"),ji=v.querySelector(".jintro"),cards=[...v.querySelectorAll(".card")];
+  if(!ji)bad.push("no intro card on the Adventure start");else{if(cards.indexOf(ji)!==0)bad.push("intro card is not first");if(/Help Zippet get home/.test(v.textContent))bad.push("old line still shown");if(!ji.querySelector(".art"))bad.push("no Zippet picture in the intro")}
+  const b=$("restMore"),L=c=>{const m=c.match(/\d+(\.\d+)?/g).map(Number).slice(0,3).map(x=>x/255).map(x=>x<=.03928?x/12.92:((x+.055)/1.055)**2.4);return .2126*m[0]+.7152*m[1]+.0722*m[2]};
+  show("restS");const fg=getComputedStyle(b).color,bg="rgb(230,221,221)",r=(Math.max(L(fg),L(bg))+.05)/(Math.min(L(fg),L(bg))+.05);if(r<4.5)bad.push("hold button text "+r.toFixed(2)+":1")}
+ catch(e){bad.push("error "+e.message)}finally{JR=null;g6Restore(sn)}return bad};
+{const _sc6h=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6h.call(this,N);const b=__test3.check6H();if(b.length)r.bad.check6H=b;return r}}
+Object.assign(__test3,{JINTRO,jIntro});
 </script>
 
 <script id="p6f">
