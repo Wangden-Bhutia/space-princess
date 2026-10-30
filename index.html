@@ -145,10 +145,10 @@ button,.tk,.tc{touch-action:manipulation} /* zoom is allowed again; this only st
 .ordr button.done{outline:4px solid #7dff9a}
 #trc{touch-action:none;background:rgba(255,255,255,.08);border-radius:24px;display:block;margin:6px auto;max-width:100%}
 .scene svg .yes{stroke:#7dff9a;stroke-width:6}
-.reader{min-height:340px}.pic{font-size:clamp(70px,18vw,130px);line-height:1.1;margin:6px 0}
+.reader{min-height:340px}.pic{font-size:clamp(110px,34vw,200px);line-height:1.1;margin:6px 0}
 .sent{font-size:clamp(28px,7vw,48px);line-height:1.6;margin:10px 0}
 .wd{display:inline-block;padding:2px 8px;margin:2px;border-radius:14px;cursor:pointer;transition:background .2s}
-.wd.sight{color:#ffe680;text-decoration:underline dotted 3px}.wd.hl{background:#ffe680;color:#5a1d8c}
+.wd.sight{color:#ffe680;text-decoration:underline dotted 3px}.wd.hl{background:#6d4bd1}
 .slist{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin:12px 0}
 .scard{border:none;border-radius:24px;padding:14px;font-size:20px;font-family:inherit;color:#fff;background:rgba(255,255,255,.14);cursor:pointer;min-height:120px}
 .scard span{display:block;font-size:46px}.scard.lock{opacity:.45}
@@ -333,6 +333,7 @@ const pick=a=>a[Math.floor(Math.random()*a.length)];
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 function opts(ans,pool,n){const s=new Set([ans]);let guard=0;while(s.size<n&&guard++<200)s.add(pick(pool));return shuffle([...s])}
 function numOpts(ans,lo,hi,n){const p=[];for(let i=lo;i<=hi;i++)p.push(i);return opts(ans,p,n)}
+function nearOpts(ans,max,n){let lo=Math.max(1,ans-3),hi=Math.min(max,ans+3);while(hi-lo+1<n&&(lo>1||hi<max)){if(hi<max)hi++;else lo--}return numOpts(ans,lo,hi,n)} // Part A: wrong answers within 3 of the answer (widened only if fewer than n values fit)
 const OBJ=["⭐","🌙","🪐","🚀","👑","💎","🦄","🌸","🍓","🧁"];
 const NAMES={"⭐":"stars","🌙":"moons","🪐":"planets","🚀":"rockets","👑":"crowns","💎":"gems","🦄":"unicorns","🌸":"flowers","🍓":"strawberries","🧁":"cupcakes"};
 const rep=(e,n)=>Array(n).fill(e).join("");
@@ -418,7 +419,7 @@ const flashBox=h=>`<div class="qlook"><div class="qin">${h}</div><button class="
 const MAXL=5; // levels 0-5; planets without maxl stay at 0-3
 const PLANETS=[
  {id:"count",name:"Counting",icon:"⭐",col:"#ff9a3c",maxl:MAXL,gen(l){const max=[5,7,10,10,15,20][l];const n=R(1,max),e=pick(OBJ);const nums=Array.from({length:n},(_,i)=>NUMW[i+1]);
-   return {prompt:"How many?",show:max>10?tap5(e,n):tapRep(e,n),say:`How many ${NAMES[e]} can you count?`,choices:numOpts(n,1,max,l<1?3:4),ans:n,item:`C:${n}`,cheer:"count",
+   return {prompt:"How many?",show:max>10?tap5(e,n):tapRep(e,n),say:`How many ${NAMES[e]} can you count?`,choices:nearOpts(n,max,l<1?3:4),ans:n,obj:NAMES[e],item:`C:${n}`,cheer:"count",
    hint:`Let's tap each one and count together: ${nums.join(", ")}!`,...(n>10?{hintParts:["Let's tap each one and count together:",...nums]}:{})}}},
  {id:"add",name:"Adding",icon:"➕",col:"#3cc9ff",maxl:MAXL,gen(l){const top=[6,6,10,10,15,20][l];if(l>=1&&Math.random()<(l>=2?.5:.3)){const a=R(2,top),b=R(1,a-1),e=pick(OBJ); // Take away: she taps b objects to float them away, then counts what is left
    return {take:true,b,prompt:`${a} − ${b} = ?`,show:`<div>${Array(a).fill(`<span class="tk">${e}</span>`).join("")}</div><div id="tacount" style="font-size:clamp(20px,4vw,30px);color:#ffe680;min-height:1.3em"></div>`,
@@ -448,7 +449,7 @@ const PLANETS=[
    if(k==="big"){const hi=l>=5?20:15,n=R(11,hi);return {flash:true,prompt:"Quick look! How many?",show:flashBox(two10(n)),say:"Quick look! How many do you see?",choices:numOpts(n,Math.max(10,n-3),Math.min(hi,n+3),4),ans:n,item:`Q:${n}`,cheer:"quick",hint:"One full ten-frame is ten. Count on from ten!",hintParts:["One full ten-frame is ten.","Count on from ten!"]}}
    if(k==="near"){const hi=l>=5?20:15,up=Math.random()<.5,n=up?R(2,hi-1):R(3,hi),ans=up?n+1:n-1;return {prompt:up?"One more?":"One less?",show:two10(n),say:`${NUMW[n]}. ${up?"What is one more?":"What is one less?"}`,sayParts:[NUMW[n],up?"What is one more?":"What is one less?"],choices:numOpts(ans,Math.max(1,ans-3),Math.min(hi,ans+3),4),ans,cheer:"frame",hint:up?"One more: add one dot and count on!":"One less: take one dot away and count back!"}}
    if(k==="sub"){const n=l>=2&&Math.random()<.5?R(6,10):R(1,5),hi=l>=2?10:5; // flash 1-5 (dice pattern), later 6-10 in a ten-frame (two rows of five)
-    return {flash:true,prompt:"Quick look! How many?",show:flashBox(n<=5&&(l<1||Math.random()<.7)?dice(n,e):frame(n)),say:"Quick look! How many do you see?",choices:numOpts(n,1,hi,nc),ans:n,item:`Q:${n}`,cheer:"quick",hint:"Look again! Can you see little groups?"}}
+    return {flash:true,prompt:"Quick look! How many?",show:flashBox(n<=5&&(l<1||Math.random()<.7)?dice(n,e):frame(n)),say:"Quick look! How many do you see?",choices:nearOpts(n,hi,nc),ans:n,item:`Q:${n}`,cheer:"quick",hint:"Look again! Can you see little groups?"}}
    if(k==="tf"){const n=R(1,l<1?5:10);return {prompt:"How many?",show:frame(n,{tap:true}),say:"How many dots are in the ten-frame?",choices:numOpts(n,1,l<1?5:10,nc),ans:n,item:`F:${n}`,cheer:"frame",
     hint:n>5?"The top row has five. Count on from five!":"Tap each dot and count!"}}
    if(k==="more"){const n=R(1,9);return {tf:true,prompt:"How many more to make 10?",show:frame(n,{empty:true}),say:"How many more to make ten?",choices:numOpts(10-n,1,9,nc),ans:10-n,item:`F10:${n}`,cheer:"frame",hint:"Tap the empty boxes and count them!"}}
@@ -493,10 +494,10 @@ function stopSpeech(){stopVoice()} // Phase 1 behaviour kept: cancels speechSynt
 function show(id){stopSpeech();if(id!=="game"&&typeof nextT!=="undefined")clearTimeout(nextT);document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===id));window.scrollTo(0,0)}
 function drawMap(){$("starN").textContent=S.stars;$("gemN").textContent=S.gems;const m=$("map");m.innerHTML="";
  PLANETS.forEach((p,i)=>{const b=document.createElement("button");b.className="planet";b.style.background=`radial-gradient(circle at 30% 30%,#fff8,${p.col} 45%)`;
-  b.style.animationDelay=(i*.3)+"s";const lv=(S.level[p.id]||{l:0}).l;b.innerHTML=`<span>${p.icon}</span>${p.name}<small>${"⭐".repeat(lv+1)}</small>`;
+  b.style.animationDelay=(i*.3)+"s";const lv=(S.level[p.id]||{l:0}).l;const tot=(p.maxl??3)+1,lr=Math.min(lv+1,tot);b.innerHTML=`<span>${p.icon}</span><span class="pl">${p.name}</span><small class="lvd" role="img" aria-label="Level ${lr} of ${tot}">${"●".repeat(lr)}${"○".repeat(tot-lr)}</small>`;
   b.onclick=()=>{sfx.tap();startPlanet(p)};m.appendChild(b)})
  const bb=document.createElement("button");bb.className="planet";bb.id="blockPlanet";bb.style.background="radial-gradient(circle at 30% 30%,#fff8,#ff3b3b 30%,#ffe23b 55%,#3b8bff 80%)";
- bb.innerHTML="<span>🧱</span>Block Buddies";bb.onclick=()=>{sfx.tap();say("Welcome to Block Buddy planet!");openBlocks()};m.prepend(bb);if(typeof extraMap==="function")extraMap(m)}
+ bb.innerHTML='<span>🧱</span><span class="pl">Block Buddies</span>';bb.onclick=()=>{sfx.tap();say("Welcome to Block Buddy planet!");openBlocks()};m.prepend(bb);if(typeof extraMap==="function")extraMap(m)}
 function drawColl(){$("starN2").textContent=S.stars;const c=$("coll");c.innerHTML="";const got=Math.floor(S.stars/5);
  const head=t=>{const h=document.createElement("div");h.style.cssText="grid-column:1/-1;font-size:24px;color:#ffe680;text-align:left;margin-top:8px";h.textContent=t;c.appendChild(h)};
  ALLST.forEach((s,i)=>{if(i===0)head("👑 Royal Collection");if(i===STICKERS.length)head("🌌 Royal Collection II");
@@ -1019,7 +1020,7 @@ function storyQ(k){k=k===1?1:0;stClear();const s=STORIES[stCur],[qs,ch,ans]=k?s.
   else{tr++;stTr++;b.classList.add("no");sfx.no();$("sqh").textContent="Let's look back at the story! ✨";say("Let's look back at the story!")}};$("sq").appendChild(b)});stLast=qs;say(qs)}
 function openStories(){show("storyS");storyList()}
 $("stBack").onclick=()=>{stClear();if(stCur!==null)storyList();else{show("mapS");drawMap()}};$("stSay").onclick=()=>{if(stCur!==null&&$("stBody").querySelector(".reader"))readAlong(stLast);else say(stLast)};
-function extraMap(m){const b=document.createElement("button");b.className="planet";b.id="storyPlanet";b.style.background="radial-gradient(circle at 30% 30%,#fff8,#c084fc 40%,#7c3aed 85%)";b.innerHTML="<span>📖</span>Story Corner";b.onclick=()=>{sfx.tap();openStories()};m.appendChild(b)}
+function extraMap(m){const b=document.createElement("button");b.className="planet";b.id="storyPlanet";b.style.background="radial-gradient(circle at 30% 30%,#fff8,#c084fc 40%,#7c3aed 85%)";b.innerHTML='<span>📖</span><span class="pl">Story Corner</span>';b.onclick=()=>{sfx.tap();openStories()};m.appendChild(b)}
 // ---------- Decorate (M9) ----------
 const DKEY="spacePrincessDecoV1",DCAP=60;let D={bg:"castle",items:[]};try{Object.assign(D,JSON.parse(localStorage.getItem(DKEY))||{});if(!Array.isArray(D.items))D.items=[]}catch(e){}
 const saveD=()=>{D.items=D.items.slice(-DCAP);try{localStorage.setItem(DKEY,JSON.stringify(D))}catch(e){}};
@@ -1249,7 +1250,7 @@ __test3.checkEpisodes=function(){const bad=[],O=["problem","show","try","recap"]
  const tr=e.steps.filter(s=>s.b==="try");if(tr.length<2||tr.length>3)f("2-3 try questions");
  tr.forEach((s,i)=>{const v=s.ch.map(c=>Array.isArray(c)?c[1]:c);if(v.length<3)f(`try ${i}: fewer than 3 choices`);if(!v.some(x=>x===s.a))f(`try ${i}: answer not in choices`);if(new Set(v.map(String)).size!==v.length)f(`try ${i}: duplicate choice`);if(!s.h)f(`try ${i}: no hint`);
   if(v.some(x=>RUDE.has(String(x).toLowerCase())))f(`try ${i}: rude word`)});
- e.steps.forEach((s,i)=>{if(s.b!=="try"&&!s.say)f(`step ${i}: no line`);if(s.d&&!["bud","count","pair","join","on","take","taken","ten","tenq","teen","pairs","tiles","blend"].includes(s.d[0]))f(`step ${i}: unknown draw ${s.d[0]}`)});
+ e.steps.forEach((s,i)=>{if(s.b!=="try"&&!s.say)f(`step ${i}: no line`);if(s.d&&!["bud","count","pair","join","on","take","taken","ten","tenq","teen","pairs","tiles","blend","coins","clock"].includes(s.d[0]))f(`step ${i}: unknown draw ${s.d[0]}`)});
  const t=epTotal(e)/1000;if(t<60||t>90)f(`length ${t.toFixed(1)} s (want 60-90)`)});
  for(let n=1;n<=20;n++)if(!BUDDY_PERS[n])bad.push(`buddy ${n}: no line`);return bad};
 __test3.selfCheck=function(N){const r=_sc.call(this,N);const ce=__test3.checkEpisodes();if(ce.length)r.bad.checkEpisodes=ce;r.cnt["episodes"]=EPISODES.length;
@@ -1354,7 +1355,7 @@ function dgGen(l){const k=pick([["hear"],["hear","pair"],["hear","pair","blend"]
   return {prompt:`Which one has ${d}?`,show:`<div class="seq">${d}</div>`,say:`${DPH[d]}. Which picture has the sound ${DPH[d]}?`,sayParts:[DPH[d],`Which picture has the sound ${DPH[d]}?`],
    choices:ch.map(x=>({label:x[1],val:x[0]})),ans:w[0],item:`DG:${d}:${w[0]}`,v:{d,k},hint:`Say each word slowly. Which one has ${DPH[d]}?`,hintParts:["Say each word slowly.",`Which one has ${DPH[d]}?`]}}
  if(k==="pair"){const w=pick(DGW[d].filter(x=>x[0].length>=4&&x[0].length<=6)),ps=[...new Set([...Array(w[0].length-1)].map((_,i)=>w[0].slice(i,i+2)))],ds=shuffle(ps.filter(p=>!DGS.includes(p))).slice(0,2);
-  return {prompt:`Find ${d}!`,show:`<div>${w[1]}</div><div style="font-size:.72em;white-space:nowrap">${tiles(w[0])}</div>`,say:`${w[0]}. Which two letters say ${DPH[d]}?`,sayParts:[w[0],`Which two letters say ${DPH[d]}?`],
+  return {prompt:`Find ${d}!`,show:`<div class="bigpic">${w[1]}</div><div style="font-size:.72em;white-space:nowrap">${tiles(w[0])}</div>`,say:`${w[0]}. Which two letters say ${DPH[d]}?`,sayParts:[w[0],`Which two letters say ${DPH[d]}?`],
    choices:shuffle([d,...ds]).map(x=>({label:x,val:x})),ans:d,item:`DGP:${w[0]}`,v:{d,k,w:w[0]},hint:`Two letters can make one sound. Look for ${d}!`}}
  const b=pick(DGB),em=x=>Object.values(DGW).flat().find(y=>y[0]===x)[1],ds=shuffle(DGB.filter(x=>x!==b&&em(x[0])!==em(b[0]))).slice(0,2),snd=b[1].map(u=>DPH[u]||PHON[u[0].toUpperCase()]);
  return {prompt:"Listen and blend!",show:`<div>${b[1].map((u,i)=>`<span class="ltile" data-i="${i}">${u}</span>`).join("")}</div>`,say:`Listen: ${snd.join("... ")}... What word is it?`,sayParts:["Listen:",...snd,"What word is it?"],
@@ -1366,16 +1367,16 @@ function clockSVG(h,m){const a=((h%12)+m/60)*Math.PI/6,b=m*Math.PI/30,P=(r,t)=>`
  return `<svg class="clk" viewBox="0 0 200 200" role="img" aria-label="clock"><circle cx="100" cy="100" r="95" fill="#fff" stroke="#7c3aed" stroke-width="6"/>${num}<line class="mh" x1="100" y1="100" x2="${P(82,b)}" stroke="#ff3b8b" stroke-width="4" stroke-linecap="round"/><line class="hh" x1="100" y1="100" x2="${P(46,a)}" stroke="#3b1a6b" stroke-width="13" stroke-linecap="round"/><circle cx="100" cy="100" r="8" fill="#3b1a6b"/></svg>`} // short thick hour hand, long thin minute hand
 const tfmt=(h,m)=>`${h}:${m?"30":"00"}`,tsay=(h,m)=>m?`half past ${NUMW[h]}`:`${NUMW[h]} o'clock`;
 function coinSet(sum){for(let g=0;g<200;g++){const n=R(2,4),c=[];let s=0;for(let i=0;i<n;i++){const v=pick([1,2,5].filter(x=>x<=sum-s-(n-i-1)));if(!v)break;c.push(v);s+=v}if(c.length===n&&s===sum)return c.sort((x,y)=>y-x)}return null}
-function coinGen(l){if(Math.random()<.45){const half=l>=4&&Math.random()<.5,h=R(1,12),m=half?30:0,ans=tfmt(h,m),nx=h%12+1;
+function coinGen(l){if(Math.random()<(l<2?0:l<4?.3:.45)){const half=l>=4&&Math.random()<.5,h=R(1,12),m=half?30:0,ans=tfmt(h,m),nx=h%12+1;
   const cand=half?[tfmt(nx,30),tfmt(h,0),tfmt(nx,0)]:shuffle([...Array(12)].map((_,i)=>i+1).filter(x=>x!==h)).map(x=>tfmt(x,0));const ch=shuffle([ans,...shuffle(cand).slice(0,l<1?2:3)]);
   return {prompt:"What time is it?",show:clockSVG(h,m),say:"What time is it?",choices:ch.map(x=>({label:x,val:x})),ans,item:`CK:${ans}`,clock:{h,m},
    hint:m?`The long hand points down to six: half past. The short hand is just past ${NUMW[h]}. ${tsay(h,m)}!`:`The long hand points up to twelve. The short hand points to ${NUMW[h]}. ${tsay(h,m)}!`,
    hintParts:m?["The long hand points down to six: half past.",`The short hand is just past ${NUMW[h]}.`,`${tsay(h,m)}!`]:["The long hand points up to twelve.",`The short hand points to ${NUMW[h]}.`,`${tsay(h,m)}!`]}}
- const k=pick([["name"],["name","count"],["count","count","name"],["make","count"],["make","make","count"],["make"]][l]);
+ const k=pick([["name","count"],["name","count"],["count","count","name"],["make","count"],["make","make","count"],["make"]][l]);
  if(k==="name"){const v=pick([1,2,5,10]),ch=shuffle([v,...shuffle([1,2,5,10].filter(x=>x!==v)).slice(0,l<1?2:3)]);
   return {prompt:`Find ₹${v}!`,show:`<div class="seq">₹${v}</div>`,say:`Find the ${NUMW[v]} rupee coin!`,choices:ch.map(x=>({label:coinH(x,.8),val:x})),ans:v,item:`CO:₹${v}`,hint:`Look for the number ${NUMW[v]} on the coin.`}}
- if(k==="count"){const max=l<2?5:10,n=R(2,max);return {prompt:"How many rupees?",show:`<div class="ctray">${Array(n).fill(`<span class="tapme">${coinH(1,.7)}</span>`).join("")}</div>`,say:"How many rupees? Count the one rupee coins!",sayParts:["How many rupees?","Count the one rupee coins!"],
-  choices:numOpts(n,1,max,l<1?3:4),ans:n,item:`CO:${n}×₹1`,hint:"Tap each coin and count. Each one is one rupee!"}}
+ if(k==="count"){const max=l<1?5:10,n=R(2,max);return {prompt:"How many rupees?",show:`<div class="ctray">${Array(n).fill(`<span class="tapme">${coinH(1,.7)}</span>`).join("")}</div>`,say:"How many rupees? Count the one rupee coins!",sayParts:["How many rupees?","Count the one rupee coins!"],
+  choices:nearOpts(n,max,l<1?3:4),ans:n,item:`CO:${n}×₹1`,hint:"Tap each coin and count. Each one is one rupee!"}}
  const T=l<4?5:l===4?pick([5,10]):10,sums=[T,...shuffle([T-1,T+1,T-2,T+2].filter(x=>x>=2)).slice(0,2)],sets=sums.map(s=>[s,coinSet(s)]);
  return {prompt:`Make ₹${T}!`,show:`<div class="seq">₹${T}</div>`,say:`Which coins make ${NUMW[T]} rupees?`,choices:shuffle(sets).map(([s,c])=>({label:`<span class="ctray">${c.map(v=>coinH(v,.6)).join("")}</span>`,val:s,small:true})),ans:T,item:`CO:make ₹${T}`,v:{sets},
   hint:"Start with the biggest coin, then count on with the others.",hintParts:["Start with the biggest coin,","then count on with the others."]}}
@@ -1393,7 +1394,7 @@ const _checkStories=checkStories;checkStories=function(){const bad=_checkStories
  s.p.forEach(([,t])=>words(t).forEach(w=>{const l=w.toLowerCase();if(!sw.has(l)&&DGS.some(d=>l.includes(d)))bad.push(`${s.t}: sound-pair word "${w}" outside the Sound Pairs stories`)}))});return bad};__test3.checkStories=checkStories;
 // Sound Pairs lock on the map, in startPlanet and in the Adventure picker
 const DG_LOCK="Learn all your letter sounds to open Sound Pairs!";
-const _drawMap4=drawMap;drawMap=function(){_drawMap4();const b=[...document.querySelectorAll("#map .planet")].find(x=>x.textContent.includes("Sound Pairs"));if(b&&!dgUnlocked()){b.classList.add("lock");b.style.filter="grayscale(.7)";b.innerHTML="<span>🔒</span>Sound Pairs";b.onclick=()=>{sfx.tap();say(DG_LOCK)}}};
+const _drawMap4=drawMap;drawMap=function(){_drawMap4();const b=[...document.querySelectorAll("#map .planet")].find(x=>x.textContent.includes("Sound Pairs"));if(b&&!dgUnlocked()){b.classList.add("lock");b.style.filter="grayscale(.7)";b.innerHTML='<span>🔒</span><span class="pl">Sound Pairs</span>';b.onclick=()=>{sfx.tap();say(DG_LOCK)}}};
 const _startPlanet4=startPlanet;startPlanet=function(p){if(p&&p.id==="dg"&&!dgUnlocked()){say(DG_LOCK);return}return _startPlanet4(p)};
 const _pickJourney=pickJourney;pickJourney=function(now){const i=ENG.indexOf("dg"),lk=!dgUnlocked()&&i>=0;if(lk)ENG.splice(i,1);try{return _pickJourney(now)}finally{if(lk)ENG.splice(i,0,"dg")}};__test3.pickJourney=pickJourney;
 // E: guiding story. Every Adventure: one story line + one home piece; 4 pieces = a new home sticker (into the castle tray via S.badges)
@@ -1428,6 +1429,68 @@ __test3.selfCheck=function(N){const r=_sc4.call(this,N),T=window.__test,f=(k,m)=
  T.setLP({g:4});const cs=checkSent();if(cs.length)r.bad.checkSent=cs;const ck=checkStories();if(ck.length)r.bad.checkStories=ck;
  Object.values(DGW).forEach((ws,i)=>ws.forEach(([w])=>{if(!dgHas(w,DGS[i]))f("dgWords",w)}));if(new Set(Object.values(DGW).flat().map(x=>x[1])).size!==Object.values(DGW).flat().length)f("dgWords","duplicate emoji");return r};
 Object.assign(__test3,{SENT,DGW,DGS,DPH,DGB,DG_STORIES,COINS,BEATS4,HOME_ST,buildQ,sortQ,sentGen,dgGen,coinGen,clockSVG,checkSent,dgUnlocked,p4Check,stLock,tfmt});
+</script>
+<script id="partA">
+// ---------- Part A data ----------
+// A1: Build it prompt after a Counting question ({o} = the object name, e.g. strawberries). One filled phrase per counting object goes in the phrase list.
+const BUILD_T="Build a tower as tall as the {o} you counted. Tap the plus for each one.",BUILD_G="Build a tower as tall as the things you counted. Tap the plus for each one.";
+// A3: two Meet it episodes (speakers are Block Buddies already in the game)
+const EPISODES_A=[
+ {id:"coins",skill:"Coins",title:"Meet the coins",steps:[
+  {b:"problem",say:"Hello! I'm Starfive. I found four shiny coins in my pocket. Which coin is which?",d:["coins",[1,2,5,10]]},
+  {b:"show",say:"Look at the number on each coin. This is one rupee, two rupees, five rupees, and ten rupees.",d:["coins",[1,2,5,10]]},
+  {b:"show",say:"One five rupee coin is the same as five one rupee coins. Count them: one, two, three, four, five!",d:["coins",[5,"=",1,1,1,1,1]]},
+  {b:"show",say:"Two coins of two rupees make four rupees. Two, and two more, makes four!",d:["coins",[2,"+",2,"= ₹4"]]},
+  {b:"try",q:"How many rupees is this coin?",h:"Look at the number on the coin.",d:["coins",[2]],ch:[["₹1",1],["₹2",2],["₹5",5]],a:2},
+  {b:"try",q:"Five one rupee coins. How many rupees?",h:"Count the coins, one for each rupee.",d:["coins",[1,1,1,1,1]],ch:[4,5,6],a:5},
+  {b:"try",q:"Two coins of two rupees. How many rupees?",h:"Two, and two more. Count on from two.",d:["coins",[2,"+",2]],ch:[3,4,5],a:4},
+  {b:"recap",say:"The number on a coin tells you how many rupees it is worth.",chant:["One, two, five, ten,","look and say,","the number on the coin","shows what you pay!"],d:["coins",[1,2,5,10]]}]},
+ {id:"clock",skill:"Clock",title:"Meet the clock",steps:[
+  {b:"problem",say:"Hello! I'm Twelvy. My clock has two hands, a short one and a long one. What time is it?",d:["clock",3,0]},
+  {b:"show",say:"The short hand tells the hour. When the long hand points straight up to twelve, we say o'clock. This is three o'clock!",d:["clock",3,0]},
+  {b:"show",say:"The short hand points to seven. The long hand points up to twelve. It is seven o'clock!",d:["clock",7,0]},
+  {b:"show",say:"Both hands point straight up to twelve. It is twelve o'clock!",d:["clock",12,0]},
+  {b:"try",q:"The long hand points up to twelve. What time is it?",h:"Look where the short hand points.",d:["clock",3,0],ch:[["3:00","3:00"],["6:00","6:00"],["11:00","11:00"]],a:"3:00"},
+  {b:"try",q:"What time does this clock say?",h:"The short hand shows the hour.",d:["clock",7,0],ch:[["2:00","2:00"],["7:00","7:00"],["10:00","10:00"]],a:"7:00"},
+  {b:"try",q:"Both hands point up. What time is it?",h:"Both hands on twelve: twelve o'clock.",d:["clock",12,0],ch:[["4:00","4:00"],["8:00","8:00"],["12:00","12:00"]],a:"12:00"},
+  {b:"recap",say:"The short hand tells the hour. The long hand up at twelve means o'clock!",chant:["Short hand, hour,","long hand, up high,","straight up to twelve,","o'clock! Say hi!"],d:["clock",12,0]}]}];
+// ---------- Part A wiring ----------
+EPISODES.push(...EPISODES_A);EPISODES_A.forEach(e=>EPI[e.id]=e);
+Object.assign(EPH,{coins:k=>k.startsWith("CO:"),clock:k=>k.startsWith("CK:")}); // the coin questions use CO: keys, the clock questions CK: keys
+const _epForA=epFor;epFor=function(pid,l){return pid==="coin"?((l|0)>=2?["clock","coins"]:["coins"]):_epForA(pid,l)};
+const _epDrawA=epDraw;epDraw=function(d){if(!d||(d[0]!=="coins"&&d[0]!=="clock"))return _epDrawA(d);const st=$("epStage");st.innerHTML="";
+ if(d[0]==="clock")st.innerHTML=`<div style="font-size:clamp(40px,9vw,60px)">${clockSVG(d[1],d[2])}</div>`;
+ else st.innerHTML=`<div class="ctray epco">${d[1].map(v=>typeof v==="number"?coinH(v,.9):`<span class="eq">${v}</span>`).join("")}</div>`};
+const isDnd=x=>!!(x&&(x.dnd||x.wire));
+const bigObjA=()=>{const v=$("visual");if(!v)return;const n=v.querySelectorAll(".tapme,.tk").length;const on=!!cur&&(cur.id==="count"||cur.id==="add")&&n>0&&n<=10&&!isDnd(q);v.classList.toggle("bigobj",on);$("game").classList.toggle("bigobjG",on)};
+const hearA=on=>{const b=$("sayBtn2");if(b)b.style.display=on&&q&&q.say?"":"none"};
+$("bldRow").insertAdjacentHTML("beforebegin",`<div id="hearRow"><button class="hear2" id="sayBtn2" aria-label="Hear it again" title="Hear it again">🔊</button></div>`);$("hearRow").appendChild($("bldRow")); // the pill sits left of the Build it button, in one row under the choices
+$("sayBtn2").onclick=()=>$("sayBtn").onclick();
+document.head.insertAdjacentHTML("beforeend",`<style>#visual.bigobj .tapme,#visual.bigobj .tk{font-size:clamp(56px,14vw,100px)}
+#hearRow{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin:4px 0}@media (max-height:720px){#game .ch{min-height:104px}}#hearRow #bldRow{margin:0}#game.bigobjG .ch{min-height:96px}
+.hear2{display:block;margin:0;min-width:88px;min-height:44px;border:none;border-radius:24px;background:rgba(255,255,255,.18);color:#fff;font-size:26px;cursor:pointer}
+.planet .pl{display:inline-block;width:auto;height:auto;background:rgba(20,10,60,.78);padding:2px 10px;border-radius:12px;font-size:clamp(16px,3.4vw,22px);text-shadow:none;line-height:1.2;max-width:100%;white-space:normal}
+.planet small.lvd{color:#d8ccff;letter-spacing:2px;font-size:14px}.epco{gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}.epco .eq{font-size:clamp(28px,7vw,44px)}
+.dz>div:first-child:not(.bframe):not(.bins),.bigpic{font-size:clamp(64px,18vw,110px);line-height:1.1}</style>`);
+const _epAfterQA=epAfterQ;epAfterQ=function(off){_epAfterQA(off);const on=!off&&$("game").classList.contains("on")&&cur&&round<ROUNDS;if(on&&isDnd(q))$("bldRow").innerHTML="";bigObjA();hearA(on)};
+buildIt=function(){if(!q)return;sfx.tap();const qq=q,cnt=cur.id==="count",n=cnt?1:+((qq.prompt.match(/\d+/)||[1])[0]);buildRet={q:qq};clearBlendT();
+ bN=Math.max(1,Math.min(20,n));openBlocks("build");$("tabs").style.display="none";$("bMeet").style.display="none";
+ const b2=(qq.prompt.match(/\d+\D+(\d+)/)||[])[1];if(cur.id==="add"&&b2)$("bprompt").textContent=qq.take?`Tap − ${b2} times. How many are left?`:`Tap ➕ ${b2} more. How many now?`;
+ if(cnt){const t=qq.obj?BUILD_T.replace("{o}",qq.obj):BUILD_G;$("bprompt").textContent=t;stopSpeech();say(t)}
+ const r=btn("↩️ Back to my question","big",bldReturn);r.id="bRet"};
+// tests
+if(window.__test3)__test3.epFor=epFor;
+const _phA=__test3.phrases,_scA=__test3.selfCheck;
+__test3.phrases=function(){const L=_phA.call(this);L.push([BUILD_G,"block-buddies"]);OBJ.forEach(e=>L.push([BUILD_T.replace("{o}",NAMES[e]),"block-buddies"]));return L};
+__test3.checkA=function(N){N=N||300;const bad=[],T=window.__test,P=id=>T.PLANETS.find(p=>p.id===id),near=(q,w)=>q.choices.forEach(c=>{if(Math.abs(c.val-q.ans)>3)bad.push(`${w}: ${c.val} far from ${q.ans}`)});
+ for(let l=0;l<=5;l++)for(let i=0;i<N;i++){let x=P("count").gen(l);if(!isDnd(x)){near(x,"count l"+l);if(!x.obj)bad.push("count: no obj")}
+  x=P("quick").gen(l);if(x.flash&&x.hint==="Look again! Can you see little groups?")near(x,"quick sub l"+l);
+  x=P("coin").gen(l);if(/×₹1$/.test(x.item||""))near(x,"coin count l"+l);if(/^CK:/.test(x.item)){if(l<2)bad.push("clock at level "+l);if(l<4&&/:30$/.test(x.ans))bad.push("half past at "+l);const v=x.choices.map(c=>c.val);if(v.length<3||new Set(v).size!==v.length)bad.push("clock choices")}
+  if(l<1&&/×₹1$/.test(x.item||"")&&x.ans>5)bad.push("count above 5 at level 0")}
+ const cl=l=>{let k=0;for(let i=0;i<2000;i++)if(/^CK:/.test(P("coin").gen(l).item))k++;return k/2000};const r2=cl(2),r4=cl(4);if(r2<.22||r2>.38)bad.push("clock share l2 "+r2);if(r4<.37||r4>.53)bad.push("clock share l4 "+r4);
+ if(epFor("coin",0).join()!=="coins"||epFor("coin",2).join()!=="clock,coins")bad.push("epFor coin");if(!EPH.coins("CO:₹5")||!EPH.clock("CK:3:00"))bad.push("EPH");
+ if(BUILD_T.indexOf("{o}")<0)bad.push("BUILD_T");return bad};
+__test3.selfCheck=function(N){const r=_scA.call(this,N);const a=__test3.checkA(Math.max(50,Math.min(400,(N|0)/10)));if(a.length)r.bad.checkA=a.slice(0,10);return r};
 </script>
 <script id="batch4">
 // ---------- Batch 4: install app (text-only, no voice) ----------
