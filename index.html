@@ -1687,6 +1687,191 @@ const _epStep6=epStep;epStep=function(){_epStep6();const E=EP;if(!E)return;const
  __test3.selfCheck=function(N){const r=_sc6b.call(this,N);const t=__test3.check6B();if(t.length)r.bad.check6B=t.slice(0,20);return r}}
 </script>
 
+<script id="p6c">
+// ---------- Part 6C: the Blinkle check rounds ("A guess can be wrong. Let's look!") ----------
+// DATA: every Blinkle word, clue list, result line and label lives here.
+const BK_PLANETS=["count","add","shape","pattern","coin"]; // only where she can truly check by looking (Coins and Clock: clock reading only)
+const BK_P=1/6,BK_WRONG=.25; // about 1 in 6 eligible questions; about 1 in 4 check rounds has a guess that needs a look
+const BK_TXT={ask:"Blinkle, guess!",right:"Good guess, Blinkle!",wrong:"That guess was wrong. Let's look!",thanks:"Thanks, Blinkle. Now we know!",
+ look:"👀 Let's look!",lookSay:"Let's look!",aria:"The Blinkle",leaf:"A leaf. Tap to look under it.",guess:"A... {x}?",
+ toggle:"Blinkle check rounds",toggleNote:"(now and then the Blinkle guesses from clues, then she taps Let's look and checks)",
+ report:"Check rounds: {s} seen. Blinkle guesses that needed a look: {w}. Looked before answering: {l}."};
+const BLINKLE_CLUES={
+ obj:{strawberries:["Red","Little seeds"],acorns:["Brown","Little caps"],leaves:["Orange","Crinkly"],flowers:["Yellow","Petals"],feathers:["Long","Soft"],
+  bees:["Yellow","Stripes"],mushrooms:["Red","Spots"],ladybirds:["Red","Dots"],snails:["Shells","Swirls"],stones:["Grey","Smooth"]},
+ amount:[[3,"Few"],[6,"Some"],[99,"Many"]], // n<=3 Few, 4-6 Some, 7+ Many (always the TRUE number on the picture)
+ shape:{circle:["Round","No corners","Smooth"],square:["Four sides","All the same","Four corners"],triangle:["Three sides","Three corners","Pointy"],
+  rectangle:["Four sides","Two long","Two short"],star:["Five points","Pointy","Spiky"],heart:["Two bumps","One point","Curvy"],
+  oval:["Round","Long","Like an egg"],diamond:["Four sides","Pointy","Tipped over"]},
+ pattern:{AB:["Two shapes","Turn about","It repeats"],AAB:["Two the same","Then one","It repeats"],ABB:["One","Then two the same","It repeats"],
+  ABC:["Three shapes","In order","It repeats"],AABB:["Two and two","Pairs","It repeats"]},
+ clock:{0:["Two hands","Long hand up","O'clock"],30:["Two hands","Long hand down","Half past"]}};
+const BK_NEAR={circle:"oval",oval:"circle",square:"rectangle",rectangle:"square",triangle:"diamond",diamond:"square",star:"heart",heart:"star"}; // obvious near-miss shapes
+const EP_BLINKLE={id:"blinkle",skill:"Check rounds",title:"Meet the Blinkle",steps:[
+ {b:"problem",say:"Hello! I'm Zippet. Blinkle, guess! How many acorns?",d:["blinkle",3,0]},
+ {b:"show",say:"Brown. Little caps. Few. A... three?",d:["blinkle",3,0]},
+ {b:"show",say:"Let's look! Three acorns. Good guess, Blinkle!",d:["lookfirst",3]},
+ {b:"show",say:"Leaves are in the way. Blinkle, guess! Brown. Little caps. Some. A... five?",d:["blinkle",6,1]},
+ {b:"show",say:"That guess was wrong. A guess can be wrong. Let's look!",d:["blinkle",6,1]},
+ {b:"show",say:"Six acorns! Thanks, Blinkle. Now we know!",d:["lookfirst",6]},
+ {b:"try",q:"Your turn! How many acorns?",h:"Touch each one once, and say one number for each.",d:["pile",4,0],ch:[3,4,5],a:4},
+ {b:"try",q:"A leaf is in the way. How many acorns?",h:"Let's look! Tap the leaf, then count each one.",d:["pile",5,1],ch:[4,5,6],a:5},
+ {b:"recap",say:"A guess can be wrong. Let's look!",chant:["Clues, clues,","guess it true.","A guess can be wrong,","so look at it too!"],d:["blinkle",3,0]}]};
+// ---------- state (old saves: safe defaults) ----------
+if(!S.chk||typeof S.chk!=="object"||Array.isArray(S.chk))S.chk={};["seen","wrong","looked"].forEach(k=>{S.chk[k]=Math.max(0,S.chk[k]|0)});
+if(typeof S.bkOn!=="boolean")S.bkOn=true; // parents' toggle, default ON
+let BKAUTO=!navigator.webdriver,bkSes=0,bkLast=false,bkForce=null; // automated test browsers turn check rounds on explicitly (like Meet it auto-play)
+const bkActive=()=>S.bkOn!==false&&BKAUTO;
+// ---------- C1: the Blinkle disc (pure CSS; painted art overrides it when the file exists) ----------
+function bkDisc(state,size){state=state==="lit"?"lit":"idle";size=size||56;const f=AFILE("blinkle",state);
+ if(ASTAT[f]===true)return artImg(f,BK_TXT.aria,size);artProbe(f);
+ return `<span class="art artf bk ${state}" data-art="${f}" data-size="${size}" role="img" aria-label="${BK_TXT.aria}" style="--s:${size}px"><span class="win"><i></i><i></i><i></i></span><span class="out"></span><span class="out o2"></span></span>`}
+const _art6c=art;art=function(id,pose,size){return id==="blinkle"?bkDisc(pose,size):_art6c(id,pose,size)};
+document.head.insertAdjacentHTML("beforeend",`<style>
+:root{--pewter:#A39E99;--pewter-dk:#3B3633}
+.bk{position:relative;width:var(--s);height:var(--s);border-radius:50%;background:var(--pewter);box-shadow:inset 0 -3px 0 rgba(var(--ink-rgb),.22);font-size:0!important}
+.bk .win{position:absolute;inset:24%;border-radius:50%;background:var(--pewter-dk);overflow:hidden}
+.bk .win i{position:absolute;inset:0;margin:auto;border-radius:50%;border:2px solid var(--pewter-dk);opacity:0}
+.bk .win i:nth-child(1){width:30%;height:30%}.bk .win i:nth-child(2){width:58%;height:58%}.bk .win i:nth-child(3){width:86%;height:86%}
+.bk .out{position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--blinkle);opacity:0;pointer-events:none}
+.bk.lit .win{background:var(--blinkle);box-shadow:0 0 12px 3px var(--blinkle)}.bk.lit .win i{opacity:.35;animation:bkrip 2.4s ease-out infinite}
+.bk.lit .win i:nth-child(2){animation-delay:.8s}.bk.lit .win i:nth-child(3){animation-delay:1.6s}
+.bk.lit .out{animation:bkout 2.4s ease-out infinite}.bk.lit .out.o2{animation-delay:1.2s}
+@keyframes bkrip{0%{transform:scale(.4);opacity:.5}100%{transform:scale(1.15);opacity:0}}@keyframes bkout{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.7);opacity:0}}
+@media (prefers-reduced-motion:reduce){.bk.lit .win i,.bk.lit .out{animation:none}.bk.lit .win i{opacity:.3}.bk.lit .out{opacity:.35;transform:scale(1.25)}.bk.lit .out.o2{opacity:.18;transform:scale(1.5)}}
+#bkPanel{display:none;max-width:640px;margin:2px auto 0;padding:4px 8px;border-radius:20px;background:rgba(var(--plum-rgb),.10);font-size:clamp(17px,4.2vw,24px)}#bkPanel.on{display:block}
+#bkPanel .bkrow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:0}#bkPanel .bkt{display:flex;flex-direction:column;align-items:flex-start;text-align:left;font-size:clamp(15px,3.8vw,20px);line-height:1.25;max-width:46%}
+#game.bkon #visual{margin:4px auto}@media (max-height:720px){#game.bkon #visual.bigobj .tapme,#game.bkon #visual.bigobj .tk{font-size:clamp(40px,10vw,72px)}#game.bkon #visual>svg,#game.bkon #visual>div>svg{max-height:110px}#game.bkon #prompt{margin:0}#game.bkon .ch{min-height:64px!important;padding-top:4px;padding-bottom:4px}}
+#bkPanel .bkbub{background:var(--card);color:var(--ink);border-radius:16px;padding:2px 12px;font-weight:bold;font-size:clamp(22px,5.4vw,32px);display:inline-flex;align-items:center;gap:2px}
+#bkPanel .bkbub svg{width:30px;height:30px}#bkClue{color:var(--plum)}
+#bkLook{font-size:clamp(18px,4.6vw,26px);padding:6px 14px;min-height:48px;min-width:0;margin:2px 0}
+#choices.bkwait .ch{opacity:.4;pointer-events:none;filter:saturate(.5)}
+#visual.bkpoor{position:relative;overflow:hidden}#visual.bkpoor>*:not(.bkleaf){filter:blur(2.5px) brightness(.85);opacity:.65}
+#game.bkon #visual>svg,#game.bkon #visual>div>svg{max-height:130px;width:auto}#visual.bkpoor.bkck svg{max-height:84px!important;opacity:.45;filter:blur(1.5px)}
+.bkleaf{overflow:hidden;position:absolute;top:-4%;bottom:-4%;right:-2%;width:56%;pointer-events:none;border-radius:70% 8% 70% 8%;background:var(--green);opacity:.96;box-shadow:inset 0 0 0 4px var(--green-l)}
+.bkleaf::after{content:"";position:absolute;left:12%;right:12%;top:50%;height:3px;background:var(--green-l);transform:rotate(-28deg)}
+.bkep{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.bkpile{position:relative;display:flex;flex-wrap:wrap;gap:6px;max-width:300px;justify-content:center;font-size:clamp(40px,10vw,56px);padding:4px 8px}
+.bkpile.fog>.po{filter:blur(3px) brightness(.85);opacity:.6;transition:all .6s}.bkpile>.po{transition:all .6s}.bkpile .po.hop{animation:bkhop .5s}
+@keyframes bkhop{50%{transform:translateY(-14px)}}.bkpile .bkleaf{pointer-events:auto;cursor:pointer;width:52%}
+</style>`);
+// ---------- C2/C4: when a question becomes a check round ----------
+function bkLocked(p){return !!(p&&(p.locked||(typeof p.lock==="function"&&p.lock())||(p.id==="dg"&&typeof dgUnlocked==="function"&&!dgUnlocked())))}
+const bkVals=x=>(x.choices||[]).map(c=>typeof c==="object"?c.val:c);
+const bkObj=x=>OBJ.find(o=>String(x.show||"").includes(o));
+function bkElig(p,x){if(!p||!x||!BK_PLANETS.includes(p.id))return false;if(isDnd(x)||x.make||x.take||x.flash||x.blend||x.seg||x.tf||!x.choices||x.choices.length<2)return false;
+ const v=bkVals(x);if(!v.some(y=>y===x.ans))return false;const it=String(x.item||"");
+ if(p.id==="count")return /^C:\d+$/.test(it)&&!!BLINKLE_CLUES.obj[x.obj];
+ if(p.id==="add")return /^A:\d+\+\d+$/.test(it)&&!!bkObj(x);
+ if(p.id==="shape")return /^SH:[a-z]+$/.test(it)&&x.prompt==="What shape is this?"&&!!BLINKLE_CLUES.shape[x.ans];
+ if(p.id==="pattern")return /^PT:[A-Z]+$/.test(it)&&!!BLINKLE_CLUES.pattern[it.slice(3)];
+ if(p.id==="coin")return /^CK:/.test(it)&&!!x.clock;return false}
+const bkAmt=n=>BLINKLE_CLUES.amount.find(a=>n<=a[0])[1];
+const bkClock=v=>{const [h,m]=String(v).split(":").map(Number);return {h,m}};
+function bkInfo(p,x){const v=bkVals(x),oth=v.filter(y=>y!==x.ans),pickIn=a=>{const c=a.filter(y=>oth.includes(y));return c.length?pick(c):undefined};
+ if(p.id==="count"||p.id==="add"){const name=p.id==="count"?x.obj:NAMES[bkObj(x)];return {clues:[...BLINKLE_CLUES.obj[name],bkAmt(x.ans)],
+  word:g=>NUMW[g],bub:g=>`${g}?`,near:()=>pickIn([x.ans-1,x.ans+1].filter(n=>n>0))}}
+ if(p.id==="shape")return {clues:BLINKLE_CLUES.shape[x.ans],word:g=>g,bub:g=>`${g}?`,near:()=>pickIn([BK_NEAR[x.ans]])??pickIn(oth)};
+ if(p.id==="pattern"){const seq=String(x.show).match(/fill="([^"]+)"/g)||[];return {clues:BLINKLE_CLUES.pattern[x.item.slice(3)],word:g=>TOK[+g][0]+" "+TOK[+g][1],bub:g=>`${tokSVG(+g,30)}?`,
+  near:()=>pickIn(oth.filter(o=>seq.some(f=>f.includes(TOK[+o][2]))))??pickIn(oth)}}
+ if(p.id==="coin"){const {m}=x.clock;return {clues:BLINKLE_CLUES.clock[m],word:g=>{const c=bkClock(g);return tsay(c.h,c.m)},bub:g=>`${g}?`,
+  near:()=>{const c=bkClock(x.ans);return pickIn([tfmt(c.h%12+1,c.m),tfmt((c.h+10)%12+1,c.m)])??pickIn(oth)}}}}
+const bkGuessLine=w=>BK_TXT.guess.replace("{x}",w);
+function bkDecide(x){const was=bkLast;bkLast=false;if(!x||!cur)return;const f=bkForce;
+ if(!bkElig(cur,x)||bkLocked(cur))return;
+ if(!f&&(!bkActive()||round<2||was||Math.random()>=BK_P))return;
+ const I=bkInfo(cur,x);if(!I)return;let wrong=false,g=x.ans;
+ const canWrong=bkSes>0&&(S.chk.seen|0)>=2&&!(typeof JR!=="undefined"&&JR&&JR.bkw);
+ const sh=(S.chk.wrong|0)/Math.max(1,S.chk.seen|0); // keeps the long-run share near BK_WRONG
+ if(f?f.wrong:(canWrong&&Math.random()<(sh<BK_WRONG?.6:.1))){const n=I.near();if(n!==undefined){wrong=true;g=n}}
+ const clues=I.clues.map(c=>c+"."),gl=bkGuessLine(I.word(g)),parts=[BK_TXT.ask,...clues,gl];
+ const ep=!f&&!S.ep.seen.blinkle&&EPAUTO&&!epAutoDone&&!(typeof JR!=="undefined"&&JR)&&!timeUp();
+ x.bk={guess:g,wrong,poor:wrong,looked:false,clues,gl,bub:I.bub(g),parts,say0:x.say,parts0:x.sayParts,item0:x.item,ep,round};
+ if(x.item)x.item="BK:"+x.item; // mastery keeps the TRUE answer under a BK: key; the guess is never recorded
+ x.say=ep?"":parts.join(" ");x.sayParts=parts;
+ S.chk.seen++;if(wrong){S.chk.wrong++;if(typeof JR!=="undefined"&&JR)JR.bkw=1}bkSes++;bkLast=true;bkForce=null;save()}
+const _genQ6c=genQ;genQ=function(l){const x=_genQ6c(l);bkDecide(x);return x};
+// ---------- C3: the check-round screen ----------
+$("visual").insertAdjacentHTML("beforebegin",`<div id="bkPanel" aria-live="polite"></div>`);
+function bkUI(){const P=$("bkPanel"),v=$("visual");v.classList.remove("bkpoor","bkck");$("choices").classList.remove("bkwait");
+ $("game").classList.toggle("bkon",!!(q&&q.bk));if(!q||!q.bk||!$("game").classList.contains("on")){P.classList.remove("on");P.innerHTML="";return}
+ if(q.bk.ui)return;q.bk.ui=1;const B=q.bk;
+ P.innerHTML=`<div class="bkrow"><span id="bkDW">${bkDisc("lit",44)}</span><span class="bkt"><span id="bkZ">${art("zippet","look",22)} ${BK_TXT.ask}</span><span id="bkClue">${B.clues.join(" ")}</span></span><span class="bkbub">${B.bub}</span><button class="big" id="bkLook">${BK_TXT.look}</button></div>`;P.classList.add("on");
+ if(B.poor){v.classList.add("bkpoor");if(cur.id==="coin")v.classList.add("bkck");else v.insertAdjacentHTML("beforeend",`<div class="bkleaf" aria-hidden="true"></div>`)}
+ $("choices").classList.add("bkwait");$("bkLook").onclick=bkLook;
+ if(B.ep){epAutoDone=true;playEpisode("blinkle",()=>{show("game");q.say=B.parts.join(" ");say(q.say,B.parts)},true)}}
+function bkLook(){if(!q||!q.bk||q.bk.looked)return;const B=q.bk;B.looked=true;S.chk.looked++;save();sfx.tap();
+ const v=$("visual");v.classList.remove("bkpoor","bkck");v.querySelectorAll(".bkleaf").forEach(e=>e.remove());$("choices").classList.remove("bkwait");
+ const P=$("bkPanel");$("bkDW").innerHTML=bkDisc("idle",44);const r=$("bkLook");if(r)r.remove();
+ const line=B.wrong?BK_TXT.wrong:BK_TXT.right;$("bkZ").innerHTML=art("zippet","look",22)+" "+line;q.say=B.say0;q.sayParts=B.parts0;
+ say(line+" "+B.say0,[line,...(B.parts0||[B.say0])])}
+const _next6c=next;next=function(){_next6c();bkUI()};
+const _answer6c=answer;answer=function(b,v){if(q&&q.bk&&!q.bk.looked)return;const was=locked,qq=q;_answer6c(b,v);
+ if(qq&&qq.bk&&!was&&locked&&v===qq.ans){const z=$("bkZ");if(z)z.innerHTML=art("zippet","happy",22)+" "+BK_TXT.thanks;const c=$("hint").textContent.replace(/\s*(🌟|✨)$/,"");
+  say(c+" "+BK_TXT.thanks,[c,BK_TXT.thanks]);clearTimeout(nextT);nextT=setTimeout(next,3200)}};
+const _startPlanet6c=startPlanet;startPlanet=function(p){bkLast=false;return _startPlanet6c(p)};
+// Meet it on a check round plays the Blinkle episode; back to the same question
+const _epAfterQ6c=epAfterQ;epAfterQ=function(off){_epAfterQ6c(off);if(!off&&q&&q.bk&&$("game").classList.contains("on")&&round<ROUNDS)$("meetBtn").style.display=""};
+const _meet6c=$("meetBtn").onclick;$("meetBtn").onclick=()=>{if(q&&q.bk&&round<ROUNDS&&$("game").classList.contains("on")){sfx.tap();const wasLocked=locked;
+ playEpisode("blinkle",()=>{show("game");if(wasLocked)next();else say(q.say,q.sayParts)});return}return _meet6c()};
+// ---------- C5: the Meet it episode ----------
+EPISODES.push(EP_BLINKLE);EPI.blinkle=EP_BLINKLE;SPEAKERS.blinkle="zippet";EPH.blinkle=k=>k.startsWith("BK:");
+const bkPile=(n,fog,leaf)=>`<div class="bkpile${fog?" fog":""}">${'<span class="po">🌰</span>'.repeat(n)}${leaf?`<div class="bkleaf" role="button" aria-label="${BK_TXT.leaf}"></div>`:""}</div>`;
+const _epDraw6c=epDraw;epDraw=function(d){if(!d||!["blinkle","lookfirst","pile"].includes(d[0]))return _epDraw6c(d);const st=$("epStage"),[op,n,b]=d,T=EP?EP.T:[],at=(ms,f)=>T.push(setTimeout(()=>{if(EP)f()},ms));
+ if(op==="blinkle"){st.innerHTML=`<div class="bkep">${bkDisc("lit",64)}${bkPile(n,b,false)}</div>`;return}
+ if(op==="lookfirst"){st.innerHTML=`<div class="bkep">${bkDisc("idle",64)}${bkPile(n,true,false)}</div>`;const p=st.querySelector(".bkpile"),k=[...p.querySelectorAll(".po")];
+  at(500,()=>p.classList.remove("fog"));k.forEach((e,i)=>at(1100+i*750,()=>{e.classList.remove("hop");void e.offsetWidth;e.classList.add("hop");tone(400+i*40,0,.15,"triangle");say(NUMW[i+1])}));return}
+ st.innerHTML=`<div class="bkep">${bkPile(n,false,b)}</div>`;const lf=st.querySelector(".bkleaf");if(lf)lf.onclick=()=>{lf.remove();sfx.tap();say(BK_TXT.lookSay)}};
+const _epAnim6c=epAnim;epAnim=function(d){return d&&d[0]==="lookfirst"?1100+d[1]*750+200:_epAnim6c(d)};
+// ---------- C2/C6: parents ----------
+const _drawParent6c=drawParent;drawParent=function(){_drawParent6c();const c=$("optBk");if(c)c.checked=S.bkOn!==false};
+$("optVibe").closest("label").insertAdjacentHTML("afterend",`<label><input type="checkbox" id="optBk" checked> <span id="optBkT"></span> <small id="optBkN" style="opacity:.8"></small></label>`);
+$("optBkT").textContent=BK_TXT.toggle;$("optBkN").textContent=BK_TXT.toggleNote;$("optBk").onchange=e=>{S.bkOn=e.target.checked;save()};
+const bkReport=()=>BK_TXT.report.replace("{s}",S.chk.seen|0).replace("{w}",S.chk.wrong|0).replace("{l}",S.chk.looked|0);
+const _drawProgress6c=drawProgress;drawProgress=function(){const d=_drawProgress6c();$("progBody").insertAdjacentHTML("beforeend",`<div class="parent" id="bkRep">${art("blinkle","idle",28)} ${bkReport()}</div>`);return d};
+const _progSummary6c=progSummary;progSummary=function(){return _progSummary6c()+"\n"+bkReport()};
+const _resetB36c=resetB3;resetB3=function(){_resetB36c();S.chk={seen:0,wrong:0,looked:0}};
+// ---------- tests: phrases, episodes, language, pacing ----------
+const BK_NUMS=Array.from({length:20},(_,i)=>i+1),BK_TIMES=[...BK_NUMS.slice(0,12).map(h=>tfmt(h,0)),...BK_NUMS.slice(0,12).map(h=>tfmt(h,30))];
+function bkGuesses(){return [...BK_NUMS.map(n=>NUMW[n]),...SH1,...SH2,...TOK.map(t=>t[0]+" "+t[1]),...BK_TIMES.map(t=>{const c=bkClock(t);return tsay(c.h,c.m)})].map(bkGuessLine)}
+function bkClueLines(){const B=BLINKLE_CLUES,w=[...Object.values(B.obj).flat(),...B.amount.map(a=>a[1]),...Object.values(B.shape).flat(),...Object.values(B.pattern).flat(),...Object.values(B.clock).flat()];return [...new Set(w)].map(c=>c+".")}
+const _ph6c=__test3.phrases,_ce6c=__test3.checkEpisodes,_sc6c=__test3.selfCheck;
+__test3.phrases=function(){const L=_ph6c.call(this),add=p=>L.push([p,"blinkle"]);[BK_TXT.ask,BK_TXT.right,BK_TXT.wrong,BK_TXT.thanks,BK_TXT.lookSay].forEach(add);bkClueLines().forEach(add);bkGuesses().forEach(add);
+ EP_BLINKLE.steps.filter(s=>s.d&&s.d[0]==="lookfirst").forEach(s=>{for(let i=1;i<=s.d[1];i++)add(NUMW[i])});return L};
+__test3.checkEpisodes=function(){return _ce6c.call(this).filter(m=>!/^blinkle: step \d+: unknown draw (blinkle|lookfirst|pile)$/.test(m))}; // the three new draw ops are drawn by Part 6C
+const BK_BAD=/\b(think|thinks|thought|know|knows|want|wants|feel|feels|sad|sorry|oops|silly|bad|stupid)\b/i;
+const BK_OK=["That guess was wrong.","A guess can be wrong","Thanks, Blinkle. Now we know!"]; // the user's own lines: the only allowed 'wrong' / 'know'
+function bkStrings(){return [...Object.values(BK_TXT),...bkClueLines(),...bkGuesses(),...EP_BLINKLE.steps.flatMap(s=>[s.say,s.q,s.h,...(s.chant||[])]).filter(Boolean),EP_BLINKLE.title,EP_BLINKLE.skill,
+ document.getElementById("optBkT")?.textContent||"",document.getElementById("optBkN")?.textContent||"",...[...document.querySelectorAll(".bk")].map(e=>e.getAttribute("aria-label")||"")]}
+__test3.checkLang6C=function(){const bad=[];bkStrings().forEach(s0=>{let s=String(s0);BK_OK.forEach(o=>{s=s.split(o).join(" ")});if(BK_BAD.test(s))bad.push("word: "+s0);if(/\bwrong\b/i.test(s))bad.push("wrong: "+s0)});return bad};
+__test3.check6C=function(N){N=N||4000;const bad=[],T=window.__test,P=id=>T.PLANETS.find(p=>p.id===id),keep={chk:{...S.chk},bkOn:S.bkOn,auto:BKAUTO,ses:bkSes,last:bkLast,cur,round,JR:typeof JR!=="undefined"?JR:null,epd:epAutoDone,EA:EPAUTO},cnt={check:0,wrong:0,sessions:0,elig:0};
+ const f=m=>{if(bad.length<30)bad.push(m)};__test3.checkLang6C().forEach(f);
+ Object.keys(BLINKLE_CLUES.obj).length;OBJ.forEach(e=>{if(!BLINKLE_CLUES.obj[NAMES[e]])f("no clues for "+NAMES[e])});[...SH1,...SH2].forEach(s=>{if(!BLINKLE_CLUES.shape[s])f("no clues for shape "+s)});
+ EPAUTO=false;BKAUTO=true;S.bkOn=true;
+ const sim=(sessions,adv)=>{for(let s=0;s<sessions;s++){bkSes=0;bkLast=false;JR=adv?{}:null;let advW=0;cnt.sessions++;
+  for(const pid of BK_PLANETS){cur=P(pid);for(let r=0;r<5;r++){round=r;const seen0=S.chk.seen,ses0=bkSes,last0=bkLast;const x=genQ(R(0,5));if(bkElig(cur,x)||(x.bk))cnt.elig++;if(!x.bk)continue;cnt.check++;const B=x.bk,v=bkVals(x);
+   if(r<2)f("check in first 2 questions");if(last0)f("two check rounds in a row");if(!v.some(y=>y===B.guess))f("guess not among choices "+pid);if(B.wrong!==(B.guess!==x.ans))f("wrong flag");
+   if(B.wrong&&!B.poor)f("wrong guess on a CLEAR picture");if(!B.wrong&&B.poor)f("POOR picture with a right guess");if(ses0===0&&B.wrong)f("first check round of the session wrong");if(seen0<2&&B.wrong)f("wrong in the first two ever");
+   if(!String(x.item).startsWith("BK:"))f("item not BK:");if(B.wrong){cnt.wrong++;advW++}
+   if(pid==="count"||pid==="add"){const a=B.clues[2];if(a!==bkAmt(x.ans)+".")f("amount clue "+a+" for "+x.ans)}}}
+  if(adv&&advW>1)f("more than 1 wrong in one Adventure")}};
+ S.chk={seen:0,wrong:0,looked:0};sim(Math.ceil(N/25),false);S.chk={seen:5,wrong:1,looked:5};sim(Math.ceil(N/50),true);
+ const share=cnt.wrong/Math.max(1,cnt.check);if(cnt.check<20)f("too few check rounds "+cnt.check);if(share>.4)f("wrong share "+share.toFixed(2));
+ // locked planet: never a check round
+ JR=null;S.chk={seen:5,wrong:1,looked:5};let lk=0;cur={...P("count"),lock:()=>true};for(let i=0;i<800;i++){round=2+i%3;bkLast=false;const x=genQ(R(0,5));if(x.bk)lk++}if(lk)f("check round on a locked planet "+lk);
+ // forced right and wrong rounds always valid
+ for(const pid of BK_PLANETS){cur=P(pid);for(let i=0;i<120;i++){bkForce={wrong:i%2===1};const x=genQ(pid==="coin"?R(2,5):R(0,5));bkForce=null;if(x.bk&&!bkVals(x).some(y=>y===x.bk.guess))f("forced guess not in choices "+pid)}}
+ // toggle off: zero check rounds
+ S.bkOn=false;let off=0;for(let i=0;i<N;i++){cur=P(BK_PLANETS[i%5]);round=2+i%3;bkLast=false;if(genQ(R(0,5)).bk)off++}if(off)f("toggle off but "+off+" check rounds");
+ if(!EPH.blinkle("BK:C:3")||EPH.blinkle("C:3"))f("EPH blinkle");if(!EPI.blinkle||SPEAKERS.blinkle!=="zippet")f("episode wiring");
+ const t=epTotal(EP_BLINKLE)/1000;if(t<60||t>90)f("blinkle episode "+t.toFixed(1)+" s");
+ const ch=EP_BLINKLE.steps[EP_BLINKLE.steps.length-1].chant.join(" ");if(ch!=="Clues, clues, guess it true. A guess can be wrong, so look at it too!")f("chant text");
+ Object.assign(S,{chk:keep.chk,bkOn:keep.bkOn});BKAUTO=keep.auto;bkSes=keep.ses;bkLast=keep.last;cur=keep.cur;round=keep.round;JR=keep.JR;epAutoDone=keep.epd;EPAUTO=keep.EA;save();
+ __test3.bkCnt={...cnt,share:+share.toFixed(3),epSec:+t.toFixed(1)};return bad};
+__test3.selfCheck=function(N){const r=_sc6c.call(this,N);const b=__test3.check6C(Math.max(4000,N|0));if(b.length)r.bad.check6C=b;r.cnt.check6C=__test3.bkCnt;return r};
+Object.assign(__test3,{BK_TXT,BLINKLE_CLUES,BK_PLANETS,bkDisc,bkElig,bkInfo,bkLook,bkUI,bkGuesses,bkClueLines,bkStrings,setBk:v=>{BKAUTO=!!v},forceBk:w=>{bkForce={wrong:!!w}},resetBkSession:()=>{bkSes=0;bkLast=false},get bkSes(){return bkSes}});
+</script>
+
 <script id="batch4">
 // ---------- Batch 4: install app (text-only, no voice) ----------
 (function(){let deferred=null,dismissed=false,installed=false;
