@@ -8,8 +8,8 @@ This is a paper guide. The game tracks nothing for this, and nothing goes online
 - Print the table below, or copy it into a notebook.
 
 ## The 5 sessions
-1. **Free play.** She picks anything. Note which planets she picks first and which she avoids.
-2. **Maths.** Counting, Quick Look, Adding, Tens and Ones and Block Buddies.
+1. **Free play.** She picks anything. Note which places she picks first and which she avoids.
+2. **Maths.** Counting, Quick Look, Adding, Tens and Ones and Zippet's Blocks.
 3. **Letters and sounds.** Letters, First Sounds, Blending, Trace.
 4. **Words and stories.** Words, Story Corner (try both "Read to me" and "I'll read"), Sight Word Stars.
 5. **Today's Adventure.** Then open the Progress report together (grown-ups area) and compare it with your notes.
@@ -23,7 +23,7 @@ This is a paper guide. The game tracks nothing for this, and nothing goes online
 
 ## Printable table
 
-| Session | Date | Planet / mode | Item | What she did | Hint? | Mood | Notes |
+| Session | Date | Game / mode | Item | What she did | Hint? | Mood | Notes |
 |---|---|---|---|---|---|---|---|
 | 1 |  |  |  |  |  |  |  |
 | 1 |  |  |  |  |  |  |  |
