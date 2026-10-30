@@ -993,10 +993,10 @@ document.body.insertAdjacentHTML("beforeend",`<section id="storyS" class="screen
 <div><button class="tab" id="bgCastle">🏰 Castle</button> <button class="tab" id="bgShip">🚀 Spaceship</button></div><div id="deco"></div><div style="font-size:18px;color:#ffe680;min-height:1.3em" id="dcTip">Tap a sticker to add it. Drag to move. Tap it again to take it off.</div><div id="tray"></div></section>`);
 let stCur=null,stPg=0,stT=[],stLast="",stTr=0;const stClear=()=>{stT.forEach(clearTimeout);stT=[];vHook=null};
 function storyList(){stClear();stCur=null;$("stTitle").textContent="📖 Story Corner";const b=$("stBody");stLast="Story time! Pick a story.";
- b.innerHTML=`<div><button class="tab${SP.mode==="me"?" on":""}" id="mdMe">🔊 Read to me</button> <button class="tab${SP.mode==="self"?" on":""}" id="mdSelf">👆 I'll read</button></div><div class="slist">${STORD().map(i=>{const s=STORIES[i],lk=LP.g<s.g;
-  return `<button class="scard${lk?" lock":""}" data-i="${i}"><span>${lk?"🔒":s.i}</span>${s.t}${SP.done[i]?" ⭐":""}${lk?`<br><small>Unlocks with: ${GROUPS[s.g].join(" ").toLowerCase()}</small>`:""}</button>`}).join("")}
+ b.innerHTML=`<div><button class="tab${SP.mode==="me"?" on":""}" id="mdMe">🔊 Read to me</button> <button class="tab${SP.mode==="self"?" on":""}" id="mdSelf">👆 I'll read</button></div><div class="slist">${STORD().map(i=>{const s=STORIES[i],lk=stLock(s);
+  return `<button class="scard${lk?" lock":""}" data-i="${i}"><span>${lk?"🔒":s.i}</span>${s.t}${SP.done[i]?" ⭐":""}${lk?`<br><small>Unlocks with: ${stLockTxt(s)}</small>`:""}</button>`}).join("")}
   <button class="scard" id="swGame"><span>🌟</span>Sight Word Stars</button></div>`;
- b.querySelectorAll(".scard[data-i]").forEach(c=>c.onclick=()=>{const s=STORIES[+c.dataset.i];if(LP.g<s.g){say("Learn more letter sounds to open this story!");return}sfx.tap();stCur=+c.dataset.i;stPg=0;storyPage()});
+ b.querySelectorAll(".scard[data-i]").forEach(c=>c.onclick=()=>{const s=STORIES[+c.dataset.i];if(stLock(s)){say("Learn more letter sounds to open this story!");return}sfx.tap();stCur=+c.dataset.i;stPg=0;storyPage()});
  $("swGame").onclick=()=>{sfx.tap();startPlanet(SIGHTP)};$("mdMe").onclick=()=>{SP.mode="me";saveSP();storyList()};$("mdSelf").onclick=()=>{SP.mode="self";saveSP();storyList()};say(stLast)}
 function readAlong(sent){const ws=[...$("stBody").querySelectorAll(".sent .wd")],hl=i=>ws.forEach((w,j)=>w.classList.toggle("hl",j===i)),k=slug(sent);let go=false;stT.forEach(clearTimeout);stT=[];
  const run=d=>{if(go)return;go=true;const per=Math.max(.22,(d-.25)/ws.length);ws.forEach((w,i)=>stT.push(setTimeout(()=>hl(i),(.1+i*per)*1000)));stT.push(setTimeout(()=>hl(-1),d*1000+200))};
@@ -1255,6 +1255,179 @@ __test3.checkEpisodes=function(){const bad=[],O=["problem","show","try","recap"]
 __test3.selfCheck=function(N){const r=_sc.call(this,N);const ce=__test3.checkEpisodes();if(ce.length)r.bad.checkEpisodes=ce;r.cnt["episodes"]=EPISODES.length;
  for(let i=0;i<3000;i++){const e=pick(EPISODES),s=pick(e.steps.filter(x=>x.b==="try"));const ch=shuffle(s.ch.slice());if(!ch.some(c=>(Array.isArray(c)?c[1]:c)===s.a)){(r.bad.epTry=r.bad.epTry||[]).push(e.id);break}}return r};
 Object.assign(__test3,{EPISODES,EPI,BUDDY_PERS,BUDDY_ART,epFor,epWants,epMiss,epDur,epTotal,playEpisode,epEnd,setEpAuto:v=>{EPAUTO=v},resetEpSession:()=>{epAutoDone=false}});Object.defineProperties(__test3,{EP:{get:()=>EP},buildRet:{get:()=>buildRet}}); // live getters
+</script>
+<script id="pass4">
+// ---------- Pass 4 data ----------
+// Sentence Builder: [sentence, picture, gap word, letter group]. Every word uses letters from groups 0..g or is in SIGHT.slice(0,SIGHT_AT[g]) (checkSent)
+const SENT=[["Ants nap.","🐜😴","Ants",0],["Tap the tin.","👆🥫","tin",0],["The ant spins.","🐜🌀","ant",0],["I tap a pan.","👧🍳","pan",0],
+ ["A dog digs.","🐶⛏️","dog",1],["Mom naps.","👩😴","Mom",1],["My pig sits.","🐷","pig",1],["We go to Dad.","👨","Dad",1],["I got a map.","🗺️","map",1],
+ ["The cat is red.","🐱🔴","cat",2],["A duck runs.","🦆","duck",2],["She cut a cake.","👧🎂","cake",2],["He got a cup.","👦🥤","cup",2],["The sun is up.","☀️","sun",2],
+ ["A hen naps.","🐔😴","hen",3],["The frog hops.","🐸","frog",3],["Bob has a hat.","👦🎩","hat",3],["They like the bus.","🚌","bus",3],["A bat flaps.","🦇","bat",3],
+ ["The fox is wet.","🦊💧","fox",4],["A van zips.","🚐💨","van",4],["Max has a box.","👦📦","box",4],["A yak is big.","🐃","yak",4],["The web is wet.","🕸️💧","web",4]];
+// Sound Pairs (sh ch th ng): not letter GROUPS; unlocks when group 4 is complete. [word, emoji]
+const DGW={sh:[["ship","🚢"],["shop","🏪"],["shell","🐚"],["fish","🐟"],["shoe","👟"],["sheep","🐑"],["shark","🦈"],["shower","🚿"],["dish","🍽️"],["shirt","👕"]],
+ ch:[["chick","🐤"],["cheese","🧀"],["chair","🪑"],["cherry","🍒"],["chips","🍟"],["chess","♟️"],["peach","🍑"],["lunch","🍱"],["beach","🏖️"],["church","⛪"]],
+ th:[["thumb","👍"],["three","3️⃣"],["bath","🛁"],["teeth","🦷"],["think","🤔"],["thread","🧵"],["earth","🌍"],["mouth","👄"],["thunder","⛈️"],["thermometer","🌡️"]],
+ ng:[["ring","💍"],["king","🤴"],["song","🎵"],["sing","🎤"],["strong","💪"],["bang","💥"],["spring","🌸"],["penguin","🐧"],["lightning","⚡"],["tongue","👅"]]};
+const DGS=["sh","ch","th","ng"],DPH={sh:"shh",ch:"chuh",th:"thh",ng:"nng"}; // spoken respellings (device voice now; future clips)
+const DGB=[["ship",["sh","i","p"]],["shop",["sh","o","p"]],["fish",["f","i","sh"]],["dish",["d","i","sh"]],["shell",["sh","e","ll"]],["chips",["ch","i","p","s"]],["chess",["ch","e","ss"]],
+ ["bath",["b","a","th"]],["ring",["r","i","ng"]],["king",["k","i","ng"]],["song",["s","o","ng"]],["sing",["s","i","ng"]],["bang",["b","a","ng"]]]; // blend with the pair: the pair is one tile
+const DG_STORIES=[
+ {t:"The Ship Shop",g:4,dg:1,i:"🚢",p:[["👩🏪","Shan has a shop."],["🚢","It has a big ship."],["👦👩","Chen chats with Shan."],["👦🚢","Chen gets the ship!"],["👩🎵","Shan sings a song."]],
+  q:["What did Chen get?",[["🚢 the ship","ship"],["🐚 a shell","shell"],["🐟 a fish","fish"]],"ship"],q2:["What did Shan do at the end?",[["🎵 sing","sing"],["😴 sleep","sleep"],["🏃 run","run"]],"sing"]},
+ {t:"Fish and Chips",g:4,dg:1,i:"🍟",p:[["👧👨","Beth and Dad get lunch."],["🐟🍟","They have fish and chips."],["👧🍟","Beth has a thin chip."],["🐦🍟","A gull gets the chip!"],["👨🍟","Dad gets Beth a big chip."],["👧😄","Then Beth sings!"]],
+  q:["What did they have?",[["🐟🍟 fish and chips","fishchips"],["🍕 pizza","pizza"],["🎂 cake","cake"]],"fishchips"],q2:["Who got the thin chip?",[["🐦 a gull","gull"],["🐶 a dog","dog"],["👨 Dad","dad"]],"gull"]}];
+// Coins and Clock: plain circles with numerals (no real coin designs)
+const COINS=[[1,"#cfd6dc",34],[2,"#b9c6cf",38],[5,"#f0c95a",42],[10,"#e9b949",46]];
+// Guiding story: one line per Adventure; every 4 Adventures a new home sticker for the castle
+const BEATS4=["The Buddies found the bridge home. Thank you, princess!","One more Buddy is safe at home!","The Buddies can see their home from here!","You lit the way home for the Buddies!","The Buddies built a road home together!","The Buddies are waving from their windows!"];
+const HOME_ST=["🏡","🌉","🛸","🏘️","🗼","🎠"];
+const OFF4={"Sentences":"Write a short sentence on a note (A cat naps.) and let her read it, then act it out together.","Sound pairs":"Hunt for sh, ch, th and ng on signs and packets: shop, chips, three, king.",
+ "Coins & Clock":"Let her pay for something small with ₹1, ₹2 and ₹5 coins, and say the time together on the hour: it's three o'clock!"};
+// ---------- Pass 4 A: drag-or-tap answer formats (build, sort, order, fill-the-gap) ----------
+// Every item is a ≥96 px button: drag it (pointer events, touch-action:none only on items) OR tap it, then tap the frame/bin/slot. A wrong drop snaps back and gives the kind hint through answer(); no fail state.
+document.head.insertAdjacentHTML("beforeend",`<style>.dz{display:flex;flex-direction:column;align-items:center;gap:12px;font-size:clamp(22px,5vw,34px)}
+.dit{min-width:96px;min-height:64px;padding:8px 14px;border-radius:18px;border:none;background:#fff;color:#5a1d8c;font:inherit;font-weight:bold;font-size:clamp(24px,6vw,36px);box-shadow:0 6px 0 #c9b6ff;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;display:inline-flex;align-items:center;justify-content:center}
+.dit.sel{outline:5px solid #ffe680}.dit.drag{position:relative;z-index:50;opacity:.9;pointer-events:none}.dit.pile{min-width:96px;min-height:96px;font-size:52px}.dit.placed{cursor:default;box-shadow:0 3px 0 #c9b6ff}
+.dtray{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}.dtg{border:4px dashed #ffe680;border-radius:18px;min-width:96px;min-height:64px;display:inline-flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;padding:6px;background:rgba(255,255,255,.08);box-sizing:border-box}
+.dtg.over{background:rgba(255,230,128,.3)}.bins{display:flex;gap:12px;justify-content:center;width:100%;max-width:460px}.bins .dtg{flex:1;min-height:130px;flex-direction:column}.bins .bl{font-size:clamp(18px,4.6vw,26px);color:#ffe680}
+.bins .in{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}.bins .dit.placed{min-width:56px;min-height:48px;font-size:26px;padding:4px 8px}
+.bframe{min-width:300px;min-height:124px}.bframe .cells{display:grid;grid-template-columns:repeat(5,48px);gap:6px}.bframe .cell{width:48px;height:48px;border-radius:8px;background:rgba(255,255,255,.15)}.bframe .cell.f{background:#3fd16a;box-shadow:inset -4px -4px 0 rgba(0,0,0,.15)}
+.sline{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;max-width:520px}.sline .w{font-size:clamp(26px,6.4vw,40px);font-weight:bold}.sline .dtg .dit.placed{box-shadow:none}
+.coin{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;font-weight:bold;color:#3a2a00;border:3px solid rgba(0,0,0,.25);box-shadow:inset -4px -4px 0 rgba(0,0,0,.15);margin:3px;vertical-align:middle;font-family:inherit}
+.clk{width:min(56vw,210px);height:min(56vw,210px)}.ctray{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;max-width:420px}</style>`);
+function dndWire(){const qq=q,v=$("visual");let sel=null,drag=null,hov=null;
+ const unsel=()=>{if(sel)sel.classList.remove("sel");sel=null},unhov=()=>{if(hov)hov.classList.remove("over");hov=null};
+ const drop=(it,tg)=>{if(q!==qq||locked)return;const pile=it.classList.contains("pile"),r=qq.drop(it,tg);if(!(pile&&r))unsel();
+  if(r===false){it.classList.remove("bounce");void it.offsetWidth;it.classList.add("bounce");answer(document.createElement("button"),"✗");return} // snap back + kind hint (same logic as a wrong tap)
+  if(r&&qq.complete()){unsel();answer(tg,qq.ans)}};
+ v.onpointerdown=e=>{if(q!==qq)return;const it=e.target.closest(".dit");if(!it||it.dataset.done||locked)return;drag={it,x:e.clientX,y:e.clientY,m:false,id:e.pointerId};try{it.setPointerCapture(e.pointerId)}catch(_){}};
+ v.onpointermove=e=>{if(!drag||e.pointerId!==drag.id)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(!drag.m&&Math.hypot(dx,dy)>10){drag.m=true;drag.it.classList.add("drag")}
+  if(drag.m){drag.it.style.transform=`translate(${dx}px,${dy}px)`;const el=document.elementFromPoint(e.clientX,e.clientY),tg=el&&el.closest(".dtg");if(tg!==hov){unhov();if(tg){hov=tg;tg.classList.add("over")}}}};
+ v.onpointerup=e=>{if(!drag||e.pointerId!==drag.id)return;const d=drag;drag=null;unhov();
+  if(!d.m){if(sel===d.it){unsel();return}unsel();sel=d.it;sel.classList.add("sel");if(d.it.dataset.say)say(d.it.dataset.say);return} // tap: pick it up
+  const el=document.elementFromPoint(e.clientX,e.clientY),tg=el&&el.closest(".dtg");d.it.classList.remove("drag");d.it.style.transform="";if(tg)drop(d.it,tg)}; // dropped outside: just snaps back
+ v.onpointercancel=()=>{if(drag){drag.it.classList.remove("drag");drag.it.style.transform="";drag=null}unhov()};
+ v.onclick=e=>{if(q!==qq||locked)return;if(e.target.closest(".dit:not(.placed)"))return;const f=e.target.closest(".cell.f");if(f&&qq.undo){qq.undo();return}const tg=e.target.closest(".dtg");if(tg&&sel)drop(sel,tg)}}
+// Counting: build N (drag or tap blocks into a ten frame)
+function buildQ(l){const max=[5,7,10,10][Math.min(l,3)],n=R(1,max);let k=0;
+ const cells=()=>[...$("visual").querySelectorAll(".bframe .cell")];
+ return {prompt:`Build ${n}!`,show:`<div class="dz"><div class="bframe dtg" data-t="f" aria-label="frame"><div class="cells">${'<div class="cell"></div>'.repeat(10)}</div></div><div class="dtray"><button class="dit pile" aria-label="block">🧱</button></div></div>`,
+  say:`Build ${NUMW[n]}! Drag the blocks into the frame.`,sayParts:[`Build ${NUMW[n]}!`,"Drag the blocks into the frame."],choices:[],ans:n,item:`C:${n}`,cheer:"count",dnd:"build",n,
+  hint:`Count each block as you put it in. Stop at ${NUMW[n]}!`,hintParts:["Count each block as you put it in.",`Stop at ${NUMW[n]}!`],
+  drop(){if(k>=n)return false;cells()[k].classList.add("f");k++;tone(400+k*40,0,.15,"triangle");say(NUMW[k]);return true},complete:()=>k===n,
+  undo(){if(k>0&&k<n){k--;cells()[k].classList.remove("f");say(k?NUMW[k]:"zero")}},wire:dndWire}}
+// More or Less: sort numbers into two bins (more/less than a number; odd/even from level 3)
+function sortQ(l){const oe=l>=3&&Math.random()<.5;let nums,bins,key,p=0;
+ if(oe){do nums=shuffle([...Array(10)].map((_,i)=>i+1)).slice(0,4);while(!nums.some(x=>x%2)||!nums.some(x=>!(x%2)));bins=[["even","👯 Even"],["odd","☝️ Odd"]];key=x=>x%2?"odd":"even"}
+ else{const max=[6,8,10,10,15,20][l];p=R(3,max-2);const lo=[...Array(p-1)].map((_,i)=>i+1),hi=[...Array(max-p)].map((_,i)=>p+1+i);let b=R(1,Math.min(3,hi.length));const a=Math.min(4-b,lo.length);b=Math.min(4-a,hi.length);
+  nums=shuffle([...shuffle(lo).slice(0,a),...shuffle(hi).slice(0,b)]);bins=[["more",`⬆️ More than ${p}`],["less",`⬇️ Less than ${p}`]];key=x=>x>p?"more":"less"}
+ let placed=0;
+ return {prompt:oe?"Even or odd?":"Sort the numbers!",show:`<div class="dz"><div class="bins">${bins.map(([t,lab])=>`<div class="dtg" data-t="${t}"><div class="bl">${lab}</div><div class="in"></div></div>`).join("")}</div><div class="dtray">${nums.map(x=>`<button class="dit" data-v="${x}" data-say="${NUMW[x]}">${x}</button>`).join("")}</div></div>`,
+  say:oe?"Put each number in the right box: even, or odd?":`Sort the numbers! More than ${NUMW[p]}, or less than ${NUMW[p]}?`,choices:[],ans:"sorted",item:oe?"ML:oddeven":"ML:sort",cheer:"more",dnd:"sort",v:{nums,bins:bins.map(b=>b[0]),key},
+  hint:oe?"Even numbers make pairs. Odd numbers have one left over.":`Is it more or less than ${NUMW[p]}? Count up to check!`,
+  drop(it,tg){if(key(+it.dataset.v)!==tg.dataset.t)return false;tg.querySelector(".in").appendChild(it);it.classList.add("placed");it.dataset.done=1;placed++;tone(500+placed*60,0,.15,"triangle");return true},complete:()=>placed===nums.length,wire:dndWire}}
+// ---------- B: Sentence Builder (order + fill the gap) ----------
+const sWords=s=>s.replace(/[.!?]$/,"").split(" "),capT=(w,first)=>first?w[0].toUpperCase()+w.slice(1):w.toLowerCase();
+function sentGen(l){const pool=SENT.filter(s=>s[3]<=(LP.g|0)),nw=pool.filter(s=>s[3]===(LP.g|0)),s=pick(nw.length&&Math.random()<.6?nw:pool),W=sWords(s[0]),end=s[0].slice(-1);
+ const order=l>=2&&(l===2||Math.random()<.6);let filled=0;
+ if(order){let t=W.map((_,i)=>i);for(let g=0;g<12&&t.every((x,i)=>x===i);g++)t=shuffle(t);const tiles=t.map(i=>W[i]);
+  return {prompt:"Make the sentence!",show:`<div class="dz"><div>${s[1]}</div><div class="sline">${W.map((w,i)=>`<div class="dtg slot" data-w="${w}" data-i="${i}">${i+1}</div>`).join("")}<span class="w">${end}</span></div><div class="dtray">${tiles.map(w=>`<button class="dit" data-v="${w}" data-say="${w.toLowerCase()==="i"?"I":w.toLowerCase()}">${w}</button>`).join("")}</div></div>`,
+   say:`Make the sentence: ${s[0]}`,sayParts:["Make the sentence:",s[0]],choices:[],ans:"ok",item:`SB:${s[0]}`,dnd:"order",v:{W,tiles,s},
+   hint:`Say it slowly and put the words in order: ${s[0]}`,hintParts:["Say it slowly and put the words in order:",s[0]],
+   drop(it,tg){if(tg.dataset.f||tg.dataset.w!==it.dataset.v)return false;tg.textContent="";tg.appendChild(it);it.classList.add("placed");it.dataset.done=1;tg.dataset.f=1;filled++;say(it.dataset.say);return true},complete:()=>filled===W.length,wire:dndWire}}
+ const gi=W.findIndex(w=>w===s[2]),gap=W[gi],lw=x=>x.toLowerCase();
+ let ds=shuffle(pool.map(x=>x[2]).filter(w=>lw(w)!==lw(gap)&&!lw(w).startsWith(lw(gap))&&!lw(gap).startsWith(lw(w))));if(ds.length<2)ds=ds.concat(shuffle(SENT.map(x=>x[2]).filter(w=>lw(w)!==lw(gap)&&!lw(w).startsWith(lw(gap))&&!lw(gap).startsWith(lw(w))&&!ds.includes(w))));
+ ds=[...new Set(ds.map(w=>capT(w,gi===0)))].slice(0,l<1?2:2);const tiles=shuffle([gap,...ds]),before=W.slice(0,gi).join(" "),after=W.slice(gi+1).join(" ")+end;
+ return {prompt:"Which word is missing?",show:`<div class="dz"><div>${s[1]}</div><div class="sline">${W.map((w,i)=>i===gi?`<div class="dtg gap" data-w="${w}">?</div>`:`<span class="w">${w}</span>`).join(" ")}<span class="w">${end}</span></div><div class="dtray">${tiles.map(w=>`<button class="dit" data-v="${w}" data-say="${w.toLowerCase()}">${w}</button>`).join("")}</div></div>`,
+  say:`Look at the picture. ${s[0]} Which word is missing?`,sayParts:["Look at the picture.",s[0],"Which word is missing?"],choices:[],ans:"ok",item:`SB:${s[0]}`,dnd:"fill",v:{W,tiles,gap,s},
+  hint:"Look at the picture. Tap a word to hear it, then put it in the gap.",
+  drop(it,tg){if(tg.dataset.w!==it.dataset.v)return false;tg.textContent="";tg.appendChild(it);it.classList.add("placed");it.dataset.done=1;filled=1;say(s[0]);return true},complete:()=>filled===1,wire:dndWire}}
+function checkSent(){const bad=[];SENT.forEach(([t,e,gw,g])=>{const ok=new Set(GROUPS.slice(0,g+1).join("").toLowerCase()),sw=new Set(SIGHT.slice(0,SIGHT_AT[g]).map(w=>w.toLowerCase())),ws=words(t);
+ if(ws.length<2||ws.length>4)bad.push(`${t}: ${ws.length} words`);if(!ws.includes(gw))bad.push(`${t}: gap ${gw} not in sentence`);
+ ws.forEach(w=>{const l=w.toLowerCase();if(!sw.has(l)&&![...l].every(c=>ok.has(c)))bad.push(`${t} (group ${g}): "${w}"`);if(RUDE.has(l))bad.push(`${t}: rude`)})});return bad}
+// ---------- C: Sound Pairs (sh ch th ng) ----------
+const dgHas=(w,d)=>w.includes(d)||(d==="ng"&&w.includes("nk")); // nk also has the ng sound
+function dgUnlocked(){if(LP.dg)return true;const G=GROUPS[GROUPS.length-1];if((LP.g|0)>=GROUPS.length-1&&(G.every(L=>((LP.per[L]||{}).ok|0)>=2)||G.reduce((s,L)=>s+((LP.per[L]||{}).n|0),0)>=30)){LP.dg=1;saveLP();return true}return false} // group 4 complete: every letter right first time twice, or 30 tries on the group
+function dgGen(l){const k=pick([["hear"],["hear","pair"],["hear","pair","blend"],["pair","blend","hear"]][Math.min(l,3)]),d=pick(DGS),nc=l<1?3:3;
+ if(k==="hear"){const w=pick(DGW[d]),ds=shuffle(BLEND.filter(b=>b[1]!==w[1]&&!DGS.some(x=>dgHas(b[0],x)))).slice(0,nc-1),ch=shuffle([w,...ds]);
+  return {prompt:`Which one has ${d}?`,show:`<div class="seq">${d}</div>`,say:`${DPH[d]}. Which picture has the sound ${DPH[d]}?`,sayParts:[DPH[d],`Which picture has the sound ${DPH[d]}?`],
+   choices:ch.map(x=>({label:x[1],val:x[0]})),ans:w[0],item:`DG:${d}:${w[0]}`,v:{d,k},hint:`Say each word slowly. Which one has ${DPH[d]}?`,hintParts:["Say each word slowly.",`Which one has ${DPH[d]}?`]}}
+ if(k==="pair"){const w=pick(DGW[d].filter(x=>x[0].length>=4&&x[0].length<=6)),ps=[...new Set([...Array(w[0].length-1)].map((_,i)=>w[0].slice(i,i+2)))],ds=shuffle(ps.filter(p=>!DGS.includes(p))).slice(0,2);
+  return {prompt:`Find ${d}!`,show:`<div>${w[1]}</div><div style="font-size:.72em;white-space:nowrap">${tiles(w[0])}</div>`,say:`${w[0]}. Which two letters say ${DPH[d]}?`,sayParts:[w[0],`Which two letters say ${DPH[d]}?`],
+   choices:shuffle([d,...ds]).map(x=>({label:x,val:x})),ans:d,item:`DGP:${w[0]}`,v:{d,k,w:w[0]},hint:`Two letters can make one sound. Look for ${d}!`}}
+ const b=pick(DGB),em=x=>Object.values(DGW).flat().find(y=>y[0]===x)[1],ds=shuffle(DGB.filter(x=>x!==b&&em(x[0])!==em(b[0]))).slice(0,2),snd=b[1].map(u=>DPH[u]||PHON[u[0].toUpperCase()]);
+ return {prompt:"Listen and blend!",show:`<div>${b[1].map((u,i)=>`<span class="ltile" data-i="${i}">${u}</span>`).join("")}</div>`,say:`Listen: ${snd.join("... ")}... What word is it?`,sayParts:["Listen:",...snd,"What word is it?"],
+  choices:shuffle([b,...ds]).map(x=>({label:em(x[0]),val:x[0]})),ans:b[0],blend:snd,item:`DGB:${b[0]}`,v:{k:"blend"},hint:`Listen: ${snd.join("... ")}. Put them together!`,hintParts:["Listen:",...snd,"Put them together!"]}}
+// ---------- D: Coins and Clock ----------
+const coinH=(v,s=1)=>{const c=COINS.find(x=>x[0]===v);return `<span class="coin" style="width:${Math.round(c[2]*2*s)}px;height:${Math.round(c[2]*2*s)}px;background:${c[1]};font-size:${Math.round(c[2]*.62*s)}px">₹${v}</span>`};
+function clockSVG(h,m){const a=((h%12)+m/60)*Math.PI/6,b=m*Math.PI/30,P=(r,t)=>`${(100+r*Math.sin(t)).toFixed(1)}" y2="${(100-r*Math.cos(t)).toFixed(1)}`;
+ const num=[...Array(12)].map((_,i)=>{const t=(i+1)*Math.PI/6;return `<text x="${(100+76*Math.sin(t)).toFixed(1)}" y="${(100-76*Math.cos(t)+8).toFixed(1)}" font-size="22" font-weight="bold" text-anchor="middle" fill="#3b1a6b">${i+1}</text>`}).join("");
+ return `<svg class="clk" viewBox="0 0 200 200" role="img" aria-label="clock"><circle cx="100" cy="100" r="95" fill="#fff" stroke="#7c3aed" stroke-width="6"/>${num}<line class="mh" x1="100" y1="100" x2="${P(82,b)}" stroke="#ff3b8b" stroke-width="4" stroke-linecap="round"/><line class="hh" x1="100" y1="100" x2="${P(46,a)}" stroke="#3b1a6b" stroke-width="13" stroke-linecap="round"/><circle cx="100" cy="100" r="8" fill="#3b1a6b"/></svg>`} // short thick hour hand, long thin minute hand
+const tfmt=(h,m)=>`${h}:${m?"30":"00"}`,tsay=(h,m)=>m?`half past ${NUMW[h]}`:`${NUMW[h]} o'clock`;
+function coinSet(sum){for(let g=0;g<200;g++){const n=R(2,4),c=[];let s=0;for(let i=0;i<n;i++){const v=pick([1,2,5].filter(x=>x<=sum-s-(n-i-1)));if(!v)break;c.push(v);s+=v}if(c.length===n&&s===sum)return c.sort((x,y)=>y-x)}return null}
+function coinGen(l){if(Math.random()<.45){const half=l>=4&&Math.random()<.5,h=R(1,12),m=half?30:0,ans=tfmt(h,m),nx=h%12+1;
+  const cand=half?[tfmt(nx,30),tfmt(h,0),tfmt(nx,0)]:shuffle([...Array(12)].map((_,i)=>i+1).filter(x=>x!==h)).map(x=>tfmt(x,0));const ch=shuffle([ans,...shuffle(cand).slice(0,l<1?2:3)]);
+  return {prompt:"What time is it?",show:clockSVG(h,m),say:"What time is it?",choices:ch.map(x=>({label:x,val:x})),ans,item:`CK:${ans}`,clock:{h,m},
+   hint:m?`The long hand points down to six: half past. The short hand is just past ${NUMW[h]}. ${tsay(h,m)}!`:`The long hand points up to twelve. The short hand points to ${NUMW[h]}. ${tsay(h,m)}!`,
+   hintParts:m?["The long hand points down to six: half past.",`The short hand is just past ${NUMW[h]}.`,`${tsay(h,m)}!`]:["The long hand points up to twelve.",`The short hand points to ${NUMW[h]}.`,`${tsay(h,m)}!`]}}
+ const k=pick([["name"],["name","count"],["count","count","name"],["make","count"],["make","make","count"],["make"]][l]);
+ if(k==="name"){const v=pick([1,2,5,10]),ch=shuffle([v,...shuffle([1,2,5,10].filter(x=>x!==v)).slice(0,l<1?2:3)]);
+  return {prompt:`Find ₹${v}!`,show:`<div class="seq">₹${v}</div>`,say:`Find the ${NUMW[v]} rupee coin!`,choices:ch.map(x=>({label:coinH(x,.8),val:x})),ans:v,item:`CO:₹${v}`,hint:`Look for the number ${NUMW[v]} on the coin.`}}
+ if(k==="count"){const max=l<2?5:10,n=R(2,max);return {prompt:"How many rupees?",show:`<div class="ctray">${Array(n).fill(`<span class="tapme">${coinH(1,.7)}</span>`).join("")}</div>`,say:"How many rupees? Count the one rupee coins!",sayParts:["How many rupees?","Count the one rupee coins!"],
+  choices:numOpts(n,1,max,l<1?3:4),ans:n,item:`CO:${n}×₹1`,hint:"Tap each coin and count. Each one is one rupee!"}}
+ const T=l<4?5:l===4?pick([5,10]):10,sums=[T,...shuffle([T-1,T+1,T-2,T+2].filter(x=>x>=2)).slice(0,2)],sets=sums.map(s=>[s,coinSet(s)]);
+ return {prompt:`Make ₹${T}!`,show:`<div class="seq">₹${T}</div>`,say:`Which coins make ${NUMW[T]} rupees?`,choices:shuffle(sets).map(([s,c])=>({label:`<span class="ctray">${c.map(v=>coinH(v,.6)).join("")}</span>`,val:s,small:true})),ans:T,item:`CO:make ₹${T}`,v:{sets},
+  hint:"Start with the biggest coin, then count on with the others.",hintParts:["Start with the biggest coin,","then count on with the others."]}}
+// ---------- Pass 4 wiring: planets, unlock, report, Adventure story, tests ----------
+PLANETS.push({id:"sent",name:"Sentence Builder",icon:"📝",col:"#22c55e",maxl:3,gen:sentGen},{id:"dg",name:"Sound Pairs",icon:"🔤",col:"#a855f7",maxl:3,gen:dgGen},{id:"coin",name:"Coins and Clock",icon:"🕒",col:"#f59e0b",maxl:MAXL,gen:coinGen});
+{const pc=PLANETS.find(p=>p.id==="count"),pm=PLANETS.find(p=>p.id==="more"),cg=pc.gen,mg=pm.gen;
+ pc.gen=function(l){return l<=3&&Math.random()<.3?buildQ(l):cg.call(this,l)}; // 30% build-N (levels 0-3, up to 10)
+ pm.gen=function(l){return Math.random()<.3?sortQ(l):mg.call(this,l)}} // 30% sort into two bins
+MATHS.push("coin");ENG.push("sent","dg");Object.assign(MP,{more:MP.more||["ML:"],sent:["SB:"],dg:["DG"],coin:["CO:","CK:"]}); // MP.more was missing (planetScore needs it)
+Object.assign(AREA_OF,{sent:"Sentences",dg:"Sound pairs",coin:"Coins & Clock",more:AREA_OF.more||"Counting"});AREAS.push(["Sentences",["SB:"],"w"],["Sound pairs",["DG"],"w"],["Coins & Clock",["CO:","CK:"],"fact"]);Object.assign(OFF,OFF4);
+STORIES.push(...DG_STORIES); // appended: old SP.done indexes unchanged
+if(typeof S.adv!=="number")S.adv=0; // Adventures finished (home pieces); old saves: 0
+const stLock=s=>s.dg?!dgUnlocked():LP.g<s.g,stLockTxt=s=>s.dg?"Sound Pairs planet":GROUPS[s.g].join(" ").toLowerCase();
+const _checkStories=checkStories;checkStories=function(){const bad=_checkStories();STORIES.forEach(s=>{if(s.dg)return;const sw=new Set(SIGHT.map(w=>w.toLowerCase()));
+ s.p.forEach(([,t])=>words(t).forEach(w=>{const l=w.toLowerCase();if(!sw.has(l)&&DGS.some(d=>l.includes(d)))bad.push(`${s.t}: sound-pair word "${w}" outside the Sound Pairs stories`)}))});return bad};__test3.checkStories=checkStories;
+// Sound Pairs lock on the map, in startPlanet and in the Adventure picker
+const DG_LOCK="Learn all your letter sounds to open Sound Pairs!";
+const _drawMap4=drawMap;drawMap=function(){_drawMap4();const b=[...document.querySelectorAll("#map .planet")].find(x=>x.textContent.includes("Sound Pairs"));if(b&&!dgUnlocked()){b.classList.add("lock");b.style.filter="grayscale(.7)";b.innerHTML="<span>🔒</span>Sound Pairs";b.onclick=()=>{sfx.tap();say(DG_LOCK)}}};
+const _startPlanet4=startPlanet;startPlanet=function(p){if(p&&p.id==="dg"&&!dgUnlocked()){say(DG_LOCK);return}return _startPlanet4(p)};
+const _pickJourney=pickJourney;pickJourney=function(now){const i=ENG.indexOf("dg"),lk=!dgUnlocked()&&i>=0;if(lk)ENG.splice(i,1);try{return _pickJourney(now)}finally{if(lk)ENG.splice(i,0,"dg")}};__test3.pickJourney=pickJourney;
+// E: guiding story. Every Adventure: one story line + one home piece; 4 pieces = a new home sticker (into the castle tray via S.badges)
+const _jcard4=journeyCard;journeyCard=function(html,btns){if(/visits three planets today/.test(html))html+=`<div class="card">🧱🏠 Help the Block Buddies get home!</div>`;
+ let beat=null;if(/What an adventure/.test(html)){S.adv=(S.adv|0)+1;const pc=(S.adv-1)%4+1,st=pc===4?HOME_ST[(S.adv/4-1)%HOME_ST.length]:null;if(st)S.badges=(S.badges||[]).concat(st).slice(-200);save();
+  beat=BEATS4[(S.adv-1)%BEATS4.length];html+=`<div class="card" id="beat4">🧱 ${beat}<br>🧩 Home piece ${pc} of 4${st?` · New home sticker: <span style="font-size:48px">${st}</span>`:""}</div>`}
+ _jcard4(html,btns);if(beat){const c=$("beat4");setTimeout(()=>{if(c.isConnected&&$("game").classList.contains("on"))say(beat)},7000)}}; // spoken after the end-card line
+// tests: phrases + self-check
+function p4Check(q){const e=[];if(!q)return["no question"];
+ if(q.dnd==="build"&&!(q.n>=1&&q.n<=10))e.push("build n");
+ if(q.dnd==="sort"){const {nums,bins,key}=q.v,ks=nums.map(key);if(nums.length!==4||new Set(nums).size!==4)e.push("sort items");if(!bins.every(b=>ks.includes(b)))e.push("sort: empty bin");if(ks.some(k=>!bins.includes(k)))e.push("sort key")}
+ if(q.dnd==="order"){const {W,tiles}=q.v;if(W.length<2||W.length>4)e.push("order length");if(tiles.slice().sort().join()!==W.slice().sort().join())e.push("order tiles");if(tiles.join()===W.join())e.push("order not shuffled")}
+ if(q.dnd==="fill"){const {tiles,gap}=q.v;if(tiles.length<3)e.push("fill: fewer than 3");if(!tiles.includes(gap))e.push("fill: no answer");if(new Set(tiles.map(x=>x.toLowerCase())).size!==tiles.length)e.push("fill: duplicate");if(tiles.some(t=>RUDE.has(t.toLowerCase())))e.push("rude")}
+ if(q.clock){const {h,m}=q.clock,vals=q.choices.map(c=>c.val);if(q.ans!==tfmt(h,m))e.push("clock answer");if(new Set(vals).size!==vals.length||vals.length<3)e.push("clock choices");if(!m&&vals.some(v=>v.endsWith(":30")))e.push("half past too early");
+  const g=(c)=>{const r=new RegExp(`class="${c}" x1="100" y1="100" x2="([\\d.]+)" y2="([\\d.]+)"`).exec(q.show);return (Math.atan2(+r[1]-100,100-+r[2])*180/Math.PI+360)%360};
+  const dh=Math.abs(g("hh")-((h%12)*30+m/2)),dm=Math.abs(g("mh")-m*6);if(Math.min(dh,360-dh)>1||Math.min(dm,360-dm)>1)e.push("hands do not match")}
+ if(q.v&&q.v.sets)q.v.sets.forEach(([s,c])=>{if(!c||c.reduce((a,b)=>a+b,0)!==s)e.push("coin set sum")});
+ if(q.v&&q.v.k==="hear"){if(!dgHas(q.ans,q.v.d))e.push("dg answer");q.choices.forEach(c=>{if(c.val!==q.ans&&DGS.some(x=>dgHas(c.val,x)))e.push("dg distractor "+c.val)})}
+ if(q.v&&q.v.k==="pair"){if(!q.v.w.includes(q.ans))e.push("pair answer");q.choices.forEach(c=>{if(c.val!==q.ans&&DGS.includes(c.val))e.push("pair distractor "+c.val)})}
+ if(q.dnd){if(q.choices.length)e.push("dnd with choices");if(!q.drop||!q.complete||!q.wire)e.push("dnd hooks")}else if(q.choices.length<3&&q.item!=="MS:heavy")e.push("fewer than 3 choices");return e}
+const _ph4=__test3.phrases,_sc4=__test3.selfCheck;
+__test3.phrases=function(){const L=_ph4.call(this),add=(p,c)=>L.push([p,c]),T=window.__test,g0=LP.g;
+ for(let g=0;g<GROUPS.length;g++){T.setLP({g});for(const id of ["sent","dg","coin"]){const p=PLANETS.find(x=>x.id===id);for(let l=0;l<=(p.maxl??3);l++)for(let i=0;i<600;i++){const q=p.gen(l);
+  if(q.sayParts)q.sayParts.forEach(x=>add(x,id));else add(q.say,id);if(q.hintParts)q.hintParts.forEach(x=>add(x,id));else add(q.hint,id)}}}T.setLP({g:g0});
+ SENT.forEach(s=>{add(s[0],"sent");words(s[0]).forEach(w=>add(w==="I"?"I":w.toLowerCase(),"sent"))});Object.values(DGW).flat().forEach(w=>add(w[0],"dg"));Object.values(DPH).forEach(x=>add(x,"dg-sounds"));
+ for(let h=1;h<=12;h++){add(tsay(h,0)+"!","coin");add(tsay(h,30)+"!","coin")}DG_STORIES.forEach(s=>{s.p.forEach(([,t])=>{add(t,"story-sentences");words(t).forEach(w=>add(w.toLowerCase(),"story-words"))});add(s.q[0],"story-sentences");add(s.q2[0],"story-sentences")});
+ [...BEATS4,DG_LOCK,"zero"].forEach(x=>add(x,"ui"));for(const n of [1,2,3,4,5,6,7,8,9,10]){add(`Build ${NUMW[n]}!`,"count");add(`Stop at ${NUMW[n]}!`,"count")}["Drag the blocks into the frame.","Count each block as you put it in."].forEach(x=>add(x,"count"));
+ for(let p=1;p<=20;p++)add(NUMW[p],"more");return L};
+__test3.selfCheck=function(N){const r=_sc4.call(this,N),T=window.__test,f=(k,m)=>{const a=r.bad[k]=r.bad[k]||[];if(a.length<6)a.push(m)};
+ for(let g=0;g<GROUPS.length;g++){T.setLP({g});for(const id of ["count","more","sent","dg","coin"]){const p=PLANETS.find(x=>x.id===id);T.setCur(p);for(let l=0;l<=MAXL;l++){const lc=Math.min(l,p.maxl??3);let n=0;
+  for(let i=0;i<Math.max(300,N/20)&&i<3000;i++){let q;try{q=p.gen(lc)}catch(e){f(id,[g,l,"throw",String(e)]);break}n++;const e=p4Check(q);if(e.length)f(id+"@p4",[g,l,e.join("; "),q.prompt])}r.cnt[`p4:${id}@g${g}:${l}`]=n}}}
+ T.setLP({g:4});const cs=checkSent();if(cs.length)r.bad.checkSent=cs;const ck=checkStories();if(ck.length)r.bad.checkStories=ck;
+ Object.values(DGW).forEach((ws,i)=>ws.forEach(([w])=>{if(!dgHas(w,DGS[i]))f("dgWords",w)}));if(new Set(Object.values(DGW).flat().map(x=>x[1])).size!==Object.values(DGW).flat().length)f("dgWords","duplicate emoji");return r};
+Object.assign(__test3,{SENT,DGW,DGS,DPH,DGB,DG_STORIES,COINS,BEATS4,HOME_ST,buildQ,sortQ,sentGen,dgGen,coinGen,clockSVG,checkSent,dgUnlocked,p4Check,stLock,tfmt});
 </script>
 <script id="batch4">
 // ---------- Batch 4: install app (text-only, no voice) ----------
