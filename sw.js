@@ -7,7 +7,7 @@
 // or passed straight to the network if not cached yet; only full 200 responses are ever cached.
 // v5 (Batch 2): Quick Look planet, take away, per-item review, sparkles, Royal Collection II, parent progress report, 94 new clips.
 // v6 (Batch 3): Tens and Ones, Shape Sparkles, Pattern Parade, Measure Magic, Trace, Story Corner, journey, decorate, 441 new clips.
-const CACHE = 'space-princess-v15';
+const CACHE = 'space-princess-v16';
 
 // Core files, relative so it works under a GitHub Pages subpath like /space-princess/
 const CORE = [
@@ -18,6 +18,8 @@ const CORE = [
   './icons/icon-512.png',
   './icons/icon-maskable-512.png',
   './icons/apple-touch-icon.png',
+  './fonts/Andika-Regular.woff2', // optional: may be missing; each file is cached on its own and a missing one is skipped (catch below)
+  './fonts/Andika-Bold.woff2',
   './audio/index.json'  // list of recorded clips; regenerate with tools/make-audio-index.sh
 ];
 
