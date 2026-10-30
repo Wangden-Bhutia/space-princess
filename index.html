@@ -116,19 +116,13 @@ button,.tk,.tc{touch-action:manipulation} /* zoom is allowed again; this only st
 .bud{display:inline-flex;flex-direction:column;align-items:center;cursor:pointer;touch-action:none;transition:transform .35s}
 .bud .cols{display:flex;align-items:flex-end;gap:3px}
 .bud .col{display:flex;flex-direction:column-reverse;position:relative}
-.blk{width:var(--b,44px);height:var(--b,44px);border-radius:7px;border:3px solid rgba(var(--ink-rgb),.25);box-shadow:inset -5px -5px 0 rgba(var(--ink-rgb),.15),inset 4px 4px 0 rgba(var(--card-rgb),.35);position:relative}
+.blk{width:var(--b,44px);height:var(--b,44px);border-radius:7px;border:2px solid var(--ink);box-shadow:inset -5px -5px 0 rgba(var(--ink-rgb),.15),inset 4px 4px 0 rgba(var(--card-rgb),.35);position:relative}
 .blk.new{animation:pop .45s}
 .blk.hop{animation:hop .45s}
 .blk.cut{cursor:pointer}
 .blk.cut:hover{outline:4px dashed var(--card)}
 @keyframes pop{0%{transform:scale(0) translateY(-60px)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
 @keyframes hop{50%{transform:translateY(-22px) scale(1.1)}}
-.face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
-.eyes{display:flex;gap:calc(var(--b,44px)*.18)}
-.eye{width:calc(var(--b,44px)*.26);height:calc(var(--b,44px)*.3);background:var(--card);border-radius:50%;position:relative;border:2px solid var(--ink)}
-.eye:after{content:"";position:absolute;width:45%;height:50%;background:var(--ink);border-radius:50%;left:30%;top:30%}
-.mouth{width:calc(var(--b,44px)*.4);height:calc(var(--b,44px)*.18);border:3px solid var(--ink);border-top:none;border-radius:0 0 30px 30px;margin-top:2px;background:var(--rose)}
-.crown{position:absolute;top:calc(var(--b,44px)*-.62);left:50%;transform:translateX(-50%);font-size:calc(var(--b,44px)*.6)}
 .bname{font-size:clamp(16px,3vw,22px);margin-top:6px;background:rgba(var(--ink-rgb),.3);border-radius:14px;padding:4px 10px;white-space:nowrap}
 .bnum{font-size:clamp(30px,6vw,48px);font-weight:bold;text-shadow:0 0 10px var(--ink)}
 .bud.drag{transition:none;z-index:5;filter:drop-shadow(0 0 16px var(--card))}
@@ -347,7 +341,7 @@ function opts(ans,pool,n){const s=new Set([ans]);let guard=0;while(s.size<n&&gua
 function numOpts(ans,lo,hi,n){const p=[];for(let i=lo;i<=hi;i++)p.push(i);return opts(ans,p,n)}
 function nearOpts(ans,max,n){let lo=Math.max(1,ans-3),hi=Math.min(max,ans+3);while(hi-lo+1<n&&(lo>1||hi<max)){if(hi<max)hi++;else lo--}return numOpts(ans,lo,hi,n)} // Part A: wrong answers within 3 of the answer (widened only if fewer than n values fit)
 const OBJ=["🍓","🌰","🍂","🌼","🪶","🐝","🍄","🐞","🐌","🪨"];
-const NAMES={"🍓":"strawberries","🌰":"acorns","🍂":"leaves","🌼":"flowers","🪶":"feathers","🐝":"bees","🍄":"mushrooms","🐞":"ladybirds","🐌":"snails","🪨":"stones"};
+const NAMES={"🍓":"strawberries","🌰":"nuts","🍂":"leaves","🌼":"flowers","🪶":"feathers","🐝":"bees","🍄":"mushrooms","🐞":"ladybirds","🐌":"snails","🪨":"stones"};
 const rep=(e,n)=>Array(n).fill(e).join("");
 const tapRep=(e,n)=>Array(n).fill(`<span class="tapme">${e}</span>`).join(""); // tappable count-along objects
 const tap5=(e,n)=>{let h="";for(let i=0;i<n;i+=5)h+=`<span class="five">${tapRep(e,Math.min(5,n-i))}</span>`;return h}; // rows of five with a gap after each five
@@ -638,12 +632,11 @@ $("homeBtn").onclick=()=>{show("start");showDays()};$("backBtn").onclick=()=>{sh
 $("sayBtn").onclick=()=>q&&say(q.say,q.sayParts);
 $("resetBtn").onclick=()=>{if(confirm("Reset progress? This clears stars, sparkles, gems, stickers, days played, letter progress, skill progress and play time. Settings stay.")){S.stars=0;S.half=0;S.gems=0;S.level={};S.days=[];S.bonusDay="";S.tms=0;S.pm={};LP=freshLP();saveLP();M={};saveM();if(typeof resetB3==="function")resetB3();save();showDays();drawParent();alert("Progress reset: stars, sparkles, gems, stickers, days played, letter progress, skill progress and play time are cleared.")}};
 // ---------- Block Buddies (number characters) ----------
-const BCOL=["var(--grey)","var(--red)","var(--accent)","var(--gold)","var(--green)","var(--blue)","var(--plum-l)","rainbow","var(--rose)","var(--grey)","var(--card)"];
-const RAIN=["var(--red)","var(--accent)","var(--gold)","var(--green)","var(--blue)","var(--blue-dk)","var(--plum-l)"];
+const BCOL=["var(--grey)",...Array(9).fill("var(--gold)"),"var(--accent)"]; // 6E: 1-9 honey gold, a full ten tangerine (no rainbow, no colour order)
 const BNAME=[]; // 6B: the invented Buddy names are gone; a block is just "Block 1", "Block 2" ...
 const bname=n=>`Block ${n}`+(BNAME[n]?` · ${BNAME[n]}`:"");
 function blkColor(n,i){ // i = 0-based index within its column-group
- if(n>10)return null; if(n===7)return RAIN[i%7]; return BCOL[n]}
+ if(n>10)return null; return BCOL[n]}
 function makeBlock(col,isNew){const b=document.createElement("div");b.className="blk"+(isNew?" new":"");b.style.background=col;return b}
 // build a buddy element for n (0..20). opts:{size,label,cut,newLast}
 function buddy(n,o={}){const d=document.createElement("div");d.className="bud";d.dataset.n=n;
@@ -654,9 +647,6 @@ function buddy(n,o={}){const d=document.createElement("div");d.className="bud";d
  groups.forEach(([cnt,colN])=>{const c=document.createElement("div");c.className="col"+(n>10&&colN===10?" rod":"");if(n>10&&colN===10){const t=document.createElement("div");t.className="rodlab";t.textContent="10";c.appendChild(t)}
   for(let i=0;i<cnt;i++){const b=makeBlock(n>10&&colN===10?BCOL[10]:blkColor(colN,i),o.newLast&&idx===n-1);b.dataset.i=idx++;if(o.cut&&idx<n)b.classList.add("cut");c.appendChild(b)}
   cols.appendChild(c);if(!tallest)tallest=c});
- if(n>0){const top=tallest.lastChild;const f=document.createElement("div");f.className="face";
-  f.innerHTML=`<div class="eyes"><div class="eye"></div><div class="eye"></div></div><div class="mouth" style="width:calc(var(--b)*${(.3+Math.min(n,10)*.03).toFixed(2)})"></div>`;
-  top.appendChild(f);if(n===10||n===20){const cr=document.createElement("div");cr.className="crown";cr.textContent="👑";top.appendChild(cr)}}
  if(o.label!==false){const l=document.createElement("div");l.className="bnum";l.textContent=n;d.appendChild(l);
   const nm=document.createElement("div");nm.className="bname";nm.textContent=n?bname(n):"Empty!";d.appendChild(nm)}
  return d}
@@ -681,7 +671,7 @@ function setMode(m){if(bTimeUp())return;bmode=m;document.querySelectorAll("#tabs
  ({build:modeBuild,join:modeJoin,split:modeSplit,make:modeMake,oddeven:modeOdd,stairs:modeStairs,...(typeof BEXTRA!=="undefined"?BEXTRA:{})})[m]()}
 function btn(txt,cls,fn){const b=document.createElement("button");b.className=cls;b.innerHTML=txt;b.onclick=fn;$("bctl").appendChild(b);return b}
 // --- Build ---
-function drawBuild(isNew){const st=$("stage");st.innerHTML="";const b=buddy(bN,{newLast:isNew});b.onclick=()=>{if(bN>0)countAlong(b,()=>say(`${NUMW[bN]}! I'm ${bname(bN)}!`));else say("zero! all gone")};st.appendChild(b)}
+function drawBuild(isNew){const st=$("stage");st.innerHTML="";const b=buddy(bN,{newLast:isNew});b.onclick=()=>{if(bN>0)countAlong(b,()=>say(`${NUMW[bN]}!`));else say("zero! all gone")};st.appendChild(b)}
 function modeBuild(){bN=Math.max(1,Math.min(bN,20));drawBuild();$("bprompt").textContent="Tap ➕ to add a block!";bspeak("Tap the plus button to add a block! Tap me to count along.");
  btn("−","rb minus",()=>{if(bN>0){bN--;tone(500,0,.1);drawBuild();say(bN?NUMW[bN]:"zero! all gone")}});
  btn("+","rb",()=>{if(bN<20){bN++;tone(500+bN*30,0,.15,"triangle");drawBuild(true);say(NUMW[bN]);if(bN===10){burst($("stage"));say("Ten! A tall tower of ten!")}}else say("Twenty is my biggest!")});}
@@ -719,10 +709,10 @@ function modeMake(){if(bTimeUp())return;resetStage();makeDone=false;bTarget=R(1,
  btn("−","rb minus",()=>{if(bN>0){bN--;tone(500,0,.1);draw();say(NUMW[bN]||"zero");check()}});
  btn("+","rb",()=>{if(bN<20){bN++;tone(500+bN*30,0,.15,"triangle");draw(true);say(NUMW[bN]);setTimeout(check,500)}})}
 // --- Odd / even pairs ---
-function modeOdd(){if(bTimeUp())return;const n=R(2,bMax());const st=resetStage();const col=n===7?null:BCOL[Math.min(n,10)];
+function modeOdd(){if(bTimeUp())return;const n=R(2,bMax());const st=resetStage();const col=BCOL[Math.min(n,10)];
  $("bprompt").textContent=`Can ${n} make pairs?`;bspeak(`Here is ${NUMW[n]}. Tap Pair up to give every block a partner!`);
  const row=document.createElement("div");row.style.cssText="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:600px";row.style.setProperty("--b","48px");
- for(let i=0;i<n;i++)row.appendChild(makeBlock(col||RAIN[i%7],true));st.appendChild(row);
+ for(let i=0;i<n;i++)row.appendChild(makeBlock(col,true));st.appendChild(row);
  btn("👯 Pair up!","big alt",()=>{const g=document.createElement("div");g.className="pairs";g.style.setProperty("--b","48px");
   [...row.children].forEach((b,i)=>{b.classList.remove("new");b.classList.add("hop");if(n%2&&i===n-1){b.style.gridColumn="1";b.style.outline="4px dashed var(--gold)"}g.appendChild(b)});
   st.innerHTML="";st.appendChild(g);$("bctl").innerHTML="";bspeak("Is it odd or even?");$("bprompt").textContent="Odd or even?";
@@ -971,7 +961,7 @@ const STORIES=[
  {t:"The Dog Digs",g:1,i:"🐶",p:[["🐶","It is a dog."],["🐶⛏️","The dog digs and digs."],["🐶🟫","The dog got a mat."],["🐶","The dog sits on the mat."],["😴🐶","The dog naps on the mat."]],q:["What is it?",[["🐶 a dog","dog"],["🐷 a pig","pig"],["🐐 a goat","goat"]],"dog"],q2:["Where did the dog nap?",[["🟫 on the mat","mat"],["🍲 in a pot","pot"],["🗺️ on a map","map"]],"mat"]},
  {t:"Moose and the Map",g:1,i:"🗺️",p:[["🫎🗺️","Moose got a map."],["🫎✋","Moose and I go."],["🏞️","We go to a pond."],["🐶","I spot a dog."],["🐶🏖️","The dog digs in the sand."],["✋🐶","We pat the dog."]],q:["What did I spot?",[["🐶 a dog","dog"],["🐷 a pig","pig"],["🐐 a goat","goat"]],"dog"],q2:["Where did we go?",[["🏞️ to a pond","pond"],["⛰️ to the top","top"],["🌙 to the moon","moon"]],"pond"]},
  {t:"The Red Cup",g:2,i:"🥤",p:[["🐻🥤","Bear got a red cup."],["🥤","The cup is on the rug."],["🐶","The pup runs to the rug."],["🐶🥤","The pup tips the cup!"],["🐻","No, pup, no!"],["🐻🐶","Bear pets the pup."],["🐻💖","Bear is not cross."]],q:["What did the pup tip?",[["🥤 the cup","cup"],["🖊️ a pen","pen"],["🥫 a tin","tin"]],"cup"],q2:["What colour was the cup?",[["🔴 red","red"],["🌸 pink","pink"],["🟢 green","green"]],"red"]},
- {t:"Elephant in the Sun",g:2,i:"🐘",p:[["🐘","Elephant is in the sun."],["🐘☀️","She sits in the sun."],["🐘💨","Elephant can run."],["🐘🐶","Elephant runs to the pup."],["🐘🐶","She pats the pup."],["🐶😊","The pup is snug."]],q:["Who is in the sun?",[["🐘 Elephant","elephant"],["🐻 Bear","bear"],["🫎 Moose","moose"]],"elephant"],q2:["Who did Elephant pat?",[["🐶 the pup","pup"],["🦆 a duck","duck"],["🐱 a cat","cat"]],"pup"]},
+ {t:"Elephant in the Sun",g:2,i:"🐘",p:[["🐘","Elephant is in the sun."],["🐘☀️","He sits in the sun."],["🐘💨","Elephant can run."],["🐘🐶","Elephant runs to the pup."],["🐘🐶","He pats the pup."],["🐶😊","The pup is snug."]],q:["Who is in the sun?",[["🐘 Elephant","elephant"],["🐻 Bear","bear"],["🫎 Moose","moose"]],"elephant"],q2:["Who did Elephant pat?",[["🐶 the pup","pup"],["🦆 a duck","duck"],["🐱 a cat","cat"]],"pup"]},
  {t:"Fog on the Log",g:3,i:"🪵",p:[["🪵","A log is on the hill."],["🐶🪵","A dog sits on the log."],["🌫️","Fog, fog, fog!"],["🐸🪵","A frog hops on the log."],["🐶🐸","Dog and frog in the fog."],["☀️","The fog lifts. Hop, hop!"]],q:["Who hops on the log?",[["🐸 a frog","frog"],["🐶 a dog","dog"],["🐻 Bear","bear"]],"frog"],q2:["What was on the hill?",[["🪵 a log","log"],["🛖 a hut","hut"],["🌳 an elm","elm"]],"log"]},
  {t:"Moose and the Hat",g:3,i:"🎩",p:[["🫎🎩","Moose has a big hat."],["🫎🐶","Moose and the pup go up."],["💨🎩","The hat flips off!"],["🐶","The pup runs and gets it."],["🐶🎩","Let me help!"],["🫎😊","Moose is glad."]],q:["What flipped off?",[["🎩 the hat","hat"],["🥤 a cup","cup"],["🥫 a tin","tin"]],"hat"],q2:["Who got the hat?",[["🐶 the pup","pup"],["🫎 Moose","moose"],["🐻 Bear","bear"]],"pup"]},
  {t:"Zippet Gets Wet",g:4,i:"🐶",p:[["🐶","Zippet is a pup."],["🐶💨","Zippet zips up the hill."],["🐘","Elephant is in a puddle."],["🐘💦","Elephant gets wet."],["🐶🐘","Zippet gets wet as well!"],["🐶🐘😄","Zippet and Elephant jump."]],q:["Where was Elephant?",[["💦 in a puddle","puddle"],["🪵 on a log","log"],["🛖 in a hut","hut"]],"puddle"],q2:["Who got wet as well?",[["🐶 Zippet","zippet"],["🐻 Bear","bear"],["🫎 Moose","moose"]],"zippet"]},
@@ -1126,11 +1116,11 @@ const EPISODES=[
   {b:"recap",say:"Take some away, then count what is left.",chant:["Float away,","wave goodbye,","count what's left,","reach for the sky!"],d:["bud",3]}]},
  {id:"maketen",skill:"Make ten",title:"Fill up to ten",steps:[
   {b:"problem",say:"I'm Moose, and I stand tall! Bear has eight blocks. How many more make ten?",d:["pair",8,2]},
-  {b:"show",say:"Eight and two make ten! Ten stands tall with a crown.",d:["ten",8]},
+  {b:"show",say:"Eight and two make ten! Ten stands tall.",d:["ten",8]},
   {b:"try",q:"Bear has seven. How many more make ten?",h:"Count on from seven until you reach ten.",d:["tenq",7],ch:[2,3,4],a:3},
   {b:"try",q:"Elephant has six. How many more make ten?",h:"Six, then count on to ten: seven, eight, nine, ten.",d:["tenq",6],ch:[3,4,5],a:4},
   {b:"try",q:"Zippet has nine. How many more make ten?",h:"Nine is one away from ten.",d:["tenq",9],ch:[1,2,3],a:1},
-  {b:"recap",say:"Fill up to ten first. Ten is a friendly number!",chant:["Ten stands tall,","crown on top,","fill up to ten,","and then we stop!"],d:["bud",10]}]},
+  {b:"recap",say:"Fill up to ten first. Ten is a friendly number!",chant:["Ten stands tall,","full to the top,","fill up to ten,","and then we stop!"],d:["bud",10]}]},
  {id:"teen",skill:"Teen numbers",title:"One ten and some ones",steps:[
   {b:"problem",say:"I'm Elephant, and I have thirteen blocks. That is one ten and some ones. Can you see the ten?",d:["bud",13]},
   {b:"show",say:"Here is one ten, and three ones. One ten and three ones make thirteen!",d:["teen",13]},
@@ -1155,8 +1145,6 @@ const EPISODES=[
   {b:"recap",say:"Say each sound, then slide them together fast!",chant:["Sounds far apart,","slide, slide, slide,","push them together,","the word's inside!"],d:["tiles","sun"]}]}];
 const EPI=Object.fromEntries(EPISODES.map(e=>[e.id,e]));
 // Block Buddies cast: one line each, tied to the number (even Buddies pair up, odd Buddies have a spare, Ten stands tall)
-const BUDDY_PERS=["","The smallest one, and it always goes first!","Two blocks make a perfect pair!","A pair, and one spare to share!","Two pairs, all holding hands!","Like the fingers on one hand, with one spare!","Three happy pairs!","Seven colours, and one spare block!","Four pairs, and nobody left out!","Just one away from ten, with one spare!","Ten stands tall, like a tower!",
- "A ten and one spare!","A ten and a pair!","A ten and three, so one is spare!","A ten and two pairs!","A ten and five, with one spare!","A ten and three pairs!","A ten and seven, so one is spare!","A ten and four pairs!","One away from twenty, with one spare!","Two tall tens, side by side!"];
 // BUDDY_ART: empty by default. To use a picture for a Buddy, put the file in icons/ (e.g. icons/buddy7.png), set BUDDY_ART[7]="icons/buddy7.png",
 // and ADD THE FILE TO THE PRECACHE LIST IN sw.js (and bump its cache name) so it works offline. If the image fails to load, the drawn Buddy is shown.
 const BUDDY_ART={};
@@ -1196,7 +1184,7 @@ function epDraw(d){const st=$("epStage");st.innerHTML="";const T=EP?EP.T:[],at=(
  else if(op==="ten"){st.append(bud(a),plus(),bud(10-a));at(1500,()=>{st.innerHTML="";const x=bud(10);st.appendChild(x);burst(x);say("ten!")})}
  else if(op==="tenq"){const q=document.createElement("div");q.className="eq";q.textContent="+ ?";st.append(bud(a),q)}
  else if(op==="teen"){const x=bud(a),k=blks(x);st.appendChild(x);k.slice(0,10).forEach(e=>e.classList.add("held"));at(100,()=>say("ten"));k.slice(10).forEach((e,i)=>at(1200+i*750,()=>hop(e,10+i,NUMW[11+i])))}
- else if(op==="pairs"){const w=document.createElement("div");w.className="prs";st.appendChild(w);const col=a===7?BCOL[5]:BCOL[Math.min(a,10)]||BCOL[3];
+ else if(op==="pairs"){const w=document.createElement("div");w.className="prs";st.appendChild(w);const col=BCOL[Math.min(a,10)]||BCOL[3];
   for(let i=0;i<Math.ceil(a/2);i++){const c=document.createElement("div");c.className="pc"+(i*2+1===a?" spare":"");for(let j=0;j<2&&i*2+j<a;j++)c.appendChild(makeBlock(col));if(b)w.appendChild(c);else{c.style.visibility="hidden";w.appendChild(c);at(i*500,()=>{c.style.visibility="";tone(500+i*60,0,.15,"triangle")})}}}
  else if(op==="tiles"||op==="blend"){const w=document.createElement("div");w.className="eptiles";const ts=[...a].map(c=>{const t=document.createElement("span");t.className="ltile";t.textContent=c;t.onclick=()=>{t.classList.add("lit");say(PHON[c.toUpperCase()])};w.appendChild(t);return t});st.appendChild(w);
   if(op==="blend"){ts.forEach((t,i)=>at(i*1000,()=>{t.classList.add("lit");say(PHON[a[i].toUpperCase()])}));at(a.length*1000,()=>{w.style.gap="24px";say([...a].map(c=>PHON[c.toUpperCase()]).join(", "))});at(a.length*1000+1600,()=>{w.style.gap="0px";say(a)})}}}
@@ -1246,8 +1234,7 @@ function buildIt(){if(!q)return;sfx.tap();const qq=q,n=cur.id==="count"?qq.ans:+
 function bldReturn(){if(!buildRet)return;const qq=buildRet.q;buildRet=null;stopCount();$("tabs").style.display="";$("bMeet").style.display="";show("game");if(q===qq&&!locked)say(q.say,q.sayParts)}
 const _bBack=$("bBack").onclick;$("bBack").onclick=()=>{if(buildRet)return bldReturn();_bBack()};
 const _setMode=setMode;setMode=function(m){if(m==="oddeven"&&!buildRet&&epAuto(["evenodd"],()=>openBlocks("oddeven")))return;$("bMeet").style.display=buildRet||!epFor(m).length?"none":"";return _setMode(m)};
-// cast: personality line after the count-along; optional art
-const _drawBuild=drawBuild;drawBuild=function(isNew){_drawBuild(isNew);const b=$("stage").firstChild;if(b&&bN>0)b.onclick=()=>{const n=bN;countAlong(b,()=>{const t=`${NUMW[n]}!`;say(t+" "+BUDDY_PERS[n],[t,BUDDY_PERS[n]]);$("bhint").textContent=`${bname(n)}: ${BUDDY_PERS[n]}`})}};
+// optional art
 const _buddy=buddy;buddy=function(n,o){const d=_buddy(n,o);const src=BUDDY_ART[n];if(src){const im=document.createElement("img");im.className="bart";im.alt=bname(n);const sz=parseFloat(d.style.getPropertyValue("--b"))||44;
  im.style.height=sz*Math.min(Math.max(n,1),10)+"px";im.style.maxWidth=sz*4+"px";im.onerror=()=>{im.remove();d.classList.remove("art")};d.classList.add("art");d.insertBefore(im,d.firstChild);im.src=src}return d}; // same height as the drawn tower; drawn Buddy if the file fails
 // report + reset
@@ -1259,7 +1246,7 @@ const _resetB3=typeof resetB3==="function"?resetB3:()=>{};resetB3=function(){_re
 // tests: phrases + self-check
 const _ph=__test3.phrases,_sc=__test3.selfCheck;
 __test3.phrases=function(){const L=_ph.call(this),add=(p,c)=>L.push([p,c]);EPISODES.forEach(e=>e.steps.forEach(s=>{[s.say,s.q,s.h,...(s.chant||[])].forEach(x=>x&&add(x,"episodes"));if(s.say&&s.chant)add([s.say,...s.chant].join(" "),"episodes");if(s.q)add(s.q+" "+s.h,"episodes")}));
- add("Look, this one!","episodes");["ten!","ten"].forEach(x=>add(x,"episodes"));for(let n=1;n<=20;n++){add(BUDDY_PERS[n],"block-buddies");add(`${NUMW[n]}! ${BUDDY_PERS[n]}`,"block-buddies")}
+ add("Look, this one!","episodes");["ten!","ten"].forEach(x=>add(x,"episodes"));for(let n=1;n<=20;n++)add(`${NUMW[n]}!`,"block-buddies");
  ["sun","cat","pig","map"].forEach(w=>add([...w].map(c=>PHON[c.toUpperCase()]).join(", "),"episodes"));return L};
 __test3.checkEpisodes=function(){const bad=[],O=["problem","show","try","recap"];EPISODES.forEach(e=>{const f=m=>bad.push(`${e.id}: ${m}`);if(!e.id||!e.skill||!e.title||!Array.isArray(e.steps))return f("missing fields");
  const bs=e.steps.map(s=>s.b),ix=bs.map(b=>O.indexOf(b));if(ix.some(i=>i<0))f("unknown beat");if(ix.some((v,i)=>i&&v<ix[i-1]))f("beats out of order");O.forEach(b=>{if(!bs.includes(b))f("no "+b)});
@@ -1268,11 +1255,10 @@ __test3.checkEpisodes=function(){const bad=[],O=["problem","show","try","recap"]
  tr.forEach((s,i)=>{const v=s.ch.map(c=>Array.isArray(c)?c[1]:c);if(v.length<3)f(`try ${i}: fewer than 3 choices`);if(!v.some(x=>x===s.a))f(`try ${i}: answer not in choices`);if(new Set(v.map(String)).size!==v.length)f(`try ${i}: duplicate choice`);if(!s.h)f(`try ${i}: no hint`);
   if(v.some(x=>RUDE.has(String(x).toLowerCase())))f(`try ${i}: rude word`)});
  e.steps.forEach((s,i)=>{if(s.b!=="try"&&!s.say)f(`step ${i}: no line`);if(s.d&&!["bud","count","pair","join","on","take","taken","ten","tenq","teen","pairs","tiles","blend","coins","clock"].includes(s.d[0]))f(`step ${i}: unknown draw ${s.d[0]}`)});
- const t=epTotal(e)/1000;if(t<60||t>90)f(`length ${t.toFixed(1)} s (want 60-90)`)});
- for(let n=1;n<=20;n++)if(!BUDDY_PERS[n])bad.push(`buddy ${n}: no line`);return bad};
+ const t=epTotal(e)/1000;if(t<60||t>90)f(`length ${t.toFixed(1)} s (want 60-90)`)});return bad};
 __test3.selfCheck=function(N){const r=_sc.call(this,N);const ce=__test3.checkEpisodes();if(ce.length)r.bad.checkEpisodes=ce;r.cnt["episodes"]=EPISODES.length;
  for(let i=0;i<3000;i++){const e=pick(EPISODES),s=pick(e.steps.filter(x=>x.b==="try"));const ch=shuffle(s.ch.slice());if(!ch.some(c=>(Array.isArray(c)?c[1]:c)===s.a)){(r.bad.epTry=r.bad.epTry||[]).push(e.id);break}}return r};
-Object.assign(__test3,{EPISODES,EPI,BUDDY_PERS,BUDDY_ART,epFor,epWants,epMiss,epDur,epTotal,playEpisode,epEnd,setEpAuto:v=>{EPAUTO=v},resetEpSession:()=>{epAutoDone=false}});Object.defineProperties(__test3,{EP:{get:()=>EP},buildRet:{get:()=>buildRet}}); // live getters
+Object.assign(__test3,{EPISODES,EPI,BUDDY_ART,epFor,epWants,epMiss,epDur,epTotal,playEpisode,epEnd,setEpAuto:v=>{EPAUTO=v},resetEpSession:()=>{epAutoDone=false}});Object.defineProperties(__test3,{EP:{get:()=>EP},buildRet:{get:()=>buildRet}}); // live getters
 </script>
 <script id="pass4">
 // ---------- Pass 4 data ----------
@@ -1351,7 +1337,7 @@ function sentGen(l){const pool=SENT.filter(s=>s[3]<=(LP.g|0)),nw=pool.filter(s=>
  const order=l>=2&&(l===2||Math.random()<.6);let filled=0;
  if(order){let t=W.map((_,i)=>i);for(let g=0;g<12&&t.every((x,i)=>x===i);g++)t=shuffle(t);const tiles=t.map(i=>W[i]);
   return {prompt:"Make the sentence!",show:`<div class="dz"><div>${s[1]}</div><div class="sline">${W.map((w,i)=>`<div class="dtg slot" data-w="${w}" data-i="${i}">${i+1}</div>`).join("")}<span class="w">${end}</span></div><div class="dtray">${tiles.map(w=>`<button class="dit" data-v="${w}" data-say="${w.toLowerCase()==="i"?"I":w.toLowerCase()}">${w}</button>`).join("")}</div></div>`,
-   ...(l>=3||Math.random()<.6?{say:"Make the sentence!",quiet:true}:{say:`Make the sentence: ${s[0]}`,sayParts:["Make the sentence:",s[0]]}),choices:[],ans:"ok",item:`SB:${s[0]}`,dnd:"order",v:{W,tiles,s},
+   ...(l>=3?{say:"Make the sentence!",quiet:true}:{say:`Make the sentence: ${s[0]}`,sayParts:["Make the sentence:",s[0]]}),choices:[],ans:"ok",item:`SB:${s[0]}`,dnd:"order",v:{W,tiles,s},
    hint:`Say it slowly and put the words in order: ${s[0]}`,hintParts:["Say it slowly and put the words in order:",s[0]],
    drop(it,tg){if(tg.dataset.f||tg.dataset.w!==it.dataset.v)return false;tg.textContent="";tg.appendChild(it);it.classList.add("placed");it.dataset.done=1;tg.dataset.f=1;filled++;say(it.dataset.say);return true},complete:()=>filled===W.length,wire:dndWire}}
  const gi=W.findIndex(w=>w===s[2]),gap=W[gi],lw=x=>x.toLowerCase();
@@ -1697,12 +1683,12 @@ const _epStep6=epStep;epStep=function(){_epStep6();const E=EP;if(!E)return;const
 // DATA: every Blinkle word, clue list, result line and label lives here.
 const BK_PLANETS=["count","add","shape","pattern","coin"]; // only where she can truly check by looking (Coins and Clock: clock reading only)
 const BK_P=1/6,BK_WRONG=.25; // about 1 in 6 eligible questions; about 1 in 4 check rounds has a guess that needs a look
-const BK_TXT={ask:"Blinkle, guess!",right:"Good guess, Blinkle!",wrong:"That guess was wrong. Let's look!",thanks:"Thanks, Blinkle. Now we know!",
+const BK_TXT={ask:"Blinkle, guess!",guessed:"The Blinkle guessed {g}.",right:"Good guess, Blinkle!",wrong:"That guess was wrong.",thanks:"Thanks, Blinkle. Now we know!",a:"a ",an:"an ",
  look:"👀 Let's look!",lookSay:"Let's look!",aria:"The Blinkle",leaf:"A leaf. Tap to look under it.",guess:"A... {x}?",
  toggle:"Blinkle check rounds",toggleNote:"(now and then the Blinkle guesses from clues, then she taps Let's look and checks)",
  report:"Check rounds: {s} seen. Blinkle guesses that needed a look: {w}. Looked before answering: {l}."};
 const BLINKLE_CLUES={
- obj:{strawberries:["Red","Little seeds"],acorns:["Brown","Little caps"],leaves:["Orange","Crinkly"],flowers:["Yellow","Petals"],feathers:["Long","Soft"],
+ obj:{strawberries:["Red","Little seeds"],nuts:["Brown","Shiny"],leaves:["Orange","Crinkly"],flowers:["Yellow","Petals"],feathers:["Long","Soft"],
   bees:["Yellow","Stripes"],mushrooms:["Red","Spots"],ladybirds:["Red","Dots"],snails:["Shells","Swirls"],stones:["Grey","Smooth"]},
  amount:[[3,"Few"],[6,"Some"],[99,"Many"]], // n<=3 Few, 4-6 Some, 7+ Many (always the TRUE number on the picture)
  shape:{circle:["Round","No corners","Smooth"],square:["Four sides","All the same","Four corners"],triangle:["Three sides","Three corners","Pointy"],
@@ -1711,16 +1697,19 @@ const BLINKLE_CLUES={
  pattern:{AB:["Two shapes","Turn about","It repeats"],AAB:["Two the same","Then one","It repeats"],ABB:["One","Then two the same","It repeats"],
   ABC:["Three shapes","In order","It repeats"],AABB:["Two and two","Pairs","It repeats"]},
  clock:{0:["Two hands","Long hand up","O'clock"],30:["Two hands","Long hand down","Half past"]}};
+const BK_SHARED={"circle/oval":["Round","No corners","Smooth"],"square/rectangle":["Four sides","Four corners","Straight lines"],"triangle/diamond":["Pointy","Straight sides","Corners"],
+ "diamond/square":["Four sides","Four corners","Straight lines"],"star/heart":["Pointy","Not round","Bright"]}; // 6E: wrong shape rounds: clues true for BOTH shapes
+const BK_VAGUE=["Shapes","In a row","It repeats"]; // 6E: wrong pattern rounds
 const BK_NEAR={circle:"oval",oval:"circle",square:"rectangle",rectangle:"square",triangle:"diamond",diamond:"square",star:"heart",heart:"star"}; // obvious near-miss shapes
 const EP_BLINKLE={id:"blinkle",skill:"Check rounds",title:"Meet the Blinkle",steps:[
- {b:"problem",say:"Hello! I'm Zippet. Blinkle, guess! How many acorns?",d:["blinkle",3,0]},
- {b:"show",say:"Brown. Little caps. Few. A... three?",d:["blinkle",3,0]},
- {b:"show",say:"Let's look! Three acorns. Good guess, Blinkle!",d:["lookfirst",3]},
- {b:"show",say:"Leaves are in the way. Blinkle, guess! Brown. Little caps. Some. A... five?",d:["blinkle",6,1]},
- {b:"show",say:"That guess was wrong. A guess can be wrong. Let's look!",d:["blinkle",6,1]},
- {b:"show",say:"Six acorns! Thanks, Blinkle. Now we know!",d:["lookfirst",6]},
- {b:"try",q:"Your turn! How many acorns?",h:"Touch each one once, and say one number for each.",d:["pile",4,0],ch:[3,4,5],a:4},
- {b:"try",q:"A leaf is in the way. How many acorns?",h:"Let's look! Tap the leaf, then count each one.",d:["pile",5,1],ch:[4,5,6],a:5},
+ {b:"problem",say:"Hello! I'm Zippet. Blinkle, guess! How many nuts?",d:["blinkle",3,0]},
+ {b:"show",say:"Brown. Shiny. Few. A... three?",d:["blinkle",3,0]},
+ {b:"show",say:"Let's look! Three nuts. Good guess, Blinkle!",d:["lookfirst",3]},
+ {b:"show",say:"Leaves are in the way. Blinkle, guess! Brown. Shiny. Some. A... five?",d:["blinkle",6,1]},
+ {b:"show",say:"A guess can be wrong. Let's look!",d:["blinkle",6,1]},
+ {b:"show",say:"Six nuts! That guess was wrong. Thanks, Blinkle. Now we know!",d:["lookfirst",6]},
+ {b:"try",q:"Your turn! How many nuts?",h:"Touch each one once, and say one number for each.",d:["pile",4,0],ch:[3,4,5],a:4},
+ {b:"try",q:"A leaf is in the way. How many nuts?",h:"Let's look! Tap the leaf, then count each one.",d:["pile",5,1],ch:[4,5,6],a:5},
  {b:"recap",say:"A guess can be wrong. Let's look!",chant:["Clues, clues,","guess it true.","A guess can be wrong,","so look at it too!"],d:["blinkle",3,0]}]};
 // ---------- state (old saves: safe defaults) ----------
 if(!S.chk||typeof S.chk!=="object"||Array.isArray(S.chk))S.chk={};["seen","wrong","looked"].forEach(k=>{S.chk[k]=Math.max(0,S.chk[k]|0)});
@@ -1775,13 +1764,15 @@ const bkAmt=n=>BLINKLE_CLUES.amount.find(a=>n<=a[0])[1];
 const bkClock=v=>{const [h,m]=String(v).split(":").map(Number);return {h,m}};
 function bkInfo(p,x){const v=bkVals(x),oth=v.filter(y=>y!==x.ans),pickIn=a=>{const c=a.filter(y=>oth.includes(y));return c.length?pick(c):undefined};
  if(p.id==="count"||p.id==="add"){const name=p.id==="count"?x.obj:NAMES[bkObj(x)];return {clues:[...BLINKLE_CLUES.obj[name],bkAmt(x.ans)],
-  word:g=>NUMW[g],bub:g=>`${g}?`,near:()=>pickIn([x.ans-1,x.ans+1].filter(n=>n>0))}}
- if(p.id==="shape")return {clues:BLINKLE_CLUES.shape[x.ans],word:g=>g,bub:g=>`${g}?`,near:()=>pickIn([BK_NEAR[x.ans]])??pickIn(oth)};
- if(p.id==="pattern"){const seq=String(x.show).match(/fill="([^"]+)"/g)||[];return {clues:BLINKLE_CLUES.pattern[x.item.slice(3)],word:g=>TOK[+g][0]+" "+TOK[+g][1],bub:g=>`${tokSVG(+g,30)}?`,
+  word:g=>NUMW[g],bub:g=>`${g}?`,near:()=>{const sb=oth.filter(n=>n>0&&bkAmt(n)===bkAmt(x.ans));return pickIn([x.ans-1,x.ans+1].filter(n=>sb.includes(n)))??pickIn(sb)}}} // 6E: same amount band, else a right round
+ if(p.id==="shape")return {clues:BLINKLE_CLUES.shape[x.ans],word:g=>g,bub:g=>`${g}?`,art:1,near:()=>bkShared(x.ans,BK_NEAR[x.ans])?pickIn([BK_NEAR[x.ans]]):undefined,wclues:g=>bkShared(x.ans,g)};
+ if(p.id==="pattern"){const seq=String(x.show).match(/fill="([^"]+)"/g)||[];return {clues:BLINKLE_CLUES.pattern[x.item.slice(3)],art:1,wclues:()=>BK_VAGUE,word:g=>TOK[+g][0]+" "+TOK[+g][1],bub:g=>`${tokSVG(+g,30)}?`,
   near:()=>pickIn(oth.filter(o=>seq.some(f=>f.includes(TOK[+o][2]))))??pickIn(oth)}}
  if(p.id==="coin"){const {m}=x.clock;return {clues:BLINKLE_CLUES.clock[m],word:g=>{const c=bkClock(g);return tsay(c.h,c.m)},bub:g=>`${g}?`,
   near:()=>{const c=bkClock(x.ans);return pickIn([tfmt(c.h%12+1,c.m),tfmt((c.h+10)%12+1,c.m)])??pickIn(oth)}}}}
 const bkGuessLine=w=>BK_TXT.guess.replace("{x}",w);
+const bkShared=(a,g)=>BK_SHARED[a+"/"+g]||BK_SHARED[g+"/"+a];
+const bkArt=w=>(/^[aeiou]/i.test(w)?BK_TXT.an:BK_TXT.a)+w; // vowel sound -> "an"
 function bkDecide(x){const was=bkLast;bkLast=false;if(!x||!cur)return;const f=bkForce;
  if(!bkElig(cur,x)||bkLocked(cur))return;
  if(!f&&(!bkActive()||round<2||was||Math.random()>=BK_P))return;
@@ -1789,16 +1780,16 @@ function bkDecide(x){const was=bkLast;bkLast=false;if(!x||!cur)return;const f=bk
  const canWrong=bkSes>0&&(S.chk.seen|0)>=2&&!(typeof JR!=="undefined"&&JR&&JR.bkw);
  const sh=(S.chk.wrong|0)/Math.max(1,S.chk.seen|0); // keeps the long-run share near BK_WRONG
  if(f?f.wrong:(canWrong&&Math.random()<(sh<BK_WRONG?.6:.1))){const n=I.near();if(n!==undefined){wrong=true;g=n}}
- const clues=I.clues.map(c=>c+"."),gl=bkGuessLine(I.word(g)),parts=[BK_TXT.ask,...clues,gl];
+ const clues=(wrong&&I.wclues?I.wclues(g):I.clues).map(c=>c+"."),gw=I.art?bkArt(I.word(g)):I.word(g),gl=bkGuessLine(I.word(g)),parts=[BK_TXT.ask,...clues,gl];
  const ep=!f&&!S.ep.seen.blinkle&&EPAUTO&&!epAutoDone&&!(typeof JR!=="undefined"&&JR)&&!timeUp();
- x.bk={guess:g,wrong,poor:wrong,looked:false,clues,gl,bub:I.bub(g),parts,say0:x.say,parts0:x.sayParts,item0:x.item,ep,round};
+ x.bk={guess:g,gw,wrong,poor:wrong,looked:false,clues,gl,bub:I.bub(g),parts,say0:x.say,parts0:x.sayParts,item0:x.item,ep,round};
  if(x.item)x.item="BK:"+x.item; // mastery keeps the TRUE answer under a BK: key; the guess is never recorded
  x.say=ep?"":parts.join(" ");x.sayParts=parts;
  S.chk.seen++;if(wrong){S.chk.wrong++;if(typeof JR!=="undefined"&&JR)JR.bkw=1}bkSes++;bkLast=true;bkForce=null;save()}
 const _genQ6c=genQ;genQ=function(l){const x=_genQ6c(l);bkDecide(x);return x};
 // ---------- C3: the check-round screen ----------
 $("visual").insertAdjacentHTML("beforebegin",`<div id="bkPanel" aria-live="polite"></div>`);
-function bkUI(){const P=$("bkPanel"),v=$("visual");v.classList.remove("bkpoor","bkck");$("choices").classList.remove("bkwait");
+function bkUI(){const P=$("bkPanel"),v=$("visual");P.classList.remove("bkdone");v.classList.remove("bkpoor","bkck");$("choices").classList.remove("bkwait");
  $("game").classList.toggle("bkon",!!(q&&q.bk));if(!q||!q.bk||!$("game").classList.contains("on")){P.classList.remove("on");P.innerHTML="";return}
  if(q.bk.ui)return;q.bk.ui=1;const B=q.bk;
  P.innerHTML=`<div class="bkrow"><span id="bkDW">${bkDisc("lit",44)}</span><span class="bkt"><span id="bkZ">${art("zippet","look",22)} ${BK_TXT.ask}</span><span id="bkClue">${B.clues.join(" ")}</span></span><span class="bkbub">${B.bub}</span><button class="big" id="bkLook">${BK_TXT.look}</button></div>`;P.classList.add("on");
@@ -1808,12 +1799,13 @@ function bkUI(){const P=$("bkPanel"),v=$("visual");v.classList.remove("bkpoor","
 function bkLook(){if(!q||!q.bk||q.bk.looked)return;const B=q.bk;B.looked=true;S.chk.looked++;save();sfx.tap();
  const v=$("visual");v.classList.remove("bkpoor","bkck");v.querySelectorAll(".bkleaf").forEach(e=>e.remove());$("choices").classList.remove("bkwait");
  const P=$("bkPanel");$("bkDW").innerHTML=bkDisc("idle",44);const r=$("bkLook");if(r)r.remove();
- const line=B.wrong?BK_TXT.wrong:BK_TXT.right;$("bkZ").innerHTML=art("zippet","look",22)+" "+line;q.say=B.say0;q.sayParts=B.parts0;
+ const line=BK_TXT.lookSay;$("bkZ").innerHTML=art("zippet","look",22)+" "+line;q.say=B.say0;q.sayParts=B.parts0; // 6E: no verdict before she answers
  say(line+" "+B.say0,[line,...(B.parts0||[B.say0])])}
+const bkVerdict=B=>[BK_TXT.guessed.replace("{g}",B.gw),...(B.wrong?[BK_TXT.wrong,BK_TXT.thanks]:[BK_TXT.right])];
 const _next6c=next;next=function(){_next6c();bkUI()};
 const _answer6c=answer;answer=function(b,v){if(q&&q.bk&&!q.bk.looked)return;const was=locked,qq=q;_answer6c(b,v);
- if(qq&&qq.bk&&!was&&locked&&v===qq.ans){const z=$("bkZ");if(z)z.innerHTML=art("zippet","happy",22)+" "+BK_TXT.thanks;const c=$("hint").textContent.replace(/\s*(🌟|✨)$/,"");
-  say(c+" "+BK_TXT.thanks,[c,BK_TXT.thanks]);clearTimeout(nextT);nextT=setTimeout(next,3200)}};
+ if(qq&&qq.bk&&!was&&locked&&v===qq.ans){const vd=bkVerdict(qq.bk),z=$("bkZ");$("bkPanel").classList.add("bkdone");if(z)z.innerHTML=art("zippet","happy",22)+" "+vd.join(" ");const c=$("hint").textContent.replace(/\s*(🌟|✨)$/,"");
+  say(c+" "+vd.join(" "),[c,...vd]);clearTimeout(nextT);nextT=setTimeout(next,3200)}};
 const _startPlanet6c=startPlanet;startPlanet=function(p){bkLast=false;return _startPlanet6c(p)};
 // Meet it on a check round plays the Blinkle episode; back to the same question
 const _epAfterQ6c=epAfterQ;epAfterQ=function(off){_epAfterQ6c(off);if(!off&&q&&q.bk&&$("game").classList.contains("on")&&round<ROUNDS)$("meetBtn").style.display=""};
@@ -1839,14 +1831,14 @@ const _resetB36c=resetB3;resetB3=function(){_resetB36c();S.chk={seen:0,wrong:0,l
 // ---------- tests: phrases, episodes, language, pacing ----------
 const BK_NUMS=Array.from({length:20},(_,i)=>i+1),BK_TIMES=[...BK_NUMS.slice(0,12).map(h=>tfmt(h,0)),...BK_NUMS.slice(0,12).map(h=>tfmt(h,30))];
 function bkGuesses(){return [...BK_NUMS.map(n=>NUMW[n]),...SH1,...SH2,...TOK.map(t=>t[0]+" "+t[1]),...BK_TIMES.map(t=>{const c=bkClock(t);return tsay(c.h,c.m)})].map(bkGuessLine)}
-function bkClueLines(){const B=BLINKLE_CLUES,w=[...Object.values(B.obj).flat(),...B.amount.map(a=>a[1]),...Object.values(B.shape).flat(),...Object.values(B.pattern).flat(),...Object.values(B.clock).flat()];return [...new Set(w)].map(c=>c+".")}
+function bkClueLines(){const B=BLINKLE_CLUES,w=[...Object.values(BK_SHARED).flat(),...BK_VAGUE,...Object.values(B.obj).flat(),...B.amount.map(a=>a[1]),...Object.values(B.shape).flat(),...Object.values(B.pattern).flat(),...Object.values(B.clock).flat()];return [...new Set(w)].map(c=>c+".")}
 const _ph6c=__test3.phrases,_ce6c=__test3.checkEpisodes,_sc6c=__test3.selfCheck;
-__test3.phrases=function(){const L=_ph6c.call(this),add=p=>L.push([p,"blinkle"]);[BK_TXT.ask,BK_TXT.right,BK_TXT.wrong,BK_TXT.thanks,BK_TXT.lookSay].forEach(add);bkClueLines().forEach(add);bkGuesses().forEach(add);
+__test3.phrases=function(){const L=_ph6c.call(this),add=p=>L.push([p,"blinkle"]);[BK_TXT.ask,BK_TXT.right,BK_TXT.wrong,BK_TXT.thanks,BK_TXT.lookSay,...bkGuessedLines()].forEach(add);bkClueLines().forEach(add);bkGuesses().forEach(add);
  EP_BLINKLE.steps.filter(s=>s.d&&s.d[0]==="lookfirst").forEach(s=>{for(let i=1;i<=s.d[1];i++)add(NUMW[i])});return L};
 __test3.checkEpisodes=function(){return _ce6c.call(this).filter(m=>!/^blinkle: step \d+: unknown draw (blinkle|lookfirst|pile)$/.test(m))}; // the three new draw ops are drawn by Part 6C
 const BK_BAD=/\b(think|thinks|thought|know|knows|want|wants|feel|feels|sad|sorry|oops|silly|bad|stupid)\b/i;
-const BK_OK=["That guess was wrong.","A guess can be wrong","Thanks, Blinkle. Now we know!"]; // the user's own lines: the only allowed 'wrong' / 'know'
-function bkStrings(){return [...Object.values(BK_TXT),...bkClueLines(),...bkGuesses(),...EP_BLINKLE.steps.flatMap(s=>[s.say,s.q,s.h,...(s.chant||[])]).filter(Boolean),EP_BLINKLE.title,EP_BLINKLE.skill,
+const BK_OK=["That guess was wrong.","A guess can be wrong","Thanks, Blinkle. Now we know!"]; // 6E: same allowed lines; the new guessed lines go through the banned-word test too // the user's own lines: the only allowed 'wrong' / 'know'
+function bkStrings(){return [...Object.values(BK_TXT),...bkGuessedLines(),...bkClueLines(),...bkGuesses(),...EP_BLINKLE.steps.flatMap(s=>[s.say,s.q,s.h,...(s.chant||[])]).filter(Boolean),EP_BLINKLE.title,EP_BLINKLE.skill,
  document.getElementById("optBkT")?.textContent||"",document.getElementById("optBkN")?.textContent||"",...[...document.querySelectorAll(".bk")].map(e=>e.getAttribute("aria-label")||"")]}
 __test3.checkLang6C=function(){const bad=[];bkStrings().forEach(s0=>{let s=String(s0);BK_OK.forEach(o=>{s=s.split(o).join(" ")});if(BK_BAD.test(s))bad.push("word: "+s0);if(/\bwrong\b/i.test(s))bad.push("wrong: "+s0)});return bad};
 __test3.check6C=function(N){N=N||4000;const bad=[],T=window.__test,P=id=>T.PLANETS.find(p=>p.id===id),keep={chk:{...S.chk},bkOn:S.bkOn,auto:BKAUTO,ses:bkSes,last:bkLast,cur,round,JR:typeof JR!=="undefined"?JR:null,epd:epAutoDone,EA:EPAUTO},cnt={check:0,wrong:0,sessions:0,elig:0};
@@ -1875,6 +1867,63 @@ __test3.check6C=function(N){N=N||4000;const bad=[],T=window.__test,P=id=>T.PLANE
  __test3.bkCnt={...cnt,share:+share.toFixed(3),epSec:+t.toFixed(1)};return bad};
 __test3.selfCheck=function(N){const r=_sc6c.call(this,N);const b=__test3.check6C(Math.max(4000,N|0));if(b.length)r.bad.check6C=b;r.cnt.check6C=__test3.bkCnt;return r};
 Object.assign(__test3,{BK_TXT,BLINKLE_CLUES,BK_PLANETS,bkDisc,bkElig,bkInfo,bkLook,bkUI,bkGuesses,bkClueLines,bkStrings,setBk:v=>{BKAUTO=!!v},forceBk:w=>{bkForce={wrong:!!w}},resetBkSession:()=>{bkSes=0;bkLast=false},get bkSes(){return bkSes}});
+</script>
+
+<script id="p6e">
+document.head.insertAdjacentHTML("beforeend",`<style>#bkPanel.bkdone #bkClue,#bkPanel.bkdone .bkbub{display:none}</style>`); // 6E: after her answer the verdict replaces the clues (keeps the panel short)
+// ---------- Part 6E: check-round verdict after the answer, fitting clues, nuts, Blocks without faces (tests) ----------
+function bkGuessedLines(){return [...BK_NUMS.map(n=>NUMW[n]),...[...SH1,...SH2].map(bkArt),...TOK.map(t=>bkArt(t[0]+" "+t[1])),...BK_TIMES.map(t=>{const c=bkClock(t);return tsay(c.h,c.m)})].map(g=>BK_TXT.guessed.replace("{g}",g))}
+const bkBand=n=>bkAmt(n);
+function bk6eSnap(){const s={S:JSON.stringify(S),M:JSON.stringify(M),LP:JSON.stringify(LP),scr:[...document.querySelectorAll(".screen.on")].map(e=>e.id),say,cur,q,round,locked,tries};return s}
+function bk6eRestore(s){clearTimeout(nextT);say=s.say;S=JSON.parse(s.S);M=JSON.parse(s.M);LP=JSON.parse(s.LP);cur=s.cur;q=s.q;round=s.round;locked=s.locked;tries=s.tries;bkForce=null;bkLast=false;
+ document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",s.scr.includes(e.id)));try{stopVoice()}catch(e){}}
+__test3.checkBk6E=function(N){N=N||2000;const bad=[],f=m=>{if(bad.length<30)bad.push(m)},sn=bk6eSnap(),cnt={};
+ try{const sp=[];say=(t)=>{sp.push(String(t||""))};
+  // A: 200 forced right + 200 forced wrong rounds through the real screen
+  [false,true].forEach(w=>{let done=0,tries0=0;while(done<200&&tries0<6000){tries0++;const p=PLANETS.find(x=>x.id===BK_PLANETS[tries0%BK_PLANETS.length]);
+   if(cur!==p){startPlanet(p)}round=1;bkForce={wrong:w};next();bkForce=null;if(!q||!q.bk)continue;if(w&&!q.bk.wrong)continue;
+   sp.length=0;bkLook();const z1=$("bkZ").textContent,s1=sp.join(" ");if(/Good guess|wrong/i.test(z1+" "+s1))f("verdict before answer: "+z1+" | "+s1);
+   if(!s1.startsWith(BK_TXT.lookSay))f("look line: "+s1);
+   sp.length=0;const b=[...$("choices").children][0];answer(b,q.ans);clearTimeout(nextT);const z2=$("bkZ").textContent,s2=sp.join(" ");
+   const g=BK_TXT.guessed.replace("{g}",q.bk.gw),v=q.bk.wrong?BK_TXT.wrong+" "+BK_TXT.thanks:BK_TXT.right;
+   if(!(z2.includes(g)&&z2.includes(v)&&s2.includes(g)&&s2.includes(v)))f("verdict after answer: "+z2+" | "+s2);
+   if(q.bk.wrong&&s2.includes(BK_TXT.right))f("right verdict on wrong round");done++}
+   cnt[w?"uiWrong":"uiRight"]=done;if(done<200)f("only "+done+(w?" wrong":" right")+" rounds")});
+  // a wrong answer from her: kind hint, no verdict
+  {let k=0;while(k<50){const p=PLANETS.find(x=>x.id==="count");if(cur!==p)startPlanet(p);round=1;bkForce={wrong:true};next();bkForce=null;if(!q||!q.bk){k++;continue}bkLook();sp.length=0;
+   const bs=[...$("choices").children];const wv=bkVals(q).find(v=>v!==q.ans);const wb=bs[bkVals(q).indexOf(wv)];answer(wb,wv);clearTimeout(nextT);
+   if(/Good guess|guess was wrong|Blinkle guessed/.test(sp.join(" ")+$("bkZ").textContent))f("verdict after her wrong answer");break}}
+  // B: clues fit both answer and guess on wrong rounds
+  BK_PLANETS.forEach(pid=>{const p=PLANETS.find(x=>x.id===pid);cur=p;let n=0;
+   for(let i=0;i<N;i++){bkForce={wrong:true};const x=genQ(R(0,Math.min(5,p.maxl??5)));bkForce=null;if(!x.bk||!x.bk.wrong)continue;n++;const B=x.bk,cl=B.clues.map(c=>c.replace(/\.$/,""));let ok=true;
+    if(pid==="count"||pid==="add"){const name=pid==="count"?x.obj:NAMES[bkObj(x)],o=BLINKLE_CLUES.obj[name];if(bkBand(B.guess)!==bkBand(x.ans))f(pid+" band "+x.ans+"/"+B.guess);
+     ok=cl.every(c=>[...o,bkBand(x.ans)].includes(c)&&[...o,bkBand(B.guess)].includes(c))}
+    else if(pid==="shape"){const sh=bkShared(x.ans,B.guess)||[],A=BLINKLE_CLUES.shape[x.ans],G=BLINKLE_CLUES.shape[B.guess];ok=sh.length>0&&cl.every(c=>sh.includes(c)||(A.includes(c)&&G.includes(c)))}
+    else if(pid==="pattern")ok=cl.every(c=>BK_VAGUE.includes(c));
+    else if(pid==="coin"){const A=BLINKLE_CLUES.clock[x.clock.m],G=BLINKLE_CLUES.clock[bkClock(B.guess).m];ok=cl.every(c=>A.includes(c)&&G.includes(c))}
+    if(!ok)f(pid+" clue does not fit: "+cl.join(",")+" ans "+x.ans+" guess "+B.guess);
+    if((pid==="shape"||pid==="pattern")&&!/^an? /.test(B.gw))f("no article: "+B.gw);if((pid==="count"||pid==="add"||pid==="coin")&&/^an? /.test(B.gw))f("article on "+B.gw)}
+   cnt["wrong:"+pid]=n;if(!n)f("no wrong rounds for "+pid)});
+ }catch(e){f("error "+e.message)}finally{bk6eRestore(sn)}
+ if(bkArt("oval")!=="an oval"||bkArt("red circle")!=="a red circle")f("articles");
+ __test3.bk6eCnt=cnt;return bad};
+__test3.check6E_blocks=function(){const bad=[],f=m=>{if(bad.length<30)bad.push(m)},n0=bN;
+ for(let n=1;n<=20;n++){bN=n;drawBuild();const st=$("stage");if(st.querySelector(".eye,.eyes,.mouth,.crown,.face"))f(n+": face/crown");
+  const bl=[...st.querySelectorAll(".blk")];if(bl.length!==n)f(n+": "+bl.length+" blocks");
+  bl.forEach((b,i)=>{const c=b.style.background,ten=n===10||(n>10&&b.closest(".rod"));if(c!==(ten?"var(--accent)":"var(--gold)"))f(n+": block "+i+" "+c)})}
+ bN=n0;if(typeof BUDDY_PERS!=="undefined")f("BUDDY_PERS defined");if(typeof RAIN!=="undefined")f("RAIN defined");
+ for(let n=1;n<=10;n++)if(!["var(--gold)","var(--accent)"].includes(blkColor(n,0)))f("blkColor "+n);
+ if(/👑|crown/i.test(EPISODES.flatMap(e=>e.steps.flatMap(s=>[s.say,s.q,s.h,...(s.chant||[])])).join(" ")))f("crown in an episode");return bad};
+__test3.check6E=function(){const bad=[],f=m=>{if(bad.length<30)bad.push(m)};
+ __test3.phrases().forEach(([p])=>{if(/acorn/i.test(p))f("acorn: "+p)});if(NAMES["🌰"]!=="nuts")f("NAMES 🌰");if(BLINKLE_CLUES.obj.acorns||String(BLINKLE_CLUES.obj.nuts)!=="Brown,Shiny")f("nuts clues");
+ STORIES.forEach(s=>s.p.forEach(([pic,t])=>{if(/[🐘🐻🫎]/u.test(pic)&&/\b(she|her)\b/i.test(t))f("she/her: "+s.t+": "+t)}));
+ const st=EP_BLINKLE.steps;if(st.length!==9)f("blinkle steps "+st.length);if(st[4].say!=="A guess can be wrong. Let's look!")f("step 5");if(st[5].say!=="Six nuts! That guess was wrong. Thanks, Blinkle. Now we know!")f("step 6");
+ st.slice(0,5).forEach((s,i)=>{if(/wrong/i.test((s.say||"").replace("A guess can be wrong","")))f("verdict before the look, step "+(i+1))});
+ const g0=LP.g;try{for(let l=0;l<=5;l++)for(let g=0;g<=4;g++){LP.g=g;for(let i=0;i<100;i++){const x=sentGen(l),s=x.v.s[0];
+   if(l<=2&&!String(x.say).includes(s))f(`sent l${l}: silent`);if(l>=3&&x.dnd==="order"&&x.say!=="Make the sentence!")f(`sent l${l}: spoken`)}}}finally{LP.g=g0}
+ return bad};
+const _sc6e=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6e.call(this,N);[["checkBk6E",()=>__test3.checkBk6E(N)],["check6E_blocks",__test3.check6E_blocks],["check6E",__test3.check6E]].forEach(([k,fn])=>{const b=fn();if(b.length)r.bad[k]=b});r.cnt.bk6e=__test3.bk6eCnt;return r};
+Object.assign(__test3,{BK_SHARED,BK_VAGUE,bkArt,bkShared,bkVerdict,bkGuessedLines});
 </script>
 
 <script id="p6d">
