@@ -7,7 +7,7 @@
 // or passed straight to the network if not cached yet; only full 200 responses are ever cached.
 // v5 (Batch 2): Quick Look planet, take away, per-item review, sparkles, Royal Collection II, parent progress report, 94 new clips.
 // v6 (Batch 3): Tens and Ones, Shape Sparkles, Pattern Parade, Measure Magic, Trace, Story Corner, journey, decorate, 441 new clips.
-const CACHE = 'space-princess-v18';
+const CACHE = 'space-princess-v19';
 
 // Core files, relative so it works under a GitHub Pages subpath like /space-princess/
 const CORE = [
@@ -89,7 +89,7 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // 3) Everything else (pages, icons, mp3s): cache-first, then network (and cache full 200 responses).
+  // 3) Everything else (pages, icons, mp3s, assets/*.webp art): cache-first; a missing asset just 404s and the game shows its emoji, then network (and cache full 200 responses).
   e.respondWith(
     caches.match(req, { ignoreSearch: req.mode === 'navigate' }).then(hit => {
       if (hit) return hit;

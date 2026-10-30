@@ -192,9 +192,9 @@ body{min-height:100vh;min-height:100dvh}
   <div style="display:flex;justify-content:flex-end"><button id="instStart" style="display:none;margin-right:auto;align-self:center;font-size:18px;padding:10px 16px;border-radius:22px;border:2px solid rgba(var(--ink-rgb),.4);background:rgba(var(--plum-rgb),.12);color:var(--ink);font-family:inherit">📲 Install app</button><button class="icon hold" id="gearBtn" aria-label="Grown-ups: press and hold for 2 seconds">⚙️</button></div>
   <div id="gearTip"></div>
   <h1 id="ttl">🏡 Zippet's Walk Home</h1>
-  <div class="hero" style="font-size:80px">🪐⭐🌙</div>
+  <div class="hero" style="font-size:80px">🌳🌼🏡</div>
   <button class="big" id="advBtn" style="background:linear-gradient(var(--gold-l),var(--gold));color:var(--ink);box-shadow:0 8px 0 var(--gold-dk);font-size:clamp(30px,7vw,48px);padding:20px 34px">🗺️ Today's Adventure</button><br>
-  <button class="big" id="playBtn">🪐 Pick a planet</button><br>
+  <button class="big" id="playBtn">🌳 Pick a place</button><br>
   <button class="big alt" id="collBtn1">👑 My Stickers</button>
   <div id="days" style="font-size:clamp(20px,4.4vw,30px);color:var(--plum);margin:8px 0;min-height:1.3em"></div>
 </section>
@@ -204,7 +204,7 @@ body{min-height:100vh;min-height:100dvh}
   <div class="parent">
     <button class="big" id="progBtn" style="font-size:22px;padding:14px 22px;min-width:0;margin:0 0 10px">📊 Progress report</button><br><div style="margin:0 0 10px" id="instBox"><button class="big alt" style="font-size:20px;padding:12px 20px;min-width:0;display:none" id="instBtn">📲 Install app</button><button class="big alt" style="font-size:20px;padding:12px 20px;min-width:0;display:none" id="instIOS">📲 Install on iPhone/iPad</button><div id="instMsg" style="font-size:16px;opacity:.85"></div></div>
 
-    A gentle learning game for ages 4–6. Each planet is a short challenge: counting, adding, numbers, more/fewer, letters, first sounds, 3-letter words, rhymes and <b>Sound Blending</b> (blend sounds into a word, and tap sound boxes to split a word into sounds). Letters and sounds come in school order (s a t p i n → m d g o → c k e u r → h b f l → j v w x y z q); the next group unlocks when she gets 8 of the last 10 right first time, or after 30 tries anyway. <b>Quick Look</b> planet: see small amounts at a glance, ten-frames, and pairs that make 5 and 10. Adding includes <b>take away</b> at higher levels. The game quietly tracks each letter, number, word and fact and brings weaker ones back now and then (at most 1 question in 4). A first-try answer earns a star ⭐; an answer after a hint earns a sparkle ✨ (two sparkles make a star). <b>Block Buddies</b> planet: build, join, split, make, odd/even pairs and number stairs. Every prompt is read aloud (tap 🔊 to repeat). There's no way to fail — wrong taps get a kind hint. Progress is saved on this device only.
+    A gentle learning game for ages 4–6. Each game is a short challenge: counting, adding, numbers, more/fewer, letters, first sounds, 3-letter words, rhymes and <b>Sound Blending</b> (blend sounds into a word, and tap sound boxes to split a word into sounds). Letters and sounds come in school order (s a t p i n → m d g o → c k e u r → h b f l → j v w x y z q); the next group unlocks when she gets 8 of the last 10 right first time, or after 30 tries anyway. <b>Quick Look</b>: see small amounts at a glance, ten-frames, and pairs that make 5 and 10. Adding includes <b>take away</b> at higher levels. The game quietly tracks each letter, number, word and fact and brings weaker ones back now and then (at most 1 question in 4). A first-try answer earns a star ⭐; an answer after a hint earns a sparkle ✨ (two sparkles make a star). <b>Zippet's Blocks</b>: build, join, split, make, odd/even pairs and number stairs. Every prompt is read aloud (tap 🔊 to repeat). There's no way to fail — wrong taps get a kind hint. Progress is saved on this device only.
     <label><input type="checkbox" id="optSpeech" checked> Spoken prompts</label>
     <label><input type="checkbox" id="optSound" checked> Sound effects</label>
     <label><input type="checkbox" id="optVibe" checked> Vibration (Android; iPhone ignores it)</label>
@@ -212,7 +212,7 @@ body{min-height:100vh;min-height:100dvh}
     <div id="limBtns" style="display:flex;flex-wrap:wrap;gap:8px"></div>
     <div id="limInfo" style="font-size:16px;opacity:.85"></div>
     <div style="margin-top:10px"><b>Letter sounds unlocked:</b> <span id="letInfo"></span></div>
-    <div style="margin-top:10px"><button class="big alt" style="font-size:20px;padding:12px 20px;min-width:0" id="dlBtn">⬇️ Download all voices for offline</button><div class="pbar" style="max-width:400px"><i id="dlBar" style="width:0"></i></div><div id="dlMsg" style="font-size:16px;opacity:.85"></div></div>
+    <div style="margin-top:10px"><button class="big alt" style="font-size:20px;padding:12px 20px;min-width:0" id="dlBtn">⬇️ Download voices and pictures for offline</button><div class="pbar" style="max-width:400px"><i id="dlBar" style="width:0"></i></div><div id="dlMsg" style="font-size:16px;opacity:.85"></div></div>
     <div style="font-size:16px;opacity:.85;margin:8px 0">Want to watch how she learns? See PILOT-NOTES.md in the game folder for a 5-session observation guide (paper only, nothing is tracked).</div>
     <button class="big alt" style="font-size:20px;padding:12px 20px;min-width:0" id="resetBtn">Reset progress</button>
     <div style="font-size:16px;opacity:.8">Reset clears stars, sparkles, gems, stickers, days played, letter progress, skill progress (the report) and play time. Settings stay.</div>
@@ -245,18 +245,18 @@ body{min-height:100vh;min-height:100dvh}
 
 <section id="mapS" class="screen">
   <div class="top"><button class="icon" id="homeBtn">🏠</button><div>⭐ <b id="starN">0</b> &nbsp; 💎 <b id="gemN">0</b></div><button class="icon" id="collBtn2">👑</button></div>
-  <h2><span id="princess">🏡</span> Pick a planet!</h2>
+  <h2><span id="princess">🏡</span> Pick a place!</h2>
   <div id="mapMsg" style="font-size:clamp(20px,4.4vw,30px);color:var(--plum)"></div>
   <div id="map"></div>
 </section>
 
 <section id="game" class="screen">
-  <div class="top"><button class="icon" id="backBtn">🪐</button><div id="prog">⭐</div><button class="icon" id="sayBtn">🔊</button></div>
+  <div class="top"><button class="icon" id="backBtn" aria-label="Back to the hill">🗺️</button><div id="prog">⭐</div><button class="icon" id="sayBtn">🔊</button></div>
   <div id="prompt"></div><div id="visual"></div><div id="choices"></div><div id="hint"></div>
 </section>
 
 <section id="collS" class="screen">
-  <div class="top"><button class="icon" id="back2">🪐</button><div>⭐ <b id="starN2">0</b></div><span></span></div>
+  <div class="top"><button class="icon" id="back2" aria-label="Back to the hill">🗺️</button><div>⭐ <b id="starN2">0</b></div><span></span></div>
   <h2>👑 My Royal Collection</h2>
   <button class="big alt" id="decoBtn">🎨 Decorate my castle</button>
   <p style="font-size:24px">Every 5 stars wins a new sticker!</p>
@@ -264,7 +264,7 @@ body{min-height:100vh;min-height:100dvh}
 </section>
 
 <section id="blocks" class="screen">
-  <div class="top"><button class="icon" id="bBack">🪐</button><div>⭐ <b id="bStar">0</b></div><button class="icon" id="bSay">🔊</button></div>
+  <div class="top"><button class="icon" id="bBack" aria-label="Back to the hill">🗺️</button><div>⭐ <b id="bStar">0</b></div><button class="icon" id="bSay">🔊</button></div>
   <div id="tabs"></div>
   <div id="bprompt"></div>
   <div id="stage"></div>
@@ -346,8 +346,8 @@ const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(M
 function opts(ans,pool,n){const s=new Set([ans]);let guard=0;while(s.size<n&&guard++<200)s.add(pick(pool));return shuffle([...s])}
 function numOpts(ans,lo,hi,n){const p=[];for(let i=lo;i<=hi;i++)p.push(i);return opts(ans,p,n)}
 function nearOpts(ans,max,n){let lo=Math.max(1,ans-3),hi=Math.min(max,ans+3);while(hi-lo+1<n&&(lo>1||hi<max)){if(hi<max)hi++;else lo--}return numOpts(ans,lo,hi,n)} // Part A: wrong answers within 3 of the answer (widened only if fewer than n values fit)
-const OBJ=["⭐","🌙","🪐","🚀","👑","💎","🦄","🌸","🍓","🧁"];
-const NAMES={"⭐":"stars","🌙":"moons","🪐":"planets","🚀":"rockets","👑":"crowns","💎":"gems","🦄":"unicorns","🌸":"flowers","🍓":"strawberries","🧁":"cupcakes"};
+const OBJ=["🍓","🌰","🍂","🌼","🪶","🐝","🍄","🐞","🐌","🪨"];
+const NAMES={"🍓":"strawberries","🌰":"acorns","🍂":"leaves","🌼":"flowers","🪶":"feathers","🐝":"bees","🍄":"mushrooms","🐞":"ladybirds","🐌":"snails","🪨":"stones"};
 const rep=(e,n)=>Array(n).fill(e).join("");
 const tapRep=(e,n)=>Array(n).fill(`<span class="tapme">${e}</span>`).join(""); // tappable count-along objects
 const tap5=(e,n)=>{let h="";for(let i=0;i<n;i+=5)h+=`<span class="five">${tapRep(e,Math.min(5,n-i))}</span>`;return h}; // rows of five with a gap after each five
@@ -509,7 +509,7 @@ function drawMap(){$("starN").textContent=S.stars;$("gemN").textContent=S.gems;c
   b.style.animationDelay=(i*.3)+"s";const lv=(S.level[p.id]||{l:0}).l;const tot=(p.maxl??3)+1,lr=Math.min(lv+1,tot);b.innerHTML=`<span>${p.icon}</span><span class="pl">${p.name}<small class="lvd" role="img" aria-label="Level ${lr} of ${tot}">${"●".repeat(lr)}${"○".repeat(tot-lr)}</small></span>`;
   b.onclick=()=>{sfx.tap();startPlanet(p)};m.appendChild(b)})
  const bb=document.createElement("button");bb.className="planet";bb.id="blockPlanet";bb.style.background="radial-gradient(circle at 30% 30%,rgba(var(--card-rgb),.55),var(--red) 30%,var(--gold) 55%,var(--blue) 80%)";
- bb.innerHTML='<span>🧱</span><span class="pl">Block Buddies</span>';bb.onclick=()=>{sfx.tap();say("Welcome to Block Buddy planet!");openBlocks()};m.prepend(bb);if(typeof extraMap==="function")extraMap(m)}
+ bb.innerHTML='<span>🧱</span><span class="pl">Zippet\'s Blocks</span>';bb.onclick=()=>{sfx.tap();say("Welcome to Zippet's Blocks!");openBlocks()};m.prepend(bb);if(typeof extraMap==="function")extraMap(m)}
 function drawColl(){$("starN2").textContent=S.stars;const c=$("coll");c.innerHTML="";const got=Math.floor(S.stars/5);
  const head=t=>{const h=document.createElement("div");h.style.cssText="grid-column:1/-1;font-size:24px;color:var(--plum);text-align:left;margin-top:8px";h.textContent=t;c.appendChild(h)};
  ALLST.forEach((s,i)=>{if(i===0)head("👑 Royal Collection");if(i===STICKERS.length)head("🌌 Royal Collection II");
@@ -577,12 +577,12 @@ function wireTaps(){const it=[...$("visual").querySelectorAll(".tapme")];const k
   if(k===k0+it.length)say(`${NUMW[k]}! That's ${NUMW[k]}!`,[NUMW[k],`That's ${NUMW[k]}!`]);else say(NUMW[k])})}
 function finish(){S.gems++;save();sfx.win();const before=Math.floor(pStars0/5),after=Math.floor(S.stars/5);
  const newSt=after>before?stickerFor(after):null;sameRuns=cur.id===lastFin?sameRuns+1:1;lastFin=cur.id;
- $("prompt").textContent="Planet complete! 💎";$("visual").innerHTML=`🏡✨${newSt?"<br>New sticker: "+newSt:""}`;$("hint").textContent="";
- const hz=`Hooray! You finished ${cur.name} planet and won a gem!${newSt?" And a brand new sticker!":""}`,SUG="You're so good at this! Want to try a new planet?";
+ $("prompt").textContent="All done! 💎";$("visual").innerHTML=`🏡✨${newSt?"<br>New sticker: "+newSt:""}`;$("hint").textContent="";
+ const hz=`Hooray! You finished ${cur.name} and won a gem!${newSt?" And a brand new sticker!":""}`,SUG="You're so good at this! Want to try something new?";
  if(sameRuns>=3)say(hz+" "+SUG,[hz,SUG]);else say(hz);
  $("choices").innerHTML="";const b1=document.createElement("button");b1.className="big";b1.textContent="🚀 Fly on!";b1.onclick=()=>{show("mapS");drawMap()};
  const b2=document.createElement("button");b2.className="big alt";b2.textContent="🔁 Again";b2.onclick=()=>startPlanet(cur);$("choices").append(b1,b2);
- if(sameRuns>=3){const o=pick(PLANETS.filter(p=>p!==cur)),b3=document.createElement("button");b3.className="big";b3.id="tryNew";b3.textContent=`✨ Try a new planet: ${o.icon} ${o.name}?`;b3.onclick=()=>{sameRuns=0;startPlanet(o)};$("choices").prepend(b3)}
+ if(sameRuns>=3){const o=pick(PLANETS.filter(p=>p!==cur)),b3=document.createElement("button");b3.className="big";b3.id="tryNew";b3.textContent=`✨ Try something new: ${o.icon} ${o.name}?`;b3.onclick=()=>{sameRuns=0;startPlanet(o)};$("choices").prepend(b3)}
  for(let i=0;i<3;i++)setTimeout(()=>burst(document.body),i*300);if(typeof JR!=="undefined"&&JR)journeyNext()}
 function burst(el,n=12,big=false){const r=el.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+Math.min(r.height/2,300),sp=big?520:300;
  for(let i=0;i<n;i++){const p=document.createElement("div");p.className="p"+(big?" bigp":"");p.textContent=pick(big?["⭐","✨","💖","🌟","💎","👑","🦄","🌈"]:["⭐","✨","💖","🌟","💎"]);
@@ -632,7 +632,7 @@ function showDays(){const n=new Set(S.days||[]).size;$("days").textContent=n?`Da
 showDays();
 $("playBtn").onclick=()=>{sfx.win();const bonus=markPlayed();show("mapS");drawMap();$("mapMsg").textContent="";
  if(bonus){$("mapMsg").textContent="Welcome back! A bonus star for you ⭐";burst($("mapMsg"),24,true);say("Welcome back! Here is a bonus star for playing again!")}
- else say(`Welcome to ${TITLE}! Pick a planet to visit!`)};
+ else say(`Welcome to ${TITLE}! Pick a place to visit!`)};
 $("collBtn1").onclick=$("collBtn2").onclick=()=>{sfx.tap();drawColl();show("collS")};
 $("homeBtn").onclick=()=>{show("start");showDays()};$("backBtn").onclick=()=>{show("mapS");drawMap()};$("back2").onclick=()=>{show("mapS");drawMap()};
 $("sayBtn").onclick=()=>q&&say(q.say,q.sayParts);
@@ -640,8 +640,8 @@ $("resetBtn").onclick=()=>{if(confirm("Reset progress? This clears stars, sparkl
 // ---------- Block Buddies (number characters) ----------
 const BCOL=["var(--grey)","var(--red)","var(--accent)","var(--gold)","var(--green)","var(--blue)","var(--plum-l)","rainbow","var(--rose)","var(--grey)","var(--card)"];
 const RAIN=["var(--red)","var(--accent)","var(--gold)","var(--green)","var(--blue)","var(--blue-dk)","var(--plum-l)"];
-const BNAME=["","Zippy","Twinkle","Tri-Star","Quadra","Starfive","Hexa","Rainbow","Octo","Nova","Queen Ten","Comet","Twelvy","Lucky","Fourteenie","Shimmer","Sixteen Sparkle","Seventeen Swirl","Eighteen Glow","Moonbeam","Twenty Twinkle"]; // 15 was "Fifty-Fizz", 19 was "Ninetina" (sound like fifty/ninety)
-const bname=n=>`Block Buddy ${n}`+(BNAME[n]?` · ${BNAME[n]}`:"");
+const BNAME=[]; // 6B: the invented Buddy names are gone; a block is just "Block 1", "Block 2" ...
+const bname=n=>`Block ${n}`+(BNAME[n]?` · ${BNAME[n]}`:"");
 function blkColor(n,i){ // i = 0-based index within its column-group
  if(n>10)return null; if(n===7)return RAIN[i%7]; return BCOL[n]}
 function makeBlock(col,isNew){const b=document.createElement("div");b.className="blk"+(isNew?" new":"");b.style.background=col;return b}
@@ -686,7 +686,7 @@ function modeBuild(){bN=Math.max(1,Math.min(bN,20));drawBuild();$("bprompt").tex
  btn("−","rb minus",()=>{if(bN>0){bN--;tone(500,0,.1);drawBuild();say(bN?NUMW[bN]:"zero! all gone")}});
  btn("+","rb",()=>{if(bN<20){bN++;tone(500+bN*30,0,.15,"triangle");drawBuild(true);say(NUMW[bN]);if(bN===10){burst($("stage"));say("Ten! A royal ten with a crown!")}}else say("Twenty is my biggest!")});}
 // --- Join (drag to add) ---
-function modeJoin(){if(bTimeUp())return;resetStage();const max=bMax();const a=R(1,max-1),b=R(1,Math.min(max-a,9));$("bprompt").textContent="Drag one buddy onto the other!";
+function modeJoin(){if(bTimeUp())return;resetStage();const max=bMax();const a=R(1,max-1),b=R(1,Math.min(max-a,9));$("bprompt").textContent="Drag one tower onto the other!";
  bspeak(`${NUMW[a]} and ${NUMW[b]} want to join together! Drag one onto the other.`);const st=$("stage");
  const A=buddy(a),B=buddy(b);const eq=document.createElement("div");eq.className="eq";eq.textContent="+";st.append(A,eq,B);
  st.classList.add("joinst");[A,B].forEach(el=>dragify(el,()=>el===A?B:A,()=>mergeJoin(a,b)));
@@ -730,8 +730,8 @@ function modeOdd(){if(bTimeUp())return;const n=R(2,bMax());const st=resetStage()
    if(v===ans){$("bctl").innerHTML="";const t2=award(g,ans==="even"?`${NUMW[n]} is even! Every block has a partner!`:`${NUMW[n]} is odd! One block is left over!`);bspeak(t2);btn("➡️ More!","big",modeOdd)}
    else{b.classList.add("no");b.style.opacity=.5;const h=ans==="even"?"Look, does every block have a partner?":"Look, is one block all alone?";$("bhint").textContent=h;say(h)}});b.style.fontSize="24px"})})}
 // --- Stairs ---
-function modeStairs(){const st=resetStage();st.classList.add("stairs");st.style.gap="6px";$("bprompt").textContent="Tap a buddy to say hello!";
- bspeak("Here are the number stairs! Each buddy is one block taller. Tap one!");const all=[];
+function modeStairs(){const st=resetStage();st.classList.add("stairs");st.style.gap="6px";$("bprompt").textContent="Tap a tower to hear its number!";
+ bspeak("Here are the number stairs! Each tower is one block taller. Tap one!");const all=[];
  const gap=4,sz=Math.max(14,Math.min(30,Math.floor((Math.min(st.clientWidth||window.innerWidth,window.innerWidth)-30-9*gap)/10)-8));st.style.gap=gap+"px";st.style.setProperty("--b",sz+"px");
  for(let n=1;n<=10;n++){const b=buddy(n,{size:sz});b.onclick=()=>{stopCount();b.classList.remove("merge");void b.offsetWidth;b.classList.add("merge");say(`${bname(n)}. I'm ${NUMW[n]}!`)};st.appendChild(b);all.push(b)}
  btn("🎵 Climb the stairs!","big alt",()=>{stopCount();all.forEach((b,i)=>countT.push(setTimeout(()=>{b.classList.remove("merge");void b.offsetWidth;b.classList.add("merge");tone(400+i*60,0,.2,"triangle");say(NUMW[i+1])},i*800)))});if(typeof skipBtns==="function")skipBtns(all)}
@@ -926,7 +926,7 @@ PLANETS.push({id:"tens",name:"Tens and Ones",icon:"🔟",col:"var(--plum)",maxl:
 // ---------- Block Buddies: Take away (M6), Join prediction (M7), skip counting (X5) ----------
 let takeRound=0;
 function modeTake(){if(bTimeUp())return;const st=resetStage();const a=R(2,takeRound>=3?Math.max(5,bMax()):5),b=R(1,a-1);let left=a;
- $("bprompt").textContent=`${a} take away ${b}`;bspeak(`${NUMW[a]} take away ${NUMW[b]}! Tap the buddy to take blocks away.`);
+ $("bprompt").textContent=`${a} take away ${b}`;bspeak(`${NUMW[a]} take away ${NUMW[b]}! Tap the tower to take blocks away.`);
  const info=()=>{$("bhint").textContent=`🫧 ${a-left} of ${b} taken away`};
  const draw=()=>{st.innerHTML="";const d=buddy(left);d.onclick=take;st.appendChild(d)};
  function take(){if(st.dataset.done==="1"||left<=a-b)return;left--;tone(760-(a-left)*40,0,.15,"sine");draw();info();
@@ -953,22 +953,22 @@ const PL=id=>PLANETS.find(p=>p.id===id);
 function journeyCard(html,btns){show("game");$("prog").textContent="🗺️";$("prompt").textContent="🗺️ Today's Adventure";$("visual").innerHTML=html;$("hint").textContent="";const c=$("choices");c.innerHTML="";
  btns.forEach(([t,cls,fn])=>{const b=document.createElement("button");b.className=cls;b.textContent=t;b.onclick=fn;c.appendChild(b)})}
 function startJourney(){if(timeUp())return restScreen();markPlayed();JR={ids:pickJourney(),i:0,s0:S.stars};const p=PL(JR.ids[0]);
- journeyCard(`<div class="card">🗺️ We visit three planets today:<br><b>${JR.ids.map(i=>PL(i).icon+" "+PL(i).name).join(" → ")}</b></div>`,[["🚀 Fly!","big",()=>startPlanet(p)],["🏠 Not now","big alt",()=>{JR=null;show("start");showDays()}]]);
- say(`Today's adventure! We fly to ${p.name} planet!`)}
+ journeyCard(`<div class="card">🗺️ Three things to do today:<br><b>${JR.ids.map(i=>PL(i).icon+" "+PL(i).name).join(" → ")}</b></div>`,[["🚀 Fly!","big",()=>startPlanet(p)],["🏠 Not now","big alt",()=>{JR=null;show("start");showDays()}]]);
+ say(JSTART.replace("{p}",p.name))}
 function journeyNext(){const j=JR;setTimeout(()=>{if(JR!==j||!$("game").classList.contains("on"))return;if(timeUp()){JR=null;return restScreen()}
- j.i++;if(j.i<j.ids.length){const p=PL(j.ids[j.i]);journeyCard(`<div class="card">✨🚀 We fly to <b>${p.icon} ${p.name}</b>!</div>`,[["🚀 Fly on!","big",()=>startPlanet(p)],["🏠 Stop for now","big alt",()=>{JR=null;show("start");showDays()}]]);say(`We fly to ${p.name} planet!`);return}
+ j.i++;if(j.i<j.ids.length){const p=PL(j.ids[j.i]);journeyCard(`<div class="card">✨🐾 We go to <b>${p.icon} ${p.name}</b>!</div>`,[["🚀 Fly on!","big",()=>startPlanet(p)],["🏠 Stop for now","big alt",()=>{JR=null;show("start");showDays()}]]);say(JGO.replace("{p}",p.name));return}
  JR=null;const badge=pick(BADGES);S.badges=(S.badges||[]).concat(badge).slice(-200);S.stars+=2;save(); // finishing bonus: 2 stars + an adventure badge for the castle
  const area=AREA_OF[j.ids.slice().sort((x,y)=>planetScore(x,Date.now())-planetScore(y,Date.now()))[0]];
- journeyCard(`<div class="card">🎉 What an adventure! <br>+2 ⭐ and a new badge: <span style="font-size:60px">${badge}</span></div><div class="card grown"><b>Grown-ups, try this together:</b><br>${OFF[area]}</div>`,[["🏠 Home","big",()=>{show("start");showDays()}],["🎨 Decorate","big alt",openDeco]]);
- sfx.win();burst(document.body,30,true);say("What an adventure! You visited three planets! Ask a grown-up to try something fun with you!")},2600)}
+ setSky(3);journeyCard(`${homeFin()}<div class="card">🎉 What an adventure! <br>+2 ⭐ and a new badge: <span style="font-size:60px">${badge}</span></div><div class="card grown"><b>Grown-ups, try this together:</b><br>${OFF[area]}</div>`,[["🏠 Home","big",()=>{show("start");showDays()}],["🎨 Decorate","big alt",openDeco]]);
+ sfx.win();burst(document.body,30,true);say(HOMEDARK+" What an adventure! You did three things today! Ask a grown-up to try something fun with you!")},2600)}
 const BADGES=["🗺️","🧭","🏵️","🎖️","🌟","🪐"];
 $("advBtn").onclick=()=>{sfx.tap();startJourney()};$("backBtn").addEventListener("click",()=>{JR=null});
 // ---------- Story corner (X2) ----------
 const STORIES=[
  {t:"Pip the Ant",g:0,i:"🐜",p:[["🐜","Pip is an ant."],["🐜💫","Pip spins and spins."],["🐜👏","Tap, tap, tap!"],["🥫🐜","Pip sits in a tin."],["😴🐜","Pip naps."]],q:["Where did Pip sit?",[["🥫 in a tin","tin"],["🍳 in a pan","pan"],["👖 in the pants","pants"]],"tin"],q2:["What did Pip do at the end?",[["😴 nap","nap"],["🌀 spin","spin"],["🎨 paint","paint"]],"nap"]},
- {t:"Nan Taps",g:0,i:"👵",p:[["👵","Nan sits."],["🥫👵","Nan taps a tin."],["🍳👵","Nan taps a pan."],["🎶","Tap, tap, tap, pat!"],["👧👵","I sit and tap."],["😴👵","Nan naps!"]],q:["Who naps?",[["👵 Nan","nan"],["🐜 Pip","pip"],["🧒 Tip","tip"]],"nan"],q2:["What did Nan tap first?",[["🥫 a tin","tin"],["🍳 a pan","pan"],["🚰 a tap","tap"]],"tin"]},
+ {t:"Nan Taps",g:0,i:"👵",p:[["👵","Nan sits."],["🥫👵","Nan taps a tin."],["🍳👵","Nan taps a pan."],["🎶","Tap, tap, tap, pat!"],["✋👵","I sit and tap."],["😴👵","Nan naps!"]],q:["Who naps?",[["👵 Nan","nan"],["🐜 Pip","pip"],["🧒 Tip","tip"]],"nan"],q2:["What did Nan tap first?",[["🥫 a tin","tin"],["🍳 a pan","pan"],["🚰 a tap","tap"]],"tin"]},
  {t:"Sam the Dog",g:1,i:"🐶",p:[["🐶","Sam is my dog."],["🐶⛏️","Sam digs and digs."],["🐶🟫","Sam got a mat."],["🐶","Sam sits on the mat."],["😴🐶","Sam naps on the mat."]],q:["What is Sam?",[["🐶 a dog","dog"],["🐷 a pig","pig"],["🐐 a goat","goat"]],"dog"],q2:["Where did Sam nap?",[["🟫 on the mat","mat"],["🍲 in a pot","pot"],["🗺️ on a map","map"]],"mat"]},
- {t:"Dad and the Map",g:1,i:"🗺️",p:[["👨🗺️","Dad got a map."],["👨👧","Dad and I go."],["🏞️","We go to a pond."],["🐶","I spot a dog."],["🐶🏖️","The dog digs in the sand."],["👧🐶","We pat the dog."]],q:["What did I spot?",[["🐶 a dog","dog"],["🐷 a pig","pig"],["🐐 a goat","goat"]],"dog"],q2:["Where did we go?",[["🏞️ to a pond","pond"],["⛰️ to the top","top"],["🌙 to the moon","moon"]],"pond"]},
+ {t:"Dad and the Map",g:1,i:"🗺️",p:[["👨🗺️","Dad got a map."],["👨✋","Dad and I go."],["🏞️","We go to a pond."],["🐶","I spot a dog."],["🐶🏖️","The dog digs in the sand."],["✋🐶","We pat the dog."]],q:["What did I spot?",[["🐶 a dog","dog"],["🐷 a pig","pig"],["🐐 a goat","goat"]],"dog"],q2:["Where did we go?",[["🏞️ to a pond","pond"],["⛰️ to the top","top"],["🌙 to the moon","moon"]],"pond"]},
  {t:"The Red Cup",g:2,i:"🥤",p:[["👧🥤","Meg got a red cup."],["🥤","The cup is on the rug."],["🐶","Pup runs to the rug."],["🐶🥤","Pup tips the cup!"],["🐶","No, Pup, no!"],["👧🐶","Meg pets Pup."],["💖","Meg is not cross."]],q:["What did Pup tip?",[["🥤 the cup","cup"],["🖊️ a pen","pen"],["🥫 a tin","tin"]],"cup"],q2:["What colour was the cup?",[["🔴 red","red"],["🌸 pink","pink"],["🟢 green","green"]],"red"]},
  {t:"Kit the Cat",g:2,i:"🐱",p:[["🐱","Kit is my cat."],["🐱☀️","She sits in the sun."],["🐱💨","Kit can run."],["👦🐱","Kit runs to Ted."],["👦","He pets Kit."],["😺","Kit is snug."]],q:["Who is Kit?",[["🐱 a cat","cat"],["🐶 a dog","dog"],["🦆 a duck","duck"]],"cat"],q2:["Who pets Kit?",[["👦 Ted","ted"],["👵 Nan","nan"],["👨 Dad","dad"]],"ted"]},
  {t:"The Big Bus",g:3,i:"🚌",p:[["🚌","The bus is big and red."],["👦🚌","Bob gets on the bus."],["👧🚌","Lil gets on the bus."],["🚌⛰️","The bus gets to the hill."],["👦👧","Bob and Lil hop off."],["🎉","It is fun!"]],q:["What colour was the bus?",[["🔴 red","red"],["🔵 blue","blue"],["🟢 green","green"]],"red"],q2:["Where did the bus go?",[["⛰️ to the hill","hill"],["🏖️ to the sea","sea"],["🏫 to school","school"]],"hill"]},
@@ -979,13 +979,13 @@ const STORIES=[
  {t:"Ants in a Pan",g:0,i:"🐜",p:[["🐜🍳","Ants in a pan!"],["👵🍳","Nan taps the pan."],["🐜🐜","Tap, tap! The ants spin."],["🐜🥫","The ants nip in a tin."],["👵😊","Nan pats the tin."]],q:["Where did the ants go?",[["🥫 in a tin","tin"],["🍳 in a pan","pan"],["👖 in the pants","pants"]],"tin"],q2:["Who tapped the pan?",[["👵 Nan","nan"],["🐜 an ant","ant"],["🧒 Tip","tip"]],"nan"]},
  {t:"Tip Spins",g:0,i:"🌀",p:[["👦🌀","Tip spins."],["👦🌀","Spin, spin, spin!"],["👦😵","Tip sits."],["👧👦","Pat sits and Tip sits."],["😴","Tip and Pat nap."]],q:["What did Tip do?",[["🌀 spin","spin"],["🚰 tap","tap"],["🎨 paint","paint"]],"spin"],q2:["What did Tip and Pat do at the end?",[["😴 nap","nap"],["🚰 tap","tap"],["🎨 paint","paint"]],"nap"]},
  {t:"Snip, Snip",g:0,i:"✂️",p:[["✂️","Snip, snip!"],["👵✂️","Nan snips."],["👧💇","Nan snips at Pat."],["👧","Pat sits and sits."],["👧😊","Pat spins!"]],q:["Who snips?",[["👵 Nan","nan"],["🐜 Pip","pip"],["🧒 Tip","tip"]],"nan"],q2:["What did Pat do at the end?",[["🌀 spin","spin"],["😴 nap","nap"],["🚰 tap","tap"]],"spin"]},
- {t:"Momo Time",g:1,i:"🥟",p:[["👩🍲","Mom got a pot."],["🥟🍲","Momo in the pot!"],["👨","Dad sat and sat."],["👨🥟","Dad got a momo."],["👧👨🥟","Dad and I dip momos."],["😋","Mmm!"]],q:["What was in the pot?",[["🥟 momos","momo"],["🥭 mangos","mango"],["🥄 spoons","spoon"]],"momo"],q2:["Who got the pot?",[["👩 Mom","mom"],["👨 Dad","dad"],["🐶 a dog","dog"]],"mom"]},
- {t:"The Mist",g:1,i:"🌫️",p:[["🌫️","Mist, mist, mist."],["⛰️🌫️","Mist on the top."],["👨👧","Dad and I go."],["👣","We go on and on."],["⛰️🌞","At the top, no mist!"],["👨👧😊","Dad and I sit."]],q:["What was on the top?",[["🌫️ mist","mist"],["🌙 the moon","moon"],["🐐 a goat","goat"]],"mist"],q2:["What did Dad and I do at the end?",[["🪑 sit","sit"],["🚶 go","go"],["⛏️ dig","dig"]],"sit"]},
+ {t:"Momo Time",g:1,i:"🥟",p:[["👩🍲","Mom got a pot."],["🥟🍲","Momo in the pot!"],["👨","Dad sat and sat."],["👨🥟","Dad got a momo."],["✋👨🥟","Dad and I dip momos."],["😋","Mmm!"]],q:["What was in the pot?",[["🥟 momos","momo"],["🥭 mangos","mango"],["🥄 spoons","spoon"]],"momo"],q2:["Who got the pot?",[["👩 Mom","mom"],["👨 Dad","dad"],["🐶 a dog","dog"]],"mom"]},
+ {t:"The Mist",g:1,i:"🌫️",p:[["🌫️","Mist, mist, mist."],["⛰️🌫️","Mist on the top."],["👨✋","Dad and I go."],["👣","We go on and on."],["⛰️🌞","At the top, no mist!"],["👨✋😊","Dad and I sit."]],q:["What was on the top?",[["🌫️ mist","mist"],["🌙 the moon","moon"],["🐐 a goat","goat"]],"mist"],q2:["What did Dad and I do at the end?",[["🪑 sit","sit"],["🚶 go","go"],["⛏️ dig","dig"]],"sit"]},
  {t:"Dot the Dog",g:1,i:"🐕",p:[["🐶","Dot is a dog."],["🐶⛏️","Dot digs and digs."],["🐶🗺️","Dot got a map!"],["👨","No, Dot, no!"],["👨🐶","Dad pats Dot."],["🐶😴","Dot naps on a mat."]],q:["What did Dot get?",[["🗺️ a map","map"],["🥄 a spoon","spoon"],["🥭 a mango","mango"]],"map"],q2:["Who said no to Dot?",[["👨 Dad","dad"],["👵 Nan","nan"],["🐷 a pig","pig"]],"dad"]},
  {t:"Drip, Drip",g:2,i:"🌧️",p:[["🌧️","Drip, drip, drip!"],["⛺","Meg is in a tent."],["⛺💧","Drip! It drips on Meg."],["🥤💧","Drip in the cup!"],["☀️","The sun is up."],["👧☀️","Meg runs in the sun."]],q:["Where did Meg sit?",[["⛺ in a tent","tent"],["🚗 in a car","car"],["🧦 in a sock","sock"]],"tent"],q2:["What came out at the end?",[["☀️ the sun","sun"],["🌙 the moon","moon"],["⭐ a star","star"]],"sun"]},
  {t:"Duck in the Mud",g:2,i:"🦆",p:[["🦆","A duck is in the mud."],["🦆🦆","Duck, duck, duck!"],["🦆🪨","The duck sits on a rock."],["🐶","A pup runs up."],["🦆💨","The duck runs and runs."],["🐶🦆","The pup and duck rest."]],q:["Where did the duck sit?",[["🪨 on a rock","rock"],["🚗 on a car","car"],["🎂 on a cake","cake"]],"rock"],q2:["Who ran up?",[["🐶 a pup","pup"],["🐱 a cat","cat"],["🐀 a rat","rat"]],"pup"]},
  {t:"The Red Drum",g:2,i:"🥁",p:[["🥁","Ted got a red drum."],["👦🥁","Dum, dum, dum!"],["👵","Nan runs in."],["👵🥁","Nan can drum!"],["👵👦🥁","Nan and Ted drum and drum."],["😄","Ted grins."]],q:["What did Ted get?",[["🥁 a drum","drum"],["🚗 a car","car"],["🪁 a kite","kite"]],"drum"],q2:["Who came in to drum?",[["👵 Nan","nan"],["👨 Dad","dad"],["🐶 a dog","dog"]],"nan"]},
- {t:"Up the Hill",g:3,i:"⛰️",p:[["⛰️","The hill is big."],["👨👧","Dad and I go up."],["🌫️","Fog, fog, fog!"],["🛖","We stop at a hut."],["🥟","We have hot momos."],["☀️","The fog lifts!"]],q:["Where did they stop?",[["🛖 at a hut","hut"],["🏫 at a school","school"],["🏪 at a shop","shop"]],"hut"],q2:["What did they eat?",[["🥟 momos","momo"],["🥕 a carrot","carrot"],["🍌 a banana","banana"]],"momo"]},
+ {t:"Up the Hill",g:3,i:"⛰️",p:[["⛰️","The hill is big."],["👨✋","Dad and I go up."],["🌫️","Fog, fog, fog!"],["🛖","We stop at a hut."],["🥟","We have hot momos."],["☀️","The fog lifts!"]],q:["Where did they stop?",[["🛖 at a hut","hut"],["🏫 at a school","school"],["🏪 at a shop","shop"]],"hut"],q2:["What did they eat?",[["🥟 momos","momo"],["🥕 a carrot","carrot"],["🍌 a banana","banana"]],"momo"]},
  {t:"The Lost Hen",g:3,i:"🐔",p:[["🐔","Bell is a hen."],["🐔❓","Bell is lost!"],["👧","Fran said, \"Help!\""],["🐔🪵","Is Bell on the log?"],["🐔🛏️","No! Bell is in the bed!"],["👧🐔💖","Fran hugs Bell."]],q:["Where was Bell?",[["🛏️ in the bed","bed"],["🪵 on the log","log"],["🌳 up a tree","tree"]],"bed"],q2:["What did Fran do at the end?",[["🤗 hug Bell","hug"],["🏃 run off","run"],["😴 nap","nap"]],"hug"]},
  {t:"Hot Dal",g:3,i:"🍲",p:[["👵🍲","Gran has a big pot."],["🍲","It is dal!"],["👦👧","Bob and Lil are glad."],["🍲😋","The dal is hot."],["👦👧🥄","Bob and Lil have lots."],["👵😊","They like dal!"]],q:["What was in the pot?",[["🍲 dal","dal"],["🥛 milk","milk"],["🍦 ice cream","icecream"]],"dal"],q2:["Who made the dal?",[["👵 Gran","gran"],["👨 Dad","dad"],["🐶 a dog","dog"]],"gran"]},
  {t:"The Windy Hill",g:4,i:"🌬️",p:[["🌬️","The wind is up."],["🚩","Max has a red flag."],["🌬️🚩","The wind tugs the flag."],["🚩💨","The flag zips up!"],["👦😮","Max yells, \"Yes!\""],["😊","What fun!"]],q:["What did the wind tug?",[["🚩 the flag","flag"],["🎩 a hat","hat"],["🧦 a sock","sock"]],"flag"],q2:["What did Max yell?",[["✅ Yes!","yes"],["❌ No!","no"],["👋 Hello!","hello"]],"yes"]},
@@ -1001,7 +1001,7 @@ function checkStories(){const bad=[];STORIES.forEach(s=>{const ok=new Set(GROUPS
 function checkWords(){const bad=[];WORDG.forEach((ws,g)=>{const ok=new Set(GROUPS.slice(0,g+1).join("").toLowerCase());ws.forEach(([w])=>{if(![...w].every(c=>ok.has(c)))bad.push(`${w} (group ${g})`)})});
  BLEND.forEach(([w])=>{if(w.length!==3||!REALW.has(w)||RUDE.has(w))bad.push(`blend ${w}`)});RHYME.forEach(r=>(r[3]||[]).forEach(d=>{if(d[0].slice(-2)===r[2][0].slice(-2))bad.push(`rhyme ${r[0]}: ${d[0]}`)}));
  bad.forEach(b=>console.error("checkWords:",b));return bad}
-document.body.insertAdjacentHTML("beforeend",`<section id="storyS" class="screen"><div class="top"><button class="icon" id="stBack" aria-label="Back to planets">🪐</button><div id="stTitle">📖 Story Corner</div><button class="icon" id="stSay" aria-label="Say it again">🔊</button></div><div id="stBody"></div></section>
+document.body.insertAdjacentHTML("beforeend",`<section id="storyS" class="screen"><div class="top"><button class="icon" id="stBack" aria-label="Back to the hill">🗺️</button><div id="stTitle">📖 Story Corner</div><button class="icon" id="stSay" aria-label="Say it again">🔊</button></div><div id="stBody"></div></section>
 <section id="decoS" class="screen"><div class="top"><button class="icon" id="dcBack" aria-label="Back">👑</button><div>🎨 Decorate</div><span style="width:72px"></span></div>
 <div><button class="tab" id="bgCastle">🏰 Castle</button> <button class="tab" id="bgShip">🚀 Spaceship</button></div><div id="deco"></div><div style="font-size:18px;color:var(--plum);min-height:1.3em" id="dcTip">Tap a sticker to add it. Drag to move. Tap it again to take it off.</div><div id="tray"></div></section>`);
 let stCur=null,stPg=0,stT=[],stLast="",stTr=0;const stClear=()=>{stT.forEach(clearTimeout);stT=[];vHook=null};
@@ -1049,9 +1049,9 @@ function dragItem(e,it){let sx=0,sy=0,on=false,moved=false;e.addEventListener("p
 function openDeco(){JR=null;show("decoS");drawDeco();say("Decorate your castle! Tap a sticker to add it.")}
 $("decoBtn").onclick=()=>{sfx.tap();openDeco()};$("dcBack").onclick=()=>{drawColl();show("collS")};$("bgCastle").onclick=()=>{D.bg="castle";saveD();drawDeco()};$("bgShip").onclick=()=>{D.bg="ship";saveD();drawDeco()};
 // ---------- optional: download all voices (M10) ----------
-$("dlBtn").onclick=async()=>{const bar=$("dlBar"),msg=$("dlMsg");try{const ks=await fetch("audio/index.json",{cache:"no-cache"}).then(r=>r.json());let n=0,ok=0,i=0;msg.textContent="Saving voices…";
- const one=async()=>{while(i<ks.length){const k=ks[i++];try{const r=await fetch("audio/"+k+".mp3");if(r.ok){await r.arrayBuffer();ok++}}catch(e){}n++;bar.style.width=Math.round(n/ks.length*100)+"%"}};
- await Promise.all([one(),one(),one(),one()]);msg.textContent=`Saved ${ok} of ${ks.length} voices for offline ✓`}catch(e){msg.textContent=""}}; // the service worker caches each full mp3 response; fails silently
+$("dlBtn").onclick=async()=>{const bar=$("dlBar"),msg=$("dlMsg");try{const ks=await fetch("audio/index.json",{cache:"no-cache"}).then(r=>r.json());const fs=[...ks.map(k=>"audio/"+k+".mp3"),...(typeof ASSET_FILES!=="undefined"?ASSET_FILES:[])];let n=0,ok=0,i=0;msg.textContent="Saving voices and pictures…";
+ const one=async()=>{while(i<fs.length){const f=fs[i++];try{const r=await fetch(f);if(r.ok){await r.arrayBuffer();ok++}}catch(e){}n++;bar.style.width=Math.round(n/fs.length*100)+"%"}};
+ await Promise.all([one(),one(),one(),one()]);msg.textContent=`Saved ${ok} of ${fs.length} files for offline ✓ (pictures not made yet are skipped)`}catch(e){msg.textContent=""}}; // the service worker caches each full mp3 response; fails silently
 // ---------- reset + time limit for open-ended screens ----------
 function resetB3(){D={bg:"castle",items:[]};saveD();SP={done:{},mode:SP.mode||"me"};saveSP();S.badges=[];JR=null;takeRound=0}
 setInterval(()=>{if($("restS").classList.contains("on"))JR=null;if(timeUp()&&($("storyS").classList.contains("on")||$("decoS").classList.contains("on"))){stClear();restScreen()}},1000);
@@ -1059,18 +1059,18 @@ if(!S.badges)S.badges=[];
 window.__test3={checkStories,checkWords,STORD,SIGHT_AT,get stTr(){return stTr},NW,shapeGen,patternGen,measureGen,tensGen,traceGen,SIGHTP,GLYPH,traceInit,traceStep,traceProg,TRACE,resample,STORIES,SIGHT,words,pickJourney,planetScore,startJourney,get JR(){return JR},setJR:v=>{JR=v},
  get D(){return D},drawDeco,openDeco,openStories,storyList,get SP(){return SP},DKEY,SKEY,modeTake,MATHS,ENG,BADGES,trayItems,
  phrases(){const L=[],add=(p,c)=>L.push([p,c]);for(let n=21;n<=100;n++)if(n%5===0)add(NW(n),"numbers");
-  for(let a=2;a<=10;a++)for(let b=1;b<a;b++){add(`${NUMW[a]} take away ${NUMW[b]}! Tap the buddy to take blocks away.`,"block-buddies");add(`${NUMW[a]} take away ${NUMW[b]} is ${NUMW[a-b]}!`,"block-buddies")}
+  for(let a=2;a<=10;a++)for(let b=1;b<a;b++){add(`${NUMW[a]} take away ${NUMW[b]}! Tap the tower to take blocks away.`,"block-buddies");add(`${NUMW[a]} take away ${NUMW[b]} is ${NUMW[a-b]}!`,"block-buddies")}
   ["How many will there be?","Yes! Let's join them!","Let's count all the blocks together!","Let's count by twos!","Let's count by fives!","Let's count by tens!"].forEach(x=>add(x,"block-buddies"));
   ABC.forEach(x=>add(`Trace the letter ${x.toLowerCase()}! Follow the dot.`,"tracing"));for(let d=0;d<=9;d++)add(`Trace the number ${NUMW[d]}! Follow the dot.`,"tracing");["Follow the glowing dot!","Now the next line!"].forEach(x=>add(x,"tracing"));
   ["Shortest!","Next!","Longest!","Make your own pattern! Tap the shapes.","Wow! You made your own pattern!","Tap the shapes to add them!",...TOK.map(t=>t[0])].forEach(x=>add(x,"shapes-patterns-measure"));
-  PLANETS.forEach(p=>{add(`Today's adventure! We fly to ${p.name} planet!`,"journey");add(`We fly to ${p.name} planet!`,"journey")});
-  add("What an adventure! You visited three planets! Ask a grown-up to try something fun with you!","journey");
+  PLANETS.forEach(p=>{add(JSTART.replace("{p}",p.name),"journey");add(JGO.replace("{p}",p.name),"journey")});
+  add(HOMEDARK+" What an adventure! You did three things today! Ask a grown-up to try something fun with you!","journey");add(HOMEDARK,"journey");
   ["Story time! Pick a story.","Learn more letter sounds to open this story!","Let's look back at the story!","Decorate your castle! Tap a sticker to add it.","Wow, so many! Take one off to add more."].forEach(x=>add(x,"ui"));
   STORIES.forEach(s=>{s.p.forEach(([,t])=>{add(t,"story-sentences");words(t).forEach(w=>add(w==="I"?"I":w.toLowerCase(),"story-words"))});add(s.q[0],"story-sentences");if(s.q2)add(s.q2[0],"story-sentences")});
   SIGHT.forEach(w=>add(w,"story-words"));Object.values(CHEER_BY).flat().forEach(c=>add(c,"cheers"));
   for(const p of [...PLANETS.filter(p=>["count","add","more","quick","tens","shape","pattern","measure","trace"].includes(p.id)),SIGHTP])for(let l=0;l<6;l++)for(let i=0;i<3000;i++){const q=p.gen(Math.min(l,p.maxl??3));
    if(q.onHint&&q.hintParts)q.hintParts.forEach(x=>add(x,p.id));
-   if(q.sayParts)q.sayParts.forEach(x=>add(x,p.id));else add(q.say,p.id);if(q.hintParts)q.hintParts.forEach(x=>add(x,p.id));else add(q.hint,p.id);add(`Hooray! You finished ${p.name} planet and won a gem!`,"ui");add(`Hooray! You finished ${p.name} planet and won a gem! And a brand new sticker!`,"ui")}
+   if(q.sayParts)q.sayParts.forEach(x=>add(x,p.id));else add(q.say,p.id);if(q.hintParts)q.hintParts.forEach(x=>add(x,p.id));else add(q.hint,p.id);add(`Hooray! You finished ${p.name} and won a gem!`,"ui");add(`Hooray! You finished ${p.name} and won a gem! And a brand new sticker!`,"ui")}
   const T=window.__test,g0=LP.g;for(let g=0;g<GROUPS.length;g++){T.setLP({g});for(const p of PLANETS.filter(p=>["word","blend","rhyme"].includes(p.id)))for(let l=0;l<4;l++)for(let i=0;i<1500;i++){const q=p.gen(l);
    if(q.sayParts)q.sayParts.forEach(x=>add(x,p.id));else add(q.say,p.id);if(q.hintParts)q.hintParts.forEach(x=>add(x,p.id));else add(q.hint,p.id)}}T.setLP({g:g0});
   return L},
@@ -1091,50 +1091,50 @@ window.__test3={checkStories,checkWords,STORD,SIGHT_AT,get stTr(){return stTr},N
 // steps: {b:"problem"|"show"|"try"|"recap", say, d:[draw op,...args]}; try: {q, h (hint), ch (>=3 choices), a (answer)}; recap: {say, chant:[lines]}
 const EPISODES=[
  {id:"count",skill:"Counting",title:"Touch and count",steps:[
-  {b:"problem",say:"Hello! I'm Rainbow. I need seven blocks for my bridge. Can you help me count them?",d:["bud",7]},
+  {b:"problem",say:"Hello! I'm Bear. I need seven blocks for my bed. Can you help me count them?",d:["bud",7]},
   {b:"show",say:"I touch each block once, and say one number for each block.",d:["count",7]},
   {b:"show",say:"The last number I said was seven. So there are seven blocks!",d:["bud",7]},
-  {b:"try",q:"Let's count Quadra's blocks together. How many?",h:"Tap each block once. The last number tells you how many.",d:["bud",4],ch:[3,4,5],a:4},
-  {b:"try",q:"How many blocks does Hexa have?",h:"Touch each one once, and say one number for each.",d:["bud",6],ch:[5,6,8],a:6},
-  {b:"try",q:"Count Starfive's blocks with me. How many?",h:"One number for each block. Say the last one again.",d:["bud",5],ch:[4,5,6],a:5},
+  {b:"try",q:"Let's count Moose's blocks together. How many?",h:"Tap each block once. The last number tells you how many.",d:["bud",4],ch:[3,4,5],a:4},
+  {b:"try",q:"How many blocks does Elephant have?",h:"Touch each one once, and say one number for each.",d:["bud",6],ch:[5,6,8],a:6},
+  {b:"try",q:"Count Zippet's blocks with me. How many?",h:"One number for each block. Say the last one again.",d:["bud",5],ch:[4,5,6],a:5},
   {b:"recap",say:"Touch each one once, and the last number tells you how many!",chant:["Touch and count,","one by one,","the last number says","how many, done!"],d:["bud",7]}]},
  {id:"join",skill:"Adding",title:"Join them together",steps:[
-  {b:"problem",say:"I'm Tri-Star! My friend Twinkle wants to join me. How many blocks will we be?",d:["pair",3,2]},
+  {b:"problem",say:"I'm Moose! My friend Elephant brings blocks too. How many blocks will we have?",d:["pair",3,2]},
   {b:"show",say:"Three and two join together. We count them all, and we get five!",d:["join",3,2]},
   {b:"try",q:"Two and two join together. How many altogether?",h:"Push them together, then count them all.",d:["pair",2,2],ch:[3,4,5],a:4},
   {b:"try",q:"Four and one join together. How many altogether?",h:"Count every block, starting at one.",d:["pair",4,1],ch:[4,5,6],a:5},
   {b:"try",q:"Three and three join together. How many altogether?",h:"Join them up and count them all.",d:["pair",3,3],ch:[5,6,7],a:6},
   {b:"recap",say:"When we add, we join the groups and count them all.",chant:["Push them close,","join as one,","count them all,","adding is fun!"],d:["bud",5]}]},
  {id:"on",skill:"Counting on",title:"Count on from the big one",steps:[
-  {b:"problem",say:"I'm Hexa, and I have six blocks. Twinkle brings two more. Do we count from one again?",d:["pair",6,2]},
+  {b:"problem",say:"I'm Elephant, and I have six blocks. Bear brings two more. Do we count from one again?",d:["pair",6,2]},
   {b:"show",say:"No! Keep six in your head, then count on: seven, eight. Eight blocks!",d:["on",6,2]},
   {b:"try",q:"Five, and two more. Start at five and count on. How many?",h:"Say five, then count on: six, seven.",d:["pair",5,2],ch:[6,7,8],a:7},
   {b:"try",q:"Seven, and three more. Start at seven and count on. How many?",h:"Say seven, then count on three more.",d:["pair",7,3],ch:[9,10,11],a:10},
   {b:"try",q:"Eight, and two more. Start at eight and count on. How many?",h:"Say eight, then count on: nine, ten.",d:["pair",8,2],ch:[9,10,12],a:10},
   {b:"recap",say:"Start with the big number, then count on!",chant:["Big number first,","keep it in your head,","count on, count on,","that's what we said!"],d:["bud",8]}]},
  {id:"take",skill:"Take away",title:"Float away, count what's left",steps:[
-  {b:"problem",say:"I'm Starfive, and I have five blocks. Two of them want to float away! How many will stay?",d:["bud",5]},
+  {b:"problem",say:"I'm Zippet, and I have five blocks. Two of them float away! How many will stay?",d:["bud",5]},
   {b:"show",say:"Two floated away. We count what is left: three. Five take away two is three!",d:["take",5,2]},
   {b:"try",q:"Four blocks, and one floats away. How many are left?",h:"Count only the blocks that are still there.",d:["taken",4,1],ch:[2,3,4],a:3},
   {b:"try",q:"Six blocks, and two float away. How many are left?",h:"Skip the faded blocks. Count the bright ones.",d:["taken",6,2],ch:[3,4,5],a:4},
   {b:"try",q:"Five blocks, and three float away. How many are left?",h:"Count the bright blocks that stayed.",d:["taken",5,3],ch:[1,2,3],a:2},
   {b:"recap",say:"Take some away, then count what is left.",chant:["Float away,","wave goodbye,","count what's left,","reach for the sky!"],d:["bud",3]}]},
  {id:"maketen",skill:"Make ten",title:"Fill up to ten",steps:[
-  {b:"problem",say:"I'm Queen Ten, and I stand tall! Octo has eight blocks. How many more to make me?",d:["pair",8,2]},
+  {b:"problem",say:"I'm Moose, and I stand tall! Bear has eight blocks. How many more make ten?",d:["pair",8,2]},
   {b:"show",say:"Eight and two make ten! Ten stands tall with a crown.",d:["ten",8]},
-  {b:"try",q:"Rainbow has seven. How many more make ten?",h:"Count on from seven until you reach ten.",d:["tenq",7],ch:[2,3,4],a:3},
-  {b:"try",q:"Hexa has six. How many more make ten?",h:"Six, then count on to ten: seven, eight, nine, ten.",d:["tenq",6],ch:[3,4,5],a:4},
-  {b:"try",q:"Nova has nine. How many more make ten?",h:"Nine is one away from ten.",d:["tenq",9],ch:[1,2,3],a:1},
+  {b:"try",q:"Bear has seven. How many more make ten?",h:"Count on from seven until you reach ten.",d:["tenq",7],ch:[2,3,4],a:3},
+  {b:"try",q:"Elephant has six. How many more make ten?",h:"Six, then count on to ten: seven, eight, nine, ten.",d:["tenq",6],ch:[3,4,5],a:4},
+  {b:"try",q:"Zippet has nine. How many more make ten?",h:"Nine is one away from ten.",d:["tenq",9],ch:[1,2,3],a:1},
   {b:"recap",say:"Fill up to ten first. Ten is a friendly number!",chant:["Ten stands tall,","crown on top,","fill up to ten,","and then we stop!"],d:["bud",10]}]},
  {id:"teen",skill:"Teen numbers",title:"One ten and some ones",steps:[
-  {b:"problem",say:"I'm Lucky, and I'm thirteen. I am one ten and some ones. Can you see my ten?",d:["bud",13]},
+  {b:"problem",say:"I'm Elephant, and I have thirteen blocks. That is one ten and some ones. Can you see the ten?",d:["bud",13]},
   {b:"show",say:"Here is one ten, and three ones. One ten and three ones make thirteen!",d:["teen",13]},
   {b:"show",say:"One ten and six ones make sixteen!",d:["teen",16]},
   {b:"try",q:"One ten and four ones. What number is that?",h:"Start at ten and count the ones: eleven, twelve, thirteen, fourteen.",d:["bud",14],ch:[12,14,15],a:14},
   {b:"try",q:"Seventeen is one ten and how many ones?",h:"Count the little blocks next to the ten.",d:["bud",17],ch:[6,7,8],a:7},
   {b:"recap",say:"A teen number is one ten and some ones.",chant:["One tall ten","and ones beside,","that makes a teen","with ten inside!"],d:["bud",13]}]},
  {id:"evenodd",skill:"Even and odd",title:"Pairs, or one left over",steps:[
-  {b:"problem",say:"I'm Octo! My blocks love to hold hands in pairs. Does every block get a partner?",d:["pairs",8,1]},
+  {b:"problem",say:"I'm Bear! My blocks love to hold hands in pairs. Does every block get a partner?",d:["pairs",8,1]},
   {b:"show",say:"Eight: every block has a partner. Eight is even!",d:["pairs",8]},
   {b:"show",say:"Seven: one block is left over. Seven is odd!",d:["pairs",7]},
   {b:"try",q:"Six blocks make pairs. How many are left over?",h:"Look for a block with no partner.",d:["pairs",6,1],ch:[0,1,2],a:0},
@@ -1142,7 +1142,7 @@ const EPISODES=[
   {b:"try",q:"Nine blocks make pairs. How many are left over?",h:"Odd numbers have one spare block.",d:["pairs",9,1],ch:[0,1,2],a:1},
   {b:"recap",say:"Even numbers make pairs. Odd numbers have one left over.",chant:["Two by two,","we pair up neat,","one left over?","Odd! Tap your feet!"],d:["pairs",7,1]}]},
  {id:"blend",skill:"Blending",title:"Slide the sounds together",steps:[
-  {b:"problem",say:"I'm Zippy! These letter sounds are sitting far apart. Let's slide them together!",d:["tiles","sun"]},
+  {b:"problem",say:"I'm Zippet! These letter sounds are sitting far apart. Let's slide them together!",d:["tiles","sun"]},
   {b:"show",say:"Slowly, then fast. The sounds slide together and make sun!",d:["blend","sun"]},
   {b:"show",say:"Slowly, then fast again. The sounds make cat!",d:["blend","cat"]},
   {b:"try",q:"Slide these sounds together. Which word is it?",h:"Tap each letter to hear its sound, then say them fast.",d:["tiles","pig"],ch:[["🐷 pig","pig"],["🐶 dog","dog"],["🐱 cat","cat"]],a:"pig"},
@@ -1150,7 +1150,7 @@ const EPISODES=[
   {b:"recap",say:"Say each sound, then slide them together fast!",chant:["Sounds far apart,","slide, slide, slide,","push them together,","the word's inside!"],d:["tiles","sun"]}]}];
 const EPI=Object.fromEntries(EPISODES.map(e=>[e.id,e]));
 // Block Buddies cast: one line each, tied to the number (even Buddies pair up, odd Buddies have a spare, Ten stands tall)
-const BUDDY_PERS=["","I'm the smallest, and I always go first!","Two of us make a perfect pair!","A pair, and one spare to share!","Two pairs, all holding hands!","Like the fingers on one hand, with one spare!","Three happy pairs!","Seven colours, and one spare block!","Four pairs, and nobody left out!","Just one away from ten, with one spare!","I stand tall with my crown!",
+const BUDDY_PERS=["","The smallest one, and it always goes first!","Two blocks make a perfect pair!","A pair, and one spare to share!","Two pairs, all holding hands!","Like the fingers on one hand, with one spare!","Three happy pairs!","Seven colours, and one spare block!","Four pairs, and nobody left out!","Just one away from ten, with one spare!","Ten stands tall, like a tower!",
  "A ten and one spare!","A ten and a pair!","A ten and three, so one is spare!","A ten and two pairs!","A ten and five, with one spare!","A ten and three pairs!","A ten and seven, so one is spare!","A ten and four pairs!","One away from twenty, with one spare!","Two tall tens, side by side!"];
 // BUDDY_ART: empty by default. To use a picture for a Buddy, put the file in icons/ (e.g. icons/buddy7.png), set BUDDY_ART[7]="icons/buddy7.png",
 // and ADD THE FILE TO THE PRECACHE LIST IN sw.js (and bump its cache name) so it works offline. If the image fails to load, the drawn Buddy is shown.
@@ -1242,7 +1242,7 @@ function bldReturn(){if(!buildRet)return;const qq=buildRet.q;buildRet=null;stopC
 const _bBack=$("bBack").onclick;$("bBack").onclick=()=>{if(buildRet)return bldReturn();_bBack()};
 const _setMode=setMode;setMode=function(m){if(m==="oddeven"&&!buildRet&&epAuto(["evenodd"],()=>openBlocks("oddeven")))return;$("bMeet").style.display=buildRet||!epFor(m).length?"none":"";return _setMode(m)};
 // cast: personality line after the count-along; optional art
-const _drawBuild=drawBuild;drawBuild=function(isNew){_drawBuild(isNew);const b=$("stage").firstChild;if(b&&bN>0)b.onclick=()=>{const n=bN;countAlong(b,()=>{const t=`${NUMW[n]}! I'm ${bname(n)}!`;say(t+" "+BUDDY_PERS[n],[t,BUDDY_PERS[n]]);$("bhint").textContent=`${bname(n)}: ${BUDDY_PERS[n]}`})}};
+const _drawBuild=drawBuild;drawBuild=function(isNew){_drawBuild(isNew);const b=$("stage").firstChild;if(b&&bN>0)b.onclick=()=>{const n=bN;countAlong(b,()=>{const t=`${NUMW[n]}!`;say(t+" "+BUDDY_PERS[n],[t,BUDDY_PERS[n]]);$("bhint").textContent=`${bname(n)}: ${BUDDY_PERS[n]}`})}};
 const _buddy=buddy;buddy=function(n,o){const d=_buddy(n,o);const src=BUDDY_ART[n];if(src){const im=document.createElement("img");im.className="bart";im.alt=bname(n);const sz=parseFloat(d.style.getPropertyValue("--b"))||44;
  im.style.height=sz*Math.min(Math.max(n,1),10)+"px";im.style.maxWidth=sz*4+"px";im.onerror=()=>{im.remove();d.classList.remove("art")};d.classList.add("art");d.insertBefore(im,d.firstChild);im.src=src}return d}; // same height as the drawn tower; drawn Buddy if the file fails
 // report + reset
@@ -1254,7 +1254,7 @@ const _resetB3=typeof resetB3==="function"?resetB3:()=>{};resetB3=function(){_re
 // tests: phrases + self-check
 const _ph=__test3.phrases,_sc=__test3.selfCheck;
 __test3.phrases=function(){const L=_ph.call(this),add=(p,c)=>L.push([p,c]);EPISODES.forEach(e=>e.steps.forEach(s=>{[s.say,s.q,s.h,...(s.chant||[])].forEach(x=>x&&add(x,"episodes"));if(s.say&&s.chant)add([s.say,...s.chant].join(" "),"episodes");if(s.q)add(s.q+" "+s.h,"episodes")}));
- add("Look, this one!","episodes");["ten!","ten"].forEach(x=>add(x,"episodes"));for(let n=1;n<=20;n++){add(BUDDY_PERS[n],"block-buddies");add(`${NUMW[n]}! I'm ${bname(n)}! ${BUDDY_PERS[n]}`,"block-buddies")}
+ add("Look, this one!","episodes");["ten!","ten"].forEach(x=>add(x,"episodes"));for(let n=1;n<=20;n++){add(BUDDY_PERS[n],"block-buddies");add(`${NUMW[n]}! ${BUDDY_PERS[n]}`,"block-buddies")}
  ["sun","cat","pig","map"].forEach(w=>add([...w].map(c=>PHON[c.toUpperCase()]).join(", "),"episodes"));return L};
 __test3.checkEpisodes=function(){const bad=[],O=["problem","show","try","recap"];EPISODES.forEach(e=>{const f=m=>bad.push(`${e.id}: ${m}`);if(!e.id||!e.skill||!e.title||!Array.isArray(e.steps))return f("missing fields");
  const bs=e.steps.map(s=>s.b),ix=bs.map(b=>O.indexOf(b));if(ix.some(i=>i<0))f("unknown beat");if(ix.some((v,i)=>i&&v<ix[i-1]))f("beats out of order");O.forEach(b=>{if(!bs.includes(b))f("no "+b)});
@@ -1272,7 +1272,7 @@ Object.assign(__test3,{EPISODES,EPI,BUDDY_PERS,BUDDY_ART,epFor,epWants,epMiss,ep
 <script id="pass4">
 // ---------- Pass 4 data ----------
 // Sentence Builder: [sentence, picture, gap word, letter group]. Every word uses letters from groups 0..g or is in SIGHT.slice(0,SIGHT_AT[g]) (checkSent)
-const SENT=[["Ants nap.","🐜😴","Ants",0],["Tap the tin.","👆🥫","tin",0],["The ant spins.","🐜🌀","ant",0],["I tap a pan.","👧🍳","pan",0],
+const SENT=[["Ants nap.","🐜😴","Ants",0],["Tap the tin.","👆🥫","tin",0],["The ant spins.","🐜🌀","ant",0],["I tap a pan.","✋🍳","pan",0],
  ["A dog digs.","🐶⛏️","dog",1],["Mom naps.","👩😴","Mom",1],["My pig sits.","🐷","pig",1],["We go to Dad.","👨","Dad",1],["I got a map.","🗺️","map",1],
  ["The cat is red.","🐱🔴","cat",2],["A duck runs.","🦆","duck",2],["She cut a cake.","👧🎂","cake",2],["He got a cup.","👦🥤","cup",2],["The sun is up.","☀️","sun",2],
  ["A hen naps.","🐔😴","hen",3],["The frog hops.","🐸","frog",3],["Bob has a hat.","👦🎩","hat",3],["They like the bus.","🚌","bus",3],["A bat flaps.","🦇","bat",3],
@@ -1293,7 +1293,7 @@ const DG_STORIES=[
 // Coins and Clock: plain circles with numerals (no real coin designs)
 const COINS=[[1,"var(--silver)",34],[2,"var(--silver-dk)",38],[5,"var(--gold-l)",42],[10,"var(--gold)",46]];
 // Guiding story: one line per Adventure; every 4 Adventures a new home sticker for the castle
-const BEATS4=["The Buddies found the bridge home. Thank you!","One more Buddy is safe at home!","The Buddies can see their home from here!","You lit the way home for the Buddies!","The Buddies built a road home together!","The Buddies are waving from their windows!"];
+const BEATS4=["Zippet found the path home. Thank you!","One more step closer to home!","Zippet can see the cottage from here!","You lit the way home for Zippet!","You and Zippet made a path home together!","The cottage windows are glowing!"];
 const HOME_ST=["🏡","🌉","🛸","🏘️","🗼","🎠"];
 const OFF4={"Sentences":"Write a short sentence on a note (A cat naps.) and let her read it, then act it out together.","Sound pairs":"Hunt for sh, ch, th and ng on signs and packets: shop, chips, three, king.",
  "Coins & Clock":"Let her pay for something small with ₹1, ₹2 and ₹5 coins, and say the time together on the hour: it's three o'clock!"};
@@ -1401,7 +1401,7 @@ MATHS.push("coin");ENG.push("sent","dg");Object.assign(MP,{more:MP.more||["ML:"]
 Object.assign(AREA_OF,{sent:"Sentences",dg:"Sound pairs",coin:"Coins & Clock",more:AREA_OF.more||"Counting"});AREAS.push(["Sentences",["SB:"],"w"],["Sound pairs",["DG"],"w"],["Coins & Clock",["CO:","CK:"],"fact"]);Object.assign(OFF,OFF4);
 STORIES.push(...DG_STORIES); // appended: old SP.done indexes unchanged
 if(typeof S.adv!=="number")S.adv=0; // Adventures finished (home pieces); old saves: 0
-const stLock=s=>s.dg?!dgUnlocked():LP.g<s.g,stLockTxt=s=>s.dg?"Sound Pairs planet":GROUPS[s.g].join(" ").toLowerCase();
+const stLock=s=>s.dg?!dgUnlocked():LP.g<s.g,stLockTxt=s=>s.dg?"Sound Pairs":GROUPS[s.g].join(" ").toLowerCase();
 const _checkStories=checkStories;checkStories=function(){const bad=_checkStories();STORIES.forEach(s=>{if(s.dg)return;const sw=new Set(SIGHT.map(w=>w.toLowerCase()));
  s.p.forEach(([,t])=>words(t).forEach(w=>{const l=w.toLowerCase();if(!sw.has(l)&&DGS.some(d=>l.includes(d)))bad.push(`${s.t}: sound-pair word "${w}" outside the Sound Pairs stories`)}))});return bad};__test3.checkStories=checkStories;
 // Sound Pairs lock on the map, in startPlanet and in the Adventure picker
@@ -1410,7 +1410,7 @@ const _drawMap4=drawMap;drawMap=function(){_drawMap4();const b=[...document.quer
 const _startPlanet4=startPlanet;startPlanet=function(p){if(p&&p.id==="dg"&&!dgUnlocked()){say(DG_LOCK);return}return _startPlanet4(p)};
 const _pickJourney=pickJourney;pickJourney=function(now){const i=ENG.indexOf("dg"),lk=!dgUnlocked()&&i>=0;if(lk)ENG.splice(i,1);try{return _pickJourney(now)}finally{if(lk)ENG.splice(i,0,"dg")}};__test3.pickJourney=pickJourney;
 // E: guiding story. Every Adventure: one story line + one home piece; 4 pieces = a new home sticker (into the castle tray via S.badges)
-const _jcard4=journeyCard;journeyCard=function(html,btns){if(/visit three planets today|visits three planets today/.test(html))html+=`<div class="card">🧱🏠 Help the Block Buddies get home!</div>`;
+const _jcard4=journeyCard;journeyCard=function(html,btns){if(/Three things to do today|visit three planets today|visits three planets today/.test(html))html+=`<div class="card">🏡 Help Zippet get home before dark!</div>`;
  let beat=null;if(/What an adventure/.test(html)){S.adv=(S.adv|0)+1;const pc=(S.adv-1)%4+1,st=pc===4?HOME_ST[(S.adv/4-1)%HOME_ST.length]:null;if(st)S.badges=(S.badges||[]).concat(st).slice(-200);save();
   beat=BEATS4[(S.adv-1)%BEATS4.length];html+=`<div class="card" id="beat4">🧱 ${beat}<br>🧩 Home piece ${pc} of 4${st?` · New home sticker: <span style="font-size:48px">${st}</span>`:""}</div>`}
  _jcard4(html,btns);if(beat){const c=$("beat4");setTimeout(()=>{if(c.isConnected&&$("game").classList.contains("on"))say(beat)},7000)}}; // spoken after the end-card line
@@ -1446,10 +1446,10 @@ Object.assign(__test3,{SENT,DGW,DGS,DPH,DGB,DG_STORIES,COINS,BEATS4,HOME_ST,buil
 // ---------- Part A data ----------
 // A1: Build it prompt after a Counting question ({o} = the object name, e.g. strawberries). One filled phrase per counting object goes in the phrase list.
 const BUILD_T="Build a tower as tall as the {o} you counted. Tap the plus for each one.",BUILD_G="Build a tower as tall as the things you counted. Tap the plus for each one.";
-// A3: two Meet it episodes (speakers are Block Buddies already in the game)
+// A3: two Meet it episodes (6B: speakers are cast members, see SPEAKERS)
 const EPISODES_A=[
  {id:"coins",skill:"Coins",title:"Meet the coins",steps:[
-  {b:"problem",say:"Hello! I'm Starfive. I found four shiny coins in my pocket. Which coin is which?",d:["coins",[1,2,5,10]]},
+  {b:"problem",say:"Hello! I'm Zippet. I found four shiny coins by the door. Which coin is which?",d:["coins",[1,2,5,10]]},
   {b:"show",say:"Look at the number on each coin. This is one rupee, two rupees, five rupees, and ten rupees.",d:["coins",[1,2,5,10]]},
   {b:"show",say:"One five rupee coin is the same as five one rupee coins. Count them: one, two, three, four, five!",d:["coins",[5,"=",1,1,1,1,1]]},
   {b:"show",say:"Two coins of two rupees make four rupees. Two, and two more, makes four!",d:["coins",[2,"+",2,"= ₹4"]]},
@@ -1458,7 +1458,7 @@ const EPISODES_A=[
   {b:"try",q:"Two coins of two rupees. How many rupees?",h:"Two, and two more. Count on from two.",d:["coins",[2,"+",2]],ch:[3,4,5],a:4},
   {b:"recap",say:"The number on a coin tells you how many rupees it is worth.",chant:["One, two, five, ten,","look and say,","the number on the coin","shows what you pay!"],d:["coins",[1,2,5,10]]}]},
  {id:"clock",skill:"Clock",title:"Meet the clock",steps:[
-  {b:"problem",say:"Hello! I'm Twelvy. My clock has two hands, a short one and a long one. What time is it?",d:["clock",3,0]},
+  {b:"problem",say:"Hello! I'm Moose. My clock has two hands, a short one and a long one. What time is it?",d:["clock",3,0]},
   {b:"show",say:"The short hand tells the hour. When the long hand points straight up to twelve, we say o'clock. This is three o'clock!",d:["clock",3,0]},
   {b:"show",say:"The short hand points to seven. The long hand points up to twelve. It is seven o'clock!",d:["clock",7,0]},
   {b:"show",say:"Both hands point straight up to twelve. It is twelve o'clock!",d:["clock",12,0]},
@@ -1519,11 +1519,13 @@ __test3.checkClock=function(){const bad=[];for(let h=1;h<=12;h++)for(const m of 
 try{document.fonts&&document.fonts.load('1em Andika').then(f=>{if(f&&f.length)document.documentElement.classList.add('andika')}).catch(()=>{})}catch(e){}
 // ---------- Part B data ----------
 // B1: map zones. p = planet ids ("build" = Block Buddies, "story" = Story Corner); every planet is in exactly one zone (checkZones)
-const ZONES=[
- {id:"num",name:"Numbers",icon:"🔢",col:"var(--accent)",p:["build","count","add","num","more","quick","tens","coin"]},
- {id:"read",name:"Letters and Reading",icon:"📚",col:"var(--green)",p:["letter","sound","word","blend","rhyme","sent","dg","trace","story"]},
- {id:"shape",name:"Shapes and Measure",icon:"🔷",col:"var(--plum)",p:["shape","pattern","measure"]}];
-const ZBACK="Pick a zone!",ZSOON="More stories soon"; // spoken on the zone back button; label of the last story card (not spoken)
+const ZONES=[ // 6B: the five PLACES on the hill (data). who = the friend who lives there; intro is spoken the first time ever she opens the place (S.pi)
+ {id:"tree",name:"Bear's Tree",who:"bear",pose:"sleepy",intro:"I'm sleepy. Can you help me count?",p:["build","count","add","num","tens"]},
+ {id:"pond",name:"Moose's Pond",who:"moose",pose:"wave",intro:"Hello! I'm Moose. I'm very tall! Let's look at shapes and sizes.",p:["measure","shape","pattern"]},
+ {id:"puddle",name:"Elephant's Puddle",who:"elephant",pose:"happy",intro:"Splash! I'm Elephant. Which side has more? Let's find out.",p:["more","quick"]},
+ {id:"log",name:"The Hollow Log",who:"chick",pose:"awake",intro:"Peep! I sleep in this log. Shall we read some words?",p:["letter","sound","blend","rhyme","word","dg","trace","story"]},
+ {id:"home",name:"Home Door",who:"zippet",pose:"happy",intro:"Let's look! There is a clock by the door, and some coins.",p:["coin","sent"]}];
+const ZBACK="Back to the hill!",ZSOON="More stories soon"; // spoken on the zone back button; label of the last story card (not spoken)
 // B5: new Words (group 0 and group 1). Real words one letter away from them, so Words distractors never make a real word:
 const WORDG_ADD=[[["pasta","🍝"],["paint","🎨"],["nap","😴"],["pinata","🪅"]],[["tomato","🍅"],["potato","🥔"],["diamond","💎"],["panda","🐼"],["onion","🧅"],["mom","👩"]]];
 const SWAPW_ADD="anion banda basta com daint danda faint ganda haint hasta inion maint mem mim moa mob moe moi mol moo mor mos mou mow moy mum naa nab nae nak nam nanda nas naw nay nip nom orion padda pains palta pandy panna panta pasha paste pasty patta penda pinda point pomato potate print saint taint union vanda vinata yom";
@@ -1597,9 +1599,92 @@ document.title=TITLE;{const h=document.getElementById("ttl");if(h)h.textContent=
   const pr=__test3.phrases().filter(p=>/princess/i.test(p[0]));if(pr.length)bad.push("phrases still say princess: "+pr.slice(0,3).map(p=>p[0]).join(" | "));
   if(/princess/i.test(document.body.innerText))bad.push("visible text says princess");
   return bad};
- const _ph6=__test3.phrases;__test3.phrases=function(){const L=_ph6.call(this);L.push([`Welcome to ${TITLE}! Pick a planet to visit!`,"ui"],["Welcome back! Here is a bonus star for playing again!","ui"],["Time to rest! You played so well today. See you next time!","ui"],["Amazing!","cheer"]);
+ const _ph6=__test3.phrases;__test3.phrases=function(){const L=_ph6.call(this);L.push([`Welcome to ${TITLE}! Pick a place to visit!`,"ui"],["Welcome back! Here is a bonus star for playing again!","ui"],["Time to rest! You played so well today. See you next time!","ui"],["Amazing!","cheer"]);
   for(let n=1;n<=10;n++)L.push([`Let's build ${an(n)} ${NUMW[n]}!`,"block-buddies"]);return L};
  const _sc6=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6.call(this,N);const t=__test3.checkTheme();if(t.length)r.bad.checkTheme=t.slice(0,20);return r}}
+</script>
+
+<script id="p6b">
+// ---------- Part 6B data: cast, art, places, sky ----------
+const CAST=[ // id, name, placeholder emoji (used until assets/ has the painted art), role line
+ {id:"zippet",name:"Zippet",emoji:"🐶",role:"A fluffy puppy. He always says: Let's look!"},
+ {id:"bear",name:"Bear",emoji:"🐻",role:"Big, sleepy and gentle."},
+ {id:"moose",name:"Moose",emoji:"🫎",role:"Very tall and a bit goofy."},
+ {id:"elephant",name:"Elephant",emoji:"🐘",role:"Huge and gentle."},
+ {id:"chick",name:"The chick",emoji:"🐥",role:"Tiny and honey-yellow. Sleeps in the hollow log."},
+ {id:"blinkle",name:"The Blinkle",emoji:"",role:"A small round gadget on Zippet's collar."},
+ {id:"log",name:"The hollow log",emoji:"🪵",role:""},{id:"ball",name:"The ball",emoji:"🔴",role:""},{id:"house",name:"The cottage",emoji:"🏡",role:""}];
+const ASSET_LIST=[ // painted art, transparent WebP about 512px: assets/{id}_{pose}.webp (things without poses use pose "main")
+ {id:"zippet",poses:["happy","nervous","surprised","laughing","look","walk"]},{id:"blinkle",poses:["idle","lit"]},
+ {id:"bear",poses:["happy","sleepy","wave","look"]},{id:"moose",poses:["happy","sleepy","wave","look"]},{id:"elephant",poses:["happy","sleepy","wave","look"]},
+ {id:"chick",poses:["asleep","awake","peep"]},{id:"log",poses:["main"]},{id:"ball",poses:["main"]},{id:"house",poses:["main"]}];
+const SPEAKERS={count:"bear",join:"moose",on:"elephant",take:"zippet",maketen:"moose",teen:"elephant",evenodd:"bear",blend:"zippet",coins:"zippet",clock:"moose"}; // Meet it episode speaker
+const JSTART="Today's adventure! We go to {p}!",JGO="We go to {p}!",HOMEDARK="Home before dark!";
+const SKY_EVERY=8; // free play: the sky moves one stage every 8 answers this session (never with a clock)
+// ---------- art(): painted picture if the file exists, else the emoji placeholder (same size, no broken image) ----------
+const AFILE=(id,pose)=>`assets/${id}_${pose||"main"}.webp`;
+const ASSET_FILES=ASSET_LIST.flatMap(a=>a.poses.map(p=>AFILE(a.id,p)));
+const ASTAT={}; // file → true (loaded) / false (missing) / null (checking); each file is requested at most once per visit
+function artImg(f,alt,size){return `<img class="art" src="${f}" alt="${alt}" loading="lazy" width="${size}" height="${size}" style="width:${size}px;height:${size}px">`}
+function artProbe(f){if(f in ASTAT)return;ASTAT[f]=null;const im=new Image();im.onload=()=>{ASTAT[f]=true;document.querySelectorAll(`span.artf[data-art="${f}"]`).forEach(el=>{el.outerHTML=artImg(f,el.getAttribute("aria-label"),+el.dataset.size)})};im.onerror=()=>{ASTAT[f]=false};im.src=f}
+function art(id,pose,size){size=size||64;const c=CAST.find(x=>x.id===id)||{name:id,emoji:"🌼"},f=AFILE(id,pose),alt=c.name;
+ if(ASTAT[f]===true)return artImg(f,alt,size);artProbe(f);
+ return `<span class="art artf${id==="blinkle"?" artb":""}" data-art="${f}" data-size="${size}" role="img" aria-label="${alt}" style="width:${size}px;height:${size}px;font-size:${Math.round(size*.78)}px">${c.emoji}</span>`}
+function homeFin(){setTimeout(()=>setSky(3),0);return `<div class="card homefin"><div class="hfart">${art("house","main",104)}${art("zippet","happy",72)}${art("chick","asleep",52)}</div><div class="hbd">${HOMEDARK}</div></div>`}
+// ---------- the hill (SVG, palette tokens only; the pond is warm lilac, not blue) ----------
+const HILL_SVG=`<svg class="hillsvg" viewBox="0 0 400 420" preserveAspectRatio="none" aria-hidden="true">
+<ellipse cx="80" cy="430" rx="330" ry="300" fill="var(--green-l)"/><ellipse cx="360" cy="460" rx="300" ry="290" fill="var(--green)"/>
+<rect x="56" y="70" width="18" height="70" rx="6" fill="var(--gold-dk)"/><circle cx="65" cy="62" r="40" fill="var(--ok)"/><circle cx="40" cy="80" r="26" fill="var(--ok)"/><circle cx="92" cy="80" r="26" fill="var(--ok)"/>
+<ellipse cx="320" cy="120" rx="70" ry="22" fill="var(--pond)"/><ellipse cx="320" cy="118" rx="40" ry="10" fill="none" stroke="var(--card)" stroke-width="2" opacity=".7"/>
+<ellipse cx="90" cy="250" rx="52" ry="14" fill="var(--pond)"/>
+<rect x="250" y="232" width="110" height="34" rx="17" fill="var(--accent-dk)"/><ellipse cx="252" cy="249" rx="13" ry="17" fill="var(--gold-l)"/><ellipse cx="252" cy="249" rx="6" ry="9" fill="var(--accent-xxdk)"/>
+<rect x="160" y="330" width="80" height="62" fill="var(--rose-l)"/><polygon points="150,332 200,292 250,332" fill="var(--plum)"/><rect x="190" y="356" width="20" height="36" rx="4" fill="var(--accent-dk)"/><rect x="168" y="344" width="16" height="14" fill="var(--gold-l)"/><rect x="216" y="344" width="16" height="14" fill="var(--gold-l)"/>
+</svg>`;
+document.head.insertAdjacentHTML("beforeend",`<style>:root{--pond:#CBB0D9}
+.art{display:inline-flex;align-items:center;justify-content:center;line-height:1;vertical-align:middle;object-fit:contain;flex:none}.artb{border-radius:50%;background:var(--grey);font-size:0!important}
+#map.hill{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"tree pond" "puddle log" "home home";gap:12px;padding:12px;margin-top:10px;border-radius:24px;overflow:hidden;background:linear-gradient(var(--sky-top),var(--sky-bottom));min-height:420px}
+#map .hillsvg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+#map .zone.place{position:relative;z-index:1;width:auto;min-height:120px;flex-direction:column;justify-content:center;gap:4px;padding:6px;background:none!important;box-shadow:none;animation:none;border-radius:24px}
+#map .zone.place:active{transform:scale(.95)}#map .zone.place .pl{font-size:clamp(16px,4.4vw,24px);text-align:center;padding:4px 12px}
+.p-tree{grid-area:tree}.p-pond{grid-area:pond}.p-puddle{grid-area:puddle}.p-log{grid-area:log}.p-home{grid-area:home;justify-self:center;min-width:180px}
+#map.placev .phead{flex-basis:100%;max-width:560px;display:flex;align-items:center;gap:12px;text-align:left;margin:0 auto;font-size:clamp(18px,4.4vw,24px)}
+#map.placev .planet{border-radius:28px;animation:none;width:clamp(140px,42vw,200px);height:clamp(130px,30vw,170px)}
+.homefin .hfart{display:flex;align-items:flex-end;justify-content:center;gap:6px}.homefin .hbd{font-size:clamp(26px,6vw,36px);font-weight:bold;color:var(--plum);margin-top:6px}
+@media (max-height:700px){.homefin .hfart{zoom:.55}.homefin{padding-top:8px;padding-bottom:8px}.homefin .hbd{font-size:24px;margin-top:2px}}</style>`);
+// ---------- B3: hill map (wraps Part B's zone map: ZONES are now the five places) ----------
+const _drawMap6=drawMap;drawMap=function(){_drawMap6();const m=$("map");m.classList.toggle("hill",!MZ);m.classList.toggle("placev",!!MZ);
+ if(!S.pi||typeof S.pi!=="object"||Array.isArray(S.pi))S.pi={}; // places whose intro line has been heard (old saves: none)
+ if(!MZ){m.insertAdjacentHTML("afterbegin",HILL_SVG);m.querySelectorAll(".zone").forEach(b=>{const z=ZONES.find(x=>x.id===b.dataset.z);if(!z)return;b.className="zone place p-"+z.id;b.style.background="";b.style.animationDelay="";
+   b.innerHTML=art(z.who,z.pose,64)+`<span class="pl">${z.name}</span>`;b.onclick=()=>{sfx.tap();MZ=z.id;if(!S.pi[z.id]){S.pi[z.id]=1;save();say(z.intro)}else say(z.name);drawMap()}})}
+ else{const z=ZONES.find(x=>x.id===MZ),bk=m.querySelector(".zback");if(z&&bk){const h=document.createElement("div");h.className="card phead";h.innerHTML=art(z.who,z.pose,72)+`<div><b>${z.name}</b><br>${z.intro}</div>`;bk.after(h)}}
+ setSky()};
+// ---------- B6: sky stage (moves only with answers) ----------
+let SESS_ANS=0,skyStage=0;
+function calcSky(){return(typeof JR!=="undefined"&&JR)?Math.min(3,JR.i|0):Math.min(3,Math.floor(SESS_ANS/SKY_EVERY))}
+function setSky(st){skyStage=st==null?calcSky():st;const c=document.body.classList;["sky0","sky1","sky2","sky3"].forEach(k=>c.remove(k));c.add("sky"+skyStage)}
+const _mRec6=mRec;mRec=function(){SESS_ANS++;const r=_mRec6.apply(this,arguments);if(["game","blocks"].some(id=>$(id)&&$(id).classList.contains("on")))setSky();return r};
+const _show6=show;show=function(id){const r=_show6.apply(this,arguments);if(["mapS","game","blocks","epS","storyS"].includes(id))setSky();else setSky(0);return r};
+// ---------- B5: Meet it speaker art ----------
+const _epStep6=epStep;epStep=function(){_epStep6();const E=EP;if(!E)return;const w=SPEAKERS[E.e.id],b=$("epBeat");if(w&&b&&!b.querySelector(".art"))b.insertAdjacentHTML("afterbegin",art(w,"happy",40)+" ")};
+// ---------- tests ----------
+{const _ph6b=__test3.phrases,_sc6b=__test3.selfCheck;
+ __test3.phrases=function(){const L=_ph6b.call(this);ZONES.forEach(z=>L.push([z.intro,"place"]));return L};
+ Object.assign(__test3,{CAST,ASSET_LIST,ASSET_FILES,ASTAT,SPEAKERS,art,setSky,calcSky,homeFin,get skyStage(){return skyStage},get SESS_ANS(){return SESS_ANS},setAns:v=>{SESS_ANS=v}});
+ __test3.check6B=function(){const bad=[],all=[...PLANETS.map(p=>p.id),"build","story"],seen={};
+  if(ZONES.length!==5)bad.push("need 5 places");ZONES.forEach(z=>{if(!CAST.find(c=>c.id===z.who))bad.push(z.id+": who");if(!z.intro)bad.push(z.id+": intro");z.p.forEach(id=>{if(seen[id])bad.push(id+" in two places");seen[id]=1})});all.forEach(id=>{if(!seen[id])bad.push(id+": in no place")});
+  ["zippet","bear","moose","elephant","chick","blinkle","log","ball","house"].forEach(id=>{if(!ASSET_LIST.find(a=>a.id===id))bad.push("ASSET_LIST missing "+id);const c=CAST.find(x=>x.id===id);if(!c)bad.push("CAST missing "+id);else if(id!=="blinkle"&&!c.emoji)bad.push("no emoji "+id)});
+  if(ASSET_FILES.length!==6+2+12+3+3)bad.push("ASSET_FILES count "+ASSET_FILES.length);
+  const t=document.createElement("div");t.innerHTML=art("bear","nosuchpose",50);const a=t.firstChild;if(!a||!/^(SPAN|IMG)$/.test(a.tagName)||a.style.width!=="50px"||!(a.getAttribute("aria-label")||a.alt))bad.push("art() fallback");
+  Object.keys(SPEAKERS).forEach(e=>{if(!EPI[e])bad.push("SPEAKERS: no episode "+e);if(!CAST.find(c=>c.id===SPEAKERS[e]))bad.push("SPEAKERS: who "+e)});
+  const OLD=/\b(Zippy|Twinkle|Tri-Star|Quadra|Starfive|Hexa|Rainbow|Octo|Nova|Queen Ten|Comet|Twelvy|Lucky|Fourteenie|Shimmer|Sixteen Sparkle|Seventeen Swirl|Eighteen Glow|Moonbeam|Twenty Twinkle|Buddies|Buddy|princess|planet)\b/i;
+  const ph=__test3.phrases().map(p=>p[0]).filter(x=>OLD.test(x));if(ph.length)bad.push("old names in phrases: "+ph.slice(0,4).join(" | "));
+  if(/👸|👧/.test(document.getElementById("start").innerText+document.getElementById("mapS").innerText))bad.push("face emoji on home/map");
+  const pics=[...STORIES.flatMap(s=>s.p.filter(p=>/\bI\b/.test(p[1])).map(p=>p[0]))];if(pics.some(p=>/👧|👦|👸/.test(p)))bad.push("an 'I' picture has a face");
+  if(OBJ.length!==10||OBJ.some(o=>!NAMES[o]))bad.push("OBJ/NAMES");
+  // sky stages: no cool hue, and navy pills keep contrast over every sky
+  const keep=document.body.className;["sky0","sky1","sky2","sky3"].forEach(k=>{document.body.className=k;const cs=getComputedStyle(document.body);["--sky-top","--sky-bottom"].forEach(v=>{const c=cs.getPropertyValue(v).trim();const m=c.match(/^#(..)(..)(..)$/);if(!m)return;const r=[1,2,3].map(i=>parseInt(m[i],16)/255),mx=Math.max(...r),mn=Math.min(...r),d=mx-mn;if(d<.08)return;let h=mx===r[0]?((r[1]-r[2])/d)%6:mx===r[1]?(r[2]-r[0])/d+2:(r[0]-r[1])/d+4;h=(h*60+360)%360;if(h>=150&&h<=210)bad.push(k+" "+v+" cool "+c)})});document.body.className=keep;
+  return bad};
+ __test3.selfCheck=function(N){const r=_sc6b.call(this,N);const t=__test3.check6B();if(t.length)r.bad.check6B=t.slice(0,20);return r}}
 </script>
 
 <script id="batch4">
