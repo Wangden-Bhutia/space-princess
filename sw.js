@@ -1,4 +1,4 @@
-/* Space Princess service worker.
+/* Zippet's Walk Home service worker (cache names keep the old 'space-princess-' prefix so old caches are cleaned up).
  * >>> BUMP THE VERSION BELOW ON EVERY RELEASE (v1 -> v2 -> v3 ...) <<<
  * A new name makes phones download the new files and delete the old cache. */
 // v4 (Batch 1): parent gate, time limit, Sound Blending planet, pure phonics clips, 110 re-recorded clips.
@@ -7,7 +7,7 @@
 // or passed straight to the network if not cached yet; only full 200 responses are ever cached.
 // v5 (Batch 2): Quick Look planet, take away, per-item review, sparkles, Royal Collection II, parent progress report, 94 new clips.
 // v6 (Batch 3): Tens and Ones, Shape Sparkles, Pattern Parade, Measure Magic, Trace, Story Corner, journey, decorate, 441 new clips.
-const CACHE = 'space-princess-v17';
+const CACHE = 'space-princess-v18';
 
 // Core files, relative so it works under a GitHub Pages subpath like /space-princess/
 const CORE = [

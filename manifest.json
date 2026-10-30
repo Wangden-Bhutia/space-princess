@@ -1,16 +1,31 @@
 {
-  "name": "Space Princess Adventure",
-  "short_name": "Space Princess",
-  "description": "A gentle maths and English space adventure for little learners.",
+  "name": "Zippet's Walk Home",
+  "short_name": "Zippet's Walk Home",
+  "description": "A gentle maths and English adventure for little learners.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#0b0630",
-  "background_color": "#0b0630",
+  "theme_color": "#F2B544",
+  "background_color": "#FEFAEF",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
