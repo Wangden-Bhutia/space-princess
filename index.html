@@ -136,7 +136,7 @@ button,.tk,.tc{touch-action:manipulation} /* zoom is allowed again; this only st
 .rodlab{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;background:var(--pill);color:var(--pill-ink);font-weight:bold;border-radius:8px;padding:2px 4px;font-size:clamp(12px,3vw,18px);pointer-events:none}
 @media (max-width:480px){#stage.joinst{flex-wrap:nowrap;gap:8px}#stage.joinst .bname{display:none}#stage.joinst .eq{font-size:36px}}
 .pv{display:inline-flex;align-items:flex-end;gap:10px;margin:6px}.pvrod{width:clamp(26px,7vw,36px);display:flex;flex-direction:column;border:3px solid var(--card);border-radius:8px;overflow:hidden;position:relative}
-.pvrod i{display:block;height:clamp(14px,3.6vw,20px);background:var(--blue);border-bottom:1px solid rgba(var(--card-rgb),.4)}.pvrod b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:16px;text-shadow:0 0 4px var(--ink)}
+.pvrod i{display:block;height:clamp(14px,3.6vw,20px);background:var(--plum-l);border-bottom:1px solid rgba(var(--card-rgb),.4)}.pvrod b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:16px;text-shadow:0 0 4px var(--ink)}
 .pvone{width:clamp(26px,7vw,36px);height:clamp(26px,7vw,36px);background:var(--accent);border:3px solid var(--card);border-radius:8px;display:inline-block;margin:2px}
 .ones{display:inline-grid;grid-template-columns:repeat(2,auto);align-items:end}
 .seq{font-size:clamp(34px,8vw,60px);letter-spacing:2px}
@@ -189,7 +189,7 @@ body{min-height:100vh;min-height:100dvh}
   <div class="hero" style="font-size:80px">🌳🌼🏡</div>
   <button class="big" id="advBtn" style="background:linear-gradient(var(--gold-l),var(--gold));color:var(--ink);box-shadow:0 8px 0 var(--gold-dk);font-size:clamp(30px,7vw,48px);padding:20px 34px">🗺️ Today's Adventure</button><br>
   <button class="big" id="playBtn">🌳 Pick a place</button><br>
-  <button class="big alt" id="collBtn1">👑 My Stickers</button>
+  <button class="big alt" id="collBtn1">🌟 My Stickers</button>
   <div id="days" style="font-size:clamp(20px,4.4vw,30px);color:var(--plum);margin:8px 0;min-height:1.3em"></div>
 </section>
 
@@ -238,8 +238,8 @@ body{min-height:100vh;min-height:100dvh}
 </div></div>
 
 <section id="mapS" class="screen">
-  <div class="top"><button class="icon" id="homeBtn">🏠</button><div>⭐ <b id="starN">0</b> &nbsp; 💎 <b id="gemN">0</b></div><button class="icon" id="collBtn2">👑</button></div>
-  <h2><span id="princess">🏡</span> Pick a place!</h2>
+  <div class="top"><button class="icon" id="homeBtn">🏠</button><div>⭐ <b id="starN">0</b> &nbsp; 💎 <b id="gemN">0</b></div><button class="icon" id="collBtn2">🌟</button></div>
+  <h2 id="mapH"><span id="princess">🏡</span> <span id="mapHT">Pick a place!</span></h2>
   <div id="mapMsg" style="font-size:clamp(20px,4.4vw,30px);color:var(--plum)"></div>
   <div id="map"></div>
 </section>
@@ -351,13 +351,13 @@ const PICS=[["A","🍎","apple"],["B","🦋","butterfly"],["C","🐱","cat"],["D
  ["I","🐛","insect"],["J","🧃","juice"],["K","🪁","kite"],["L","🦁","lion"],["M","🌙","moon"],["N","👃","nose"],["O","🐙","octopus"],["P","🐷","pig"],
  ["Q","👸","queen"],["R","🚀","rocket"],["S","☀️","sun"],["T","🌳","tree"],["U","☂️","umbrella"],["V","🎻","violin"],["W","🐋","whale"],["Y","🪀","yo-yo"],["Z","🦓","zebra"]];
 const WORDG=[ // Words planet, by letter group: a word uses only letters from its group and earlier groups (checkWords)
- [["ant","🐜"],["pin","📌"],["tin","🥫"],["pan","🍳"],["tap","🚰"],["pants","👖"]],
- [["map","🗺️"],["dog","🐶"],["pig","🐷"],["man","👨"],["top","🔝"],["pot","🍲"],["tag","🏷️"],["sad","😢"],["mango","🥭"],["moon","🌙"],["spoon","🥄"],["goat","🐐"]],
+ [["ant","🐜"],["pin","📌"],["tin","🥫"],["pan","🍳"],["tap","🚰"]],
+ [["map","🗺️"],["dog","🐶"],["pig","🐷"],["man","👨"],["top","🔝"],["pot","🍲"],["tag","🏷️"],["sad","😢"]],
  [["cat","🐱"],["sun","☀️"],["cup","🥤"],["egg","🥚"],["pen","🖊️"],["car","🚗"],["ten","🔟"],["nut","🥜"],["net","🥅"],["rat","🐀"],["duck","🦆"],["sock","🧦"],["cake","🎂"],["corn","🌽"],["drum","🥁"],["tiger","🐯"],["carrot","🥕"]],
  [["hat","🎩"],["bus","🚌"],["bed","🛏️"],["bat","🦇"],["hen","🐔"],["bug","🐛"],["bell","🔔"],["fish","🐟"],["frog","🐸"],["lemon","🍋"],["bird","🐦"],["bulb","💡"],["leaf","🍃"],["hand","✋"],["robot","🤖"],["rabbit","🐰"],["banana","🍌"]],
  [["fox","🦊"],["box","📦"],["van","🚐"],["web","🕸️"],["zebra","🦓"],["wolf","🐺"],["volcano","🌋"],["watch","⌚"],["violin","🎻"],["kiwi","🥝"],["taxi","🚕"],["wave","🌊"]]];
 const WORDS=WORDG.flat(); // flat list (tests, phrases)
-const WREG=new Set("pants drum frog bulb hand lemon rabbit".split(" ")); // longer words that sound out letter by letter; others get a "say it slowly" hint
+const WREG=new Set("spin snip pond stop mint mist drum frog bulb hand lemon rabbit".split(" ")); // longer words that sound out letter by letter; others get a "say it slowly" hint
 // Real 3-letter words: a Words distractor must not make another real word (e.g. bus -> "bum"). RUDE words never appear anywhere.
 const REALW=new Set("bad bag ban bat bed beg bet bib bid big bin bit bob bog box bud bug bum bun bus but cab can cap car cat cob cod cog cop cot cow cub cud cup cut dab dad dam den dig dim din dip dog dot dug dun ear eat egg fan far fat fed fen fib fig fin fit fix fog fox fun fur gap gas gel get god got gum gun gut had ham has hat hen her hid him hip his hit hob hog hop hot hug hum hut jab jam jar jet jig job jog jot jug jut keg kid kin kit lab lad lap leg let lid lip lit log lot lug mad man map mat men met mix mob mom mop mud mug mum nab nag nap net nib nip nod not nut pad pal pan pat peg pen pet pig pin pit pod pop pot pub pug pun pup pus put rag ram ran rap rat red rib rid rig rim rip rob rod rot rub rug rum run rut sad sag sap sat set sin sip sit six sob sod son sub sum sun tab tag tan tap tar ten tin tip ton top tot tub tug van vat vet wag war was web wed wet wig win wit yak yam yap yen yes yet yum zap zip pee poo wee ant art arm bar cap pox sex".split(" "));
 // SWAPW: real English words (web2/gcide, built offline) one letter away from a Words word; distractors must not make these
@@ -502,7 +502,7 @@ function drawMap(){$("starN").textContent=S.stars;$("gemN").textContent=S.gems;c
  PLANETS.forEach((p,i)=>{const b=document.createElement("button");b.className="planet";b.style.background=`radial-gradient(circle at 30% 30%,rgba(var(--card-rgb),.55),${p.col} 45%)`;
   b.style.animationDelay=(i*.3)+"s";const lv=(S.level[p.id]||{l:0}).l;const tot=(p.maxl??3)+1,lr=Math.min(lv+1,tot);b.innerHTML=`<span>${p.icon}</span><span class="pl">${p.name}<small class="lvd" role="img" aria-label="Level ${lr} of ${tot}">${"●".repeat(lr)}${"○".repeat(tot-lr)}</small></span>`;
   b.onclick=()=>{sfx.tap();startPlanet(p)};m.appendChild(b)})
- const bb=document.createElement("button");bb.className="planet";bb.id="blockPlanet";bb.style.background="radial-gradient(circle at 30% 30%,rgba(var(--card-rgb),.55),var(--red) 30%,var(--gold) 55%,var(--blue) 80%)";
+ const bb=document.createElement("button");bb.className="planet";bb.id="blockPlanet";bb.style.background="radial-gradient(circle at 30% 30%,rgba(var(--card-rgb),.55),var(--gold) 30%,var(--accent) 55%,var(--rose) 80%)";
  bb.innerHTML='<span>🧱</span><span class="pl">Zippet\'s Blocks</span>';bb.onclick=()=>{sfx.tap();say("Welcome to Zippet's Blocks!");openBlocks()};m.prepend(bb);if(typeof extraMap==="function")extraMap(m)}
 function drawColl(){$("starN2").textContent=S.stars;const c=$("coll");c.innerHTML="";const got=Math.floor(S.stars/5);
  const head=t=>{const h=document.createElement("div");h.style.cssText="grid-column:1/-1;font-size:24px;color:var(--plum);text-align:left;margin-top:8px";h.textContent=t;c.appendChild(h)};
@@ -574,12 +574,14 @@ function finish(){S.gems++;save();sfx.win();const before=Math.floor(pStars0/5),a
  $("prompt").textContent="All done! 💎";$("visual").innerHTML=`🏡✨${newSt?"<br>New sticker: "+newSt:""}`;$("hint").textContent="";
  const hz=`Hooray! You finished ${cur.name} and won a gem!${newSt?" And a brand new sticker!":""}`,SUG="You're so good at this! Want to try something new?";
  if(sameRuns>=3)say(hz+" "+SUG,[hz,SUG]);else say(hz);
- $("choices").innerHTML="";const b1=document.createElement("button");b1.className="big";b1.textContent="🚀 Fly on!";b1.onclick=()=>{show("mapS");drawMap()};
+ $("choices").innerHTML="";const b1=document.createElement("button");b1.className="big";b1.textContent=JBTN.on;b1.onclick=()=>{show("mapS");drawMap()};
  const b2=document.createElement("button");b2.className="big alt";b2.textContent="🔁 Again";b2.onclick=()=>startPlanet(cur);$("choices").append(b1,b2);
  if(sameRuns>=3){const o=pick(PLANETS.filter(p=>p!==cur)),b3=document.createElement("button");b3.className="big";b3.id="tryNew";b3.textContent=`✨ Try something new: ${o.icon} ${o.name}?`;b3.onclick=()=>{sameRuns=0;startPlanet(o)};$("choices").prepend(b3)}
  for(let i=0;i<3;i++)setTimeout(()=>burst(document.body),i*300);if(typeof JR!=="undefined"&&JR)journeyNext()}
+const BURST_S=["⭐","✨","💖","🌟","💎"],BURST_B=["⭐","✨","💖","🌟","💎","🌼","🍂","🐝","🌈"]; // 6F: confetti (no crown, no unicorn)
+const JBTN={go:"🐾 Let's go!",on:"🐾 On we go!"}; // 6F: journey buttons
 function burst(el,n=12,big=false){const r=el.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+Math.min(r.height/2,300),sp=big?520:300;
- for(let i=0;i<n;i++){const p=document.createElement("div");p.className="p"+(big?" bigp":"");p.textContent=pick(big?["⭐","✨","💖","🌟","💎","👑","🦄","🌈"]:["⭐","✨","💖","🌟","💎"]);
+ for(let i=0;i<n;i++){const p=document.createElement("div");p.className="p"+(big?" bigp":"");p.textContent=pick(big?BURST_B:BURST_S);
   p.style.left=x+"px";p.style.top=y+"px";p.style.setProperty("--x",(Math.random()*sp-sp/2)+"px");p.style.setProperty("--y",(Math.random()*sp-sp*.65)+"px");
   $("burst").appendChild(p);setTimeout(()=>p.remove(),big?1800:1300)}}
 // ---------- wiring ----------
@@ -774,7 +776,7 @@ Object.assign(OFF,{"Take away":"Put 5 toys in a row, hide 2 under a cup: how man
  "Shapes":"Go on a shape hunt at home: find a circle, a square and a triangle.","Patterns":"Make a pattern with spoons and forks, or clap-clap-stamp, and ask what comes next.",
  "Measure":"Line up three shoes from shortest to longest.","Tracing":"Draw big letters in the air, in sand, or with a wet finger on the table.",
  "Sight words":"Point to 'the' and 'and' when you read a bedtime story together.","Stories":"Read one Story Corner story together, then ask her to retell it."});
-const SCOL=["var(--rose)","var(--blue)","var(--gold)","var(--green)","var(--plum-l)","var(--accent)"];
+const SCOL=["var(--rose)","var(--plum)","var(--gold)","var(--green)","var(--plum-l)","var(--accent)"];
 // ---------- shapes (SVG, original) ----------
 function starPts(){let p=[];for(let i=0;i<10;i++){const r=i%2?19:44,a=(-90+i*36)*Math.PI/180;p.push((50+r*Math.cos(a)).toFixed(1)+","+(53+r*Math.sin(a)).toFixed(1))}return p.join(" ")}
 const SHP={circle:'<circle cx="50" cy="50" r="40"/>',square:'<rect x="13" y="13" width="74" height="74"/>',rectangle:'<rect x="4" y="27" width="92" height="46"/>',
@@ -787,7 +789,7 @@ const SHINT={circle:"A circle is round, with no corners.",square:"A square has f
 const SIDES={triangle:3,square:4,rectangle:4,diamond:4};
 function houseSVG(){return `<svg width="min(300px,80vw)" viewBox="0 0 200 160" style="max-width:300px"><g stroke="var(--card)" stroke-width="3">
  <circle data-s="circle" cx="165" cy="30" r="20" fill="var(--gold)"/><polygon data-s="triangle" points="40,70 100,20 160,70" fill="var(--rose)"/>
- <rect data-s="square" x="50" y="70" width="100" height="80" fill="var(--blue)"/><rect data-s="rectangle" x="88" y="104" width="26" height="46" fill="var(--plum-l)"/></g></svg>`}
+ <rect data-s="square" x="50" y="70" width="100" height="80" fill="var(--rose)"/><rect data-s="rectangle" x="88" y="104" width="26" height="46" fill="var(--plum-l)"/></g></svg>`}
 const dummyBtn=()=>document.createElement("button");
 function shapeGen(l){const pool=l<2?SH1:[...SH1,...SH2],nc=l<1?3:4,c=()=>pick(SCOL);
  const k=pick([["name","find"],["name","find","sides","odd"],["name","find","sides","odd","pic"],["find","sides","odd","pic","name"]][l]);
@@ -817,7 +819,7 @@ function patternGen(l){if(l>=3&&Math.random()<.25)return makePattern();
 const bar=(w,col)=>`<svg width="170" height="40" viewBox="0 0 170 40"><rect x="4" y="8" width="${w}" height="24" rx="10" fill="${col}" stroke="var(--card)" stroke-width="3"/></svg>`;
 const tower=(h,col)=>`<svg width="70" height="160" viewBox="0 0 70 160"><rect x="12" y="${156-h}" width="46" height="${h}" rx="8" fill="${col}" stroke="var(--card)" stroke-width="3"/></svg>`;
 function scaleSVG(a,b,left){const t=left?12:-12;return `<svg width="min(320px,86vw)" viewBox="0 0 220 130" style="max-width:320px"><polygon points="100,125 120,125 110,70" fill="var(--gold)"/>
- <g transform="rotate(${-t} 110 70)"><line x1="20" y1="70" x2="200" y2="70" stroke="var(--card)" stroke-width="6" stroke-linecap="round"/><path d="M5 72 Q35 100 65 72" fill="var(--blue)"/><path d="M155 72 Q185 100 215 72" fill="var(--blue)"/>
+ <g transform="rotate(${-t} 110 70)"><line x1="20" y1="70" x2="200" y2="70" stroke="var(--card)" stroke-width="6" stroke-linecap="round"/><path d="M5 72 Q35 100 65 72" fill="var(--plum-l)"/><path d="M155 72 Q185 100 215 72" fill="var(--plum-l)"/>
  <text x="35" y="66" font-size="34" text-anchor="middle">${a}</text><text x="185" y="66" font-size="34" text-anchor="middle">${b}</text></g></svg>`}
 const MOBJ=["🍎","🧸","📦","🎁","🪀","🧁","🍉","🎈"];
 function measureGen(l){const k=pick([["long","tall"],["long","tall","big","heavy"],["long","tall","big","heavy","order"],["long","tall","big","heavy","order"]][l]),[c1,c2,c3]=shuffle(SCOL);const cs=[c1,c2,c3];
@@ -943,10 +945,10 @@ const PL=id=>PLANETS.find(p=>p.id===id);
 function journeyCard(html,btns){show("game");$("prog").textContent="🗺️";$("prompt").textContent="🗺️ Today's Adventure";$("visual").innerHTML=html;$("hint").textContent="";const c=$("choices");c.innerHTML="";
  btns.forEach(([t,cls,fn])=>{const b=document.createElement("button");b.className=cls;b.textContent=t;b.onclick=fn;c.appendChild(b)})}
 function startJourney(){if(timeUp())return restScreen();markPlayed();JR={ids:pickJourney(),i:0,s0:S.stars};const p=PL(JR.ids[0]);
- journeyCard(`<div class="card">🗺️ Three things to do today:<br><b>${JR.ids.map(i=>PL(i).icon+" "+PL(i).name).join(" → ")}</b></div>`,[["🚀 Fly!","big",()=>startPlanet(p)],["🏠 Not now","big alt",()=>{JR=null;show("start");showDays()}]]);
+ journeyCard(`<div class="card">🗺️ Three things to do today:<br><b>${JR.ids.map(i=>PL(i).icon+" "+PL(i).name).join(" → ")}</b></div>`,[[JBTN.go,"big",()=>startPlanet(p)],["🏠 Not now","big alt",()=>{JR=null;show("start");showDays()}]]);
  say(JSTART.replace("{p}",p.name))}
 function journeyNext(){const j=JR;setTimeout(()=>{if(JR!==j||!$("game").classList.contains("on"))return;if(timeUp()){JR=null;return restScreen()}
- j.i++;if(j.i<j.ids.length){const p=PL(j.ids[j.i]);journeyCard(`<div class="card">✨🐾 We go to <b>${p.icon} ${p.name}</b>!</div>`,[["🚀 Fly on!","big",()=>startPlanet(p)],["🏠 Stop for now","big alt",()=>{JR=null;show("start");showDays()}]]);say(JGO.replace("{p}",p.name));return}
+ j.i++;if(j.i<j.ids.length){const p=PL(j.ids[j.i]);journeyCard(`<div class="card">✨🐾 We go to <b>${p.icon} ${p.name}</b>!</div>`,[[JBTN.on,"big",()=>startPlanet(p)],["🏠 Stop for now","big alt",()=>{JR=null;show("start");showDays()}]]);say(JGO.replace("{p}",p.name));return}
  JR=null;const badge=pick(BADGES);S.badges=(S.badges||[]).concat(badge).slice(-200);S.stars+=2;save(); // finishing bonus: 2 stars + an adventure badge for the castle
  const area=AREA_OF[j.ids.slice().sort((x,y)=>planetScore(x,Date.now())-planetScore(y,Date.now()))[0]];
  setSky(3);journeyCard(`${homeFin()}<div class="card">🎉 What an adventure! <br>+2 ⭐ and a new badge: <span style="font-size:60px">${badge}</span></div><div class="card grown"><b>Grown-ups, try this together:</b><br>${OFF[area]}</div>`,[["🏠 Home","big",()=>{show("start");showDays()}],["🎨 Decorate","big alt",openDeco]]);
@@ -1079,7 +1081,7 @@ window.__test3={checkStories,checkWords,STORD,SIGHT_AT,get stTr(){return stTr},N
    if(!vals.some(v=>v==q.ans))f("ans not in choices");if(vals.length<3)f("fewer than 3 choices");if(new Set(vals.map(String)).size!==vals.length)f("duplicate choice");if(vals.some(v=>RUDE.has(String(v).toLowerCase())))f("rude word")}cnt[`${p.id}@g${g}:${l}`]=n}}}
   T.setLP({g:4});const cs=checkStories(),cw=checkWords();if(cs.length)bad.checkStories=cs;if(cw.length)bad.checkWords=cw;return {bad,cnt}}};
 </script>
-<div id="iosCard" role="dialog" aria-label="Install on iPhone or iPad" style="display:none;position:fixed;inset:0;z-index:99;background:rgba(var(--plum-rgb),.93);align-items:center;justify-content:center;padding:16px"><div style="background:var(--card);color:var(--ink);border-radius:24px;padding:22px;max-width:420px;width:100%;font-size:22px;line-height:1.5"><div style="font-size:26px;font-weight:bold;margin-bottom:8px">Install on iPhone/iPad</div><ol style="padding-left:28px;margin:0"><li>Tap the Share button <svg width="30" height="34" viewBox="0 0 30 34" style="vertical-align:middle"><rect x="4" y="12" width="22" height="20" rx="3" fill="none" stroke="var(--blue)" stroke-width="3"/><path d="M15 3v18M9 9l6-6 6 6" fill="none" stroke="var(--blue)" stroke-width="3" stroke-linecap="round"/></svg> in Safari</li><li>Tap <b>Add to Home Screen</b> ➕</li><li>Tap <b>Add</b></li></ol><button class="big" id="iosClose" style="margin-top:14px;font-size:22px">OK</button></div></div>
+<div id="iosCard" role="dialog" aria-label="Install on iPhone or iPad" style="display:none;position:fixed;inset:0;z-index:99;background:rgba(var(--plum-rgb),.93);align-items:center;justify-content:center;padding:16px"><div style="background:var(--card);color:var(--ink);border-radius:24px;padding:22px;max-width:420px;width:100%;font-size:22px;line-height:1.5"><div style="font-size:26px;font-weight:bold;margin-bottom:8px">Install on iPhone/iPad</div><ol style="padding-left:28px;margin:0"><li>Tap the Share button <svg width="30" height="34" viewBox="0 0 30 34" style="vertical-align:middle"><rect x="4" y="12" width="22" height="20" rx="3" fill="none" stroke="var(--plum-l)" stroke-width="3"/><path d="M15 3v18M9 9l6-6 6 6" fill="none" stroke="var(--plum-l)" stroke-width="3" stroke-linecap="round"/></svg> in Safari</li><li>Tap <b>Add to Home Screen</b> ➕</li><li>Tap <b>Add</b></li></ol><button class="big" id="iosClose" style="margin-top:14px;font-size:22px">OK</button></div></div>
 <script id="pass3">
 // ---------- Pass 3: "Meet it" episodes (teaching layer) ----------
 // Each episode: Problem (a Buddy says one line) → Show (animated demo) → Try together (2-3 guided questions, hints on, no stars) → Recap (one sentence + an original chant)
@@ -1518,8 +1520,8 @@ const ZONES=[ // 6B: the five PLACES on the hill (data). who = the friend who li
  {id:"home",name:"Home Door",who:"zippet",pose:"happy",intro:"Let's look! There is a clock by the door, and some coins.",p:["coin","sent"]}];
 const ZBACK="Back to the hill!",ZSOON="More stories soon"; // spoken on the zone back button; label of the last story card (not spoken)
 // B5: new Words (group 0 and group 1). Real words one letter away from them, so Words distractors never make a real word:
-const WORDG_ADD=[[["pasta","🍝"],["paint","🎨"],["nap","😴"],["pinata","🪅"]],[["tomato","🍅"],["potato","🥔"],["diamond","💎"],["panda","🐼"],["onion","🧅"],["mom","👩"]]];
-const SWAPW_ADD="anion banda basta com daint danda faint ganda haint hasta inion maint mem mim moa mob moe moi mol moo mor mos mou mow moy mum naa nab nae nak nam nanda nas naw nay nip nom orion padda pains palta pandy panna panta pasha paste pasty patta penda pinda point pomato potate print saint taint union vanda vinata yom";
+const WORDG_ADD=[[["nap","😴"],["sit","🪑"],["sip","🧃"],["spin","🌀"],["snip","✂️"]],[["mom","👩"],["mop","🧹"],["dig","⛏️"],["pod","🫛"],["mad","😠"],["dad","👨‍👧"],["pond","🏞️"],["stop","🛑"],["mint","🌿"],["mist","🌫️"]]]; // 6F: only that group's single-letter sounds, 3-4 letters
+const SWAPW_ADD="ait cit dit git hit kit lit nit pit tit wit zit sot sic sib sid sim sir sis siz shin skin span spun spit spiv spic pip kip hip lip dip rip tip zip yip sop sup ship skip slip snap snit snib snig bop cop hop lop pop fop mob mod moa moc moe mog moi mol mon moo mor mos mot mou mow mox moy gig big fig jig mig pig rig wig dag deg dog dug dib did die dim din dis div cod hod nod rod sod tod pad ped pud pob poa poh poi pol pom pon poo pot pow bad cad fad gad had lad rad tad wad med mid mud mab mac mae mag mal mam man map mar mas mat maw max may dab dah dal dam dan dap das daw day ded dod dud bond fond pend pood pons pong pone pony pont atop shop slop scop step stap stob stoa stot stow hint lint pint tint dint bint mant mind mine mini mink mitt milt minx miny fist gist hist list cist mast most must mise miso miss anion banda basta com daint danda faint ganda haint hasta inion maint mem mim moa mob moe moi mol moo mor mos mou mow moy mum naa nab nae nak nam nanda nas naw nay nip nom orion padda pains palta pandy panna panta pasha paste pasty patta penda pinda point pomato potate print saint taint union vanda vinata yom";
 // ---------- Part B wiring ----------
 WORDG_ADD.forEach((ws,g)=>WORDG[g].push(...ws));WORDS.length=0;WORDS.push(...WORDG.flat());SWAPW_ADD.split(" ").forEach(w=>SWAPW.add(w));
 let MZ=null; // open zone (not saved): after a planet, the map comes back to the same zone; Play on the home screen starts at the zones
@@ -1586,7 +1588,7 @@ document.title=TITLE;{const h=document.getElementById("ttl");if(h)h.textContent=
  __test3.checkTheme=function(){const bad=[];__test3.contrastTable().forEach(r=>{if(!r.ok)bad.push(`contrast ${r.w} ${r.ratio}<${r.min}`)});
   __test3.coolScan().slice(0,20).forEach(x=>bad.push("cool colour: "+x));
   if(document.title!==TITLE)bad.push("document.title != TITLE");
-  try{const x=new XMLHttpRequest();x.open("GET","manifest.json",false);x.send();if(x.status===200){const m=JSON.parse(x.responseText);if(m.name!==TITLE||m.short_name!==TITLE)bad.push("manifest name/short_name != TITLE");if(m.theme_color!=="#F2B544"||m.background_color!=="#FEFAEF")bad.push("manifest colours")}}catch(e){}
+  try{const x=new XMLHttpRequest();x.open("GET","manifest.json",false);x.send();if(x.status===200){const m=JSON.parse(x.responseText);if(m.name!==TITLE||m.short_name!==SHORT_TITLE)bad.push("manifest name/short_name != TITLE");if(m.theme_color!=="#F2B544"||m.background_color!=="#FEFAEF")bad.push("manifest colours")}}catch(e){}
   const pr=__test3.phrases().filter(p=>/princess/i.test(p[0]));if(pr.length)bad.push("phrases still say princess: "+pr.slice(0,3).map(p=>p[0]).join(" | "));
   if(/princess/i.test(document.body.innerText))bad.push("visible text says princess");
   return bad};
@@ -1627,8 +1629,8 @@ const HILL_SVG=`<svg class="hillsvg" viewBox="0 0 400 420" preserveAspectRatio="
 <ellipse cx="80" cy="430" rx="330" ry="300" fill="var(--green-l)"/><ellipse cx="360" cy="460" rx="300" ry="290" fill="var(--green)"/>
 <rect x="56" y="70" width="18" height="70" rx="6" fill="var(--gold-dk)"/><circle cx="65" cy="62" r="40" fill="var(--ok)"/><circle cx="40" cy="80" r="26" fill="var(--ok)"/><circle cx="92" cy="80" r="26" fill="var(--ok)"/>
 <ellipse cx="320" cy="120" rx="70" ry="22" fill="var(--pond)"/><ellipse cx="320" cy="118" rx="40" ry="10" fill="none" stroke="var(--card)" stroke-width="2" opacity=".7"/>
-<ellipse cx="90" cy="250" rx="52" ry="14" fill="var(--pond)"/>
-<rect x="250" y="232" width="110" height="34" rx="17" fill="var(--accent-dk)"/><ellipse cx="252" cy="249" rx="13" ry="17" fill="var(--gold-l)"/><ellipse cx="252" cy="249" rx="6" ry="9" fill="var(--accent-xxdk)"/>
+<ellipse data-k="puddle" cx="66" cy="302" rx="50" ry="13" fill="var(--pond)"/>
+<g data-k="log"><rect x="272" y="286" width="108" height="30" rx="15" fill="var(--accent-dk)"/><ellipse cx="274" cy="301" rx="12" ry="15" fill="var(--gold-l)"/><ellipse cx="274" cy="301" rx="6" ry="8" fill="var(--accent-xxdk)"/></g>
 <rect x="160" y="330" width="80" height="62" fill="var(--rose-l)"/><polygon points="150,332 200,292 250,332" fill="var(--plum)"/><rect x="190" y="356" width="20" height="36" rx="4" fill="var(--accent-dk)"/><rect x="168" y="344" width="16" height="14" fill="var(--gold-l)"/><rect x="216" y="344" width="16" height="14" fill="var(--gold-l)"/>
 </svg>`;
 document.head.insertAdjacentHTML("beforeend",`<style>:root{--pond:#CBB0D9}
@@ -1648,6 +1650,7 @@ const _drawMap6=drawMap;drawMap=function(){_drawMap6();const m=$("map");m.classL
  if(!MZ){m.insertAdjacentHTML("afterbegin",HILL_SVG);m.querySelectorAll(".zone").forEach(b=>{const z=ZONES.find(x=>x.id===b.dataset.z);if(!z)return;b.className="zone place p-"+z.id;b.style.background="";b.style.animationDelay="";
    b.innerHTML=art(z.who,z.pose,64)+`<span class="pl">${z.name}</span>`;b.onclick=()=>{sfx.tap();MZ=z.id;if(!S.pi[z.id]){S.pi[z.id]=1;save();say(z.intro)}else say(z.name);drawMap()}})}
  else{const z=ZONES.find(x=>x.id===MZ),bk=m.querySelector(".zback");if(z&&bk){const h=document.createElement("div");h.className="card phead";h.innerHTML=art(z.who,z.pose,72)+`<div><b>${z.name}</b><br>${z.intro}</div>`;bk.after(h)}}
+ {const z=MZ&&ZONES.find(x=>x.id===MZ),c=z&&CAST.find(x=>x.id===z.who);$("princess").textContent=z&&c&&c.emoji?c.emoji:MAP_ICON;$("mapHT").textContent=z?z.name:MAP_H2} // 6F: inside a place the heading names it ("🐻 Bear's Tree")
  setSky()};
 // ---------- B6: sky stage (moves only with answers) ----------
 let SESS_ANS=0,skyStage=0;
@@ -1684,7 +1687,7 @@ const _epStep6=epStep;epStep=function(){_epStep6();const E=EP;if(!E)return;const
 const BK_PLANETS=["count","add","shape","pattern","coin"]; // only where she can truly check by looking (Coins and Clock: clock reading only)
 const BK_P=1/6,BK_WRONG=.25; // about 1 in 6 eligible questions; about 1 in 4 check rounds has a guess that needs a look
 const BK_TXT={ask:"Blinkle, guess!",guessed:"The Blinkle guessed {g}.",right:"Good guess, Blinkle!",wrong:"That guess was wrong.",thanks:"Thanks, Blinkle. Now we know!",a:"a ",an:"an ",
- look:"👀 Let's look!",lookSay:"Let's look!",aria:"The Blinkle",leaf:"A leaf. Tap to look under it.",guess:"A... {x}?",
+ look:"👀 Let's look!",lookSay:"Let's look!",aria:"The Blinkle",leaf:"A leaf. Tap to look under it.",guess:"A... {x}?",guessAn:"An... {x}?",guessN:"{x}?",
  toggle:"Blinkle check rounds",toggleNote:"(now and then the Blinkle guesses from clues, then she taps Let's look and checks)",
  report:"Check rounds: {s} seen. Blinkle guesses that needed a look: {w}. Looked before answering: {l}."};
 const BLINKLE_CLUES={
@@ -1703,9 +1706,9 @@ const BK_VAGUE=["Shapes","In a row","It repeats"]; // 6E: wrong pattern rounds
 const BK_NEAR={circle:"oval",oval:"circle",square:"rectangle",rectangle:"square",triangle:"diamond",diamond:"square",star:"heart",heart:"star"}; // obvious near-miss shapes
 const EP_BLINKLE={id:"blinkle",skill:"Check rounds",title:"Meet the Blinkle",steps:[
  {b:"problem",say:"Hello! I'm Zippet. Blinkle, guess! How many nuts?",d:["blinkle",3,0]},
- {b:"show",say:"Brown. Shiny. Few. A... three?",d:["blinkle",3,0]},
+ {b:"show",say:"Brown. Shiny. Few. Three?",d:["blinkle",3,0]},
  {b:"show",say:"Let's look! Three nuts. Good guess, Blinkle!",d:["lookfirst",3]},
- {b:"show",say:"Leaves are in the way. Blinkle, guess! Brown. Shiny. Some. A... five?",d:["blinkle",6,1]},
+ {b:"show",say:"Leaves are in the way. Blinkle, guess! Brown. Shiny. Some. Five?",d:["blinkle",6,1]},
  {b:"show",say:"A guess can be wrong. Let's look!",d:["blinkle",6,1]},
  {b:"show",say:"Six nuts! That guess was wrong. Thanks, Blinkle. Now we know!",d:["lookfirst",6]},
  {b:"try",q:"Your turn! How many nuts?",h:"Touch each one once, and say one number for each.",d:["pile",4,0],ch:[3,4,5],a:4},
@@ -1770,7 +1773,7 @@ function bkInfo(p,x){const v=bkVals(x),oth=v.filter(y=>y!==x.ans),pickIn=a=>{con
   near:()=>pickIn(oth.filter(o=>seq.some(f=>f.includes(TOK[+o][2]))))??pickIn(oth)}}
  if(p.id==="coin"){const {m}=x.clock;return {clues:BLINKLE_CLUES.clock[m],word:g=>{const c=bkClock(g);return tsay(c.h,c.m)},bub:g=>`${g}?`,
   near:()=>{const c=bkClock(x.ans);return pickIn([tfmt(c.h%12+1,c.m),tfmt((c.h+10)%12+1,c.m)])??pickIn(oth)}}}}
-const bkGuessLine=w=>BK_TXT.guess.replace("{x}",w);
+const bkGuessLine=(w,a)=>a?(/^[aeiou]/i.test(w)?BK_TXT.guessAn:BK_TXT.guess).replace("{x}",w):BK_TXT.guessN.replace("{x}",w[0].toUpperCase()+w.slice(1)); // 6F: numbers/times "Five?"; shapes/patterns "A... circle?" / "An... oval?"
 const bkShared=(a,g)=>BK_SHARED[a+"/"+g]||BK_SHARED[g+"/"+a];
 const bkArt=w=>(/^[aeiou]/i.test(w)?BK_TXT.an:BK_TXT.a)+w; // vowel sound -> "an"
 function bkDecide(x){const was=bkLast;bkLast=false;if(!x||!cur)return;const f=bkForce;
@@ -1780,7 +1783,7 @@ function bkDecide(x){const was=bkLast;bkLast=false;if(!x||!cur)return;const f=bk
  const canWrong=bkSes>0&&(S.chk.seen|0)>=2&&!(typeof JR!=="undefined"&&JR&&JR.bkw);
  const sh=(S.chk.wrong|0)/Math.max(1,S.chk.seen|0); // keeps the long-run share near BK_WRONG
  if(f?f.wrong:(canWrong&&Math.random()<(sh<BK_WRONG?.6:.1))){const n=I.near();if(n!==undefined){wrong=true;g=n}}
- const clues=(wrong&&I.wclues?I.wclues(g):I.clues).map(c=>c+"."),gw=I.art?bkArt(I.word(g)):I.word(g),gl=bkGuessLine(I.word(g)),parts=[BK_TXT.ask,...clues,gl];
+ const clues=(wrong&&I.wclues?I.wclues(g):I.clues).map(c=>c+"."),gw=I.art?bkArt(I.word(g)):I.word(g),gl=bkGuessLine(I.word(g),I.art),parts=[BK_TXT.ask,...clues,gl];
  const ep=!f&&!S.ep.seen.blinkle&&EPAUTO&&!epAutoDone&&!(typeof JR!=="undefined"&&JR)&&!timeUp();
  x.bk={guess:g,gw,wrong,poor:wrong,looked:false,clues,gl,bub:I.bub(g),parts,say0:x.say,parts0:x.sayParts,item0:x.item,ep,round};
  if(x.item)x.item="BK:"+x.item; // mastery keeps the TRUE answer under a BK: key; the guess is never recorded
@@ -1830,7 +1833,7 @@ const _progSummary6c=progSummary;progSummary=function(){return _progSummary6c()+
 const _resetB36c=resetB3;resetB3=function(){_resetB36c();S.chk={seen:0,wrong:0,looked:0}};
 // ---------- tests: phrases, episodes, language, pacing ----------
 const BK_NUMS=Array.from({length:20},(_,i)=>i+1),BK_TIMES=[...BK_NUMS.slice(0,12).map(h=>tfmt(h,0)),...BK_NUMS.slice(0,12).map(h=>tfmt(h,30))];
-function bkGuesses(){return [...BK_NUMS.map(n=>NUMW[n]),...SH1,...SH2,...TOK.map(t=>t[0]+" "+t[1]),...BK_TIMES.map(t=>{const c=bkClock(t);return tsay(c.h,c.m)})].map(bkGuessLine)}
+function bkGuesses(){return [...BK_NUMS.map(n=>bkGuessLine(NUMW[n])),...[...SH1,...SH2,...TOK.map(t=>t[0]+" "+t[1])].map(w=>bkGuessLine(w,1)),...BK_TIMES.map(t=>{const c=bkClock(t);return bkGuessLine(tsay(c.h,c.m))})]}
 function bkClueLines(){const B=BLINKLE_CLUES,w=[...Object.values(BK_SHARED).flat(),...BK_VAGUE,...Object.values(B.obj).flat(),...B.amount.map(a=>a[1]),...Object.values(B.shape).flat(),...Object.values(B.pattern).flat(),...Object.values(B.clock).flat()];return [...new Set(w)].map(c=>c+".")}
 const _ph6c=__test3.phrases,_ce6c=__test3.checkEpisodes,_sc6c=__test3.selfCheck;
 __test3.phrases=function(){const L=_ph6c.call(this),add=p=>L.push([p,"blinkle"]);[BK_TXT.ask,BK_TXT.right,BK_TXT.wrong,BK_TXT.thanks,BK_TXT.lookSay,...bkGuessedLines()].forEach(add);bkClueLines().forEach(add);bkGuesses().forEach(add);
@@ -1867,6 +1870,35 @@ __test3.check6C=function(N){N=N||4000;const bad=[],T=window.__test,P=id=>T.PLANE
  __test3.bkCnt={...cnt,share:+share.toFixed(3),epSec:+t.toFixed(1)};return bad};
 __test3.selfCheck=function(N){const r=_sc6c.call(this,N);const b=__test3.check6C(Math.max(4000,N|0));if(b.length)r.bad.check6C=b;r.cnt.check6C=__test3.bkCnt;return r};
 Object.assign(__test3,{BK_TXT,BLINKLE_CLUES,BK_PLANETS,bkDisc,bkElig,bkInfo,bkLook,bkUI,bkGuesses,bkClueLines,bkStrings,setBk:v=>{BKAUTO=!!v},forceBk:w=>{bkForce={wrong:!!w}},resetBkSession:()=>{bkSes=0;bkLast=false},get bkSes(){return bkSes}});
+</script>
+
+<script id="p6f">
+// ---------- Part 6F: leftovers and polish (data + tests) ----------
+const SHORT_TITLE="Zippet",MAP_H2="Pick a place!",MAP_ICON="🏡";
+const BLUE_TOK=/var\(--blue(-dk)?\)/g;
+__test3.check6F=function(){const bad=[],f=m=>{if(bad.length<30)bad.push(m)};
+ // F1: no old space/royal items on any button, in the confetti or journey buttons
+ [...document.querySelectorAll("button")].forEach(b=>{if(OLD_SPACE.test(b.textContent))f("button: "+b.textContent.trim())});
+ [...BURST_S,...BURST_B,JBTN.go,JBTN.on].forEach(x=>{if(OLD_SPACE.test(x))f("burst/journey: "+x)});
+ // F2: the blue colour token only in TOK
+ const src=[...document.querySelectorAll("script:not(#p6f),style")].map(e=>e.textContent).join("\n")+document.body.innerHTML.replace(/<script[\s\S]*?<\/script>/g,"");
+ const tokSrc=JSON.stringify(TOK),n=(src.match(BLUE_TOK)||[]).length,inTok=(tokSrc.match(BLUE_TOK)||[]).length;
+ if(n!==inTok||inTok!==1)f(`blue token found ${n}x, ${inTok}x in TOK`);
+ // F3: guess lines
+ if(bkGuessLine("five")!=="Five?"||bkGuessLine("three o'clock")!=="Three o'clock?"||bkGuessLine("circle",1)!=="A... circle?"||bkGuessLine("oval",1)!=="An... oval?")f("guess line wording");
+ bkGuesses().forEach(g=>{if(/^A\.\.\. (one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|half)\b/.test(g))f("number/time with A...: "+g)});
+ // F4: words
+ [0,1].forEach(g=>WORDG[g].forEach(([w])=>{if(w.length<3||w.length>4)f(`word ${w}: length`);if(/[aeiou]{2}/.test(w))f(`word ${w}: two vowels`)}));
+ ["pasta","paint","pinata","tomato","potato","diamond","onion"].forEach(w=>{if(WORDS.some(x=>x[0]===w))f("old word "+w)});
+ __test3.checkWordsB().forEach(m=>f("checkWordsB: "+m));
+ // F5: heading names the place; drawings tagged
+ if(!/data-k="puddle"/.test(HILL_SVG)||!/data-k="log"/.test(HILL_SVG))f("hill drawings not tagged");
+ const mz=MZ,on=$("mapS").classList.contains("on");try{ZONES.forEach(z=>{MZ=z.id;drawMap();const c=CAST.find(x=>x.id===z.who),t=$("mapH").textContent.trim();if(t!==c.emoji+" "+z.name)f("heading "+z.id+": "+t)});MZ=null;drawMap();if($("mapH").textContent.trim()!==MAP_ICON+" "+MAP_H2)f("hill heading")}finally{MZ=mz;drawMap();$("mapS").classList.toggle("on",on)}
+ // F6
+ try{const x=new XMLHttpRequest();x.open("GET","manifest.json",false);x.send();if(x.status===200){const m=JSON.parse(x.responseText);if(m.short_name!=="Zippet"||m.name!=="Zippet's Walk Home")f("manifest")}}catch(e){}
+ return bad};
+const _sc6f=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6f.call(this,N);const b=__test3.check6F();if(b.length)r.bad.check6F=b;return r};
+Object.assign(__test3,{BURST_S,BURST_B,JBTN,SHORT_TITLE,MAP_H2,bkGuessLine});
 </script>
 
 <script id="p6e">
