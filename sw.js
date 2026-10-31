@@ -7,7 +7,8 @@
 // or passed straight to the network if not cached yet; only full 200 responses are ever cached.
 // v5 (Batch 2): Quick Look planet, take away, per-item review, sparkles, Royal Collection II, parent progress report, 94 new clips.
 // v6 (Batch 3): Tens and Ones, Shape Sparkles, Pattern Parade, Measure Magic, Trace, Story Corner, journey, decorate, 441 new clips.
-const CACHE = 'space-princess-v50';
+// v51 (Part 7E): background music (music/*.mp3, composed), Web Audio player, settings switch.
+const CACHE = 'space-princess-v51';
 
 // Core files, relative so it works under a GitHub Pages subpath like /space-princess/
 const CORE = [

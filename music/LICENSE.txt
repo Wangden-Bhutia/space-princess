@@ -1,0 +1,3 @@
+Music composed for this game (Part 7E). Rendered with FluidR3_GM.sf2 (Fluid R3 GM SoundFont by Frank Wen, MIT License).
+
+hill.mp3, decorate.mp3, evening.mp3: original compositions written note by note for Zippet's Walk Home (no AI models, no existing melodies). Sources: tools/music-src/*.mid and compose.py, rendered with FluidSynth 2.4.4.

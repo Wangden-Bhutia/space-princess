@@ -1049,7 +1049,7 @@ function dragItem(e,it){let sx=0,sy=0,on=false,moved=false;e.addEventListener("p
 function openDeco(){JR=null;show("decoS");drawDeco();say("Decorate your hill! Tap a sticker to add it.")}
 $("decoBtn").onclick=()=>{sfx.tap();openDeco()};$("dcBack").onclick=()=>{drawColl();show("collS")};document.querySelectorAll("#bgTabs [data-bg]").forEach(b=>b.onclick=()=>{D.bg=b.dataset.bg;saveD();sfx.tap();drawDeco()});
 // ---------- optional: download all voices (M10) ----------
-$("dlBtn").onclick=async()=>{const bar=$("dlBar"),msg=$("dlMsg");try{const ks=await fetch("audio/index.json",{cache:"no-cache"}).then(r=>r.json());const fs=[...ks.map(k=>"audio/"+k+".mp3"),...(typeof ASSET_FILES!=="undefined"?ASSET_FILES:[])];let n=0,ok=0,i=0;msg.textContent="Saving voices and pictures…";
+$("dlBtn").onclick=async()=>{const bar=$("dlBar"),msg=$("dlMsg");try{const ks=await fetch("audio/index.json",{cache:"no-cache"}).then(r=>r.json());const fs=[...ks.map(k=>"audio/"+k+".mp3"),...(typeof ASSET_FILES!=="undefined"?ASSET_FILES:[]),...(typeof MUSIC_FILES!=="undefined"?MUSIC_FILES:[])];let n=0,ok=0,i=0;msg.textContent="Saving voices and pictures…";
  const one=async()=>{while(i<fs.length){const f=fs[i++];try{const r=await fetch(f);if(r.ok){await r.arrayBuffer();ok++}}catch(e){}n++;bar.style.width=Math.round(n/fs.length*100)+"%"}};
  await Promise.all([one(),one(),one(),one()]);msg.textContent=`Saved ${ok} of ${fs.length} files for offline ✓ (pictures not made yet are skipped)`}catch(e){msg.textContent=""}}; // the service worker caches each full mp3 response; fails silently
 // ---------- reset + time limit for open-ended screens ----------
@@ -2630,7 +2630,7 @@ Object.assign(__test3,{C1,c1Open,c1Check,c1Ready,nw,num99Gen,add99Gen,daysGen,wo
 </script>
 <script id="p7c">
 // ---------- Part 7C: grown-ups page — at a glance, clearer order, Class 1 progress bars, offline with size ----------
-const OFFLINE_MB=186; // all voices and pictures (audio/*.mp3 + assets/*.webp) when this was built; update when clips are added
+const OFFLINE_MB=187; // all voices, pictures and music (audio/*.mp3 + assets/*.webp + music/*.mp3; 7E) when this was built; update when clips are added
 const G7={glance:"This week",days:"days played",mins:"min of play",stars:"stars",stk:"stickers",strong:"Going well",weak:"Needs practice",none:"Play a few days and this fills in.",full:"📊 Full progress report",
  offBtn:"⬇️ Save for offline use",offNote:`Saves all voices and pictures (about ${OFFLINE_MB} MB) so the game works with no internet. Use Wi-Fi.`,
  offHave:"Saved on this phone: {n} of {t} voices.",
@@ -2874,4 +2874,78 @@ __test3.checkGU6O=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},sc
  }catch(e){f("error "+e.message)}finally{document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}return bad};
 {const _sc=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc.call(this,N);const b=__test3.checkGU6O();if(b.length)r.bad.checkGU6O=b;return r}}
 Object.assign(__test3,{GU_TXT,guBuild,guLetters});
-</script></body></html>
+</script><script id="p7e">
+/* Part 7E: background music (composed for this game; see music/LICENSE.txt). Web Audio player, lazy, after first gesture only. */
+const MUSIC_MAP={hill:["start","mapS","collS"],decorate:["decoS"],evening:["homeFin","restS"]}; // homeFin = the "Home before dark!" card inside #game; every other screen is silent
+const MUSIC_FILES=Object.keys(MUSIC_MAP).map(k=>"music/"+k+".mp3");
+const MUSIC_LOOP={hill:45.714,decorate:41.739,evening:32.727}; // seconds of music before the 2 s render tail (16, 16, 12 bars)
+const MUSIC_KB={hill:450,decorate:450,evening:450},MUSIC_TOTAL_KB=1400;
+const MUS_CFG={vol:.22,dip:.06,dipIn:.25,dipOut:.6,xf:1.5,leave:.8,enter:1.2,swap:1,off:.3};
+GU_TXT.sw.optMusic=["Background music","Soft music on the hill, the sticker book and the ending. Never during games."];
+const MP7={ctx:null,master:null,buf:{},loading:{},failed:{},cur:null,pg:null,gest:false,preGest:0,fetches:0,target:0,sayT:0,timer:null,want:null};
+const musOn=()=>S.music!==false&&!!S.sound; // old saves have no S.music: treated as ON
+function musicWant(){if(!musOn())return null;if($("gate")&&$("gate").classList.contains("on"))return null;
+ const sc=document.querySelector(".screen.on"),id=sc?sc.id:"";
+ if(id==="game")return $("game").querySelector(".homefin")?"evening":null;
+ for(const k in MUSIC_MAP)if(MUSIC_MAP[k].includes(id))return k;return null}
+function musVoiceBusy(){try{if(typeof vAud!=="undefined"&&vAud&&!vAud.paused&&!vAud.ended)return true}catch(e){}
+ try{if("speechSynthesis" in window&&speechSynthesis.speaking)return true}catch(e){}return Date.now()-MP7.sayT<400}
+function musCtx(){if(MP7.ctx)return MP7.ctx;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;const c=new C(),m=c.createGain();m.gain.value=0;m.connect(c.destination);MP7.ctx=c;MP7.master=m}catch(e){MP7.ctx=null}return MP7.ctx}
+function musRamp(g,v,dur){const c=MP7.ctx,t=c.currentTime;try{g.gain.cancelScheduledValues(t);g.gain.setValueAtTime(g.gain.value,t);g.gain.linearRampToValueAtTime(v,t+dur)}catch(e){}}
+function musMaster(){const v=musVoiceBusy()?MUS_CFG.dip:MUS_CFG.vol;if(v===MP7.target||!MP7.master)return;const d=v<MP7.target?MUS_CFG.dipIn:MUS_CFG.dipOut;MP7.target=v;musRamp(MP7.master,v,d)}
+function musLoad(n){if(MP7.buf[n]||MP7.loading[n]||MP7.failed[n])return;if(!MP7.gest){MP7.preGest++;return}
+ MP7.loading[n]=1;MP7.fetches++;fetch("music/"+n+".mp3").then(r=>r.ok?r.arrayBuffer():Promise.reject()).then(a=>new Promise((ok,no)=>{const p=MP7.ctx.decodeAudioData(a,ok,no);if(p&&p.then)p.then(ok,no)}))
+  .then(b=>{MP7.buf[n]=b;MP7.loading[n]=0;musUpdate()}).catch(()=>{MP7.failed[n]=1;MP7.loading[n]=0})} // failure: stay silent, never retry
+/* Loop: each copy plays its loop part L; the next copy starts xf (1.5 s) before L and fades in over xf while this one fades out over xf, so period = L - xf. */
+function musCopy(p,at,first){const c=MP7.ctx,L=MUSIC_LOOP[p.name],xf=MUS_CFG.xf;if(p.dead)return;
+ const s=c.createBufferSource(),g=c.createGain();s.buffer=MP7.buf[p.name];s.connect(g);g.connect(p.gain);
+ g.gain.setValueAtTime(first?1:0,at);if(!first)g.gain.linearRampToValueAtTime(1,at+xf);g.gain.setValueAtTime(1,at+L-xf);g.gain.linearRampToValueAtTime(0,at+L);
+ s.start(at);s.stop(at+L+.05);p.srcs.push(s);const next=at+L-xf;p.next=next;
+ p.t=setTimeout(()=>{p.srcs=p.srcs.slice(-2);musCopy(p,next,false)},Math.max(0,(next-c.currentTime-.5)*1000))}
+function musStop(p,dur){if(!p)return;musRamp(p.gain,0,dur);clearTimeout(p.t);p.dead=1;setTimeout(()=>{p.srcs.forEach(s=>{try{s.stop()}catch(e){}});try{p.gain.disconnect()}catch(e){}},dur*1000+100)}
+function musUpdate(){const w=musicWant();MP7.want=w;const c=MP7.ctx;if(!MP7.gest||!c)return;
+ if(MP7.cur&&MP7.cur!==w){const d=w?MUS_CFG.swap:(musOn()?MUS_CFG.leave:MUS_CFG.off);musStop(MP7.pg,d);MP7.pg=null;MP7.cur=null;MP7.swapAt=w?Date.now():0}
+ if(!w||MP7.cur===w)return musMaster();
+ if(!MP7.buf[w]){musLoad(w);return}
+ if(c.state==="suspended"&&!document.hidden)try{c.resume()}catch(e){}
+ const g=c.createGain();g.gain.value=0;g.connect(MP7.master);const p={name:w,gain:g,srcs:[],dead:0};
+ musRamp(g,1,(Date.now()-(MP7.swapAt||0)<100)?MUS_CFG.swap:MUS_CFG.enter);MP7.pg=p;MP7.cur=w;musCopy(p,c.currentTime+.05,true);musMaster()}
+{const _sw=show;show=function(id){const r=_sw.apply(this,arguments);try{musUpdate()}catch(e){}return r}}
+{const _s=say;say=function(){MP7.sayT=Date.now();const r=_s.apply(this,arguments);try{musMaster()}catch(e){}return r}}
+function musGesture(){if(MP7.gest)return;MP7.gest=true;if(!musCtx())return;try{MP7.ctx.resume()}catch(e){}musUpdate()}
+["pointerdown","keydown","touchend"].forEach(t=>addEventListener(t,musGesture,{capture:true,passive:true}));
+document.addEventListener("visibilitychange",()=>{const c=MP7.ctx;if(!c)return;try{if(document.hidden)c.suspend();else if(musOn())c.resume()}catch(e){}});
+MP7.timer=setInterval(()=>{if(!document.hidden)try{musUpdate()}catch(e){}},250); // catches homeFin, gate, Sound-effects switch
+function musSwitch(){const p=document.querySelector('#parentS .gc[data-k="set"]');if(!p)return;let i=$("optMusic");
+ if(!i){const l=document.createElement("label");l.className="gsw";l.innerHTML='<span class="gst"><b></b><small></small></span><input type="checkbox" id="optMusic" role="switch">';
+  const [a,b]=GU_TXT.sw.optMusic;l.querySelector("b").textContent=a;l.querySelector("small").textContent=b;const after=$("optSound").closest("label");after.after(l);i=$("optMusic");
+  i.onchange=e=>{S.music=e.target.checked;save();musUpdate()}}
+ i.checked=S.music!==false}
+{const _dp=drawParent;drawParent=function(){const r=_dp.apply(this,arguments);try{musSwitch()}catch(e){}return r}}
+__test3.check7E=function(){const bad=[],f=m=>bad.push(m);const sv={S:JSON.stringify(S),scr:(document.querySelector(".screen.on")||{}).id,gest:MP7.gest,ctx:MP7.ctx,m:MP7.master,t:MP7.target,cur:MP7.cur,pg:MP7.pg,sayT:MP7.sayT};
+ try{const all=Object.values(MUSIC_MAP).flat().sort().join();if(all!=="collS,decoS,homeFin,mapS,restS,start")f("map "+all);
+  if(MUSIC_MAP.hill.join()!=="start,mapS,collS"||MUSIC_MAP.decorate.join()!=="decoS"||MUSIC_MAP.evening.join()!=="homeFin,restS")f("map pieces");
+  if(MP7.preGest!==0)f("music fetched before first gesture");if(!MP7.gest&&MP7.fetches)f("fetch without gesture");
+  S.music=true;S.sound=true;const ms=[];
+  ["game","blocks","storyS","epS","parentS","progS"].forEach(id=>{show(id);if(id==="game")$("game").querySelectorAll(".homefin").forEach(e=>e.remove());if(musicWant())f(id+" should be silent")});
+  show("mapS");if(musicWant()!=="hill")f("mapS→"+musicWant());show("start");if(musicWant()!=="hill")f("start");show("collS");if(musicWant()!=="hill")f("collS");
+  show("restS");if(musicWant()!=="evening")f("restS");openDeco();if(musicWant()!=="decorate")f("openDeco→"+musicWant());
+  show("game");const d=document.createElement("div");d.innerHTML=homeFin();const hf=d.firstElementChild;$("game").appendChild(hf);if(musicWant()!=="evening")f("homeFin→"+musicWant());hf.remove();if(musicWant())f("game after homeFin");
+  $("gate").classList.add("on");show("mapS");if(musicWant())f("gate should be silent");$("gate").classList.remove("on");
+  S.music=false;["start","mapS","collS","decoS","restS"].forEach(id=>{show(id);if(musicWant())f("music off but "+id)});S.music=true;S.sound=false;show("mapS");if(musicWant())f("sound off but music");S.sound=true;
+  delete S.music;if(!musOn())f("old save (no S.music) should be ON");
+  // gain with a stubbed AudioContext
+  const ramps=[];const G=()=>({gain:{value:0,cancelScheduledValues(){},setValueAtTime(){},linearRampToValueAtTime(v,t){ramps.push(v)}},connect(){},disconnect(){}});
+  MP7.ctx={currentTime:0,state:"running",createGain:G,createBufferSource:()=>({connect(){},start(){},stop(){}}),resume(){},suspend(){},decodeAudioData(){}};MP7.master=G();MP7.target=MUS_CFG.vol;MP7.cur="hill";MP7.pg=null;MP7.gest=true;
+  const sp=S.speech;S.speech=true;say("Tap the star.");if(MP7.target!==MUS_CFG.dip)f("dip during say: "+MP7.target);stopVoice();MP7.sayT=0;musMaster();if(MP7.target!==MUS_CFG.vol)f("after say: "+MP7.target);S.speech=sp;
+  if(!ramps.includes(.06)||!ramps.includes(.22))f("ramps "+ramps.join());
+  let tot=0;Object.keys(MUSIC_MAP).forEach(n=>{try{const x=new XMLHttpRequest();x.open("HEAD","music/"+n+".mp3",false);x.send();const kb=+x.getResponseHeader("content-length")/1024;tot+=kb;if(x.status!==200||!kb)f("missing music/"+n+".mp3");else if(kb>MUSIC_KB[n])f(n+" "+kb.toFixed(0)+" KB")}catch(e){f("head "+n)}});
+  if(tot>MUSIC_TOTAL_KB)f("music total "+tot.toFixed(0)+" KB");
+  try{const x=new XMLHttpRequest();x.open("GET","music/LICENSE.txt",false);x.send();if(x.status!==200||!/Part 7E/.test(x.responseText))f("LICENSE.txt")}catch(e){f("license")}
+  if(MUSIC_FILES.length!==3||MUSIC_FILES.some(u=>!/^music\/(hill|decorate|evening)\.mp3$/.test(u)))f("MUSIC_FILES");
+ }catch(e){f("err "+e.message)}
+ S=JSON.parse(sv.S);Object.assign(MP7,{gest:sv.gest,ctx:sv.ctx,master:sv.m,target:sv.t,cur:sv.cur,pg:sv.pg,sayT:sv.sayT});if(sv.scr)show(sv.scr);return bad};
+{const _sc=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc.call(this,N);const b=__test3.check7E();if(b.length)r.bad.check7E=b;return r}}
+Object.assign(__test3,{MUSIC_MAP,MUSIC_FILES,MUSIC_LOOP,MUS_CFG,MP7,musicWant,musUpdate,musOn});
+</script>
+</body></html>
