@@ -2180,7 +2180,7 @@ document.head.insertAdjacentHTML("beforeend",`<style>
 @media (prefers-reduced-motion:reduce){#stPop .sps{animation:none}}
 </style>`);
 let stShown=Math.floor(S.stars/5),stPending=null;
-function stCalm(){if($("stPop").classList.contains("on")||$("gate").classList.contains("on"))return false;if($("epS").classList.contains("on"))return false;
+function stCalm(){if($("stPop").classList.contains("on")||$("gate").classList.contains("on"))return false;if($("epS").classList.contains("on"))return false;if(["parentS","progS","restS"].some(id=>$(id)&&$(id).classList.contains("on")))return false; // never on grown-up pages
  if($("game").classList.contains("on")&&cur&&round<ROUNDS)return false;return true}
 function stPopShow(t){$("stPopS").innerHTML=isArtSt(t)?stImg(t,170):t;$("stPop").classList.add("on");try{[523,659,784,1047,1319].forEach((f,i)=>tone(f,i*.11,.3,"triangle"))}catch(e){}try{burst($("stPopS"),24,true)}catch(e){}}
 $("stPopOk").onclick=$("stPop").onclick=e=>{if(e.target.closest(".spc")&&e.target.id!=="stPopOk")return;$("stPop").classList.remove("on");try{sfx.tap()}catch(_){}};
@@ -2198,7 +2198,7 @@ __test3.check6L=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)};
  PAINTED_ST.forEach(t=>{if(!ASSET_FILES.includes("assets/"+t.slice(4)+".webp"))f("no asset for "+t)});
  [0,3,7,12].forEach(st=>{const k=S.stars;S.stars=st;meterDraw();const on=document.querySelectorAll("#stm_game i.on").length;if(on!==st%5)f(`meter ${st}: ${on}`);S.stars=k;meterDraw()});
  const sc=[...document.querySelectorAll(".screen.on")].map(e=>e.id),c0=cur,r0=round;
- try{cur=PLANETS[0];round=1;show("game");if(stCalm())f("pop allowed mid-game");round=ROUNDS;if(!stCalm())f("pop blocked at game end");show("start");if(!stCalm())f("pop blocked on home")}
+ try{cur=PLANETS[0];round=1;show("game");if(stCalm())f("pop allowed mid-game");round=ROUNDS;if(!stCalm())f("pop blocked at game end");show("start");if(!stCalm())f("pop blocked on home");show("progS");if(stCalm())f("pop allowed on the grown-ups report")}
  finally{cur=c0;round=r0;document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}
  const d=document.createElement("div");d.innerHTML="New sticker: art:bear_happy";fixArtText(d);if(!d.querySelector("img.stimg"))f("sticker text not drawn as a picture");
  return bad};
@@ -2288,6 +2288,123 @@ __test3.check6N=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},mz=M
  }catch(e){f("error "+e.message)}finally{MZ=mz;document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}return bad};
 {const _sc6n=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6n.call(this,N);const b=__test3.check6N();if(b.length)r.bad.check6N=b;return r}}
 Object.assign(__test3,{HILL_ART,hillArt});
+</script>
+<script id="p7a">
+// ---------- Part 7A: learning profile — evidence, skills, strengths and weaknesses, mix-ups, adaptive practice ----------
+// Evidence: one event per question (her FIRST answer): item, game, first-try right?, what she picked when wrong, time to answer, day.
+const LGKEY="spacePrincessLearnV1",LGCAP=1500;
+let LG={ev:[]};try{const x=JSON.parse(localStorage.getItem(LGKEY));if(x&&Array.isArray(x.ev))LG=x}catch(e){}
+const saveLG=()=>{try{localStorage.setItem(LGKEY,JSON.stringify(LG))}catch(e){}};
+const plain=h=>{const d=document.createElement("div");d.innerHTML=String(h);return d.textContent.trim()};
+function lgRecord(item,ok,pick,ans,ms,pv,av){if(!item)return;item=String(item).replace(/^BK:/,"");
+ const e={k:item,g:cur?cur.id:"",ok:ok?1:0,d:dkey(new Date()),t:Date.now()};if(ms>0&&ms<600000)e.ms=Math.round(ms);if(!ok&&pick!=null){e.w=String(pick).slice(0,24);e.a=String(ans).slice(0,24);if(pv!=null)e.wv=String(pv).slice(0,24);if(av!=null)e.av=String(av).slice(0,24)}
+ LG.ev.push(e);if(LG.ev.length>LGCAP)LG.ev.splice(0,LG.ev.length-LGCAP);saveLG()}
+{const _n=next;next=function(){const r=_n.apply(this,arguments);if(q)q._t0=Date.now();return r}}
+{const _a=answer;answer=function(b,v){try{if(q&&!q._lg&&!locked&&b&&!b.classList.contains("no")&&!(q.bk&&!q.bk.looked)&&q.item){q._lg=1;
+  const lab=x=>{const c=(q.choices||[]).find(c=>(typeof c==="object"?c.val:c)===x);return c==null?x:plain(typeof c==="object"?c.label:c)};
+  lgRecord(q.item,v===q.ans,lab(v),lab(q.ans),Date.now()-(q._t0||Date.now()),v,q.ans)}}catch(e){}return _a.apply(this,arguments)}}
+// Skills: what she is learning, across games. m(key) says whether an item key belongs to the skill; g = the game that practises it.
+const num=(k,p)=>+(k.slice(p.length).match(/\d+/)||[NaN])[0];
+const sumOf=k=>{const m=k.match(/^A:(\d+)\+(\d+)/);return m?+m[1]+ +m[2]:NaN};
+const SKILLS=[
+ {id:"cnt10",name:"Counting to 10",area:"Maths",g:"count",m:k=>k.startsWith("C:")&&num(k,"C:")<=10},
+ {id:"cnt20",name:"Counting 11 to 20",area:"Maths",g:"count",m:k=>k.startsWith("C:")&&num(k,"C:")>10},
+ {id:"numrec",name:"Knowing numbers",area:"Maths",g:"num",m:k=>k.startsWith("N:")},
+ {id:"glance",name:"Seeing amounts at a glance",area:"Maths",g:"quick",m:k=>/^(Q|F|F10|K5|K10):/.test(k)},
+ {id:"more",name:"More and less",area:"Maths",g:"more",m:k=>k.startsWith("ML:")},
+ {id:"add10",name:"Adding within 10",area:"Maths",g:"add",m:k=>k.startsWith("A:")&&sumOf(k)<=10},
+ {id:"add20",name:"Adding within 20",area:"Maths",g:"add",m:k=>k.startsWith("A:")&&sumOf(k)>10},
+ {id:"take",name:"Taking away",area:"Maths",g:"add",m:k=>k.startsWith("T:")},
+ {id:"tens",name:"Tens and ones",area:"Maths",g:"tens",m:k=>/^(P|O|SK):/.test(k)},
+ {id:"shapes",name:"Shapes",area:"Maths",g:"shape",m:k=>k.startsWith("SH:")},
+ {id:"pattern",name:"Patterns",area:"Maths",g:"pattern",m:k=>k.startsWith("PT:")},
+ {id:"measure",name:"Long, tall, heavy",area:"Maths",g:"measure",m:k=>k.startsWith("MS:")},
+ {id:"coins",name:"Coins",area:"Maths",g:"coin",m:k=>k.startsWith("CO:")},
+ {id:"clock",name:"Telling the time",area:"Maths",g:"coin",m:k=>k.startsWith("CK:")},
+ {id:"letname",name:"Letter names",area:"Reading",g:"letter",m:k=>k.startsWith("L:")},
+ {id:"letsound",name:"Letter sounds",area:"Reading",g:"sound",m:k=>k.startsWith("S:")},
+ {id:"blend",name:"Blending sounds into words",area:"Reading",g:"blend",m:k=>k.startsWith("BL:")},
+ {id:"words",name:"Spelling short words",area:"Reading",g:"word",m:k=>k.startsWith("W:")},
+ {id:"rhyme",name:"Rhymes",area:"Reading",g:"rhyme",m:k=>k.startsWith("R:")},
+ {id:"pairs",name:"Sound pairs (sh, ch, th, ng)",area:"Reading",g:"dg",m:k=>/^DG[PB]?:/.test(k)},
+ {id:"tricky",name:"Tricky words",area:"Reading",g:"story",m:k=>k.startsWith("SW:")},
+ {id:"sentence",name:"Building sentences",area:"Reading",g:"sent",m:k=>k.startsWith("SB:")},
+ {id:"story",name:"Understanding stories",area:"Reading",g:"story",m:k=>k.startsWith("ST:")},
+ {id:"write",name:"Writing letters and numbers",area:"Reading",g:"trace",m:k=>k.startsWith("TR:")}];
+const SKILL_OF=k=>SKILLS.find(s=>s.m(String(k).replace(/^BK:/,"")));
+// Profile of one skill: strength 0..1 from the item boxes (long-term) and the last 20 answers (recent), how sure we are, days practised.
+function skillStats(s,now){now=now||Date.now();const ks=Object.keys(M).filter(k=>s.m(k)),ev=LG.ev.filter(e=>s.m(e.k)),rec=ev.slice(-20);
+ const box=ks.length?ks.reduce((a,k)=>a+M[k].b/4,0)/ks.length:0,acc=rec.length?rec.reduce((a,e)=>a+e.ok,0)/rec.length:null;
+ const att=ks.reduce((a,k)=>a+(M[k].a|0),0),okDays=new Set(ev.filter(e=>e.ok).map(e=>e.d)).size,last=Math.max(0,...ks.map(k=>M[k].t||0));
+ const str=acc==null?box:(rec.length>=6?.5*box+.5*acc:.7*box+.3*acc);
+ const weakItems=ks.filter(k=>M[k].b===0&&(M[k].a|0)>=2).sort((x,y)=>(M[y].a-M[y].f)-(M[x].a-M[x].f));
+ const ms=ev.filter(e=>e.ok&&e.ms).map(e=>e.ms).sort((a,b)=>a-b),med=ms.length?ms[ms.length>>1]:null;
+ const status=!att?"new":(att>=8&&str>=.75&&okDays>=2)?"strong":(att>=5&&str<.5)?"weak":"learning";
+ return {s,ks,att,str,acc,okDays,last,weakItems,med,status,due:ks.filter(k=>mDue(M[k],now)).length}}
+// Mix-ups: the same wrong pick for the same answer, at least twice ("6 for 9", "b for d"), and counting one off.
+function mixups(s){const c={};LG.ev.filter(e=>!e.ok&&e.w!=null&&e.a!=null&&(!s||s.m(e.k))).forEach(e=>{const av=e.av!=null?e.av:e.a,wv=e.wv!=null?e.wv:e.w,k=av+"→"+wv;(c[k]=c[k]||{a:e.a,w:e.w,av,wv,n:0,sk:SKILL_OF(e.k)}).n++});
+ return Object.values(c).filter(x=>x.n>=2).sort((a,b)=>b.n-a.n)}
+function offByOne(s){const ev=LG.ev.filter(e=>s.m(e.k)&&!e.ok&&e.w!=null),n=ev.filter(e=>Math.abs(+e.w-+e.a)===1).length;return ev.length>=3&&n/ev.length>=.6?n:0}
+function profile(now){const st=SKILLS.map(s=>skillStats(s,now));return {st,strong:st.filter(x=>x.status==="strong").sort((a,b)=>b.str-a.str),
+ weak:st.filter(x=>x.status==="weak").sort((a,b)=>a.str-b.str),learning:st.filter(x=>x.status==="learning").sort((a,b)=>a.str-b.str),fresh:st.filter(x=>x.status==="new"),mix:mixups()}}
+// ---------- adaptive practice ----------
+// 1) Today's Adventure: a game's priority is its weakest practised skill (weak skills first), as well as the old due/strength score.
+{const _ps=planetScore;planetScore=function(id,now){const base=_ps(id,now),st=SKILLS.filter(s=>s.g===id).map(s=>skillStats(s,now)).filter(x=>x.att);
+  if(!st.length)return base;const w=Math.min(...st.map(x=>x.status==="weak"?x.str-.3:x.status==="strong"?x.str+.2:x.str));return Math.min(base,w)}}
+// 2) In a game: when it has items she keeps missing, they come back every second question (normally every fourth).
+const weakDue=id=>{const pre=MP[id];if(!pre)return false;const now=Date.now();return Object.keys(M).some(k=>pre.some(p=>k.startsWith(p))&&M[k].b===0&&(M[k].a|0)>=2&&mDue(M[k],now))};
+// 3) Mix-ups: when a question's answer is one she has mixed up, the thing she mixes it with is one of the choices, so she practises telling them apart.
+function confusionFor(item,ans){const a=String(ans);const m=mixups().filter(x=>x.av===a&&x.sk&&x.sk.m(String(item).replace(/^BK:/,"")));return m.length?m[0].wv:null}
+{const _g=genQ;genQ=function(l){if(cur&&weakDue(cur.id)&&sinceRev>=1)sinceRev=3;const x=_g.apply(this,arguments);
+  try{const simple=c=>typeof c!=="object"||(c&&String(c.label)===String(c.val));const vOf=c=>typeof c==="object"?c.val:c;
+  if(x&&!x.bk&&!x.dnd&&x.item&&Array.isArray(x.choices)&&x.choices.length>=2&&x.choices.every(simple)){const w=confusionFor(x.item,x.ans);
+   if(w!=null&&!x.choices.map(c=>String(vOf(c))).includes(w)&&w!==String(x.ans)){const wv=typeof x.ans==="number"&&w.trim()!==""&&!isNaN(+w)?+w:w,obj=typeof x.choices[0]==="object";
+    const idx=x.choices.map((c,i)=>i).filter(i=>vOf(x.choices[i])!==x.ans);if(idx.length){x.choices[pick(idx)]=obj?{label:String(wv),val:wv}:wv;x.mixup=1}}}}catch(e){}
+  return x}}
+// ---------- the grown-ups report ----------
+const LTXT={title:"How she is learning",strong:"Strong",weak:"Needs practice",learning:"Still learning",mix:"Mix-ups to watch",next:"What the game does about it",
+ none:"Not enough play yet. After a few days of games this shows her strengths and where she needs help.",
+ adv:"Today's Adventure picks the games for her weakest skills first.",rev:"In a game, things she keeps missing come back every second question.",
+ mixdo:"When a mix-up's answer comes up, the thing she mixes it with is one of the choices, so she learns to tell them apart.",
+ off:"Often one off when counting ({n} times): she may be counting an object twice or skipping one. Count together, touching each one.",
+ slow:"Takes time to answer ({s} s on average): she is still working it out."};
+const showItem=k=>{const v=k.slice(k.indexOf(":")+1);return /^[LS]:/.test(k)?v.toLowerCase():v.replace(/^[a-z]{2}:/,"")};
+function learnHTML(){const P=profile();if(!P.st.some(x=>x.att))return `<div class="parent lrn"><b>${LTXT.title}</b><br>${LTXT.none}</div>`;
+ const row=x=>`<li><b>${x.s.name}</b> <small>(${Math.round(x.str*100)}%${x.okDays?`, ${x.okDays} day${x.okDays>1?"s":""}`:""})</small>${x.weakItems.length?`<br><small>Missing most: ${x.weakItems.slice(0,6).map(showItem).join(", ")}</small>`:""}${offByOne(x.s)?`<br><small>${LTXT.off.replace("{n}",offByOne(x.s))}</small>`:""}${x.med&&x.med>8000?`<br><small>${LTXT.slow.replace("{s}",Math.round(x.med/1000))}</small>`:""}</li>`;
+ const sec=(t,a,cls)=>a.length?`<div class="lsec ${cls}"><b>${t}</b><ul>${a.map(row).join("")}</ul></div>`:"";
+ const mix=P.mix.slice(0,6);
+ return `<div class="parent lrn"><h3>${LTXT.title}</h3>${sec(LTXT.weak,P.weak,"w")}${sec(LTXT.strong,P.strong,"s")}${sec(LTXT.learning,P.learning.slice(0,6),"l")}
+ ${mix.length?`<div class="lsec m"><b>${LTXT.mix}</b><ul>${mix.map(x=>`<li>Picks <b>${x.w}</b> when it is <b>${x.a}</b> <small>(${x.n} times${x.sk?", "+x.sk.name.toLowerCase():""})</small></li>`).join("")}</ul></div>`:""}
+ <div class="lsec"><b>${LTXT.next}</b><ul><li>${LTXT.adv}</li><li>${LTXT.rev}</li>${mix.length?`<li>${LTXT.mixdo}</li>`:""}</ul></div></div>`}
+document.head.insertAdjacentHTML("beforeend",`<style>.lrn h3{margin:0 0 6px;color:var(--plum)}.lrn ul{margin:4px 0 8px;padding-left:22px}.lrn li{margin:3px 0}
+.lsec.w>b{color:var(--accent-xdk)}.lsec.s>b{color:var(--ok-dk)}.lsec.m>b{color:var(--plum)}</style>`);
+{const _dp=drawProgress;drawProgress=function(){const r=_dp.apply(this,arguments);$("progBody").insertAdjacentHTML("afterbegin",learnHTML());return r}}
+{const _psum=progSummary;progSummary=function(){const P=profile();return _psum()+"\n"+[`Strong: ${P.strong.map(x=>x.s.name).join(", ")||"not yet"}`,`Needs practice: ${P.weak.map(x=>x.s.name).join(", ")||"nothing yet"}`,
+  ...P.mix.slice(0,5).map(x=>`Mix-up: picks ${x.w} for ${x.a} (${x.n}x)`)].join("\n")}}
+{const _rb=resetB3;resetB3=function(){_rb.apply(this,arguments);LG={ev:[]};saveLG()}}
+// ---------- tests ----------
+__test3.check7A=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},keepM=JSON.stringify(M),keepL=JSON.stringify(LG),keepCur=cur;
+ try{// every item key the games make belongs to a skill
+  const lg=LP.g;LP.g=4;PLANETS.forEach(p=>{for(let l=0;l<=3;l++)for(let i=0;i<60;i++){let x;try{x=p.gen(Math.min(l,p.maxl??3))}catch(e){continue}if(x&&x.item&&!SKILL_OF(x.item))f(p.id+": no skill for "+x.item)}});LP.g=lg;
+  SKILLS.forEach(s=>{if(s.g!=="story"&&!PLANETS.find(p=>p.id===s.g))f("skill game missing "+s.id)});
+  // a made-up history: strong counting, weak letter sounds, b/d mix-up
+  Object.keys(M).forEach(k=>delete M[k]);LG={ev:[]};const day=(n)=>dkey(new Date(Date.now()-n*864e5));
+  for(let i=0;i<12;i++){M["C:"+(i%9+1)]={a:3,f:3,b:4,t:Date.now()};LG.ev.push({k:"C:"+(i%9+1),g:"count",ok:1,d:day(i%3),t:Date.now()})}
+  for(let i=0;i<8;i++){M["S:"+"BDPQ"[i%4]]={a:4,f:0,b:0,t:0};LG.ev.push({k:"S:B",g:"sound",ok:0,w:"d",a:"b",wv:"D",av:"B",d:day(0),t:Date.now()})}
+  const P=profile();if(!P.strong.some(x=>x.s.id==="cnt10"))f("strong skill not found");if(!P.weak.some(x=>x.s.id==="letsound"))f("weak skill not found");
+  if(!P.mix.some(x=>x.av==="B"&&x.wv==="D"))f("mix-up not found");
+  const j=pickJourney();if(j[1]!=="sound")f("Adventure does not pick the weak reading skill: "+j.join(","));
+  if(!weakDue("sound"))f("weak items not seen as due");
+  cur=PLANETS.find(p=>p.id==="sound");let hit=0,tot=0;for(let i=0;i<300;i++){const x=genQ(1);if(x.item==="S:B"&&Array.isArray(x.choices)){tot++;if(x.choices.map(c=>String(typeof c==="object"?c.val:c)).includes("D"))hit++}}
+  if(tot<3||hit<tot)f(`mix-up not offered (${hit}/${tot})`);
+  const h=learnHTML();if(!/Needs practice/.test(h)||!/Strong/.test(h)||!/Mix-ups/.test(h))f("report sections");
+  // the recorder: one event per question, first answer only
+  LG={ev:[]};cur=PLANETS.find(p=>p.id==="num");show("game");startPlanet(cur);const vals=q.choices.map(c=>typeof c==="object"?c.val:c),bs=[...$("choices").children];
+  const wi=vals.findIndex(v=>v!==q.ans);if(wi>=0)answer(bs[wi],vals[wi]);answer(bs[vals.indexOf(q.ans)],q.ans);clearTimeout(nextT);
+  if(LG.ev.length!==1)f("events per question "+LG.ev.length);else if(wi>=0&&(LG.ev[0].ok||LG.ev[0].w==null))f("wrong first answer not recorded");
+ }catch(e){f("error "+e.message)}finally{M=JSON.parse(keepM);saveM();LG=JSON.parse(keepL);saveLG();cur=keepCur;clearTimeout(nextT);show("start")}return bad};
+{const _sc7a=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc7a.call(this,N);const b=__test3.check7A();if(b.length)r.bad.check7A=b;return r}}
+Object.assign(__test3,{SKILLS,skillStats,profile,mixups,learnHTML,lgRecord,get LG(){return LG},setLG:v=>{LG=v}});
 </script>
 <script id="batch4">
 // ---------- Batch 4: install app (text-only, no voice) ----------
