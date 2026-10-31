@@ -357,7 +357,7 @@ const WORDG=[ // Words planet, by letter group: a word uses only letters from it
  [["hat","🎩"],["bus","🚌"],["bed","🛏️"],["bat","🦇"],["hen","🐔"],["bug","🪲"],["bell","🔔"],["fish","🐟"],["frog","🐸"],["lemon","🍋"],["bird","🐦"],["bulb","💡"],["leaf","🍃"],["hand","✋"],["robot","🤖"],["rabbit","🐰"],["banana","🍌"]],
  [["fox","🦊"],["box","📦"],["van","🚐"],["web","🕸️"],["zebra","🦓"],["wolf","🐺"],["volcano","🌋"],["watch","⌚"],["violin","🎻"],["kiwi","🥝"],["taxi","🚕"],["wave","🌊"]]];
 const WORDS=WORDG.flat(); // flat list (tests, phrases)
-const WREG=new Set("dino spin snip pond stop mint mist drum frog bulb hand lemon rabbit".split(" ")); // longer words that sound out letter by letter; others get a "say it slowly" hint
+const WREG=new Set("spin snip pond stop mint mist drum frog bulb hand lemon rabbit".split(" ")); // longer words that sound out letter by letter; others get a "say it slowly" hint
 // Real 3-letter words: a Words distractor must not make another real word (e.g. bus -> "bum"). RUDE words never appear anywhere.
 const REALW=new Set("bad bag ban bat bed beg bet bib bid big bin bit bob bog box bud bug bum bun bus but cab can cap car cat cob cod cog cop cot cow cub cud cup cut dab dad dam den dig dim din dip dog dot dug dun ear eat egg fan far fat fed fen fib fig fin fit fix fog fox fun fur gap gas gel get god got gum gun gut had ham has hat hen her hid him hip his hit hob hog hop hot hug hum hut jab jam jar jet jig job jog jot jug jut keg kid kin kit lab lad lap leg let lid lip lit log lot lug mad man map mat men met mix mob mom mop mud mug mum nab nag nap net nib nip nod not nut pad pal pan pat peg pen pet pig pin pit pod pop pot pub pug pun pup pus put rag ram ran rap rat red rib rid rig rim rip rob rod rot rub rug rum run rut sad sag sap sat set sin sip sit six sob sod son sub sum sun tab tag tan tap tar ten tin tip ton top tot tub tug van vat vet wag war was web wed wet wig win wit yak yam yap yen yes yet yum zap zip pee poo wee ant art arm bar cap pox sex".split(" "));
 // SWAPW: real English words (web2/gcide, built offline) one letter away from a Words word; distractors must not make these
@@ -1521,8 +1521,8 @@ const ZONES=[ // 6B: the five PLACES on the hill (data). who = the friend who li
  {id:"home",name:"Home Door",who:"zippet",pose:"happy",intro:"Let's look! There is a clock by the door, and some coins.",p:["coin","sent"]}];
 const ZBACK="Back to the hill!",ZSOON="More stories soon"; // spoken on the zone back button; label of the last story card (not spoken)
 // B5: new Words (group 0 and group 1). Real words one letter away from them, so Words distractors never make a real word:
-const WORDG_ADD=[[["nap","😴"],["sit","🪑"],["sip","🧋"],["spin","🌀"],["snip","✂️"]],[["mom","👩"],["mop","🧹"],["dig","⛏️"],["dino","🦕"],["mad","😠"],["dad","👨‍👧"],["pond","🏞️"],["stop","🛑"],["mint","🌿"],["mist","🌫️"]]]; // 6F: only that group's single-letter sounds, 3-4 letters
-const SWAPW_ADD="vino wino lino kino mino pino fino tino bino dido dina dine dink ding dins dint diny dano duno dono dibo diso dito gab gad gal gam gap gar gat gay gaz bas das fas kas las mas pas ras vas was gis gos gus ait cit dit git hit kit lit nit pit tit wit zit sot sic sib sid sim sir sis siz shin skin span spun spit spiv spic pip kip hip lip dip rip tip zip yip sop sup ship skip slip snap snit snib snig bop cop hop lop pop fop mob mod moa moc moe mog moi mol mon moo mor mos mot mou mow mox moy gig big fig jig mig pig rig wig dag deg dog dug dib did die dim din dis div cod hod nod rod sod tod pad ped pud pob poa poh poi pol pom pon poo pot pow bad cad fad gad had lad rad tad wad med mid mud mab mac mae mag mal mam man map mar mas mat maw max may dab dah dal dam dan dap das daw day ded dod dud bond fond pend pood pons pong pone pony pont atop shop slop scop step stap stob stoa stot stow hint lint pint tint dint bint mant mind mine mini mink mitt milt minx miny fist gist hist list cist mast most must mise miso miss anion banda basta com daint danda faint ganda haint hasta inion maint mem mim moa mob moe moi mol moo mor mos mou mow moy mum naa nab nae nak nam nanda nas naw nay nip nom orion padda pains palta pandy panna panta pasha paste pasty patta penda pinda point pomato potate print saint taint union vanda vinata yom";
+const WORDG_ADD=[[["nap","😴"],["sit","🪑"],["sip","🧋"],["spin","🌀"],["snip","✂️"]],[["mom","👩"],["mop","🧹"],["dig","⛏️"],["pod","🫛"],["mad","😠"],["dad","👨‍👧"],["pond","🏞️"],["stop","🛑"],["mint","🌿"],["mist","🌫️"]]]; // 6F: only that group's single-letter sounds, 3-4 letters
+const SWAPW_ADD="gab gad gal gam gap gar gat gay gaz bas das fas kas las mas pas ras vas was gis gos gus ait cit dit git hit kit lit nit pit tit wit zit sot sic sib sid sim sir sis siz shin skin span spun spit spiv spic pip kip hip lip dip rip tip zip yip sop sup ship skip slip snap snit snib snig bop cop hop lop pop fop mob mod moa moc moe mog moi mol mon moo mor mos mot mou mow mox moy gig big fig jig mig pig rig wig dag deg dog dug dib did die dim din dis div cod hod nod rod sod tod pad ped pud pob poa poh poi pol pom pon poo pot pow bad cad fad gad had lad rad tad wad med mid mud mab mac mae mag mal mam man map mar mas mat maw max may dab dah dal dam dan dap das daw day ded dod dud bond fond pend pood pons pong pone pony pont atop shop slop scop step stap stob stoa stot stow hint lint pint tint dint bint mant mind mine mini mink mitt milt minx miny fist gist hist list cist mast most must mise miso miss anion banda basta com daint danda faint ganda haint hasta inion maint mem mim moa mob moe moi mol moo mor mos mou mow moy mum naa nab nae nak nam nanda nas naw nay nip nom orion padda pains palta pandy panna panta pasha paste pasty patta penda pinda point pomato potate print saint taint union vanda vinata yom";
 // ---------- Part B wiring ----------
 WORDG_ADD.forEach((ws,g)=>WORDG[g].push(...ws));WORDS.length=0;WORDS.push(...WORDG.flat());SWAPW_ADD.split(" ").forEach(w=>SWAPW.add(w));
 let MZ=null; // open zone (not saved): after a planet, the map comes back to the same zone; Play on the home screen starts at the zones
@@ -1949,6 +1949,28 @@ __test3.check6H=function(){const bad=[],sn=bk6eSnap();
  catch(e){bad.push("error "+e.message)}finally{JR=null;g6Restore(sn)}return bad};
 {const _sc6h=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6h.call(this,N);const b=__test3.check6H();if(b.length)r.bad.check6H=b;return r}}
 Object.assign(__test3,{JINTRO,jIntro});
+</script>
+<script id="p6j">
+// ---------- Part 6J: spoken Adventure intro; held-state contrast check ----------
+{const _sj6j=startJourney;startJourney=function(){const sv=say;let r;say=function(){};try{r=_sj6j.apply(this,arguments)}finally{say=sv} // hold the old single line; it is spoken last below
+  if(!(JR&&document.querySelector("#visual .jintro"))){if(JR&&$("game").classList.contains("on"))say(JSTART.replace("{p}",PL(JR.ids[0]).name));return r}
+  if(JR&&$("game").classList.contains("on")&&document.querySelector("#visual .jintro")){const js=JSTART.replace("{p}",PL(JR.ids[0]).name),L=JINTRO.concat([js]);
+   say(L.join(" "),L)} // one say(): clips play in order, each after the last ends; leaving the card (show → stopSpeech) stops the chain
+  return r}}
+{const _ph6j=__test3.phrases;__test3.phrases=function(){const L=_ph6j.call(this);JINTRO.forEach(t=>L.push([t,"journey"]));return L}}
+function c6jRGB(s){return String(s).match(/[\d.]+/g).map(Number).slice(0,3)}
+function c6jL(c){const v=c.map(x=>{x/=255;return x<=.03928?x/12.92:Math.pow((x+.055)/1.055,2.4)});return .2126*v[0]+.7152*v[1]+.0722*v[2]}
+__test3.checkHeld6J=function(){const bad=[],b=$("restMore");const d=document.createElement("div");d.style.color="var(--gold)";document.body.appendChild(d);
+ const gold=c6jRGB(getComputedStyle(d).color);d.remove();const fg=c6jRGB(getComputedStyle(b).color),A=c6jL(fg),B=c6jL(gold),r=(Math.max(A,B)+.05)/(Math.min(A,B)+.05);
+ __test3.held6j=+r.toFixed(2);if(!/var\(--gold\)/.test(getComputedStyle(b).backgroundImage)&&!/rgb\(242, 181, 68\)/.test(getComputedStyle(b).backgroundImage))bad.push("hold fill is no longer gold");
+ if(r<4.5)bad.push("hold button text on gold "+r.toFixed(2)+":1");return bad};
+__test3.checkIntro6J=function(){const bad=[],sn=bk6eSnap(),T=window.__test,old=window.say;const got=[];
+ try{say=(t,p)=>got.push([t,p]);startJourney();const p=got.find(x=>x[1]&&x[1][0]===JINTRO[0]);
+  if(!p)bad.push("intro not spoken");else{if(p[1].length!==4||p[1].slice(0,3).join("|")!==JINTRO.join("|")||!/^Today's adventure! We go to /.test(p[1][3]))bad.push("intro order wrong");
+   p[1].forEach(t=>{if(!hasAud(slug(t)))bad.push("no clip: "+t)})}
+  const n=got.length;journeyCard($("visual").innerHTML,[]);if(got.length!==n)bad.push("re-render repeats the intro")}
+ catch(e){bad.push("error "+e.message)}finally{say=old;JR=null;g6Restore(sn)}return bad};
+{const _sc6j=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6j.call(this,N);[["checkHeld6J",__test3.checkHeld6J],["checkIntro6J",__test3.checkIntro6J]].forEach(([n,f])=>{const b=f();if(b.length)r.bad[n]=b});return r}}
 </script>
 
 <script id="p6f">
