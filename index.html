@@ -2628,6 +2628,59 @@ __test3.phrasesC1=function(n){n=n||400;const L=new Set(),add=t=>{if(t)L.add(Stri
   [C1TXT.say,C1TXT.lock].forEach(()=>0);C1.forEach(c=>{add(C1TXT.say.replace("{g}",c.name).replace("{p}",placeName(c.place)))});return [...L].sort()};
 Object.assign(__test3,{C1,c1Open,c1Check,c1Ready,nw,num99Gen,add99Gen,daysGen,words2Gen,solidGen,shopGen,graphGen});
 </script>
+<script id="p7c">
+// ---------- Part 7C: grown-ups page — at a glance, clearer order, Class 1 progress bars, offline with size ----------
+const OFFLINE_MB=186; // all voices and pictures (audio/*.mp3 + assets/*.webp) when this was built; update when clips are added
+const G7={glance:"This week",days:"days played",mins:"min of play",stars:"stars",stk:"stickers",strong:"Going well",weak:"Needs practice",none:"Play a few days and this fills in.",full:"📊 Full progress report",
+ offBtn:"⬇️ Save for offline use",offNote:`Saves every voice and picture on this phone so the game works with no internet (on a trip, on a plane). About ${OFFLINE_MB} MB: use Wi-Fi. Without this, each voice is saved the first time it plays.`,
+ offHave:"Saved on this phone: {n} of {t} voices.",
+ aboutAdd:[["Class 1 games","Seven more games for Class 1 (numbers to 99, two-digit sums, picture graphs, solid shapes, word fun, my day, notes and shop). Each opens when she is strong in the skills it builds on."],
+  ["How it adapts","Every answer is noted. Today's Adventure picks her weakest skills first; things she keeps missing come back every second question; a known mix-up (b and d, 6 and 9) is put among the choices so she learns to tell them apart. Everything stays on this device."]],
+ quiet:"The game remembers each letter, number, word and fact, and brings weaker ones back: about 1 question in 4, or every second question when she keeps missing something. Progress stays on this device only.",
+ pilot:"Want to watch how she learns? PILOT-NOTES.md in the game folder is a 5-session observation guide on paper, to use alongside the Progress report.",
+ c1Open:"Open now",c1All:"Open all Class 1 games now",c1AllNote:"Normally each game opens by itself when she is ready. Use this only if her school is already teaching it.",c1Strong:"Strong means 8 or more answers, 75% right first time, on at least 2 different days."};
+document.head.insertAdjacentHTML("beforeend",`<style>
+.gl3{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:2px 0 10px}.gl3 div{background:rgba(var(--gold-rgb),.18);border-radius:14px;padding:8px 4px;text-align:center;line-height:1.1}
+.gl3 b{display:block;font-size:22px;color:var(--ink)}.gl3 small{font-size:12px;color:rgba(var(--ink-rgb),.75)}
+.glw{font-size:15px;margin:4px 0}.glw b{color:var(--ok-dk)}.glw.w b{color:var(--accent-xdk)}
+#parentS details.gab2 summary{cursor:pointer;font-size:16px;color:var(--plum);font-weight:bold;list-style:none;padding:4px 0}#parentS details.gab2 summary::after{content:" ▾"}#parentS details.gab2[open] summary::after{content:" ▴"}
+.c1r{display:grid;grid-template-columns:34px 1fr;gap:2px 8px;padding:10px 0;border-top:1px solid rgba(var(--plum-rgb),.12)}.c1r:first-of-type{border-top:none}
+.c1r .ci{font-size:26px;grid-row:1/span 9;grid-column:1;align-self:start}.c1r>:not(.ci){grid-column:2}.c1r .cn{font-weight:bold;font-size:17px}.c1r .cn small{font-weight:normal;color:rgba(var(--ink-rgb),.7)}.c1r .ok{color:var(--ok-dk);font-weight:bold;font-size:15px}
+.c1n{display:grid;grid-template-columns:1fr 64px;align-items:center;gap:6px;font-size:14px}.c1n .pbar{margin:0;height:10px}
+#offHave{font-weight:bold;color:var(--ink);font-size:15px;margin-top:8px}
+</style>`);
+function guGlance(){const c=document.querySelector('#parentS .gc[data-k="prog"]');if(!c)return;let g=c.querySelector(".glc");if(!g){g=document.createElement("div");g.className="glc";c.querySelector("h3").after(g)}
+ const d=progData(),P=profile(),got=Math.floor(S.stars/5);
+ g.innerHTML=`<div class="gl3"><div><b>${d.daysW}</b><small>${G7.days}</small></div><div><b>${d.mins}</b><small>${G7.mins}</small></div><div><b>${S.stars|0}</b><small>${G7.stars}</small></div><div><b>${got}</b><small>${G7.stk}</small></div></div>`+
+  (P.st.some(x=>x.att)?`<div class="glw"><b>${G7.strong}:</b> ${P.strong.slice(0,3).map(x=>x.s.name).join(", ")||"not yet"}</div><div class="glw w"><b>${G7.weak}:</b> ${P.weak.slice(0,3).map(x=>x.s.name).join(", ")||"nothing yet"}</div>`:`<div class="gnote">${G7.none}</div>`);
+ const pb=$("progBtn");if(pb){pb.textContent=G7.full;c.appendChild(pb)}}
+function guC1(){const box=$("c1Box");if(!box)return;box.dataset.k="c1";
+ box.innerHTML=`<h3>🎒 Class 1 games</h3>`+C1.map(c=>{const open=c1Open(c.id);return `<div class="c1r"><span class="ci">${c.icon}</span><div class="cn">${c.name} <small>· ${placeName(c.place)}</small></div>`+
+  (open?`<div class="ok">✓ ${G7.c1Open}</div>`:c.need.map(id=>{const s=SKILLS.find(x=>x.id===id),x=skillStats(s),pc=x.status==="strong"?100:Math.round(x.str*100);
+   return `<div class="c1n"><span>${s.name}</span><span>${x.status==="strong"?"✓":pc+"%"}</span><div class="pbar" style="grid-column:1/-1"><i style="width:${pc}%"></i></div></div>`}).join(""))+`</div>`}).join("")+
+  `<div class="gnote">${G7.c1Strong}</div><label class="gsw" style="margin-top:8px"><span class="gst"><b>${G7.c1All}</b><small>${G7.c1AllNote}</small></span><input type="checkbox" id="optC1" role="switch"${S.c1all?" checked":""}></label>`;
+ $("optC1").onchange=e=>{S.c1all=e.target.checked;save();guC1()}}
+async function offHave(){const el=$("offHave");if(!el)return;try{const ks=await fetch("audio/index.json").then(r=>r.json()),names=await caches.keys(),nm=names.filter(n=>n.startsWith("space-princess-")).sort((a,b)=>(+b.split("-v")[1])-(+a.split("-v")[1]))[0];
+  if(!nm){el.textContent="";return}const reqs=await (await caches.open(nm)).keys(),n=reqs.filter(r=>/\/audio\/.+\.mp3$/.test(r.url)).length;el.textContent=G7.offHave.replace("{n}",n.toLocaleString("en-IN")).replace("{t}",ks.length.toLocaleString("en-IN"))}catch(e){el.textContent=""}}
+function guOffline(){const c=document.querySelector('#parentS .gc[data-k="off"]');if(!c||c.dataset.p7)return;c.dataset.p7=1;$("dlBtn").textContent=G7.offBtn;
+ const n=document.createElement("div");n.className="gnote";n.textContent=G7.offNote;c.querySelector("h3").after(n);const h=document.createElement("div");h.id="offHave";c.appendChild(h)}
+function guAbout(){const c=document.querySelector('#parentS .gc[data-k="about"]');if(!c||c.dataset.p7)return;c.dataset.p7=1;const ul=c.querySelector(".gab");
+ [...ul.children].forEach(li=>{if(li.children[0].textContent==="Quiet tracking")li.children[1].textContent=G7.quiet});
+ G7.aboutAdd.forEach(([a,b])=>{const li=document.createElement("li");li.innerHTML="<b></b><span></span>";li.children[0].textContent=a;li.children[1].textContent=b;ul.appendChild(li)});
+ const d=document.createElement("details");d.className="gab2";d.innerHTML="<summary>How the game works</summary>";d.appendChild(ul);c.appendChild(d);
+ const pl=document.querySelector('#parentS .gc[data-k="pilot"] .gnote');if(pl)pl.textContent=G7.pilot}
+const GU_ORDER=["prog","time","set","c1","lets","off","inst","about","pilot","reset"];
+function guOrder(){const p=document.querySelector("#parentS .parent");if(!p)return;GU_ORDER.forEach(k=>{const e=p.querySelector(`[data-k="${k}"]`);if(e)p.appendChild(e)})}
+{const _dp=drawParent;drawParent=function(){const r=_dp.apply(this,arguments);try{guGlance();guC1();guOffline();guAbout();guOrder();offHave()}catch(e){}return r}}
+{const _ob=$("dlBtn").onclick;$("dlBtn").onclick=async e=>{await _ob(e);offHave()}}
+__test3.check7C=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},sc=[...document.querySelectorAll(".screen.on")].map(e=>e.id);
+ try{show("parentS");drawParent();const p=document.querySelector("#parentS .parent"),ks=[...p.children].map(e=>e.dataset.k);
+  if(ks.join()!==GU_ORDER.join())f("order "+ks.join());if(!p.querySelector(".gl3"))f("no glance");if(!/MB/.test(p.querySelector('[data-k="off"]').textContent))f("no size on offline");
+  if(/nothing is tracked/.test(p.textContent))f("old pilot text");if(p.querySelectorAll(".c1r").length!==C1.length)f("class 1 rows");if(!$("optC1"))f("class 1 switch");
+  if(p.lastElementChild!==p.querySelector(".gdz"))f("reset not last");
+ }catch(e){f("error "+e.message)}finally{document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}return bad};
+{const _s=__test3.selfCheck;__test3.selfCheck=function(N){const r=_s.call(this,N);const b=__test3.check7C();if(b.length)r.bad.check7C=b;return r}}
+</script>
 <script id="batch4">
 // ---------- Batch 4: install app (text-only, no voice) ----------
 (function(){let deferred=null,dismissed=false,installed=false;
