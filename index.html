@@ -2306,4 +2306,69 @@ Object.assign(__test3,{HILL_ART,hillArt});
  g("instStart").addEventListener("click",doInstall);g("instBtn").addEventListener("click",doInstall);
  g("instIOS").addEventListener("click",()=>{g("iosCard").style.display="flex"});g("iosClose").addEventListener("click",()=>{g("iosCard").style.display="none"});
  window.__test4={refresh,isIOS,isStandalone};refresh()})();
+</script>
+<script id="p6k2">
+// ---------- Hill map composition: each place is one little scene (prop + friend on one ground line), label below ----------
+// Layout: 2-column grid of equal scene cards (Tree | Pond, Puddle | Log), Home Door centred below. Positions are % of the scene box,
+// so the picture scales with the card. a = box aspect (w/h) cropped from the sprite's transparent padding with object-fit:cover.
+// l = left %, b = bottom % (of scene height), w = width % (of scene width), z = layer, f = mirror.
+const SCENE_AR=1.2; // scene box width/height
+const SCENES={
+ tree:[{who:"tree",pose:"main",l:30,b:3,w:68,a:1,z:1},{who:"bear",pose:"sleepy",l:24,b:2,w:36,a:.8,z:2}],
+ pond:[{who:"moose",pose:"wave",l:6,b:26,w:44,a:.9,z:1},{who:"pond",pose:"main",l:16,b:3,w:80,a:512/235,z:2}],
+ puddle:[{who:"elephant",pose:"happy",l:2,b:16,w:58,a:1.08,z:1},{who:"puddle",pose:"main",l:34,b:3,w:64,a:512/155,z:2}],
+ log:[{who:"chick",pose:"awake",l:8,b:6,w:22,a:.82,z:2},{who:"log",pose:"main",l:28,b:4,w:70,a:512/310,z:1,f:1}],
+ home:[{who:"house",pose:"main",l:16,b:8,w:46,a:512/335,z:1},{who:"zippet",pose:"happy",l:56,b:4,w:20,a:1.14,z:2}]};
+const SCENE_FB={tree:"🌳",pond:"",puddle:""}; // no-picture fallback for props that are not cast members ("" = a drawn lilac water patch)
+function sceneArt(o){let h=art(o.who,o.pose,128);if(o.who in SCENE_FB&&/class="art artf/.test(h))h=SCENE_FB[o.who]?h.replace("🌼",SCENE_FB[o.who]):h.replace('class="art artf','class="art artf pfb').replace("🌼","");return h}
+function sceneHTML(id){const L=SCENES[id];if(!L)return "";
+ return `<span class="scene${id==="home"?" hdart":""}" aria-hidden="true"><span class="sci">${L.map(o=>`<span class="ly${o.f?" flip":""}" data-k="${o.who}" style="left:${o.l}%;bottom:${o.b}%;width:${o.w}%;aspect-ratio:${o.a};z-index:${o.z};--w:${o.w}">${sceneArt(o)}</span>`).join("")}</span></span>`}
+document.head.insertAdjacentHTML("beforeend",`<style>
+#map.hill{grid-template-columns:1fr 1fr;grid-template-areas:"tree pond" "puddle log" "home home";gap:8px 10px;padding:12px 10px 14px;min-height:0;align-items:start}
+#map.hill .hillart{display:none}
+#map .zone.place{min-height:0;justify-content:flex-start;gap:6px;padding:4px;min-width:0}
+#map .zone.place .scene{position:relative;display:block;width:100%;aspect-ratio:var(--sar,${SCENE_AR})}#map .scene .sci{position:absolute;left:50%;top:0;height:100%;aspect-ratio:${SCENE_AR};transform:translateX(-50%);container-type:inline-size}
+#map .zone.place .scene::before{content:"";position:absolute;left:6%;right:6%;bottom:0;height:16%;border-radius:50%;background:radial-gradient(closest-side,rgba(var(--ink-rgb),.16),transparent)}
+#map .scene .ly{position:absolute;display:block;height:auto}
+#map .scene .ly .art{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover;object-position:center}
+#map .scene .ly .artf{font-size:calc(var(--w)*.8cqw)!important;align-items:flex-end}
+#map .scene .ly:has(.pfb){z-index:0!important}#map .scene .ly .pfb{border-radius:50%;background:radial-gradient(var(--pond) 55%,var(--ok) 56%,var(--ok) 64%,transparent 66%)}
+#map .scene .flip .art{transform:scaleX(-1)}
+#map .zone.place .pl{position:relative;z-index:3;max-width:100%;font-size:clamp(14px,4vw,22px);line-height:1.15}
+#map .zone.place.p-home{justify-self:center;width:min(80%,400px)}#map .zone.place.p-home .scene{--sar:2}#map .p-home .sci{aspect-ratio:2}
+@media (min-width:700px){#map.hill{grid-template-columns:1fr 1fr 1fr;grid-template-areas:"tree pond puddle" "log home home";max-width:760px;margin-left:auto;margin-right:auto}
+ #map .zone.place.p-home{width:100%}#map .zone.place.p-home .scene{--sar:2.4}}
+@media (max-height:700px){#map.hill{padding:6px 8px 8px;gap:2px 6px}#map .zone.place{gap:3px;padding:2px}#map .zone.place .scene{--sar:1.55}#map .zone.place.p-home .scene{--sar:3}#map .zone.place .pl{font-size:15px;padding:3px 10px}#mapH{margin:2px 0}}
+@media (max-height:500px) and (min-width:560px){#map.hill{grid-template-columns:repeat(5,1fr);grid-template-areas:"tree pond puddle log home";max-width:none}#map .zone.place.p-home{width:100%}#map .zone.place.p-home .scene{--sar:1.55}#map .p-home .sci{aspect-ratio:1.55}}
+</style>`);
+{const _dm=drawMap;drawMap=function(){const r=_dm.apply(this,arguments);if(!MZ)document.querySelectorAll("#map .zone.place").forEach(b=>{const id=(b.className.match(/p-(\w+)/)||[])[1];if(!SCENES[id])return;
+  const pl=b.querySelector(".pl");b.innerHTML=sceneHTML(id);if(pl)b.appendChild(pl);const z=ZONES.find(x=>x.id===id);if(z)b.setAttribute("aria-label",z.name)});return r}}
+// the old check6N looked for the loose painted props on the hill; the props now live inside each scene
+__test3.check6N=(old=>function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},mz=MZ,sc=[...document.querySelectorAll(".screen.on")].map(e=>e.id);
+ try{MZ=null;show("mapS");drawMap();const m=$("map");["tree","log","pond","puddle","house"].forEach(k=>{if(!m.querySelector(`.scene .ly[data-k="${k}"]`))f("hill: no "+k+" in its scene")});
+  if(/r="40" fill="var\(--ok\)"|data-k="log"|var\(--pond\)/.test(m.querySelector(".hillsvg").outerHTML))f("old drawn prop still on the hill");
+  BD_SCREENS.forEach(id=>{show(id);if(!/flowers_main/.test(getComputedStyle($(id)).backgroundImage))f(id+": no backdrop")});
+  ["parentS","decoS"].forEach(id=>{show(id);if(/flowers_main/.test(getComputedStyle($(id)).backgroundImage))f(id+" should stay plain")});
+ }catch(e){f("error "+e.message)}finally{MZ=mz;document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}return bad})(__test3.check6N);
+// layout check: every scene and label inside the map, nothing overlapping another place, the top bar or the heading; tap targets >= 48px
+__test3.checkHill6K2=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},mz=MZ,sc=[...document.querySelectorAll(".screen.on")].map(e=>e.id);
+ try{MZ=null;show("mapS");drawMap();const m=$("map"),R=e=>e.getBoundingClientRect(),mr=R(m),ov=(a,b,t=1)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>t&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>t;
+  const pls=[...m.querySelectorAll(".zone.place")];if(pls.length!==5)f("need 5 places, got "+pls.length);
+  if(document.documentElement.scrollWidth>innerWidth+1)f("sideways scroll");
+  const top=R(document.querySelector("#mapS .top")),h2=R($("mapH"));
+  pls.forEach((b,i)=>{const br=R(b),id=b.className.match(/p-(\w+)/)[1],sn=b.querySelector(".scene"),pl=b.querySelector(".pl");
+   if(!sn||!pl){f(id+": no scene/label");return}const sr=R(sn),lr=R(pl);
+   if(br.width<48||br.height<48)f(id+": tap target small");if(!b.getAttribute("aria-label"))f(id+": no aria-label");
+   [br,lr].forEach(x=>{if(x.left<mr.left-1||x.right>mr.right+1||x.top<mr.top-1||x.bottom>mr.bottom+1)f(id+": outside the map")});
+   if(lr.top<sr.bottom-1)f(id+": label overlaps its picture");
+   [...sn.querySelectorAll(".ly")].forEach(l=>{const r=R(l);if(r.left<sr.left-2||r.right>sr.right+2||r.top<sr.top-2||r.bottom>sr.bottom+2)f(id+": "+l.dataset.k+" clipped/outside");if(ov(r,lr))f(id+": "+l.dataset.k+" covers the label")});
+   if(ov(br,top)||ov(br,h2))f(id+": under the top bar/heading");
+   pls.slice(i+1).forEach(c=>{if(ov(br,R(c),2))f(id+" overlaps "+c.className)})});
+  const L=s=>R(m.querySelector(`.p-${s} .ly[data-k]`+(s==="tree"?'[data-k="bear"]':s==="pond"?'[data-k="moose"]':s==="puddle"?'[data-k="elephant"]':s==="log"?'[data-k="chick"]':'[data-k="zippet"]')));
+  const w=s=>L(s).width;if(!(w("puddle")>w("pond")&&w("pond")>=w("tree")&&w("tree")>w("home")&&w("home")>w("log")))f("friend sizes out of order");
+  [["tree","bear","tree"],["pond","moose","pond"],["puddle","elephant","puddle"],["log","chick","log"],["home","zippet","house"]].forEach(([s,a,p])=>{const A=R(m.querySelector(`.p-${s} [data-k="${a}"]`)),P=R(m.querySelector(`.p-${s} [data-k="${p}"]`));
+   if(!ov(A,P,-6))f(s+": "+a+" is not at the "+p)});
+ }catch(e){f("error "+e.message)}finally{MZ=mz;document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}return bad};
+{const _sc=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc.call(this,N);const b=__test3.checkHill6K2();if(b.length)r.bad.checkHill6K2=b;return r}}
+Object.assign(__test3,{SCENES,sceneHTML});
 </script></body></html>
