@@ -1670,7 +1670,7 @@ const _epStep6=epStep;epStep=function(){_epStep6();const E=EP;if(!E)return;const
  __test3.check6B=function(){const bad=[],all=[...PLANETS.map(p=>p.id),"build","story"],seen={};
   if(ZONES.length!==5)bad.push("need 5 places");ZONES.forEach(z=>{if(!CAST.find(c=>c.id===z.who))bad.push(z.id+": who");if(!z.intro)bad.push(z.id+": intro");z.p.forEach(id=>{if(seen[id])bad.push(id+" in two places");seen[id]=1})});all.forEach(id=>{if(!seen[id])bad.push(id+": in no place")});
   ["zippet","bear","moose","elephant","chick","blinkle","log","ball","house"].forEach(id=>{if(!ASSET_LIST.find(a=>a.id===id))bad.push("ASSET_LIST missing "+id);const c=CAST.find(x=>x.id===id);if(!c)bad.push("CAST missing "+id);else if(id!=="blinkle"&&!c.emoji)bad.push("no emoji "+id)});
-  if(ASSET_FILES.length!==6+2+12+3+3+(typeof SHOP!=="undefined"?SHOP.filter(p=>!ASSET_LIST.some(a=>a.poses.some(z=>a.id+"_"+z===p.id))).length:0)) /* 6M: gem-shop pictures are offline files too */bad.push("ASSET_FILES count "+ASSET_FILES.length);
+  if(ASSET_FILES.length!==6+2+12+3+3+(typeof SHOP!=="undefined"?SHOP.filter(p=>!ASSET_LIST.some(a=>a.poses.some(z=>a.id+"_"+z===p.id))).length+2:0)) /* 6M: gem-shop pictures are offline files too */bad.push("ASSET_FILES count "+ASSET_FILES.length);
   const t=document.createElement("div");t.innerHTML=art("bear","nosuchpose",50);const a=t.firstChild;if(!a||!/^(SPAN|IMG)$/.test(a.tagName)||a.style.width!=="50px"||!(a.getAttribute("aria-label")||a.alt))bad.push("art() fallback");
   Object.keys(SPEAKERS).forEach(e=>{if(!EPI[e])bad.push("SPEAKERS: no episode "+e);if(!CAST.find(c=>c.id===SPEAKERS[e]))bad.push("SPEAKERS: who "+e)});
   const OLD=/\b(Zippy|Twinkle|Tri-Star|Quadra|Starfive|Hexa|Rainbow|Octo|Nova|Queen Ten|Comet|Twelvy|Lucky|Fourteenie|Shimmer|Sixteen Sparkle|Seventeen Swirl|Eighteen Glow|Moonbeam|Twenty Twinkle|Buddies|Buddy|princess|planet)\b/i;
@@ -2211,7 +2211,7 @@ const SHOP=[{id:"ball_main",name:"Red ball",cost:2},{id:"flowers_main",name:"Flo
  {id:"mushrooms_main",name:"Mushrooms",cost:3},{id:"log_main",name:"Hollow log",cost:4},{id:"tree_main",name:"Big tree",cost:5}];
 const SHOP_TXT={title:"Gem shop",need:"{n} more 💎 — finish a game to win a gem!",got:"New for your hill!",yours:"Yours!"};
 if(!Array.isArray(S.props))S.props=[];
-SHOP.forEach(p=>{const f="assets/"+p.id+".webp";if(!ASSET_FILES.includes(f))ASSET_FILES.push(f)}); // offline download includes them
+SHOP.forEach(p=>{const f="assets/"+p.id+".webp";if(!ASSET_FILES.includes(f))ASSET_FILES.push(f)});["pond_main","puddle_main"].forEach(id=>ASSET_FILES.push("assets/"+id+".webp")); // 6O: hill pictures offline too // offline download includes them
 {const _ti=trayItems;trayItems=function(){return [...new Set([..._ti.apply(this,arguments),...S.props.map(id=>"art:"+id)])]}} // bought things go into the Decorate tray
 // stName(): props have their own names
 {const _sn=stName;stName=t=>{const p=SHOP.find(x=>"art:"+x.id===t);return p?p.name:_sn(t)}}
@@ -2257,9 +2257,9 @@ Object.assign(__test3,{SHOP,shopBuy,shopDraw});
 <script id="p6n">
 // ---------- Part 6N: book-style backdrop on every child screen; painted tree, log and flowers on the hill map ----------
 // A) Hill map: the drawn tree and log become the painted ones; painted flowers and mushrooms dress the hill
-const HILL_ART=[{id:"tree_main",l:-2,t:2,w:40,k:"tree"},{id:"log_main",l:68,t:66,w:30,k:"log"},{id:"mushrooms_main",l:2,t:81,w:16,k:"mushrooms"},{id:"bee_main",l:87,t:16,w:11,k:"bee"}];
+const HILL_ART=[{id:"pond_main",l:60,t:20,w:39,k:"pond"},{id:"puddle_main",l:2,t:67,w:30,k:"puddle"},{id:"tree_main",l:-2,t:2,w:40,k:"tree"},{id:"log_main",l:68,t:66,w:30,k:"log"},{id:"mushrooms_main",l:2,t:81,w:16,k:"mushrooms"},{id:"bee_main",l:87,t:16,w:11,k:"bee"}];
 const HILL_SVG_ORIG=HILL_SVG;
-const HILL_SVG_PAINT=HILL_SVG.replace(/<rect x="56" y="70"[^]*?cx="92" cy="80" r="26" fill="var\(--ok\)"\/>/,"").replace(/<g data-k="log">[^]*?<\/g>/,""); // drop the drawn tree and log
+const HILL_SVG_PAINT=HILL_SVG.replace(/<rect x="56" y="70"[^]*?cx="92" cy="80" r="26" fill="var\(--ok\)"\/>/,"").replace(/<g data-k="log">[^]*?<\/g>/,"").replace(/<ellipse cx="320" cy="120"[^>]*>/,"").replace(/<ellipse cx="320" cy="118"[^>]*>/,"").replace(/<ellipse data-k="puddle"[^>]*>/,""); // drop the drawn tree and log
 function hillArt(){return `<div class="hillart" aria-hidden="true">${HILL_ART.map(a=>`<img data-k="${a.k}" src="assets/${a.id}.webp" alt="" style="left:${a.l}%;top:${a.t}%;width:${a.w}%">`).join("")}</div>`}
 {const _dm=drawMap;drawMap=function(){const r=_dm.apply(this,arguments);const m=$("map");
   if(!MZ){const s=m.querySelector(".hillsvg");if(s&&!m.querySelector(".hillart")){s.outerHTML=HILL_SVG_PAINT;m.querySelector(".hillsvg").insertAdjacentHTML("afterend",hillArt())}}return r}}
@@ -2279,9 +2279,9 @@ ${BD_SCREENS.map(id=>"#"+id+".on").join(",")}{
 </style>`);
 // tests
 __test3.check6N=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},mz=MZ,sc=[...document.querySelectorAll(".screen.on")].map(e=>e.id);
- try{MZ=null;show("mapS");drawMap();const m=$("map");["tree","log","mushrooms","bee"].forEach(k=>{if(!m.querySelector(`.hillart img[data-k="${k}"]`))f("hill: no painted "+k)});
+ try{MZ=null;show("mapS");drawMap();const m=$("map");["tree","log","mushrooms","bee","pond","puddle"].forEach(k=>{if(!m.querySelector(`.hillart img[data-k="${k}"]`))f("hill: no painted "+k)});
   if(/r="40" fill="var\(--ok\)"/.test(m.querySelector(".hillsvg").outerHTML))f("drawn tree still on the hill");if(/data-k="log"/.test(m.querySelector(".hillsvg").outerHTML))f("drawn log still on the hill");
-  if(!/data-k="puddle"/.test(m.querySelector(".hillsvg").outerHTML))f("puddle lost");
+  if(!m.querySelector('.hillart img[data-k="puddle"]')||!m.querySelector('.hillart img[data-k="pond"]'))f("painted pond/puddle missing");if(/var\(--pond\)/.test(m.querySelector(".hillsvg").outerHTML))f("drawn pond still there");
   const lab=[...m.querySelectorAll(".zone.place .pl")];lab.forEach(l=>{if(getComputedStyle(l.closest(".zone")).zIndex!=="1")f("place above the art")});
   BD_SCREENS.forEach(id=>{show(id);const bg=getComputedStyle($(id)).backgroundImage;if(!/flowers_main/.test(bg))f(id+": no backdrop")});
   ["parentS","decoS"].forEach(id=>{show(id);if(/flowers_main/.test(getComputedStyle($(id)).backgroundImage))f(id+" should stay plain")});
