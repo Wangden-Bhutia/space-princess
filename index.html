@@ -1691,7 +1691,7 @@ const BK_PLANETS=["count","add","shape","pattern","coin"]; // only where she can
 const BK_P=1/6,BK_WRONG=.25; // about 1 in 6 eligible questions; about 1 in 4 check rounds has a guess that needs a look
 const BK_TXT={ask:"Blinkle, guess!",guessed:"The Blinkle guessed {g}.",right:"Good guess, Blinkle!",wrong:"That guess was wrong.",thanks:"Thanks, Blinkle. Now we know!",a:"a ",an:"an ",
  look:"👀 Let's look!",lookSay:"Let's look!",aria:"The Blinkle",leaf:"A leaf. Tap to look under it.",guess:"A... {x}?",guessAn:"An... {x}?",guessN:"{x}?",
- toggle:"Blinkle check rounds",toggleNote:"(now and then the Blinkle guesses from clues, then she taps Let's look and checks)",
+ toggle:"Blinkle check rounds",toggleNote:"The Blinkle guesses now and then; she taps Let's look to check.",
  report:"Check rounds: {s} seen. Blinkle guesses that needed a look: {w}. Looked before answering: {l}."};
 const BLINKLE_CLUES={
  obj:{strawberries:["Red","Little seeds"],nuts:["Brown","Shiny"],leaves:["Orange","Crinkly"],flowers:["Yellow","Petals"],feathers:["Long","Soft"],
@@ -2632,13 +2632,13 @@ Object.assign(__test3,{C1,c1Open,c1Check,c1Ready,nw,num99Gen,add99Gen,daysGen,wo
 // ---------- Part 7C: grown-ups page — at a glance, clearer order, Class 1 progress bars, offline with size ----------
 const OFFLINE_MB=186; // all voices and pictures (audio/*.mp3 + assets/*.webp) when this was built; update when clips are added
 const G7={glance:"This week",days:"days played",mins:"min of play",stars:"stars",stk:"stickers",strong:"Going well",weak:"Needs practice",none:"Play a few days and this fills in.",full:"📊 Full progress report",
- offBtn:"⬇️ Save for offline use",offNote:`Saves every voice and picture on this phone so the game works with no internet (on a trip, on a plane). About ${OFFLINE_MB} MB: use Wi-Fi. Without this, each voice is saved the first time it plays.`,
+ offBtn:"⬇️ Save for offline use",offNote:`Saves all voices and pictures (about ${OFFLINE_MB} MB) so the game works with no internet. Use Wi-Fi.`,
  offHave:"Saved on this phone: {n} of {t} voices.",
  aboutAdd:[["Class 1 games","Seven more games for Class 1 (numbers to 99, two-digit sums, picture graphs, solid shapes, word fun, my day, notes and shop). Each opens when she is strong in the skills it builds on."],
   ["How it adapts","Every answer is noted. Today's Adventure picks her weakest skills first; things she keeps missing come back every second question; a known mix-up (b and d, 6 and 9) is put among the choices so she learns to tell them apart. Everything stays on this device."]],
  quiet:"The game remembers each letter, number, word and fact, and brings weaker ones back: about 1 question in 4, or every second question when she keeps missing something. Progress stays on this device only.",
  pilot:"Want to watch how she learns? PILOT-NOTES.md in the game folder is a 5-session observation guide on paper, to use alongside the Progress report.",
- c1Open:"Open now",c1All:"Open all Class 1 games now",c1AllNote:"Normally each game opens by itself when she is ready. Use this only if her school is already teaching it.",c1Strong:"Strong means 8 or more answers, 75% right first time, on at least 2 different days."};
+ c1Open:"Open now",c1All:"Open all Class 1 games now",c1AllNote:"Only if her school already teaches these.",c1Strong:"Strong means 8 or more answers, 75% right first time, on at least 2 different days."};
 document.head.insertAdjacentHTML("beforeend",`<style>
 .gl3{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:2px 0 10px}.gl3 div{background:rgba(var(--gold-rgb),.18);border-radius:14px;padding:8px 4px;text-align:center;line-height:1.1}
 .gl3 b{display:block;font-size:22px;color:var(--ink)}.gl3 small{font-size:12px;color:rgba(var(--ink-rgb),.75)}
@@ -2680,6 +2680,43 @@ __test3.check7C=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},sc=[
   if(p.lastElementChild!==p.querySelector(".gdz"))f("reset not last");
  }catch(e){f("error "+e.message)}finally{document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}return bad};
 {const _s=__test3.selfCheck;__test3.selfCheck=function(N){const r=_s.call(this,N);const b=__test3.check7C();if(b.length)r.bad.check7C=b;return r}}
+</script>
+<script id="p7d">
+// ---------- Part 7D: shorter grown-ups page — compact Class 1 card, Install/About/Pilot folded under More ----------
+const G8={c1Sum:"{o} of {t} open",tap:"Tap a game to see what it is waiting for.",more:"More: install, about the game, pilot notes",
+ letters:"Letters come in five small groups, in the order schools teach phonics, not A to Z. The first group (s a t p i n) already makes real words like sat, pin and tap. The next group opens when she gets 8 of her last 10 right first time, or after 30 tries."};
+document.head.insertAdjacentHTML("beforeend",`<style>
+#c1Box .c1sum{font-size:15px;color:rgba(var(--ink-rgb),.8);margin:-4px 0 8px}
+#c1Box details{border-top:1px solid rgba(var(--plum-rgb),.12)}#c1Box details:first-of-type{border-top:none}
+#c1Box summary{list-style:none;display:grid;grid-template-columns:30px 1fr 54px;align-items:center;gap:8px;padding:8px 0;cursor:pointer}#c1Box summary::-webkit-details-marker{display:none}
+#c1Box summary .ci{font-size:22px}#c1Box summary .cn{font-weight:bold;font-size:16px}#c1Box summary .cp{text-align:right;font-size:14px;font-weight:bold}#c1Box summary .cp.ok{color:var(--ok-dk)}
+#c1Box summary .pbar{grid-column:2/4;margin:0;height:8px}#c1Box .c1d{padding:0 0 8px 38px;font-size:14px}#c1Box .c1d div{display:flex;justify-content:space-between}
+#guMore>summary{list-style:none;cursor:pointer;font-weight:bold;font-size:18px;color:var(--plum);padding:6px 4px}#guMore>summary::-webkit-details-marker{display:none}#guMore>summary::after{content:" ▾"}#guMore[open]>summary::after{content:" ▴"}
+#guMore{background:rgba(var(--card-rgb),.6);border-radius:20px;padding:6px 10px}#guMore>.gc{margin-top:10px}
+</style>`);
+guC1=function(){const box=$("c1Box");if(!box)return;box.dataset.k="c1";const pct=c=>{if(c1Open(c.id))return 100;const v=c.need.map(id=>{const x=skillStats(SKILLS.find(s=>s.id===id));return x.status==="strong"?100:Math.round(x.str*100)});return Math.round(v.reduce((a,b)=>a+b,0)/v.length)};
+ const open=C1.filter(c=>c1Open(c.id)).length;
+ box.innerHTML=`<h3>🎒 Class 1 games</h3><div class="c1sum">${G8.c1Sum.replace("{o}",open).replace("{t}",C1.length)}. ${G8.tap}</div>`+C1.map(c=>{const o=c1Open(c.id),p=pct(c);
+  return `<details><summary><span class="ci">${c.icon}</span><span class="cn">${c.name}</span><span class="cp${o?" ok":""}">${o?"✓ open":p+"%"}</span><div class="pbar"><i style="width:${p}%"></i></div></summary>
+   <div class="c1d"><div><small>${placeName(c.place)}</small></div>${c.need.map(id=>{const s=SKILLS.find(x=>x.id===id),x=skillStats(s);return `<div><span>${s.name}</span><b>${x.status==="strong"?"✓":Math.round(x.str*100)+"%"}</b></div>`}).join("")}</div></details>`}).join("")+
+  `<div class="gnote">${G7.c1Strong}</div><label class="gsw" style="margin-top:8px"><span class="gst"><b>${G7.c1All}</b><small>${G7.c1AllNote}</small></span><input type="checkbox" id="optC1" role="switch"${S.c1all?" checked":""}></label>`;
+ $("optC1").onchange=e=>{S.c1all=e.target.checked;save();guC1()}};
+const GU_ORDER2=["prog","time","set","c1","lets","off","more","reset"];
+guOrder=function(){const p=document.querySelector("#parentS .parent");if(!p)return;let m=$("guMore");
+ if(!m){m=document.createElement("details");m.id="guMore";m.dataset.k="more";m.innerHTML=`<summary>${G8.more}</summary>`}
+ ["inst","about","pilot"].forEach(k=>{const e=p.querySelector(`.gc[data-k="${k}"]`);if(e&&e.parentNode!==m)m.appendChild(e)});
+ const ab=p.querySelector('.gc[data-k="about"] details.gab2');if(ab)ab.open=true; // inside More it is already folded once
+ [...p.querySelectorAll('.gab li')].forEach(li=>{if(li.children[0]&&li.children[0].textContent==="How letters unlock")li.children[1].textContent=G8.letters});
+ GU_ORDER2.forEach(k=>{const e=k==="more"?m:p.querySelector(`:scope>[data-k="${k}"]`);if(e)p.appendChild(e)})};
+document.addEventListener("DOMContentLoaded",()=>{const _d=drawParent;drawParent=function(){const r=_d.apply(this,arguments);try{guGlance();guC1();guOffline();guAbout();guOrder()}catch(e){}return r}}); // run after the 6O page builder, which loads later
+__test3.check7C=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},sc=[...document.querySelectorAll(".screen.on")].map(e=>e.id);
+ try{show("parentS");drawParent();const p=document.querySelector("#parentS .parent"),ks=[...p.children].map(e=>e.dataset.k);
+  if(ks.join()!==GU_ORDER2.join())f("order "+ks.join());if(!p.querySelector(".gl3"))f("no glance");if(!/MB/.test(p.querySelector('[data-k="off"]').textContent))f("no size on offline");
+  if(/nothing is tracked/.test(p.textContent))f("old pilot text");if($("c1Box").querySelectorAll("details").length!==C1.length)f("class 1 rows");if(!$("optC1"))f("class 1 switch");
+  if($("guMore").open)f("More should start folded");if(!/order schools teach phonics/.test(p.textContent))f("letters text");
+  if(p.lastElementChild!==p.querySelector(".gdz"))f("reset not last");
+  if(document.querySelector("#parentS").scrollHeight>3.1*innerHeight&&innerHeight>=700)f("page still long: "+document.querySelector("#parentS").scrollHeight);
+ }catch(e){f("error "+e.message)}finally{document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}return bad};
 </script>
 <script id="batch4">
 // ---------- Batch 4: install app (text-only, no voice) ----------
