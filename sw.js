@@ -1,6 +1,8 @@
-/* Zippet's Walk Home service worker (cache names keep the old 'space-princess-' prefix so old caches are cleaned up).
+/* v52 (Part 7F): offline media moved to stable cache 'zippet-media-v1' (survives updates; migrated from old caches), persist request, storage size, remove button.
+ * Zippet's Walk Home service worker (cache names keep the old 'space-princess-' prefix so old caches are cleaned up).
  * >>> BUMP THE VERSION BELOW ON EVERY RELEASE (v1 -> v2 -> v3 ...) <<<
- * A new name makes phones download the new files and delete the old cache. */
+ * A new name makes phones download the new files and delete the old cache.
+ * Bump CACHE only. Do NOT rename MEDIA, or every phone re-downloads all media. */
 // v4 (Batch 1): parent gate, time limit, Sound Blending planet, pure phonics clips, 110 re-recorded clips.
 // Also: audio/index.json is network-first (new clips are seen without a version bump);
 // mp3s are cache-first; Range requests (iOS Safari <audio>) are answered with a 206 slice of the cached file,
@@ -8,7 +10,10 @@
 // v5 (Batch 2): Quick Look planet, take away, per-item review, sparkles, Royal Collection II, parent progress report, 94 new clips.
 // v6 (Batch 3): Tens and Ones, Shape Sparkles, Pattern Parade, Measure Magic, Trace, Story Corner, journey, decorate, 441 new clips.
 // v51 (Part 7E): background music (music/*.mp3, composed), Web Audio player, settings switch.
-const CACHE = 'space-princess-v51';
+const CACHE = 'space-princess-v52';
+const MEDIA = 'zippet-media-v1'; // stable media store (audio/*.mp3, assets/*.webp, music/*.mp3): NEVER rename in normal releases
+const isMedia = p => (p.includes('/audio/') && p.endsWith('.mp3')) || (p.includes('/assets/') && p.endsWith('.webp')) || (p.includes('/music/') && p.endsWith('.mp3'));
+const pathOf = r => { try { return new URL(typeof r === 'string' ? r : r.url, self.location.href).pathname; } catch (e) { return ''; } };
 
 // Core files, relative so it works under a GitHub Pages subpath like /space-princess/
 const CORE = [
@@ -36,7 +41,22 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k.startsWith('space-princess-') && k !== CACHE).map(k => caches.delete(k))))
+      .then(async keys => {
+        const old = keys.filter(k => k.startsWith('space-princess-') && k !== CACHE);
+        // One-time migration: copy media already saved in old caches into MEDIA, so nothing is downloaded again.
+        const media = await caches.open(MEDIA);
+        for (const k of old) {
+          try {
+            const c = await caches.open(k);
+            for (const req of await c.keys()) {
+              if (!isMedia(pathOf(req)) || await media.match(req)) continue;
+              const res = await c.match(req);
+              if (res) await media.put(req, res).catch(() => {});
+            }
+          } catch (err) {}
+        }
+        return Promise.all(old.map(k => caches.delete(k)));
+      })
       .then(() => self.clients.claim())
   );
 });
@@ -45,7 +65,7 @@ function putIfFull(req, res) {
   // Never cache partial (206) or opaque/error responses: cache.put rejects 206 and they would break playback later.
   if (res && res.status === 200 && res.type === 'basic') {
     const copy = res.clone();
-    caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {});
+    caches.open(isMedia(pathOf(req)) ? MEDIA : CACHE).then(c => c.put(req, copy)).catch(() => {});
   }
   return res;
 }

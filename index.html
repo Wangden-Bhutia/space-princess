@@ -1050,8 +1050,8 @@ function openDeco(){JR=null;show("decoS");drawDeco();say("Decorate your hill! Ta
 $("decoBtn").onclick=()=>{sfx.tap();openDeco()};$("dcBack").onclick=()=>{drawColl();show("collS")};document.querySelectorAll("#bgTabs [data-bg]").forEach(b=>b.onclick=()=>{D.bg=b.dataset.bg;saveD();sfx.tap();drawDeco()});
 // ---------- optional: download all voices (M10) ----------
 $("dlBtn").onclick=async()=>{const bar=$("dlBar"),msg=$("dlMsg");try{const ks=await fetch("audio/index.json",{cache:"no-cache"}).then(r=>r.json());const fs=[...ks.map(k=>"audio/"+k+".mp3"),...(typeof ASSET_FILES!=="undefined"?ASSET_FILES:[]),...(typeof MUSIC_FILES!=="undefined"?MUSIC_FILES:[])];let n=0,ok=0,i=0;msg.textContent="Saving voices and pictures…";
- const one=async()=>{while(i<fs.length){const f=fs[i++];try{const r=await fetch(f);if(r.ok){await r.arrayBuffer();ok++}}catch(e){}n++;bar.style.width=Math.round(n/fs.length*100)+"%"}};
- await Promise.all([one(),one(),one(),one()]);msg.textContent=`Saved ${ok} of ${fs.length} files for offline ✓ (pictures not made yet are skipped)`}catch(e){msg.textContent=""}}; // the service worker caches each full mp3 response; fails silently
+ const mc=await caches.open("zippet-media-v1").catch(()=>null);const one=async()=>{while(i<fs.length){const f=fs[i++];try{if(mc&&await mc.match(f))ok++;else{const r=await fetch(f);if(r.ok){await r.arrayBuffer();ok++}}}catch(e){}n++;bar.style.width=Math.round(n/fs.length*100)+"%"}};
+ await Promise.all([one(),one(),one(),one()]);msg.textContent=`Saved ${ok} of ${fs.length} files for offline ✓ (pictures not made yet are skipped)`;await requestKeep()}catch(e){msg.textContent=""}}; // the service worker caches each full mp3 response; fails silently
 // ---------- reset + time limit for open-ended screens ----------
 function resetB3(){D={bg:"hill",items:[]};saveD();SP={done:{},mode:SP.mode||"me"};saveSP();S.badges=[];JR=null;takeRound=0}
 setInterval(()=>{if($("restS").classList.contains("on"))JR=null;if(timeUp()&&($("storyS").classList.contains("on")||$("decoS").classList.contains("on"))){stClear();restScreen()}},1000);
@@ -2633,7 +2633,8 @@ Object.assign(__test3,{C1,c1Open,c1Check,c1Ready,nw,num99Gen,add99Gen,daysGen,wo
 const OFFLINE_MB=187; // all voices, pictures and music (audio/*.mp3 + assets/*.webp + music/*.mp3; 7E) when this was built; update when clips are added
 const G7={glance:"This week",days:"days played",mins:"min of play",stars:"stars",stk:"stickers",strong:"Going well",weak:"Needs practice",none:"Play a few days and this fills in.",full:"📊 Full progress report",
  offBtn:"⬇️ Save for offline use",offNote:`Saves all voices and pictures (about ${OFFLINE_MB} MB) so the game works with no internet. Use Wi-Fi.`,
- offHave:"Saved on this phone: {n} of {t} voices.",
+ offHave:"Saved for offline: {n} of {t} voice clips.",offUsed:"Space used by Zippet: about {X} MB",offKept:"Kept safe: the phone won't clear these files on its own.",offLoose:"Not locked: the phone may clear these files if it runs low on space. Re-save if voices stop working offline.",
+ offDel:"🗑️ Remove offline files",offDelAsk:"Remove all saved voices, pictures and music? The game still works online.",offDelYes:"Remove",offDelNo:"Keep",offIos:"iPhone: add the game to your Home Screen first, then save for offline from inside the Home Screen app. Safari and the Home Screen app keep separate storage, and iPhone may clear Safari's copy after 7 days without play.",
  aboutAdd:[["Class 1 games","Seven more games for Class 1 (numbers to 99, two-digit sums, picture graphs, solid shapes, word fun, my day, notes and shop). Each opens when she is strong in the skills it builds on."],
   ["How it adapts","Every answer is noted. Today's Adventure picks her weakest skills first; things she keeps missing come back every second question; a known mix-up (b and d, 6 and 9) is put among the choices so she learns to tell them apart. Everything stays on this device."]],
  quiet:"The game remembers each letter, number, word and fact, and brings weaker ones back: about 1 question in 4, or every second question when she keeps missing something. Progress stays on this device only.",
@@ -2660,10 +2661,21 @@ function guC1(){const box=$("c1Box");if(!box)return;box.dataset.k="c1";
    return `<div class="c1n"><span>${s.name}</span><span>${x.status==="strong"?"✓":pc+"%"}</span><div class="pbar" style="grid-column:1/-1"><i style="width:${pc}%"></i></div></div>`}).join(""))+`</div>`}).join("")+
   `<div class="gnote">${G7.c1Strong}</div><label class="gsw" style="margin-top:8px"><span class="gst"><b>${G7.c1All}</b><small>${G7.c1AllNote}</small></span><input type="checkbox" id="optC1" role="switch"${S.c1all?" checked":""}></label>`;
  $("optC1").onchange=e=>{S.c1all=e.target.checked;save();guC1()}}
-async function offHave(){const el=$("offHave");if(!el)return;try{const ks=await fetch("audio/index.json").then(r=>r.json()),names=await caches.keys(),nm=names.filter(n=>n.startsWith("space-princess-")).sort((a,b)=>(+b.split("-v")[1])-(+a.split("-v")[1]))[0];
-  if(!nm){el.textContent="";return}const reqs=await (await caches.open(nm)).keys(),n=reqs.filter(r=>/\/audio\/.+\.mp3$/.test(r.url)).length;el.textContent=G7.offHave.replace("{n}",n.toLocaleString("en-IN")).replace("{t}",ks.length.toLocaleString("en-IN"))}catch(e){el.textContent=""}}
+async function requestKeep(){ try{ if(navigator.storage&&navigator.storage.persist){ const ok=await navigator.storage.persisted()||await navigator.storage.persist(); return ok } }catch(e){} return false }
+async function offHave(){const el=$("offHave");if(!el)return;try{const ks=await fetch("audio/index.json").then(r=>r.json()),has=(await caches.keys()).includes("zippet-media-v1");
+  const reqs=has?await (await caches.open("zippet-media-v1")).keys():[],n=reqs.filter(r=>/\/audio\/.+\.mp3$/.test(r.url)).length;el.textContent=G7.offHave.replace("{n}",n.toLocaleString("en-IN")).replace("{t}",ks.length.toLocaleString("en-IN"))}catch(e){el.textContent=""}
+  const u=$("offUsed");if(u)try{if(navigator.storage&&navigator.storage.estimate){const est=await navigator.storage.estimate();u.textContent=G7.offUsed.replace("{X}",Math.round((est.usage||0)/1048576).toLocaleString("en-IN"))}else u.textContent=""}catch(e){u.textContent=""}
+  const k=$("offKeep");if(k)try{const p=!!(navigator.storage&&navigator.storage.persisted&&await navigator.storage.persisted());k.textContent=p?G7.offKept:G7.offLoose}catch(e){k.textContent=G7.offLoose}}
 function guOffline(){const c=document.querySelector('#parentS .gc[data-k="off"]');if(!c||c.dataset.p7)return;c.dataset.p7=1;$("dlBtn").textContent=G7.offBtn;
- const n=document.createElement("div");n.className="gnote";n.textContent=G7.offNote;c.querySelector("h3").after(n);const h=document.createElement("div");h.id="offHave";c.appendChild(h)}
+ const n=document.createElement("div");n.className="gnote";n.textContent=G7.offNote;c.querySelector("h3").after(n);const h=document.createElement("div");h.id="offHave";c.appendChild(h);
+ const io=document.createElement("small");io.id="offIos";io.style.display="block";io.textContent=G7.offIos;n.after(io);
+ ["offUsed","offKeep"].forEach(id=>{const d=document.createElement("small");d.id=id;d.style.display="block";c.appendChild(d)});
+ const db=document.createElement("button");db.id="offDel";db.className="big alt";db.style.cssText="font-size:15px;padding:8px 14px;min-width:0;margin-top:8px";db.textContent=G7.offDel;$("dlBar").parentElement.after(db);
+ const cf=document.createElement("div");cf.id="offAsk";cf.hidden=true;cf.innerHTML='<p></p><button class="big alt" style="font-size:15px;padding:8px 14px;min-width:0" id="offYes"></button> <button class="big alt" style="font-size:15px;padding:8px 14px;min-width:0" id="offNo"></button>';cf.querySelector("p").textContent=G7.offDelAsk;db.after(cf);
+ $("offYes").textContent=G7.offDelYes;$("offNo").textContent=G7.offDelNo;
+ db.onclick=()=>{cf.hidden=false};$("offNo").onclick=()=>{cf.hidden=true};
+ $("offYes").onclick=async()=>{cf.hidden=true;try{await caches.delete("zippet-media-v1")}catch(e){}$("dlBar").style.width="0%";$("dlMsg").textContent="";offHave()};
+ requestKeep().then(()=>offHave())}
 function guAbout(){const c=document.querySelector('#parentS .gc[data-k="about"]');if(!c||c.dataset.p7)return;c.dataset.p7=1;const ul=c.querySelector(".gab");
  [...ul.children].forEach(li=>{if(li.children[0].textContent==="Quiet tracking")li.children[1].textContent=G7.quiet});
  G7.aboutAdd.forEach(([a,b])=>{const li=document.createElement("li");li.innerHTML="<b></b><span></span>";li.children[0].textContent=a;li.children[1].textContent=b;ul.appendChild(li)});
