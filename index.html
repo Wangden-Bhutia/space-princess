@@ -2069,7 +2069,7 @@ const OLD_NAMES=/\b(Pip|Nan|Tip|Pat|Sam|Dot|Meg|Ted|Kit|Bob|Lil|Fin|Bel|Jen|Max|
 const BEAT_FRIENDS=["Bear","Moose","Elephant","chick","Blinkle"];
 __test3.check6D=function(){const bad=[],f=m=>{if(bad.length<40)bad.push(m)};
  if(STICKERS.length!==24||STICKERS2.length!==24)f("sticker counts");if(new Set(ALLST).size!==ALLST.length)f("duplicate sticker");ALLST.forEach(x=>{if(OLD_SPACE.test(x))f("old sticker "+x)});
- if(stickerFor(1)!==STICKERS[0]||stickerFor(25)!==STICKERS2[0]||stickerFor(49)!=="🏅"||stickerFor(0)!==null)f("stickerFor numbering");
+ if(stickerFor(1)!==ALLST[0]||stickerFor(ALLST.length)!==ALLST[ALLST.length-1]||stickerFor(ALLST.length+1)!=="🏅"||stickerFor(0)!==null)f("stickerFor numbering") /* 6L: order is per child (painted stickers mixed in after the ones she owns) */;
  if(BG_IDS.some(b=>!BGS[b])||Object.keys(BGS).length!==4)f("backgrounds");["castle","ship","x",undefined].forEach(b=>{if(bgOf(b)!=="hill")f("bg migration "+b)});if(/#[0-9a-f]{3,6}\b/i.test(Object.values(BGS).join("")))f("hex colour in a background (tokens only)");
  if(/<text/i.test(Object.values(BGS).join("")))f("lettering in a background");
  if(BEATS4.length<4)f("beats");BEATS4.forEach((b,i)=>{const n=BEAT_FRIENDS.filter(w=>b.includes(w)).length;if(i<BEATS4.length-1&&n!==1)f("beat needs one friend: "+b);if(/\b(think|thinks|know|knows|want|wants|feel|feels)\b/i.test(b))f("beat word: "+b)});
@@ -2139,6 +2139,71 @@ __test3.check6K=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},sn=b
  }catch(e){f("error "+e.message)}finally{g6Restore(sn);MZ=null}return bad};
 {const _sc6k=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6k.call(this,N);const b=__test3.check6K();if(b.length)r.bad.check6K=b;return r}}
 Object.assign(__test3,{ICON_HILL,homeArt,navIcons});
+</script>
+<script id="p6l">
+// ---------- Part 6L: painted sticker set, next-sticker meter, big sticker moment ----------
+// 1) Painted stickers ("art:<asset id>") join the collection. Stickers she already owns keep their place;
+//    from her next sticker on, every third sticker is a painted one, until all are in.
+const PAINTED_ST=["art:zippet_happy","art:bear_sleepy","art:chick_awake","art:moose_wave","art:elephant_happy","art:zippet_look","art:bear_happy","art:chick_asleep","art:moose_happy","art:house_main"];
+const ST_BASE=ALLST.slice();
+if(typeof S.stSeqFrom!=="number"){S.stSeqFrom=Math.min(Math.floor(S.stars/5),ST_BASE.length);save()}
+function stSeq(from){const out=ST_BASE.slice(0,from),rest=ST_BASE.slice(from),P=PAINTED_ST.slice();let k=0;
+ while(rest.length||P.length){if(P.length&&(k%3===0||!rest.length))out.push(P.shift());else out.push(rest.shift());k++}return out}
+ALLST.length=0;ALLST.push(...stSeq(S.stSeqFrom)); // stickerFor(), the collection and the tray all read ALLST
+const stName=t=>{const id=t.slice(4).split("_")[0],c=CAST.find(x=>x.id===id);return c?c.name:"Sticker"};
+const stImg=(t,z)=>`<img class="art stimg" src="assets/${t.slice(4)}.webp" alt="${stName(t)}" width="${z}" height="${z}" style="width:${z}px;height:${z}px">`;
+const isArtSt=t=>typeof t==="string"&&t.startsWith("art:");
+function fixArtText(el){if(el&&/art:[a-z_]+/.test(el.innerHTML))el.innerHTML=el.innerHTML.replace(/art:[a-z_]+/g,m=>stImg(m,56))}
+{const _dc=drawColl;drawColl=function(){const r=_dc.apply(this,arguments);$("coll").querySelectorAll(".stk").forEach(d=>{const t=d.textContent;if(isArtSt(t)){d.classList.add("painted");d.innerHTML=stImg(t,72)}});return r};
+ const _dd=drawDeco;drawDeco=function(){const r=_dd.apply(this,arguments);document.querySelectorAll("#deco .it").forEach(e=>{const t=e.textContent;if(isArtSt(t))e.innerHTML=stImg(t,72)});
+  document.querySelectorAll("#tray button").forEach(b=>{const t=b.textContent;if(isArtSt(t)){b.innerHTML=stImg(t,52);b.setAttribute("aria-label",stName(t))}});return r}}
+// 3) Next-sticker meter: five stars, one fills for each star she earns; the gift is the next sticker
+const MTR={gift:"🎁",aria:"Stars to the next sticker: {n} of 5"};
+function meterHTML(){const n=stPending?5:S.stars%5; /* a sticker won mid-game waits for the end: keep the meter full until then */return `<span class="stg">${MTR.gift}</span>`+[0,1,2,3,4].map(i=>`<i class="${i<n?"on":""}"></i>`).join("")}
+["game","blocks"].forEach(id=>{const top=$(id).querySelector(".top");if(top)top.insertAdjacentHTML("afterend",`<div class="stm" id="stm_${id}" role="img"></div>`)});
+function meterDraw(){const n=stPending?5:S.stars%5;document.querySelectorAll(".stm").forEach(m=>{m.innerHTML=meterHTML();m.classList.toggle("full",!!stPending);m.setAttribute("aria-label",MTR.aria.replace("{n}",n))})}
+// 4) Big sticker moment: when a new sticker is won it pops up large, at a calm moment (never in the middle of a game)
+document.body.insertAdjacentHTML("beforeend",`<div id="stPop" role="dialog" aria-label="New sticker"><div class="spc"><div class="spt">New sticker!</div><div class="sps" id="stPopS"></div><button class="big" id="stPopOk">⭐ Yay!</button></div></div>`);
+document.head.insertAdjacentHTML("beforeend",`<style>
+.stm{display:flex;align-items:center;justify-content:center;gap:6px;margin:2px auto 0;min-height:26px}
+.stm .stg{font-size:20px;margin-right:2px}.stm i{display:block;width:14px;height:14px;border-radius:50%;border:2px solid var(--gold-dk);background:transparent}
+.stm.full .stg{animation:stwig 1s ease-in-out infinite}@keyframes stwig{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg) scale(1.15)}75%{transform:rotate(14deg) scale(1.15)}}
+.stm i.on{background:var(--gold);border-color:var(--gold-dk);box-shadow:0 0 6px rgba(var(--gold-rgb),.8)}
+.stk.painted{background:rgba(var(--gold-rgb),.28);box-shadow:inset 0 0 0 3px var(--gold);display:flex;align-items:center;justify-content:center}
+#deco .it .stimg{pointer-events:none}#tray button .stimg{pointer-events:none}
+#stPop{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(var(--plum-rgb),.78);padding:16px}#stPop.on{display:flex}
+#stPop .spc{background:var(--card);border-radius:32px;padding:20px 24px 24px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.3);max-width:340px;width:100%}
+#stPop .spt{font-size:clamp(26px,7vw,34px);font-weight:bold;color:var(--plum)}
+#stPop .sps{font-size:130px;line-height:1.1;margin:10px auto 14px;animation:stpop .7s cubic-bezier(.2,1.6,.4,1) both}#stPop .sps img{width:170px;height:170px}
+#stPop .big{margin:0 auto;min-width:180px}
+@keyframes stpop{0%{transform:scale(.1) rotate(-25deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+@media (prefers-reduced-motion:reduce){#stPop .sps{animation:none}}
+</style>`);
+let stShown=Math.floor(S.stars/5),stPending=null;
+function stCalm(){if($("stPop").classList.contains("on")||$("gate").classList.contains("on"))return false;if($("epS").classList.contains("on"))return false;
+ if($("game").classList.contains("on")&&cur&&round<ROUNDS)return false;return true}
+function stPopShow(t){$("stPopS").innerHTML=isArtSt(t)?stImg(t,170):t;$("stPop").classList.add("on");try{[523,659,784,1047,1319].forEach((f,i)=>tone(f,i*.11,.3,"triangle"))}catch(e){}try{burst($("stPopS"),24,true)}catch(e){}}
+$("stPopOk").onclick=$("stPop").onclick=e=>{if(e.target.closest(".spc")&&e.target.id!=="stPopOk")return;$("stPop").classList.remove("on");try{sfx.tap()}catch(_){}};
+function stTick(){if(window.__stHold)return;const got=Math.floor(S.stars/5);if(got<stShown)stShown=got;if(got>stShown){stPending=stickerFor(got);stShown=got}
+ if(stPending&&stCalm()){const t=stPending;stPending=null;stPopShow(t)}
+ const sig=S.stars+"|"+!!stPending;if(stTick.s!==sig){stTick.s=sig;meterDraw()}fixArtText($("visual"));fixArtText($("sqh"))}
+meterDraw();setInterval(stTick,400);
+{const _fin=finish;finish=function(){const r=_fin.apply(this,arguments);const v=$("visual");if(v.innerHTML.startsWith("🏡✨"))v.innerHTML=art("zippet","happy",96)+v.innerHTML.slice("🏡✨".length);fixArtText(v);return r}}
+// tests
+__test3.check6L=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)};
+ const from=S.stSeqFrom;if(ALLST.slice(0,from).join()!==ST_BASE.slice(0,from).join())f("stickers she already owns changed");
+ if(from<ST_BASE.length&&!isArtSt(ALLST[from]))f("next sticker is not painted");
+ PAINTED_ST.forEach(t=>{if(!ALLST.includes(t))f("missing "+t)});if(new Set(ALLST).size!==ALLST.length)f("duplicate sticker");if(ALLST.length!==ST_BASE.length+PAINTED_ST.length)f("sticker count");
+ for(let n=1;n<=ALLST.length;n++)if(stickerFor(n)!==ALLST[n-1])f("stickerFor "+n);
+ PAINTED_ST.forEach(t=>{if(!ASSET_FILES.includes("assets/"+t.slice(4)+".webp"))f("no asset for "+t)});
+ [0,3,7,12].forEach(st=>{const k=S.stars;S.stars=st;meterDraw();const on=document.querySelectorAll("#stm_game i.on").length;if(on!==st%5)f(`meter ${st}: ${on}`);S.stars=k;meterDraw()});
+ const sc=[...document.querySelectorAll(".screen.on")].map(e=>e.id),c0=cur,r0=round;
+ try{cur=PLANETS[0];round=1;show("game");if(stCalm())f("pop allowed mid-game");round=ROUNDS;if(!stCalm())f("pop blocked at game end");show("start");if(!stCalm())f("pop blocked on home")}
+ finally{cur=c0;round=r0;document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}
+ const d=document.createElement("div");d.innerHTML="New sticker: art:bear_happy";fixArtText(d);if(!d.querySelector("img.stimg"))f("sticker text not drawn as a picture");
+ return bad};
+{const _sc6l=__test3.selfCheck;__test3.selfCheck=function(N){window.__stHold=true;try{const r=_sc6l.call(this,N);const b=__test3.check6L();if(b.length)r.bad.check6L=b;return r}finally{stShown=Math.floor(S.stars/5);stPending=null;stTick.s=null;window.__stHold=false}}} // tests move stars around; no pop for those
+Object.assign(__test3,{PAINTED_ST,stSeq,meterDraw,stPopShow,stCalm,get stPending(){return stPending}});
 </script>
 <script id="batch4">
 // ---------- Batch 4: install app (text-only, no voice) ----------
