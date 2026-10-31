@@ -1,0 +1,3677 @@
+A ball is a sphere!
+A bed is a thing. Bed is a naming word.
+A box is a cuboid!
+A bus is a thing. Bus is a naming word.
+A cat is a thing. Cat is a naming word.
+A cup is a thing. Cup is a naming word.
+A dice is a cube!
+A dog is a thing. Dog is a naming word.
+A hat is a thing. Hat is a naming word.
+A ice cream cone is a cone!
+A new game is open: Big Numbers, at Bear's Tree!
+A new game is open: Big Sums, at Bear's Tree!
+A new game is open: My Day, at Home Door!
+A new game is open: Notes and Shop, at Home Door!
+A new game is open: Picture Graphs, at Bear's Tree!
+A new game is open: Solid Shapes, at Moose's Pond!
+A new game is open: Word Fun, at The Hollow Log!
+A pen is a thing. Pen is a naming word.
+A sentence starts with a capital letter and ends with a full stop.
+A sun is a thing. Sun is a naming word.
+A tin is a cylinder!
+Add one more ten: eighty, ninety!
+Add one more ten: fifty, sixty!
+Add one more ten: forty, fifty!
+Add one more ten: seventy, eighty!
+Add one more ten: sixty, seventy!
+Add one more ten: thirty, forty!
+Add up the notes. They must make eighty rupees.
+Add up the notes. They must make fifty rupees.
+Add up the notes. They must make forty rupees.
+Add up the notes. They must make ninety rupees.
+Add up the notes. They must make seventy rupees.
+Add up the notes. They must make sixty rupees.
+Add up the notes. They must make thirty rupees.
+Add up the notes. They must make twenty rupees.
+After we brush your teeth, we eat breakfast.
+After we come home, we eat dinner.
+After we eat breakfast, we go to school.
+After we eat dinner, we go to sleep.
+After we go to school, we come home.
+After we wake up, we brush your teeth.
+Ant starts with a vowel sound. We say an ant!
+Apple starts with a vowel sound. We say an apple!
+Bed does not start with a vowel sound. We say a bed!
+Bus does not start with a vowel sound. We say a bus!
+Cat does not start with a vowel sound. We say a cat!
+Count back one: eighteen, seventeen!
+Count back one: eighty eight, eighty seven!
+Count back one: eighty five, eighty four!
+Count back one: eighty four, eighty three!
+Count back one: eighty nine, eighty eight!
+Count back one: eighty one, eighty!
+Count back one: eighty seven, eighty six!
+Count back one: eighty six, eighty five!
+Count back one: eighty three, eighty two!
+Count back one: eighty two, eighty one!
+Count back one: eighty, seventy nine!
+Count back one: fifteen, fourteen!
+Count back one: fifty eight, fifty seven!
+Count back one: fifty five, fifty four!
+Count back one: fifty four, fifty three!
+Count back one: fifty nine, fifty eight!
+Count back one: fifty one, fifty!
+Count back one: fifty seven, fifty six!
+Count back one: fifty six, fifty five!
+Count back one: fifty three, fifty two!
+Count back one: fifty two, fifty one!
+Count back one: fifty, forty nine!
+Count back one: forty eight, forty seven!
+Count back one: forty five, forty four!
+Count back one: forty four, forty three!
+Count back one: forty nine, forty eight!
+Count back one: forty one, forty!
+Count back one: forty seven, forty six!
+Count back one: forty six, forty five!
+Count back one: forty three, forty two!
+Count back one: forty two, forty one!
+Count back one: forty, thirty nine!
+Count back one: fourteen, thirteen!
+Count back one: nineteen, eighteen!
+Count back one: ninety eight, ninety seven!
+Count back one: ninety five, ninety four!
+Count back one: ninety four, ninety three!
+Count back one: ninety nine, ninety eight!
+Count back one: ninety one, ninety!
+Count back one: ninety seven, ninety six!
+Count back one: ninety six, ninety five!
+Count back one: ninety three, ninety two!
+Count back one: ninety two, ninety one!
+Count back one: ninety, eighty nine!
+Count back one: seventeen, sixteen!
+Count back one: seventy eight, seventy seven!
+Count back one: seventy five, seventy four!
+Count back one: seventy four, seventy three!
+Count back one: seventy nine, seventy eight!
+Count back one: seventy one, seventy!
+Count back one: seventy seven, seventy six!
+Count back one: seventy six, seventy five!
+Count back one: seventy three, seventy two!
+Count back one: seventy two, seventy one!
+Count back one: seventy, sixty nine!
+Count back one: sixteen, fifteen!
+Count back one: sixty eight, sixty seven!
+Count back one: sixty five, sixty four!
+Count back one: sixty four, sixty three!
+Count back one: sixty nine, sixty eight!
+Count back one: sixty one, sixty!
+Count back one: sixty seven, sixty six!
+Count back one: sixty six, sixty five!
+Count back one: sixty three, sixty two!
+Count back one: sixty two, sixty one!
+Count back one: sixty, fifty nine!
+Count back one: thirteen, twelve!
+Count back one: thirty eight, thirty seven!
+Count back one: thirty five, thirty four!
+Count back one: thirty four, thirty three!
+Count back one: thirty nine, thirty eight!
+Count back one: thirty one, thirty!
+Count back one: thirty seven, thirty six!
+Count back one: thirty six, thirty five!
+Count back one: thirty three, thirty two!
+Count back one: thirty two, thirty one!
+Count back one: thirty, twenty nine!
+Count back one: twelve, eleven!
+Count back one: twenty eight, twenty seven!
+Count back one: twenty five, twenty four!
+Count back one: twenty four, twenty three!
+Count back one: twenty nine, twenty eight!
+Count back one: twenty one, twenty!
+Count back one: twenty seven, twenty six!
+Count back one: twenty six, twenty five!
+Count back one: twenty three, twenty two!
+Count back one: twenty two, twenty one!
+Count back one: twenty, nineteen!
+Count every animal in every row!
+Count in tens: fifty, sixty, seventy. What comes next?
+Count in tens: forty, fifty, sixty. What comes next?
+Count in tens: sixty, seventy, eighty. What comes next?
+Count in tens: ten, twenty, thirty. What comes next?
+Count in tens: thirty, forty, fifty. What comes next?
+Count in tens: twenty, thirty, forty. What comes next?
+Count on from the biggest note: fifty, then ten, then ten. seventy rupees!
+Count on from the biggest note: fifty, then ten. sixty rupees!
+Count on from the biggest note: fifty, then twenty, then ten. eighty rupees!
+Count on from the biggest note: fifty, then twenty, then twenty. ninety rupees!
+Count on from the biggest note: fifty, then twenty. seventy rupees!
+Count on from the biggest note: ten, then ten, then ten. thirty rupees!
+Count on from the biggest note: ten, then ten. twenty rupees!
+Count on from the biggest note: twenty, then ten, then ten. forty rupees!
+Count on from the biggest note: twenty, then ten. thirty rupees!
+Count on from the biggest note: twenty, then twenty, then ten. fifty rupees!
+Count on from the biggest note: twenty, then twenty, then twenty. sixty rupees!
+Count on from the biggest note: twenty, then twenty. forty rupees!
+Count on one: eighteen, nineteen!
+Count on one: eighty eight, eighty nine!
+Count on one: eighty five, eighty six!
+Count on one: eighty four, eighty five!
+Count on one: eighty nine, ninety!
+Count on one: eighty one, eighty two!
+Count on one: eighty seven, eighty eight!
+Count on one: eighty six, eighty seven!
+Count on one: eighty three, eighty four!
+Count on one: eighty two, eighty three!
+Count on one: eighty, eighty one!
+Count on one: eleven, twelve!
+Count on one: fifteen, sixteen!
+Count on one: fifty eight, fifty nine!
+Count on one: fifty five, fifty six!
+Count on one: fifty four, fifty five!
+Count on one: fifty nine, sixty!
+Count on one: fifty one, fifty two!
+Count on one: fifty seven, fifty eight!
+Count on one: fifty six, fifty seven!
+Count on one: fifty three, fifty four!
+Count on one: fifty two, fifty three!
+Count on one: fifty, fifty one!
+Count on one: forty eight, forty nine!
+Count on one: forty five, forty six!
+Count on one: forty four, forty five!
+Count on one: forty nine, fifty!
+Count on one: forty one, forty two!
+Count on one: forty seven, forty eight!
+Count on one: forty six, forty seven!
+Count on one: forty three, forty four!
+Count on one: forty two, forty three!
+Count on one: forty, forty one!
+Count on one: fourteen, fifteen!
+Count on one: nineteen, twenty!
+Count on one: ninety eight, ninety nine!
+Count on one: ninety five, ninety six!
+Count on one: ninety four, ninety five!
+Count on one: ninety one, ninety two!
+Count on one: ninety seven, ninety eight!
+Count on one: ninety six, ninety seven!
+Count on one: ninety three, ninety four!
+Count on one: ninety two, ninety three!
+Count on one: ninety, ninety one!
+Count on one: seventeen, eighteen!
+Count on one: seventy eight, seventy nine!
+Count on one: seventy five, seventy six!
+Count on one: seventy four, seventy five!
+Count on one: seventy nine, eighty!
+Count on one: seventy one, seventy two!
+Count on one: seventy seven, seventy eight!
+Count on one: seventy six, seventy seven!
+Count on one: seventy three, seventy four!
+Count on one: seventy two, seventy three!
+Count on one: seventy, seventy one!
+Count on one: sixteen, seventeen!
+Count on one: sixty eight, sixty nine!
+Count on one: sixty five, sixty six!
+Count on one: sixty four, sixty five!
+Count on one: sixty nine, seventy!
+Count on one: sixty one, sixty two!
+Count on one: sixty seven, sixty eight!
+Count on one: sixty six, sixty seven!
+Count on one: sixty three, sixty four!
+Count on one: sixty two, sixty three!
+Count on one: sixty, sixty one!
+Count on one: thirteen, fourteen!
+Count on one: thirty eight, thirty nine!
+Count on one: thirty five, thirty six!
+Count on one: thirty four, thirty five!
+Count on one: thirty nine, forty!
+Count on one: thirty one, thirty two!
+Count on one: thirty seven, thirty eight!
+Count on one: thirty six, thirty seven!
+Count on one: thirty three, thirty four!
+Count on one: thirty two, thirty three!
+Count on one: thirty, thirty one!
+Count on one: twelve, thirteen!
+Count on one: twenty eight, twenty nine!
+Count on one: twenty five, twenty six!
+Count on one: twenty four, twenty five!
+Count on one: twenty nine, thirty!
+Count on one: twenty one, twenty two!
+Count on one: twenty seven, twenty eight!
+Count on one: twenty six, twenty seven!
+Count on one: twenty three, twenty four!
+Count on one: twenty two, twenty three!
+Count on one: twenty, twenty one!
+Count the bees in their row!
+Count the butterflies in their row!
+Count the ladybirds in their row!
+Count the snails in their row!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety. Then the ones. ninety eight!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety. Then the ones. ninety five!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety. Then the ones. ninety four!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety. Then the ones. ninety nine!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety. Then the ones. ninety one!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety. Then the ones. ninety seven!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety. Then the ones. ninety six!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety. Then the ones. ninety three!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety. Then the ones. ninety two!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety. Then the ones. ninety!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty. Then the ones. eighty eight!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty. Then the ones. eighty five!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty. Then the ones. eighty four!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty. Then the ones. eighty nine!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty. Then the ones. eighty one!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty. Then the ones. eighty seven!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty. Then the ones. eighty six!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty. Then the ones. eighty three!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty. Then the ones. eighty two!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy, eighty. Then the ones. eighty!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy. Then the ones. seventy eight!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy. Then the ones. seventy five!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy. Then the ones. seventy four!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy. Then the ones. seventy nine!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy. Then the ones. seventy one!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy. Then the ones. seventy seven!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy. Then the ones. seventy six!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy. Then the ones. seventy three!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy. Then the ones. seventy two!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty, seventy. Then the ones. seventy!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty. Then the ones. sixty eight!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty. Then the ones. sixty five!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty. Then the ones. sixty four!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty. Then the ones. sixty nine!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty. Then the ones. sixty one!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty. Then the ones. sixty seven!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty. Then the ones. sixty six!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty. Then the ones. sixty three!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty. Then the ones. sixty two!
+Count the tens: ten, twenty, thirty, forty, fifty, sixty. Then the ones. sixty!
+Count the tens: ten, twenty, thirty, forty, fifty. Then the ones. fifty eight!
+Count the tens: ten, twenty, thirty, forty, fifty. Then the ones. fifty five!
+Count the tens: ten, twenty, thirty, forty, fifty. Then the ones. fifty four!
+Count the tens: ten, twenty, thirty, forty, fifty. Then the ones. fifty nine!
+Count the tens: ten, twenty, thirty, forty, fifty. Then the ones. fifty one!
+Count the tens: ten, twenty, thirty, forty, fifty. Then the ones. fifty seven!
+Count the tens: ten, twenty, thirty, forty, fifty. Then the ones. fifty six!
+Count the tens: ten, twenty, thirty, forty, fifty. Then the ones. fifty three!
+Count the tens: ten, twenty, thirty, forty, fifty. Then the ones. fifty two!
+Count the tens: ten, twenty, thirty, forty, fifty. Then the ones. fifty!
+Count the tens: ten, twenty, thirty, forty. Then the ones. forty eight!
+Count the tens: ten, twenty, thirty, forty. Then the ones. forty five!
+Count the tens: ten, twenty, thirty, forty. Then the ones. forty four!
+Count the tens: ten, twenty, thirty, forty. Then the ones. forty nine!
+Count the tens: ten, twenty, thirty, forty. Then the ones. forty one!
+Count the tens: ten, twenty, thirty, forty. Then the ones. forty seven!
+Count the tens: ten, twenty, thirty, forty. Then the ones. forty six!
+Count the tens: ten, twenty, thirty, forty. Then the ones. forty three!
+Count the tens: ten, twenty, thirty, forty. Then the ones. forty two!
+Count the tens: ten, twenty, thirty, forty. Then the ones. forty!
+Count the tens: ten, twenty, thirty. Then the ones. thirty eight!
+Count the tens: ten, twenty, thirty. Then the ones. thirty five!
+Count the tens: ten, twenty, thirty. Then the ones. thirty four!
+Count the tens: ten, twenty, thirty. Then the ones. thirty nine!
+Count the tens: ten, twenty, thirty. Then the ones. thirty one!
+Count the tens: ten, twenty, thirty. Then the ones. thirty seven!
+Count the tens: ten, twenty, thirty. Then the ones. thirty six!
+Count the tens: ten, twenty, thirty. Then the ones. thirty three!
+Count the tens: ten, twenty, thirty. Then the ones. thirty two!
+Count the tens: ten, twenty, thirty. Then the ones. thirty!
+Count the tens: ten, twenty. Then the ones. twenty eight!
+Count the tens: ten, twenty. Then the ones. twenty five!
+Count the tens: ten, twenty. Then the ones. twenty four!
+Count the tens: ten, twenty. Then the ones. twenty nine!
+Count the tens: ten, twenty. Then the ones. twenty one!
+Count the tens: ten, twenty. Then the ones. twenty seven!
+Count the tens: ten, twenty. Then the ones. twenty six!
+Count the tens: ten, twenty. Then the ones. twenty three!
+Count the tens: ten, twenty. Then the ones. twenty two!
+Count the tens: ten, twenty. Then the ones. twenty!
+Count the tens: ten. Then the ones. eighteen!
+Count the tens: ten. Then the ones. eleven!
+Count the tens: ten. Then the ones. fifteen!
+Count the tens: ten. Then the ones. fourteen!
+Count the tens: ten. Then the ones. nineteen!
+Count the tens: ten. Then the ones. seventeen!
+Count the tens: ten. Then the ones. sixteen!
+Count the tens: ten. Then the ones. thirteen!
+Count the tens: ten. Then the ones. twelve!
+Count up from eighty to undefined: that is twenty!
+Count up from fifty to undefined: that is fifty!
+Count up from forty to fifty: that is ten!
+Count up from ninety to undefined: that is ten!
+Count up from seventy to undefined: that is thirty!
+Count up from sixty to undefined: that is forty!
+Count up from thirty to fifty: that is twenty!
+Count up from twenty to fifty: that is thirty!
+Count: eighteen, nineteen, twenty!
+Count: eighty eight, eighty nine, ninety!
+Count: eighty five, eighty six, eighty seven!
+Count: eighty four, eighty five, eighty six!
+Count: eighty nine, ninety, ninety one!
+Count: eighty one, eighty two, eighty three!
+Count: eighty seven, eighty eight, eighty nine!
+Count: eighty six, eighty seven, eighty eight!
+Count: eighty three, eighty four, eighty five!
+Count: eighty two, eighty three, eighty four!
+Count: eighty, eighty one, eighty two!
+Count: eleven, twelve, thirteen!
+Count: fifteen, sixteen, seventeen!
+Count: fifty eight, fifty nine, sixty!
+Count: fifty five, fifty six, fifty seven!
+Count: fifty four, fifty five, fifty six!
+Count: fifty nine, sixty, sixty one!
+Count: fifty one, fifty two, fifty three!
+Count: fifty seven, fifty eight, fifty nine!
+Count: fifty six, fifty seven, fifty eight!
+Count: fifty three, fifty four, fifty five!
+Count: fifty two, fifty three, fifty four!
+Count: fifty, fifty one, fifty two!
+Count: forty eight, forty nine, fifty!
+Count: forty five, forty six, forty seven!
+Count: forty four, forty five, forty six!
+Count: forty nine, fifty, fifty one!
+Count: forty one, forty two, forty three!
+Count: forty seven, forty eight, forty nine!
+Count: forty six, forty seven, forty eight!
+Count: forty three, forty four, forty five!
+Count: forty two, forty three, forty four!
+Count: forty, forty one, forty two!
+Count: fourteen, fifteen, sixteen!
+Count: nineteen, twenty, twenty one!
+Count: ninety five, ninety six, ninety seven!
+Count: ninety four, ninety five, ninety six!
+Count: ninety one, ninety two, ninety three!
+Count: ninety seven, ninety eight, ninety nine!
+Count: ninety six, ninety seven, ninety eight!
+Count: ninety three, ninety four, ninety five!
+Count: ninety two, ninety three, ninety four!
+Count: ninety, ninety one, ninety two!
+Count: seventeen, eighteen, nineteen!
+Count: seventy eight, seventy nine, eighty!
+Count: seventy five, seventy six, seventy seven!
+Count: seventy four, seventy five, seventy six!
+Count: seventy nine, eighty, eighty one!
+Count: seventy one, seventy two, seventy three!
+Count: seventy seven, seventy eight, seventy nine!
+Count: seventy six, seventy seven, seventy eight!
+Count: seventy three, seventy four, seventy five!
+Count: seventy two, seventy three, seventy four!
+Count: seventy, seventy one, seventy two!
+Count: sixteen, seventeen, eighteen!
+Count: sixty eight, sixty nine, seventy!
+Count: sixty five, sixty six, sixty seven!
+Count: sixty four, sixty five, sixty six!
+Count: sixty nine, seventy, seventy one!
+Count: sixty one, sixty two, sixty three!
+Count: sixty seven, sixty eight, sixty nine!
+Count: sixty six, sixty seven, sixty eight!
+Count: sixty three, sixty four, sixty five!
+Count: sixty two, sixty three, sixty four!
+Count: sixty, sixty one, sixty two!
+Count: thirteen, fourteen, fifteen!
+Count: thirty eight, thirty nine, forty!
+Count: thirty five, thirty six, thirty seven!
+Count: thirty four, thirty five, thirty six!
+Count: thirty nine, forty, forty one!
+Count: thirty one, thirty two, thirty three!
+Count: thirty seven, thirty eight, thirty nine!
+Count: thirty six, thirty seven, thirty eight!
+Count: thirty three, thirty four, thirty five!
+Count: thirty two, thirty three, thirty four!
+Count: thirty, thirty one, thirty two!
+Count: twelve, thirteen, fourteen!
+Count: twenty eight, twenty nine, thirty!
+Count: twenty five, twenty six, twenty seven!
+Count: twenty four, twenty five, twenty six!
+Count: twenty nine, thirty, thirty one!
+Count: twenty one, twenty two, twenty three!
+Count: twenty seven, twenty eight, twenty nine!
+Count: twenty six, twenty seven, twenty eight!
+Count: twenty three, twenty four, twenty five!
+Count: twenty two, twenty three, twenty four!
+Count: twenty, twenty one, twenty two!
+Cup does not start with a vowel sound. We say a cup!
+Do the ones, then the tens. eight tens and eight ones: eighty eight!
+Do the ones, then the tens. eight tens and five ones: eighty five!
+Do the ones, then the tens. eight tens and four ones: eighty four!
+Do the ones, then the tens. eight tens and nine ones: eighty nine!
+Do the ones, then the tens. eight tens and one ones: eighty one!
+Do the ones, then the tens. eight tens and seven ones: eighty seven!
+Do the ones, then the tens. eight tens and six ones: eighty six!
+Do the ones, then the tens. eight tens and three ones: eighty three!
+Do the ones, then the tens. eight tens and two ones: eighty two!
+Do the ones, then the tens. eight tens and zero ones: eighty!
+Do the ones, then the tens. five tens and eight ones: fifty eight!
+Do the ones, then the tens. five tens and five ones: fifty five!
+Do the ones, then the tens. five tens and four ones: fifty four!
+Do the ones, then the tens. five tens and nine ones: fifty nine!
+Do the ones, then the tens. five tens and one ones: fifty one!
+Do the ones, then the tens. five tens and seven ones: fifty seven!
+Do the ones, then the tens. five tens and six ones: fifty six!
+Do the ones, then the tens. five tens and three ones: fifty three!
+Do the ones, then the tens. five tens and two ones: fifty two!
+Do the ones, then the tens. five tens and zero ones: fifty!
+Do the ones, then the tens. four tens and eight ones: forty eight!
+Do the ones, then the tens. four tens and five ones: forty five!
+Do the ones, then the tens. four tens and four ones: forty four!
+Do the ones, then the tens. four tens and nine ones: forty nine!
+Do the ones, then the tens. four tens and one ones: forty one!
+Do the ones, then the tens. four tens and seven ones: forty seven!
+Do the ones, then the tens. four tens and six ones: forty six!
+Do the ones, then the tens. four tens and three ones: forty three!
+Do the ones, then the tens. four tens and two ones: forty two!
+Do the ones, then the tens. four tens and zero ones: forty!
+Do the ones, then the tens. nine tens and eight ones: ninety eight!
+Do the ones, then the tens. nine tens and five ones: ninety five!
+Do the ones, then the tens. nine tens and four ones: ninety four!
+Do the ones, then the tens. nine tens and nine ones: ninety nine!
+Do the ones, then the tens. nine tens and one ones: ninety one!
+Do the ones, then the tens. nine tens and seven ones: ninety seven!
+Do the ones, then the tens. nine tens and six ones: ninety six!
+Do the ones, then the tens. nine tens and three ones: ninety three!
+Do the ones, then the tens. nine tens and two ones: ninety two!
+Do the ones, then the tens. nine tens and zero ones: ninety!
+Do the ones, then the tens. one tens and eight ones: eighteen!
+Do the ones, then the tens. one tens and five ones: fifteen!
+Do the ones, then the tens. one tens and four ones: fourteen!
+Do the ones, then the tens. one tens and nine ones: nineteen!
+Do the ones, then the tens. one tens and one ones: eleven!
+Do the ones, then the tens. one tens and seven ones: seventeen!
+Do the ones, then the tens. one tens and six ones: sixteen!
+Do the ones, then the tens. one tens and three ones: thirteen!
+Do the ones, then the tens. one tens and two ones: twelve!
+Do the ones, then the tens. one tens and zero ones: ten!
+Do the ones, then the tens. seven tens and eight ones: seventy eight!
+Do the ones, then the tens. seven tens and five ones: seventy five!
+Do the ones, then the tens. seven tens and four ones: seventy four!
+Do the ones, then the tens. seven tens and nine ones: seventy nine!
+Do the ones, then the tens. seven tens and one ones: seventy one!
+Do the ones, then the tens. seven tens and seven ones: seventy seven!
+Do the ones, then the tens. seven tens and six ones: seventy six!
+Do the ones, then the tens. seven tens and three ones: seventy three!
+Do the ones, then the tens. seven tens and two ones: seventy two!
+Do the ones, then the tens. seven tens and zero ones: seventy!
+Do the ones, then the tens. six tens and eight ones: sixty eight!
+Do the ones, then the tens. six tens and five ones: sixty five!
+Do the ones, then the tens. six tens and four ones: sixty four!
+Do the ones, then the tens. six tens and nine ones: sixty nine!
+Do the ones, then the tens. six tens and one ones: sixty one!
+Do the ones, then the tens. six tens and seven ones: sixty seven!
+Do the ones, then the tens. six tens and six ones: sixty six!
+Do the ones, then the tens. six tens and three ones: sixty three!
+Do the ones, then the tens. six tens and two ones: sixty two!
+Do the ones, then the tens. six tens and zero ones: sixty!
+Do the ones, then the tens. three tens and eight ones: thirty eight!
+Do the ones, then the tens. three tens and five ones: thirty five!
+Do the ones, then the tens. three tens and four ones: thirty four!
+Do the ones, then the tens. three tens and nine ones: thirty nine!
+Do the ones, then the tens. three tens and one ones: thirty one!
+Do the ones, then the tens. three tens and seven ones: thirty seven!
+Do the ones, then the tens. three tens and six ones: thirty six!
+Do the ones, then the tens. three tens and three ones: thirty three!
+Do the ones, then the tens. three tens and two ones: thirty two!
+Do the ones, then the tens. three tens and zero ones: thirty!
+Do the ones, then the tens. two tens and eight ones: twenty eight!
+Do the ones, then the tens. two tens and five ones: twenty five!
+Do the ones, then the tens. two tens and four ones: twenty four!
+Do the ones, then the tens. two tens and nine ones: twenty nine!
+Do the ones, then the tens. two tens and one ones: twenty one!
+Do the ones, then the tens. two tens and seven ones: twenty seven!
+Do the ones, then the tens. two tens and six ones: twenty six!
+Do the ones, then the tens. two tens and three ones: twenty three!
+Do the ones, then the tens. two tens and two ones: twenty two!
+Do the ones, then the tens. two tens and zero ones: twenty!
+Dog does not start with a vowel sound. We say a dog!
+Egg starts with a vowel sound. We say an egg!
+Eight bees, five butterflies. Count the extra ones: three!
+Eight bees, five ladybirds. Count the extra ones: three!
+Eight bees, five snails. Count the extra ones: three!
+Eight bees, four butterflies. Count the extra ones: four!
+Eight bees, four ladybirds. Count the extra ones: four!
+Eight bees, four snails. Count the extra ones: four!
+Eight bees, one butterflies. Count the extra ones: seven!
+Eight bees, one ladybirds. Count the extra ones: seven!
+Eight bees, one snails. Count the extra ones: seven!
+Eight bees, six butterflies. Count the extra ones: two!
+Eight bees, six ladybirds. Count the extra ones: two!
+Eight bees, six snails. Count the extra ones: two!
+Eight bees, three butterflies. Count the extra ones: five!
+Eight bees, three ladybirds. Count the extra ones: five!
+Eight bees, three snails. Count the extra ones: five!
+Eight bees, two butterflies. Count the extra ones: six!
+Eight bees, two ladybirds. Count the extra ones: six!
+Eight bees, two snails. Count the extra ones: six!
+Eight butterflies, five bees. Count the extra ones: three!
+Eight butterflies, five ladybirds. Count the extra ones: three!
+Eight butterflies, five snails. Count the extra ones: three!
+Eight butterflies, four bees. Count the extra ones: four!
+Eight butterflies, four ladybirds. Count the extra ones: four!
+Eight butterflies, four snails. Count the extra ones: four!
+Eight butterflies, one bees. Count the extra ones: seven!
+Eight butterflies, one ladybirds. Count the extra ones: seven!
+Eight butterflies, one snails. Count the extra ones: seven!
+Eight butterflies, six bees. Count the extra ones: two!
+Eight butterflies, six ladybirds. Count the extra ones: two!
+Eight butterflies, six snails. Count the extra ones: two!
+Eight butterflies, three bees. Count the extra ones: five!
+Eight butterflies, three ladybirds. Count the extra ones: five!
+Eight butterflies, three snails. Count the extra ones: five!
+Eight butterflies, two bees. Count the extra ones: six!
+Eight butterflies, two ladybirds. Count the extra ones: six!
+Eight butterflies, two snails. Count the extra ones: six!
+Eight ladybirds, five bees. Count the extra ones: three!
+Eight ladybirds, five butterflies. Count the extra ones: three!
+Eight ladybirds, five snails. Count the extra ones: three!
+Eight ladybirds, four bees. Count the extra ones: four!
+Eight ladybirds, four butterflies. Count the extra ones: four!
+Eight ladybirds, four snails. Count the extra ones: four!
+Eight ladybirds, one bees. Count the extra ones: seven!
+Eight ladybirds, one butterflies. Count the extra ones: seven!
+Eight ladybirds, one snails. Count the extra ones: seven!
+Eight ladybirds, six bees. Count the extra ones: two!
+Eight ladybirds, six butterflies. Count the extra ones: two!
+Eight ladybirds, six snails. Count the extra ones: two!
+Eight ladybirds, three bees. Count the extra ones: five!
+Eight ladybirds, three butterflies. Count the extra ones: five!
+Eight ladybirds, three snails. Count the extra ones: five!
+Eight ladybirds, two bees. Count the extra ones: six!
+Eight ladybirds, two butterflies. Count the extra ones: six!
+Eight ladybirds, two snails. Count the extra ones: six!
+Eight snails, five bees. Count the extra ones: three!
+Eight snails, five butterflies. Count the extra ones: three!
+Eight snails, five ladybirds. Count the extra ones: three!
+Eight snails, four bees. Count the extra ones: four!
+Eight snails, four butterflies. Count the extra ones: four!
+Eight snails, four ladybirds. Count the extra ones: four!
+Eight snails, one bees. Count the extra ones: seven!
+Eight snails, one butterflies. Count the extra ones: seven!
+Eight snails, one ladybirds. Count the extra ones: seven!
+Eight snails, six bees. Count the extra ones: two!
+Eight snails, six ladybirds. Count the extra ones: two!
+Eight snails, three bees. Count the extra ones: five!
+Eight snails, three butterflies. Count the extra ones: five!
+Eight snails, three ladybirds. Count the extra ones: five!
+Eight snails, two bees. Count the extra ones: six!
+Eight snails, two butterflies. Count the extra ones: six!
+Eight snails, two ladybirds. Count the extra ones: six!
+Eighteen: one tens and eight ones. Look at the tens first!
+Eighty eight: eight tens and eight ones. Look at the tens first!
+Eighty five: eight tens and five ones. Look at the tens first!
+Eighty four: eight tens and four ones. Look at the tens first!
+Eighty nine: eight tens and nine ones. Look at the tens first!
+Eighty one: eight tens and one ones. Look at the tens first!
+Eighty seven: eight tens and seven ones. Look at the tens first!
+Eighty six: eight tens and six ones. Look at the tens first!
+Eighty three: eight tens and three ones. Look at the tens first!
+Eighty two: eight tens and two ones. Look at the tens first!
+Eighty: eight tens and zero ones. Look at the tens first!
+Eleven: one tens and one ones. Look at the tens first!
+Fifteen: one tens and five ones. Look at the tens first!
+Fifty eight: five tens and eight ones. Look at the tens first!
+Fifty five: five tens and five ones. Look at the tens first!
+Fifty four: five tens and four ones. Look at the tens first!
+Fifty nine: five tens and nine ones. Look at the tens first!
+Fifty one: five tens and one ones. Look at the tens first!
+Fifty seven: five tens and seven ones. Look at the tens first!
+Fifty six: five tens and six ones. Look at the tens first!
+Fifty three: five tens and three ones. Look at the tens first!
+Fifty two: five tens and two ones. Look at the tens first!
+Fifty: five tens and zero ones. Look at the tens first!
+Find the fifty rupee note!
+Find the number eighteen!
+Find the number eighty eight!
+Find the number eighty five!
+Find the number eighty four!
+Find the number eighty nine!
+Find the number eighty one!
+Find the number eighty seven!
+Find the number eighty six!
+Find the number eighty three!
+Find the number eighty two!
+Find the number eighty!
+Find the number eleven!
+Find the number fifteen!
+Find the number fifty eight!
+Find the number fifty five!
+Find the number fifty four!
+Find the number fifty nine!
+Find the number fifty one!
+Find the number fifty seven!
+Find the number fifty six!
+Find the number fifty three!
+Find the number fifty two!
+Find the number fifty!
+Find the number forty eight!
+Find the number forty five!
+Find the number forty four!
+Find the number forty nine!
+Find the number forty one!
+Find the number forty seven!
+Find the number forty six!
+Find the number forty three!
+Find the number forty two!
+Find the number forty!
+Find the number fourteen!
+Find the number nineteen!
+Find the number ninety eight!
+Find the number ninety five!
+Find the number ninety four!
+Find the number ninety nine!
+Find the number ninety one!
+Find the number ninety seven!
+Find the number ninety six!
+Find the number ninety three!
+Find the number ninety two!
+Find the number ninety!
+Find the number seventeen!
+Find the number seventy eight!
+Find the number seventy five!
+Find the number seventy four!
+Find the number seventy nine!
+Find the number seventy one!
+Find the number seventy seven!
+Find the number seventy six!
+Find the number seventy three!
+Find the number seventy two!
+Find the number seventy!
+Find the number sixteen!
+Find the number sixty eight!
+Find the number sixty five!
+Find the number sixty four!
+Find the number sixty nine!
+Find the number sixty one!
+Find the number sixty seven!
+Find the number sixty six!
+Find the number sixty three!
+Find the number sixty two!
+Find the number sixty!
+Find the number thirteen!
+Find the number thirty eight!
+Find the number thirty five!
+Find the number thirty four!
+Find the number thirty nine!
+Find the number thirty one!
+Find the number thirty seven!
+Find the number thirty six!
+Find the number thirty three!
+Find the number thirty two!
+Find the number thirty!
+Find the number twelve!
+Find the number twenty eight!
+Find the number twenty five!
+Find the number twenty four!
+Find the number twenty nine!
+Find the number twenty one!
+Find the number twenty seven!
+Find the number twenty six!
+Find the number twenty three!
+Find the number twenty two!
+Find the number twenty!
+Find the ten rupee note!
+Find the twenty rupee note!
+Find the undefined rupee note!
+First we brush your teeth. What do we do next?
+First we come home. What do we do next?
+First we eat breakfast. What do we do next?
+First we eat dinner. What do we do next?
+First we go to school. What do we do next?
+First we wake up. What do we do next?
+Fish does not start with a vowel sound. We say a fish!
+Five bees, one butterflies. Count the extra ones: four!
+Five bees, one ladybirds. Count the extra ones: four!
+Five bees, one snails. Count the extra ones: four!
+Five bees, three butterflies. Count the extra ones: two!
+Five bees, three ladybirds. Count the extra ones: two!
+Five bees, three snails. Count the extra ones: two!
+Five bees, two butterflies. Count the extra ones: three!
+Five bees, two ladybirds. Count the extra ones: three!
+Five bees, two snails. Count the extra ones: three!
+Five butterflies, one bees. Count the extra ones: four!
+Five butterflies, one ladybirds. Count the extra ones: four!
+Five butterflies, one snails. Count the extra ones: four!
+Five butterflies, three snails. Count the extra ones: two!
+Five butterflies, two bees. Count the extra ones: three!
+Five butterflies, two ladybirds. Count the extra ones: three!
+Five butterflies, two snails. Count the extra ones: three!
+Five ladybirds, one bees. Count the extra ones: four!
+Five ladybirds, one butterflies. Count the extra ones: four!
+Five ladybirds, one snails. Count the extra ones: four!
+Five ladybirds, three bees. Count the extra ones: two!
+Five ladybirds, three snails. Count the extra ones: two!
+Five ladybirds, two bees. Count the extra ones: three!
+Five ladybirds, two snails. Count the extra ones: three!
+Five snails, one bees. Count the extra ones: four!
+Five snails, one butterflies. Count the extra ones: four!
+Five snails, one ladybirds. Count the extra ones: four!
+Five snails, three bees. Count the extra ones: two!
+Five snails, three ladybirds. Count the extra ones: two!
+Five snails, two bees. Count the extra ones: three!
+Five snails, two butterflies. Count the extra ones: three!
+Five snails, two ladybirds. Count the extra ones: three!
+Forty eight: four tens and eight ones. Look at the tens first!
+Forty five: four tens and five ones. Look at the tens first!
+Forty four: four tens and four ones. Look at the tens first!
+Forty nine: four tens and nine ones. Look at the tens first!
+Forty one: four tens and one ones. Look at the tens first!
+Forty seven: four tens and seven ones. Look at the tens first!
+Forty six: four tens and six ones. Look at the tens first!
+Forty three: four tens and three ones. Look at the tens first!
+Forty two: four tens and two ones. Look at the tens first!
+Forty: four tens and zero ones. Look at the tens first!
+Four bees, one butterflies. Count the extra ones: three!
+Four bees, one ladybirds. Count the extra ones: three!
+Four bees, one snails. Count the extra ones: three!
+Four bees, two butterflies. Count the extra ones: two!
+Four bees, two ladybirds. Count the extra ones: two!
+Four bees, two snails. Count the extra ones: two!
+Four butterflies, one bees. Count the extra ones: three!
+Four butterflies, one ladybirds. Count the extra ones: three!
+Four butterflies, one snails. Count the extra ones: three!
+Four butterflies, two bees. Count the extra ones: two!
+Four butterflies, two ladybirds. Count the extra ones: two!
+Four butterflies, two snails. Count the extra ones: two!
+Four ladybirds, one bees. Count the extra ones: three!
+Four ladybirds, one butterflies. Count the extra ones: three!
+Four ladybirds, one snails. Count the extra ones: three!
+Four ladybirds, two bees. Count the extra ones: two!
+Four ladybirds, two butterflies. Count the extra ones: two!
+Four ladybirds, two snails. Count the extra ones: two!
+Four snails, one bees. Count the extra ones: three!
+Four snails, one butterflies. Count the extra ones: three!
+Four snails, one ladybirds. Count the extra ones: three!
+Four snails, two bees. Count the extra ones: two!
+Four snails, two ladybirds. Count the extra ones: two!
+Fourteen: one tens and four ones. Look at the tens first!
+Friday
+Hat does not start with a vowel sound. We say a hat!
+Hen does not start with a vowel sound. We say a hen!
+How many animals are there altogether?
+How many days are there in one week?
+How many more bees than butterflies?
+How many more bees than ladybirds?
+How many more bees than snails?
+How many more butterflies than bees?
+How many more butterflies than ladybirds?
+How many more butterflies than snails?
+How many more ladybirds than bees?
+How many more ladybirds than butterflies?
+How many more ladybirds than snails?
+How many more snails than bees?
+How many more snails than butterflies?
+How many more snails than ladybirds?
+How many? Count the tens, then the ones.
+How much money is this?
+Just one: ant!
+Just one: cat!
+Just one: cup!
+Just one: dog!
+Just one: egg!
+Just one: hat!
+Just one: hen!
+Just one: pen!
+Just one: pig!
+Look at the number on the note: 10!
+Look at the number on the note: 100!
+Look at the number on the note: 20!
+Look at the number on the note: 50!
+Look at the picture graph. How many bees are there?
+Look at the picture graph. How many butterflies are there?
+Look at the picture graph. How many ladybirds are there?
+Look at the picture graph. How many snails are there?
+Look at the tens first: eighty eight has more tens. It is bigger!
+Look at the tens first: eighty five has more tens. It is bigger!
+Look at the tens first: eighty four has more tens. It is bigger!
+Look at the tens first: eighty has more tens. It is bigger!
+Look at the tens first: eighty nine has more tens. It is bigger!
+Look at the tens first: eighty one has more tens. It is bigger!
+Look at the tens first: eighty seven has more tens. It is bigger!
+Look at the tens first: eighty six has more tens. It is bigger!
+Look at the tens first: eighty three has more tens. It is bigger!
+Look at the tens first: eighty two has more tens. It is bigger!
+Look at the tens first: fifty eight has more tens. It is bigger!
+Look at the tens first: fifty five has more tens. It is bigger!
+Look at the tens first: fifty four has more tens. It is bigger!
+Look at the tens first: fifty has more tens. It is bigger!
+Look at the tens first: fifty nine has more tens. It is bigger!
+Look at the tens first: fifty one has more tens. It is bigger!
+Look at the tens first: fifty seven has more tens. It is bigger!
+Look at the tens first: fifty six has more tens. It is bigger!
+Look at the tens first: fifty three has more tens. It is bigger!
+Look at the tens first: fifty two has more tens. It is bigger!
+Look at the tens first: forty eight has more tens. It is bigger!
+Look at the tens first: forty five has more tens. It is bigger!
+Look at the tens first: forty four has more tens. It is bigger!
+Look at the tens first: forty has more tens. It is bigger!
+Look at the tens first: forty nine has more tens. It is bigger!
+Look at the tens first: forty one has more tens. It is bigger!
+Look at the tens first: forty seven has more tens. It is bigger!
+Look at the tens first: forty six has more tens. It is bigger!
+Look at the tens first: forty three has more tens. It is bigger!
+Look at the tens first: forty two has more tens. It is bigger!
+Look at the tens first: ninety eight has more tens. It is bigger!
+Look at the tens first: ninety five has more tens. It is bigger!
+Look at the tens first: ninety four has more tens. It is bigger!
+Look at the tens first: ninety has more tens. It is bigger!
+Look at the tens first: ninety nine has more tens. It is bigger!
+Look at the tens first: ninety one has more tens. It is bigger!
+Look at the tens first: ninety seven has more tens. It is bigger!
+Look at the tens first: ninety six has more tens. It is bigger!
+Look at the tens first: ninety three has more tens. It is bigger!
+Look at the tens first: ninety two has more tens. It is bigger!
+Look at the tens first: seventy eight has more tens. It is bigger!
+Look at the tens first: seventy five has more tens. It is bigger!
+Look at the tens first: seventy four has more tens. It is bigger!
+Look at the tens first: seventy has more tens. It is bigger!
+Look at the tens first: seventy nine has more tens. It is bigger!
+Look at the tens first: seventy one has more tens. It is bigger!
+Look at the tens first: seventy seven has more tens. It is bigger!
+Look at the tens first: seventy six has more tens. It is bigger!
+Look at the tens first: seventy three has more tens. It is bigger!
+Look at the tens first: seventy two has more tens. It is bigger!
+Look at the tens first: sixty eight has more tens. It is bigger!
+Look at the tens first: sixty five has more tens. It is bigger!
+Look at the tens first: sixty four has more tens. It is bigger!
+Look at the tens first: sixty has more tens. It is bigger!
+Look at the tens first: sixty nine has more tens. It is bigger!
+Look at the tens first: sixty one has more tens. It is bigger!
+Look at the tens first: sixty seven has more tens. It is bigger!
+Look at the tens first: sixty six has more tens. It is bigger!
+Look at the tens first: sixty three has more tens. It is bigger!
+Look at the tens first: sixty two has more tens. It is bigger!
+Look at the tens first: thirty eight has more tens. It is bigger!
+Look at the tens first: thirty five has more tens. It is bigger!
+Look at the tens first: thirty four has more tens. It is bigger!
+Look at the tens first: thirty has more tens. It is bigger!
+Look at the tens first: thirty nine has more tens. It is bigger!
+Look at the tens first: thirty one has more tens. It is bigger!
+Look at the tens first: thirty seven has more tens. It is bigger!
+Look at the tens first: thirty six has more tens. It is bigger!
+Look at the tens first: thirty three has more tens. It is bigger!
+Look at the tens first: thirty two has more tens. It is bigger!
+Look at the tens first: twenty eight has more tens. It is bigger!
+Look at the tens first: twenty five has more tens. It is bigger!
+Look at the tens first: twenty four has more tens. It is bigger!
+Look at the tens first: twenty has more tens. It is bigger!
+Look at the tens first: twenty nine has more tens. It is bigger!
+Look at the tens first: twenty one has more tens. It is bigger!
+Look at the tens first: twenty seven has more tens. It is bigger!
+Look at the tens first: twenty six has more tens. It is bigger!
+Look at the tens first: twenty three has more tens. It is bigger!
+Look at the tens first: twenty two has more tens. It is bigger!
+Look for a capital letter at the start and a full stop at the end.
+Look for the chick in the log!
+Look for the chick next to the log!
+Look for the chick on the log!
+Look for the chick under the tree!
+Monday
+More than one ant: we add s. Ants!
+More than one cat: we add s. Cats!
+More than one cup: we add s. Cups!
+More than one dog: we add s. Dogs!
+More than one egg: we add s. Eggs!
+More than one hat: we add s. Hats!
+More than one hen: we add s. Hens!
+More than one pen: we add s. Pens!
+More than one pig: we add s. Pigs!
+Nineteen: one tens and nine ones. Look at the tens first!
+Ninety eight: nine tens and eight ones. Look at the tens first!
+Ninety five: nine tens and five ones. Look at the tens first!
+Ninety four: nine tens and four ones. Look at the tens first!
+Ninety nine: nine tens and nine ones. Look at the tens first!
+Ninety one: nine tens and one ones. Look at the tens first!
+Ninety seven: nine tens and seven ones. Look at the tens first!
+Ninety six: nine tens and six ones. Look at the tens first!
+Ninety three: nine tens and three ones. Look at the tens first!
+Ninety two: nine tens and two ones. Look at the tens first!
+Ninety: nine tens and zero ones. Look at the tens first!
+Octopus starts with a vowel sound. We say an octopus!
+Orange starts with a vowel sound. We say an orange!
+Owl starts with a vowel sound. We say an owl!
+Pen does not start with a vowel sound. We say a pen!
+Round shapes can roll. Flat sides make a shape slide!
+Same tens. Look at the ones: eight is more than five. eighteen is bigger!
+Same tens. Look at the ones: eight is more than five. sixty eight is bigger!
+Same tens. Look at the ones: eight is more than five. thirty eight is bigger!
+Same tens. Look at the ones: eight is more than four. eighteen is bigger!
+Same tens. Look at the ones: eight is more than four. forty eight is bigger!
+Same tens. Look at the ones: eight is more than one. eighteen is bigger!
+Same tens. Look at the ones: eight is more than one. seventy eight is bigger!
+Same tens. Look at the ones: eight is more than one. thirty eight is bigger!
+Same tens. Look at the ones: eight is more than seven. ninety eight is bigger!
+Same tens. Look at the ones: eight is more than six. sixty eight is bigger!
+Same tens. Look at the ones: eight is more than three. forty eight is bigger!
+Same tens. Look at the ones: eight is more than three. ninety eight is bigger!
+Same tens. Look at the ones: eight is more than three. seventy eight is bigger!
+Same tens. Look at the ones: eight is more than three. thirty eight is bigger!
+Same tens. Look at the ones: eight is more than two. ninety eight is bigger!
+Same tens. Look at the ones: eight is more than two. seventy eight is bigger!
+Same tens. Look at the ones: eight is more than two. sixty eight is bigger!
+Same tens. Look at the ones: eight is more than two. twenty eight is bigger!
+Same tens. Look at the ones: eight is more than zero. eighty eight is bigger!
+Same tens. Look at the ones: eight is more than zero. fifty eight is bigger!
+Same tens. Look at the ones: eight is more than zero. ninety eight is bigger!
+Same tens. Look at the ones: eight is more than zero. sixty eight is bigger!
+Same tens. Look at the ones: eight is more than zero. twenty eight is bigger!
+Same tens. Look at the ones: five is more than four. fifty five is bigger!
+Same tens. Look at the ones: five is more than four. forty five is bigger!
+Same tens. Look at the ones: five is more than four. ninety five is bigger!
+Same tens. Look at the ones: five is more than one. fifteen is bigger!
+Same tens. Look at the ones: five is more than one. seventy five is bigger!
+Same tens. Look at the ones: five is more than three. forty five is bigger!
+Same tens. Look at the ones: five is more than three. thirty five is bigger!
+Same tens. Look at the ones: five is more than two. eighty five is bigger!
+Same tens. Look at the ones: five is more than two. fifty five is bigger!
+Same tens. Look at the ones: five is more than zero. ninety five is bigger!
+Same tens. Look at the ones: four is more than one. fourteen is bigger!
+Same tens. Look at the ones: four is more than one. ninety four is bigger!
+Same tens. Look at the ones: four is more than one. seventy four is bigger!
+Same tens. Look at the ones: four is more than three. thirty four is bigger!
+Same tens. Look at the ones: four is more than two. eighty four is bigger!
+Same tens. Look at the ones: four is more than two. fourteen is bigger!
+Same tens. Look at the ones: four is more than two. twenty four is bigger!
+Same tens. Look at the ones: four is more than zero. eighty four is bigger!
+Same tens. Look at the ones: four is more than zero. fifty four is bigger!
+Same tens. Look at the ones: four is more than zero. ninety four is bigger!
+Same tens. Look at the ones: four is more than zero. twenty four is bigger!
+Same tens. Look at the ones: nine is more than eight. fifty nine is bigger!
+Same tens. Look at the ones: nine is more than eight. ninety nine is bigger!
+Same tens. Look at the ones: nine is more than eight. seventy nine is bigger!
+Same tens. Look at the ones: nine is more than eight. sixty nine is bigger!
+Same tens. Look at the ones: nine is more than eight. twenty nine is bigger!
+Same tens. Look at the ones: nine is more than five. forty nine is bigger!
+Same tens. Look at the ones: nine is more than five. ninety nine is bigger!
+Same tens. Look at the ones: nine is more than four. ninety nine is bigger!
+Same tens. Look at the ones: nine is more than four. sixty nine is bigger!
+Same tens. Look at the ones: nine is more than four. twenty nine is bigger!
+Same tens. Look at the ones: nine is more than one. fifty nine is bigger!
+Same tens. Look at the ones: nine is more than one. forty nine is bigger!
+Same tens. Look at the ones: nine is more than one. nineteen is bigger!
+Same tens. Look at the ones: nine is more than one. ninety nine is bigger!
+Same tens. Look at the ones: nine is more than seven. fifty nine is bigger!
+Same tens. Look at the ones: nine is more than seven. forty nine is bigger!
+Same tens. Look at the ones: nine is more than seven. ninety nine is bigger!
+Same tens. Look at the ones: nine is more than six. eighty nine is bigger!
+Same tens. Look at the ones: nine is more than six. fifty nine is bigger!
+Same tens. Look at the ones: nine is more than six. ninety nine is bigger!
+Same tens. Look at the ones: nine is more than six. sixty nine is bigger!
+Same tens. Look at the ones: nine is more than six. thirty nine is bigger!
+Same tens. Look at the ones: nine is more than three. nineteen is bigger!
+Same tens. Look at the ones: nine is more than three. seventy nine is bigger!
+Same tens. Look at the ones: nine is more than three. sixty nine is bigger!
+Same tens. Look at the ones: nine is more than three. twenty nine is bigger!
+Same tens. Look at the ones: nine is more than two. ninety nine is bigger!
+Same tens. Look at the ones: nine is more than two. seventy nine is bigger!
+Same tens. Look at the ones: nine is more than two. thirty nine is bigger!
+Same tens. Look at the ones: nine is more than zero. eighty nine is bigger!
+Same tens. Look at the ones: nine is more than zero. fifty nine is bigger!
+Same tens. Look at the ones: nine is more than zero. seventy nine is bigger!
+Same tens. Look at the ones: one is more than zero. fifty one is bigger!
+Same tens. Look at the ones: one is more than zero. forty one is bigger!
+Same tens. Look at the ones: one is more than zero. seventy one is bigger!
+Same tens. Look at the ones: one is more than zero. sixty one is bigger!
+Same tens. Look at the ones: one is more than zero. thirty one is bigger!
+Same tens. Look at the ones: seven is more than five. seventeen is bigger!
+Same tens. Look at the ones: seven is more than four. seventeen is bigger!
+Same tens. Look at the ones: seven is more than four. seventy seven is bigger!
+Same tens. Look at the ones: seven is more than four. twenty seven is bigger!
+Same tens. Look at the ones: seven is more than one. seventeen is bigger!
+Same tens. Look at the ones: seven is more than one. thirty seven is bigger!
+Same tens. Look at the ones: seven is more than six. eighty seven is bigger!
+Same tens. Look at the ones: seven is more than six. fifty seven is bigger!
+Same tens. Look at the ones: seven is more than six. seventy seven is bigger!
+Same tens. Look at the ones: seven is more than six. sixty seven is bigger!
+Same tens. Look at the ones: seven is more than three. forty seven is bigger!
+Same tens. Look at the ones: seven is more than three. twenty seven is bigger!
+Same tens. Look at the ones: seven is more than two. eighty seven is bigger!
+Same tens. Look at the ones: seven is more than two. sixty seven is bigger!
+Same tens. Look at the ones: seven is more than zero. eighty seven is bigger!
+Same tens. Look at the ones: seven is more than zero. fifty seven is bigger!
+Same tens. Look at the ones: seven is more than zero. sixty seven is bigger!
+Same tens. Look at the ones: seven is more than zero. thirty seven is bigger!
+Same tens. Look at the ones: six is more than four. ninety six is bigger!
+Same tens. Look at the ones: six is more than four. sixteen is bigger!
+Same tens. Look at the ones: six is more than one. sixteen is bigger!
+Same tens. Look at the ones: six is more than one. sixty six is bigger!
+Same tens. Look at the ones: six is more than one. twenty six is bigger!
+Same tens. Look at the ones: six is more than three. fifty six is bigger!
+Same tens. Look at the ones: six is more than three. ninety six is bigger!
+Same tens. Look at the ones: six is more than three. seventy six is bigger!
+Same tens. Look at the ones: six is more than three. sixteen is bigger!
+Same tens. Look at the ones: six is more than two. ninety six is bigger!
+Same tens. Look at the ones: six is more than zero. fifty six is bigger!
+Same tens. Look at the ones: six is more than zero. forty six is bigger!
+Same tens. Look at the ones: six is more than zero. ninety six is bigger!
+Same tens. Look at the ones: six is more than zero. seventy six is bigger!
+Same tens. Look at the ones: three is more than one. thirteen is bigger!
+Same tens. Look at the ones: three is more than two. eighty three is bigger!
+Same tens. Look at the ones: three is more than two. fifty three is bigger!
+Same tens. Look at the ones: three is more than two. sixty three is bigger!
+Same tens. Look at the ones: two is more than one. fifty two is bigger!
+Same tens. Look at the ones: two is more than one. seventy two is bigger!
+Same tens. Look at the ones: two is more than one. thirty two is bigger!
+Same tens. Look at the ones: two is more than one. twelve is bigger!
+Same tens. Look at the ones: two is more than one. twenty two is bigger!
+Same tens. Look at the ones: two is more than zero. eighty two is bigger!
+Same tens. Look at the ones: two is more than zero. fifty two is bigger!
+Same tens. Look at the ones: two is more than zero. sixty two is bigger!
+Saturday
+Say the days in order: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday.
+Seven bees, five butterflies. Count the extra ones: two!
+Seven bees, five ladybirds. Count the extra ones: two!
+Seven bees, five snails. Count the extra ones: two!
+Seven bees, four butterflies. Count the extra ones: three!
+Seven bees, four ladybirds. Count the extra ones: three!
+Seven bees, four snails. Count the extra ones: three!
+Seven bees, one butterflies. Count the extra ones: six!
+Seven bees, one ladybirds. Count the extra ones: six!
+Seven bees, one snails. Count the extra ones: six!
+Seven bees, three butterflies. Count the extra ones: four!
+Seven bees, three ladybirds. Count the extra ones: four!
+Seven bees, three snails. Count the extra ones: four!
+Seven bees, two butterflies. Count the extra ones: five!
+Seven bees, two ladybirds. Count the extra ones: five!
+Seven bees, two snails. Count the extra ones: five!
+Seven butterflies, five bees. Count the extra ones: two!
+Seven butterflies, five ladybirds. Count the extra ones: two!
+Seven butterflies, five snails. Count the extra ones: two!
+Seven butterflies, four bees. Count the extra ones: three!
+Seven butterflies, four ladybirds. Count the extra ones: three!
+Seven butterflies, four snails. Count the extra ones: three!
+Seven butterflies, one bees. Count the extra ones: six!
+Seven butterflies, one ladybirds. Count the extra ones: six!
+Seven butterflies, one snails. Count the extra ones: six!
+Seven butterflies, three bees. Count the extra ones: four!
+Seven butterflies, three ladybirds. Count the extra ones: four!
+Seven butterflies, three snails. Count the extra ones: four!
+Seven butterflies, two bees. Count the extra ones: five!
+Seven butterflies, two ladybirds. Count the extra ones: five!
+Seven butterflies, two snails. Count the extra ones: five!
+Seven ladybirds, five bees. Count the extra ones: two!
+Seven ladybirds, five butterflies. Count the extra ones: two!
+Seven ladybirds, five snails. Count the extra ones: two!
+Seven ladybirds, four bees. Count the extra ones: three!
+Seven ladybirds, four butterflies. Count the extra ones: three!
+Seven ladybirds, four snails. Count the extra ones: three!
+Seven ladybirds, one bees. Count the extra ones: six!
+Seven ladybirds, one butterflies. Count the extra ones: six!
+Seven ladybirds, one snails. Count the extra ones: six!
+Seven ladybirds, three bees. Count the extra ones: four!
+Seven ladybirds, three butterflies. Count the extra ones: four!
+Seven ladybirds, three snails. Count the extra ones: four!
+Seven ladybirds, two bees. Count the extra ones: five!
+Seven ladybirds, two butterflies. Count the extra ones: five!
+Seven ladybirds, two snails. Count the extra ones: five!
+Seven snails, five bees. Count the extra ones: two!
+Seven snails, five butterflies. Count the extra ones: two!
+Seven snails, five ladybirds. Count the extra ones: two!
+Seven snails, four bees. Count the extra ones: three!
+Seven snails, four butterflies. Count the extra ones: three!
+Seven snails, four ladybirds. Count the extra ones: three!
+Seven snails, one bees. Count the extra ones: six!
+Seven snails, one butterflies. Count the extra ones: six!
+Seven snails, one ladybirds. Count the extra ones: six!
+Seven snails, three bees. Count the extra ones: four!
+Seven snails, three butterflies. Count the extra ones: four!
+Seven snails, three ladybirds. Count the extra ones: four!
+Seven snails, two bees. Count the extra ones: five!
+Seven snails, two butterflies. Count the extra ones: five!
+Seven snails, two ladybirds. Count the extra ones: five!
+Seventeen: one tens and seven ones. Look at the tens first!
+Seventy eight: seven tens and eight ones. Look at the tens first!
+Seventy five: seven tens and five ones. Look at the tens first!
+Seventy four: seven tens and four ones. Look at the tens first!
+Seventy nine: seven tens and nine ones. Look at the tens first!
+Seventy one: seven tens and one ones. Look at the tens first!
+Seventy seven: seven tens and seven ones. Look at the tens first!
+Seventy six: seven tens and six ones. Look at the tens first!
+Seventy three: seven tens and three ones. Look at the tens first!
+Seventy two: seven tens and two ones. Look at the tens first!
+Seventy: seven tens and zero ones. Look at the tens first!
+Six bees, four butterflies. Count the extra ones: two!
+Six bees, four ladybirds. Count the extra ones: two!
+Six bees, four snails. Count the extra ones: two!
+Six bees, one butterflies. Count the extra ones: five!
+Six bees, one ladybirds. Count the extra ones: five!
+Six bees, one snails. Count the extra ones: five!
+Six bees, three butterflies. Count the extra ones: three!
+Six bees, three ladybirds. Count the extra ones: three!
+Six bees, three snails. Count the extra ones: three!
+Six bees, two butterflies. Count the extra ones: four!
+Six bees, two ladybirds. Count the extra ones: four!
+Six bees, two snails. Count the extra ones: four!
+Six butterflies, four bees. Count the extra ones: two!
+Six butterflies, four ladybirds. Count the extra ones: two!
+Six butterflies, four snails. Count the extra ones: two!
+Six butterflies, one bees. Count the extra ones: five!
+Six butterflies, one ladybirds. Count the extra ones: five!
+Six butterflies, one snails. Count the extra ones: five!
+Six butterflies, three bees. Count the extra ones: three!
+Six butterflies, three ladybirds. Count the extra ones: three!
+Six butterflies, three snails. Count the extra ones: three!
+Six butterflies, two bees. Count the extra ones: four!
+Six butterflies, two ladybirds. Count the extra ones: four!
+Six butterflies, two snails. Count the extra ones: four!
+Six ladybirds, four bees. Count the extra ones: two!
+Six ladybirds, four butterflies. Count the extra ones: two!
+Six ladybirds, four snails. Count the extra ones: two!
+Six ladybirds, one bees. Count the extra ones: five!
+Six ladybirds, one butterflies. Count the extra ones: five!
+Six ladybirds, one snails. Count the extra ones: five!
+Six ladybirds, three bees. Count the extra ones: three!
+Six ladybirds, three butterflies. Count the extra ones: three!
+Six ladybirds, three snails. Count the extra ones: three!
+Six ladybirds, two bees. Count the extra ones: four!
+Six ladybirds, two butterflies. Count the extra ones: four!
+Six ladybirds, two snails. Count the extra ones: four!
+Six snails, four bees. Count the extra ones: two!
+Six snails, four butterflies. Count the extra ones: two!
+Six snails, four ladybirds. Count the extra ones: two!
+Six snails, one bees. Count the extra ones: five!
+Six snails, one butterflies. Count the extra ones: five!
+Six snails, one ladybirds. Count the extra ones: five!
+Six snails, three bees. Count the extra ones: three!
+Six snails, three butterflies. Count the extra ones: three!
+Six snails, three ladybirds. Count the extra ones: three!
+Six snails, two bees. Count the extra ones: four!
+Six snails, two butterflies. Count the extra ones: four!
+Six snails, two ladybirds. Count the extra ones: four!
+Sixteen: one tens and six ones. Look at the tens first!
+Sixty eight: six tens and eight ones. Look at the tens first!
+Sixty five: six tens and five ones. Look at the tens first!
+Sixty four: six tens and four ones. Look at the tens first!
+Sixty nine: six tens and nine ones. Look at the tens first!
+Sixty one: six tens and one ones. Look at the tens first!
+Sixty seven: six tens and seven ones. Look at the tens first!
+Sixty six: six tens and six ones. Look at the tens first!
+Sixty three: six tens and three ones. Look at the tens first!
+Sixty two: six tens and two ones. Look at the tens first!
+Sixty: six tens and zero ones. Look at the tens first!
+Sunday
+Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday. Seven days!
+Tap the picture where the chick is in the log.
+Tap the picture where the chick is next to the log.
+Tap the picture where the chick is on the log.
+Tap the picture where the chick is under the tree.
+The apple costs eighty rupees. Which money makes eighty rupees?
+The apple costs fifty rupees. Which money makes fifty rupees?
+The apple costs forty rupees. Which money makes forty rupees?
+The apple costs ninety rupees. Which money makes ninety rupees?
+The apple costs seventy rupees. Which money makes seventy rupees?
+The apple costs sixty rupees. Which money makes sixty rupees?
+The apple costs thirty rupees. Which money makes thirty rupees?
+The apple costs twenty rupees. Which money makes twenty rupees?
+The balloon costs eighty rupees. Which money makes eighty rupees?
+The balloon costs fifty rupees. Which money makes fifty rupees?
+The balloon costs forty rupees. Which money makes forty rupees?
+The balloon costs ninety rupees. Which money makes ninety rupees?
+The balloon costs seventy rupees. Which money makes seventy rupees?
+The balloon costs sixty rupees. Which money makes sixty rupees?
+The balloon costs thirty rupees. Which money makes thirty rupees?
+The balloon costs twenty rupees. Which money makes twenty rupees?
+The juice costs eighty rupees. Which money makes eighty rupees?
+The juice costs fifty rupees. Which money makes fifty rupees?
+The juice costs forty rupees. Which money makes forty rupees?
+The juice costs ninety rupees. Which money makes ninety rupees?
+The juice costs seventy rupees. Which money makes seventy rupees?
+The juice costs sixty rupees. Which money makes sixty rupees?
+The juice costs thirty rupees. Which money makes thirty rupees?
+The juice costs twenty rupees. Which money makes twenty rupees?
+The longest row has the most!
+The moon comes out at night.
+The notebook costs eighty rupees. Which money makes eighty rupees?
+The notebook costs fifty rupees. Which money makes fifty rupees?
+The notebook costs forty rupees. Which money makes forty rupees?
+The notebook costs ninety rupees. Which money makes ninety rupees?
+The notebook costs seventy rupees. Which money makes seventy rupees?
+The notebook costs sixty rupees. Which money makes sixty rupees?
+The notebook costs thirty rupees. Which money makes thirty rupees?
+The notebook costs twenty rupees. Which money makes twenty rupees?
+The opposite of big is small!
+The opposite of cold is hot!
+The opposite of day is night!
+The opposite of down is up!
+The opposite of fast is slow!
+The opposite of happy is sad!
+The opposite of hot is cold!
+The opposite of night is day!
+The opposite of sad is happy!
+The opposite of short is tall!
+The opposite of slow is fast!
+The opposite of small is big!
+The opposite of tall is short!
+The opposite of up is down!
+The pencil costs eighty rupees. Which money makes eighty rupees?
+The pencil costs fifty rupees. Which money makes fifty rupees?
+The pencil costs forty rupees. Which money makes forty rupees?
+The pencil costs ninety rupees. Which money makes ninety rupees?
+The pencil costs seventy rupees. Which money makes seventy rupees?
+The pencil costs sixty rupees. Which money makes sixty rupees?
+The pencil costs thirty rupees. Which money makes thirty rupees?
+The pencil costs twenty rupees. Which money makes twenty rupees?
+The shortest row has the fewest!
+The sun comes up in the morning.
+The sun goes down in the evening.
+The sun is high in the afternoon.
+The teddy costs eighty rupees. Which money makes eighty rupees?
+The teddy costs fifty rupees. Which money makes fifty rupees?
+The teddy costs forty rupees. Which money makes forty rupees?
+The teddy costs ninety rupees. Which money makes ninety rupees?
+The teddy costs seventy rupees. Which money makes seventy rupees?
+The teddy costs sixty rupees. Which money makes sixty rupees?
+The teddy costs thirty rupees. Which money makes thirty rupees?
+The teddy costs twenty rupees. Which money makes twenty rupees?
+Thirteen: one tens and three ones. Look at the tens first!
+Thirty eight: three tens and eight ones. Look at the tens first!
+Thirty five: three tens and five ones. Look at the tens first!
+Thirty four: three tens and four ones. Look at the tens first!
+Thirty nine: three tens and nine ones. Look at the tens first!
+Thirty one: three tens and one ones. Look at the tens first!
+Thirty seven: three tens and seven ones. Look at the tens first!
+Thirty six: three tens and six ones. Look at the tens first!
+Thirty three: three tens and three ones. Look at the tens first!
+Thirty two: three tens and two ones. Look at the tens first!
+Thirty: three tens and zero ones. Look at the tens first!
+This is big. Which picture shows the opposite of big?
+This is cold. Which picture shows the opposite of cold?
+This is day. Which picture shows the opposite of day?
+This is down. Which picture shows the opposite of down?
+This is fast. Which picture shows the opposite of fast?
+This is happy. Which picture shows the opposite of happy?
+This is hot. Which picture shows the opposite of hot?
+This is night. Which picture shows the opposite of night?
+This is sad. Which picture shows the opposite of sad?
+This is short. Which picture shows the opposite of short?
+This is slow. Which picture shows the opposite of slow?
+This is small. Which picture shows the opposite of small?
+This is tall. Which picture shows the opposite of tall?
+This is up. Which picture shows the opposite of up?
+This shape is a cone. Which thing is a cone?
+This shape is a cube. Which thing is a cube?
+This shape is a cuboid. Which thing is a cuboid?
+This shape is a cylinder. Which thing is a cylinder?
+This shape is a sphere. Which thing is a sphere?
+Three bees, one butterflies. Count the extra ones: two!
+Three bees, one ladybirds. Count the extra ones: two!
+Three bees, one snails. Count the extra ones: two!
+Three butterflies, one bees. Count the extra ones: two!
+Three butterflies, one ladybirds. Count the extra ones: two!
+Three butterflies, one snails. Count the extra ones: two!
+Three ladybirds, one bees. Count the extra ones: two!
+Three ladybirds, one butterflies. Count the extra ones: two!
+Three ladybirds, one snails. Count the extra ones: two!
+Three snails, one bees. Count the extra ones: two!
+Three snails, one butterflies. Count the extra ones: two!
+Three snails, one ladybirds. Count the extra ones: two!
+Thursday
+Tuesday
+Twelve: one tens and two ones. Look at the tens first!
+Twenty eight: two tens and eight ones. Look at the tens first!
+Twenty five: two tens and five ones. Look at the tens first!
+Twenty four: two tens and four ones. Look at the tens first!
+Twenty nine: two tens and nine ones. Look at the tens first!
+Twenty one: two tens and one ones. Look at the tens first!
+Twenty seven: two tens and seven ones. Look at the tens first!
+Twenty six: two tens and six ones. Look at the tens first!
+Twenty three: two tens and three ones. Look at the tens first!
+Twenty two: two tens and two ones. Look at the tens first!
+Twenty: two tens and zero ones. Look at the tens first!
+Umbrella starts with a vowel sound. We say an umbrella!
+Wednesday
+What day comes after Friday?
+What day comes after Monday?
+What day comes after Saturday?
+What day comes after Sunday?
+What day comes after Thursday?
+What day comes after Tuesday?
+What day comes after Wednesday?
+What day comes before Friday?
+What day comes before Monday?
+What day comes before Saturday?
+What day comes before Sunday?
+What day comes before Thursday?
+What day comes before Tuesday?
+What day comes before Wednesday?
+What day comes between Friday and Sunday?
+What day comes between Monday and Wednesday?
+What day comes between Saturday and Monday?
+What day comes between Sunday and Tuesday?
+What day comes between Thursday and Saturday?
+What day comes between Tuesday and Thursday?
+What day comes between Wednesday and Friday?
+What number comes after eighteen?
+What number comes after eighty eight?
+What number comes after eighty five?
+What number comes after eighty four?
+What number comes after eighty nine?
+What number comes after eighty one?
+What number comes after eighty seven?
+What number comes after eighty six?
+What number comes after eighty three?
+What number comes after eighty two?
+What number comes after eighty?
+What number comes after eleven?
+What number comes after fifteen?
+What number comes after fifty eight?
+What number comes after fifty five?
+What number comes after fifty four?
+What number comes after fifty nine?
+What number comes after fifty one?
+What number comes after fifty seven?
+What number comes after fifty six?
+What number comes after fifty three?
+What number comes after fifty two?
+What number comes after fifty?
+What number comes after forty eight?
+What number comes after forty five?
+What number comes after forty four?
+What number comes after forty nine?
+What number comes after forty one?
+What number comes after forty seven?
+What number comes after forty six?
+What number comes after forty three?
+What number comes after forty two?
+What number comes after forty?
+What number comes after fourteen?
+What number comes after nineteen?
+What number comes after ninety eight?
+What number comes after ninety five?
+What number comes after ninety four?
+What number comes after ninety one?
+What number comes after ninety seven?
+What number comes after ninety six?
+What number comes after ninety three?
+What number comes after ninety two?
+What number comes after ninety?
+What number comes after seventeen?
+What number comes after seventy eight?
+What number comes after seventy five?
+What number comes after seventy four?
+What number comes after seventy nine?
+What number comes after seventy one?
+What number comes after seventy seven?
+What number comes after seventy six?
+What number comes after seventy three?
+What number comes after seventy two?
+What number comes after seventy?
+What number comes after sixteen?
+What number comes after sixty eight?
+What number comes after sixty five?
+What number comes after sixty four?
+What number comes after sixty nine?
+What number comes after sixty one?
+What number comes after sixty seven?
+What number comes after sixty six?
+What number comes after sixty three?
+What number comes after sixty two?
+What number comes after sixty?
+What number comes after thirteen?
+What number comes after thirty eight?
+What number comes after thirty five?
+What number comes after thirty four?
+What number comes after thirty nine?
+What number comes after thirty one?
+What number comes after thirty seven?
+What number comes after thirty six?
+What number comes after thirty three?
+What number comes after thirty two?
+What number comes after thirty?
+What number comes after twelve?
+What number comes after twenty eight?
+What number comes after twenty five?
+What number comes after twenty four?
+What number comes after twenty nine?
+What number comes after twenty one?
+What number comes after twenty seven?
+What number comes after twenty six?
+What number comes after twenty three?
+What number comes after twenty two?
+What number comes after twenty?
+What number comes before eighteen?
+What number comes before eighty eight?
+What number comes before eighty five?
+What number comes before eighty four?
+What number comes before eighty nine?
+What number comes before eighty one?
+What number comes before eighty seven?
+What number comes before eighty six?
+What number comes before eighty three?
+What number comes before eighty two?
+What number comes before eighty?
+What number comes before fifteen?
+What number comes before fifty eight?
+What number comes before fifty five?
+What number comes before fifty four?
+What number comes before fifty nine?
+What number comes before fifty one?
+What number comes before fifty seven?
+What number comes before fifty six?
+What number comes before fifty three?
+What number comes before fifty two?
+What number comes before fifty?
+What number comes before forty eight?
+What number comes before forty five?
+What number comes before forty four?
+What number comes before forty nine?
+What number comes before forty one?
+What number comes before forty seven?
+What number comes before forty six?
+What number comes before forty three?
+What number comes before forty two?
+What number comes before forty?
+What number comes before fourteen?
+What number comes before nineteen?
+What number comes before ninety eight?
+What number comes before ninety five?
+What number comes before ninety four?
+What number comes before ninety nine?
+What number comes before ninety one?
+What number comes before ninety seven?
+What number comes before ninety six?
+What number comes before ninety three?
+What number comes before ninety two?
+What number comes before ninety?
+What number comes before seventeen?
+What number comes before seventy eight?
+What number comes before seventy five?
+What number comes before seventy four?
+What number comes before seventy nine?
+What number comes before seventy one?
+What number comes before seventy seven?
+What number comes before seventy six?
+What number comes before seventy three?
+What number comes before seventy two?
+What number comes before seventy?
+What number comes before sixteen?
+What number comes before sixty eight?
+What number comes before sixty five?
+What number comes before sixty four?
+What number comes before sixty nine?
+What number comes before sixty one?
+What number comes before sixty seven?
+What number comes before sixty six?
+What number comes before sixty three?
+What number comes before sixty two?
+What number comes before sixty?
+What number comes before thirteen?
+What number comes before thirty eight?
+What number comes before thirty five?
+What number comes before thirty four?
+What number comes before thirty nine?
+What number comes before thirty one?
+What number comes before thirty seven?
+What number comes before thirty six?
+What number comes before thirty three?
+What number comes before thirty two?
+What number comes before thirty?
+What number comes before twelve?
+What number comes before twenty eight?
+What number comes before twenty five?
+What number comes before twenty four?
+What number comes before twenty nine?
+What number comes before twenty one?
+What number comes before twenty seven?
+What number comes before twenty six?
+What number comes before twenty three?
+What number comes before twenty two?
+What number comes before twenty?
+What number comes between eighteen and twenty?
+What number comes between eighty and eighty two?
+What number comes between eighty eight and ninety?
+What number comes between eighty five and eighty seven?
+What number comes between eighty four and eighty six?
+What number comes between eighty nine and ninety one?
+What number comes between eighty one and eighty three?
+What number comes between eighty seven and eighty nine?
+What number comes between eighty six and eighty eight?
+What number comes between eighty three and eighty five?
+What number comes between eighty two and eighty four?
+What number comes between eleven and thirteen?
+What number comes between fifteen and seventeen?
+What number comes between fifty and fifty two?
+What number comes between fifty eight and sixty?
+What number comes between fifty five and fifty seven?
+What number comes between fifty four and fifty six?
+What number comes between fifty nine and sixty one?
+What number comes between fifty one and fifty three?
+What number comes between fifty seven and fifty nine?
+What number comes between fifty six and fifty eight?
+What number comes between fifty three and fifty five?
+What number comes between fifty two and fifty four?
+What number comes between forty and forty two?
+What number comes between forty eight and fifty?
+What number comes between forty five and forty seven?
+What number comes between forty four and forty six?
+What number comes between forty nine and fifty one?
+What number comes between forty one and forty three?
+What number comes between forty seven and forty nine?
+What number comes between forty six and forty eight?
+What number comes between forty three and forty five?
+What number comes between forty two and forty four?
+What number comes between fourteen and sixteen?
+What number comes between nineteen and twenty one?
+What number comes between ninety and ninety two?
+What number comes between ninety five and ninety seven?
+What number comes between ninety four and ninety six?
+What number comes between ninety one and ninety three?
+What number comes between ninety seven and ninety nine?
+What number comes between ninety six and ninety eight?
+What number comes between ninety three and ninety five?
+What number comes between ninety two and ninety four?
+What number comes between seventeen and nineteen?
+What number comes between seventy and seventy two?
+What number comes between seventy eight and eighty?
+What number comes between seventy five and seventy seven?
+What number comes between seventy four and seventy six?
+What number comes between seventy nine and eighty one?
+What number comes between seventy one and seventy three?
+What number comes between seventy seven and seventy nine?
+What number comes between seventy six and seventy eight?
+What number comes between seventy three and seventy five?
+What number comes between seventy two and seventy four?
+What number comes between sixteen and eighteen?
+What number comes between sixty and sixty two?
+What number comes between sixty eight and seventy?
+What number comes between sixty five and sixty seven?
+What number comes between sixty four and sixty six?
+What number comes between sixty nine and seventy one?
+What number comes between sixty one and sixty three?
+What number comes between sixty seven and sixty nine?
+What number comes between sixty six and sixty eight?
+What number comes between sixty three and sixty five?
+What number comes between sixty two and sixty four?
+What number comes between thirteen and fifteen?
+What number comes between thirty and thirty two?
+What number comes between thirty eight and forty?
+What number comes between thirty five and thirty seven?
+What number comes between thirty four and thirty six?
+What number comes between thirty nine and forty one?
+What number comes between thirty one and thirty three?
+What number comes between thirty seven and thirty nine?
+What number comes between thirty six and thirty eight?
+What number comes between thirty three and thirty five?
+What number comes between thirty two and thirty four?
+What number comes between twelve and fourteen?
+What number comes between twenty and twenty two?
+What number comes between twenty eight and thirty?
+What number comes between twenty five and twenty seven?
+What number comes between twenty four and twenty six?
+What number comes between twenty nine and thirty one?
+What number comes between twenty one and twenty three?
+What number comes between twenty seven and twenty nine?
+What number comes between twenty six and twenty eight?
+What number comes between twenty three and twenty five?
+What number comes between twenty two and twenty four?
+Which animal has the fewest? Find the shortest row.
+Which animal has the most? Find the longest row.
+Which is a naming word, the name of a thing?
+Which is an action word, something you can do?
+Which number is bigger?
+Which picture shows afternoon?
+Which picture shows evening?
+Which picture shows morning?
+Which picture shows night?
+Which sentence is written the right way?
+Which shape can roll?
+Which shape looks like this ball?
+Which shape looks like this box?
+Which shape looks like this dice?
+Which shape looks like this ice cream cone?
+Which shape looks like this tin?
+Which word goes before ant:
+Which word goes before apple:
+Which word goes before bed:
+Which word goes before bus:
+Which word goes before cat:
+Which word goes before cup:
+Which word goes before dog:
+Which word goes before egg:
+Which word goes before fish:
+Which word goes before hat:
+Which word goes before hen:
+Which word goes before octopus:
+Which word goes before orange:
+Which word goes before owl:
+Which word goes before pen:
+Which word goes before umbrella:
+Which word goes with the picture?
+You can dig! Dig is an action word.
+You can hop! Hop is an action word.
+You can hug! Hug is an action word.
+You can jog! Jog is an action word.
+You can nap! Nap is an action word.
+You can run! Run is an action word.
+You can sit! Sit is an action word.
+You can tap! Tap is an action word.
+You have fifty rupees. The apple costs forty rupees. How much is left?
+You have fifty rupees. The apple costs thirty rupees. How much is left?
+You have fifty rupees. The apple costs twenty rupees. How much is left?
+You have fifty rupees. The balloon costs forty rupees. How much is left?
+You have fifty rupees. The balloon costs thirty rupees. How much is left?
+You have fifty rupees. The balloon costs twenty rupees. How much is left?
+You have fifty rupees. The juice costs forty rupees. How much is left?
+You have fifty rupees. The juice costs thirty rupees. How much is left?
+You have fifty rupees. The juice costs twenty rupees. How much is left?
+You have fifty rupees. The notebook costs forty rupees. How much is left?
+You have fifty rupees. The notebook costs thirty rupees. How much is left?
+You have fifty rupees. The notebook costs twenty rupees. How much is left?
+You have fifty rupees. The pencil costs forty rupees. How much is left?
+You have fifty rupees. The pencil costs thirty rupees. How much is left?
+You have fifty rupees. The pencil costs twenty rupees. How much is left?
+You have fifty rupees. The teddy costs forty rupees. How much is left?
+You have fifty rupees. The teddy costs thirty rupees. How much is left?
+You have fifty rupees. The teddy costs twenty rupees. How much is left?
+You have undefined rupees. The apple costs eighty rupees. How much is left?
+You have undefined rupees. The apple costs fifty rupees. How much is left?
+You have undefined rupees. The apple costs ninety rupees. How much is left?
+You have undefined rupees. The apple costs seventy rupees. How much is left?
+You have undefined rupees. The apple costs sixty rupees. How much is left?
+You have undefined rupees. The balloon costs eighty rupees. How much is left?
+You have undefined rupees. The balloon costs fifty rupees. How much is left?
+You have undefined rupees. The balloon costs ninety rupees. How much is left?
+You have undefined rupees. The balloon costs seventy rupees. How much is left?
+You have undefined rupees. The balloon costs sixty rupees. How much is left?
+You have undefined rupees. The juice costs eighty rupees. How much is left?
+You have undefined rupees. The juice costs fifty rupees. How much is left?
+You have undefined rupees. The juice costs ninety rupees. How much is left?
+You have undefined rupees. The juice costs seventy rupees. How much is left?
+You have undefined rupees. The juice costs sixty rupees. How much is left?
+You have undefined rupees. The notebook costs eighty rupees. How much is left?
+You have undefined rupees. The notebook costs fifty rupees. How much is left?
+You have undefined rupees. The notebook costs ninety rupees. How much is left?
+You have undefined rupees. The notebook costs seventy rupees. How much is left?
+You have undefined rupees. The notebook costs sixty rupees. How much is left?
+You have undefined rupees. The pencil costs eighty rupees. How much is left?
+You have undefined rupees. The pencil costs fifty rupees. How much is left?
+You have undefined rupees. The pencil costs ninety rupees. How much is left?
+You have undefined rupees. The pencil costs seventy rupees. How much is left?
+You have undefined rupees. The pencil costs sixty rupees. How much is left?
+You have undefined rupees. The teddy costs eighty rupees. How much is left?
+You have undefined rupees. The teddy costs fifty rupees. How much is left?
+You have undefined rupees. The teddy costs ninety rupees. How much is left?
+You have undefined rupees. The teddy costs seventy rupees. How much is left?
+You have undefined rupees. The teddy costs sixty rupees. How much is left?
+a, or an?
+bed
+bus
+cat
+cup
+dig
+dog
+eighteen plus eleven. How much is it?
+eighteen plus fifty one. How much is it?
+eighteen plus forty. How much is it?
+eighteen plus one. How much is it?
+eighteen plus sixty one. How much is it?
+eighteen plus ten. How much is it?
+eighteen plus thirty one. How much is it?
+eighteen plus twenty. How much is it?
+eighteen take away five. How much is it?
+eighteen take away four. How much is it?
+eighteen take away one. How much is it?
+eighteen take away seven. How much is it?
+eighteen take away six. How much is it?
+eighteen take away three. How much is it?
+eighteen take away two. How much is it?
+eighty eight plus one. How much is it?
+eighty eight take away eight. How much is it?
+eighty eight take away fifteen. How much is it?
+eighty eight take away fifty one. How much is it?
+eighty eight take away fifty seven. How much is it?
+eighty eight take away five. How much is it?
+eighty eight take away forty six. How much is it?
+eighty eight take away four. How much is it?
+eighty eight take away one. How much is it?
+eighty eight take away seven. How much is it?
+eighty eight take away seventy two. How much is it?
+eighty eight take away six. How much is it?
+eighty eight take away sixty three. How much is it?
+eighty eight take away sixty. How much is it?
+eighty eight take away thirty. How much is it?
+eighty eight take away three. How much is it?
+eighty eight take away twenty three. How much is it?
+eighty eight take away two. How much is it?
+eighty five plus four. How much is it?
+eighty five plus one. How much is it?
+eighty five plus three. How much is it?
+eighty five plus two. How much is it?
+eighty five take away fifty. How much is it?
+eighty five take away five. How much is it?
+eighty five take away four. How much is it?
+eighty five take away fourteen. How much is it?
+eighty five take away one. How much is it?
+eighty five take away seventy five. How much is it?
+eighty five take away sixty three. How much is it?
+eighty five take away sixty. How much is it?
+eighty five take away thirty five. How much is it?
+eighty five take away thirty four. How much is it?
+eighty five take away thirty one. How much is it?
+eighty five take away thirty three. How much is it?
+eighty five take away thirty two. How much is it?
+eighty five take away thirty. How much is it?
+eighty five take away three. How much is it?
+eighty five take away two. How much is it?
+eighty four plus five. How much is it?
+eighty four plus four. How much is it?
+eighty four plus one. How much is it?
+eighty four plus three. How much is it?
+eighty four plus two. How much is it?
+eighty four take away eleven. How much is it?
+eighty four take away fifty four. How much is it?
+eighty four take away fifty one. How much is it?
+eighty four take away fifty three. How much is it?
+eighty four take away forty two. How much is it?
+eighty four take away four. How much is it?
+eighty four take away fourteen. How much is it?
+eighty four take away one. How much is it?
+eighty four take away seventy three. How much is it?
+eighty four take away sixty. How much is it?
+eighty four take away ten. How much is it?
+eighty four take away thirty one. How much is it?
+eighty four take away thirty three. How much is it?
+eighty four take away three. How much is it?
+eighty four take away twenty four. How much is it?
+eighty four take away twenty one. How much is it?
+eighty four take away twenty two. How much is it?
+eighty four take away two. How much is it?
+eighty nine take away eight. How much is it?
+eighty nine take away fifty one. How much is it?
+eighty nine take away five. How much is it?
+eighty nine take away forty four. How much is it?
+eighty nine take away nine. How much is it?
+eighty nine take away one. How much is it?
+eighty nine take away seven. How much is it?
+eighty nine take away seventy five. How much is it?
+eighty nine take away seventy two. How much is it?
+eighty nine take away six. How much is it?
+eighty nine take away sixteen. How much is it?
+eighty nine take away thirteen. How much is it?
+eighty nine take away thirty five. How much is it?
+eighty nine take away thirty six. How much is it?
+eighty nine take away three. How much is it?
+eighty nine take away two. How much is it?
+eighty one plus eight. How much is it?
+eighty one plus five. How much is it?
+eighty one plus four. How much is it?
+eighty one plus one. How much is it?
+eighty one plus seven. How much is it?
+eighty one plus six. How much is it?
+eighty one plus three. How much is it?
+eighty one plus two. How much is it?
+eighty one take away fifty. How much is it?
+eighty one take away forty one. How much is it?
+eighty one take away forty. How much is it?
+eighty one take away one. How much is it?
+eighty one take away seventy. How much is it?
+eighty one take away sixty one. How much is it?
+eighty one take away ten. How much is it?
+eighty one take away thirty one. How much is it?
+eighty one take away twenty one. How much is it?
+eighty one take away twenty. How much is it?
+eighty plus eight. How much is it?
+eighty plus five. How much is it?
+eighty plus four. How much is it?
+eighty plus nine. How much is it?
+eighty plus one. How much is it?
+eighty plus seven. How much is it?
+eighty plus six. How much is it?
+eighty plus three. How much is it?
+eighty plus two. How much is it?
+eighty seven plus one. How much is it?
+eighty seven plus two. How much is it?
+eighty seven take away five. How much is it?
+eighty seven take away forty one. How much is it?
+eighty seven take away forty two. How much is it?
+eighty seven take away four. How much is it?
+eighty seven take away one. How much is it?
+eighty seven take away seven. How much is it?
+eighty seven take away seventy four. How much is it?
+eighty seven take away seventy seven. How much is it?
+eighty seven take away six. How much is it?
+eighty seven take away sixty one. How much is it?
+eighty seven take away sixty six. How much is it?
+eighty seven take away ten. How much is it?
+eighty seven take away thirty one. How much is it?
+eighty seven take away thirty two. How much is it?
+eighty seven take away three. How much is it?
+eighty seven take away twelve. How much is it?
+eighty seven take away twenty two. How much is it?
+eighty seven take away two. How much is it?
+eighty six plus one. How much is it?
+eighty six plus three. How much is it?
+eighty six plus two. How much is it?
+eighty six take away eleven. How much is it?
+eighty six take away fifty five. How much is it?
+eighty six take away five. How much is it?
+eighty six take away forty six. How much is it?
+eighty six take away four. How much is it?
+eighty six take away one. How much is it?
+eighty six take away seventy one. How much is it?
+eighty six take away six. How much is it?
+eighty six take away sixty one. How much is it?
+eighty six take away sixty. How much is it?
+eighty six take away thirty two. How much is it?
+eighty six take away three. How much is it?
+eighty six take away twenty five. How much is it?
+eighty six take away twenty. How much is it?
+eighty six take away two. How much is it?
+eighty take away fifty. How much is it?
+eighty take away forty. How much is it?
+eighty take away seventy. How much is it?
+eighty take away sixty. How much is it?
+eighty take away ten. How much is it?
+eighty take away thirty. How much is it?
+eighty take away twenty. How much is it?
+eighty three plus five. How much is it?
+eighty three plus four. How much is it?
+eighty three plus one. How much is it?
+eighty three plus six. How much is it?
+eighty three plus three. How much is it?
+eighty three plus two. How much is it?
+eighty three take away fifty three. How much is it?
+eighty three take away forty one. How much is it?
+eighty three take away forty three. How much is it?
+eighty three take away forty two. How much is it?
+eighty three take away one. How much is it?
+eighty three take away seventy one. How much is it?
+eighty three take away seventy two. How much is it?
+eighty three take away sixty three. How much is it?
+eighty three take away sixty two. How much is it?
+eighty three take away ten. How much is it?
+eighty three take away three. How much is it?
+eighty three take away twenty three. How much is it?
+eighty three take away twenty two. How much is it?
+eighty three take away two. How much is it?
+eighty two plus five. How much is it?
+eighty two plus four. How much is it?
+eighty two plus one. How much is it?
+eighty two plus seven. How much is it?
+eighty two plus six. How much is it?
+eighty two plus three. How much is it?
+eighty two plus two. How much is it?
+eighty two take away fifty one. How much is it?
+eighty two take away forty one. How much is it?
+eighty two take away forty two. How much is it?
+eighty two take away forty. How much is it?
+eighty two take away one. How much is it?
+eighty two take away seventy. How much is it?
+eighty two take away ten. How much is it?
+eighty two take away thirty. How much is it?
+eighty two take away twenty one. How much is it?
+eighty two take away twenty two. How much is it?
+eighty two take away twenty. How much is it?
+eighty two take away two. How much is it?
+eleven plus eight. How much is it?
+eleven plus fifty eight. How much is it?
+eleven plus fifty three. How much is it?
+eleven plus five. How much is it?
+eleven plus forty one. How much is it?
+eleven plus four. How much is it?
+eleven plus one. How much is it?
+eleven plus seven. How much is it?
+eleven plus six. How much is it?
+eleven plus sixty eight. How much is it?
+eleven plus three. How much is it?
+eleven plus twelve. How much is it?
+eleven plus twenty. How much is it?
+eleven plus two. How much is it?
+fifteen plus fifty three. How much is it?
+fifteen plus forty three. How much is it?
+fifteen plus forty two. How much is it?
+fifteen plus forty. How much is it?
+fifteen plus four. How much is it?
+fifteen plus fourteen. How much is it?
+fifteen plus one. How much is it?
+fifteen plus seventy four. How much is it?
+fifteen plus sixty four. How much is it?
+fifteen plus ten. How much is it?
+fifteen plus thirty two. How much is it?
+fifteen plus thirty. How much is it?
+fifteen plus three. How much is it?
+fifteen plus twenty four. How much is it?
+fifteen plus twenty one. How much is it?
+fifteen plus twenty two. How much is it?
+fifteen plus two. How much is it?
+fifteen take away five. How much is it?
+fifteen take away four. How much is it?
+fifteen take away one. How much is it?
+fifteen take away three. How much is it?
+fifteen take away two. How much is it?
+fifty eight plus eleven. How much is it?
+fifty eight plus one. How much is it?
+fifty eight plus ten. How much is it?
+fifty eight plus thirty one. How much is it?
+fifty eight plus thirty. How much is it?
+fifty eight plus twenty one. How much is it?
+fifty eight take away eight. How much is it?
+fifty eight take away fifteen. How much is it?
+fifty eight take away five. How much is it?
+fifty eight take away forty six. How much is it?
+fifty eight take away forty two. How much is it?
+fifty eight take away forty. How much is it?
+fifty eight take away four. How much is it?
+fifty eight take away one. How much is it?
+fifty eight take away seven. How much is it?
+fifty eight take away seventeen. How much is it?
+fifty eight take away six. How much is it?
+fifty eight take away ten. How much is it?
+fifty eight take away thirteen. How much is it?
+fifty eight take away thirty. How much is it?
+fifty eight take away three. How much is it?
+fifty eight take away twelve. How much is it?
+fifty eight take away twenty six. How much is it?
+fifty eight take away two. How much is it?
+fifty five plus four. How much is it?
+fifty five plus one. How much is it?
+fifty five plus ten. How much is it?
+fifty five plus thirty two. How much is it?
+fifty five plus thirty. How much is it?
+fifty five plus three. How much is it?
+fifty five plus twelve. How much is it?
+fifty five plus twenty four. How much is it?
+fifty five plus twenty one. How much is it?
+fifty five plus twenty three. How much is it?
+fifty five plus twenty. How much is it?
+fifty five plus two. How much is it?
+fifty five take away five. How much is it?
+fifty five take away forty four. How much is it?
+fifty five take away forty three. How much is it?
+fifty five take away four. How much is it?
+fifty five take away one. How much is it?
+fifty five take away thirty. How much is it?
+fifty five take away three. How much is it?
+fifty five take away twelve. How much is it?
+fifty five take away twenty four. How much is it?
+fifty five take away twenty one. How much is it?
+fifty five take away twenty two. How much is it?
+fifty five take away two. How much is it?
+fifty four plus fifteen. How much is it?
+fifty four plus five. How much is it?
+fifty four plus four. How much is it?
+fifty four plus one. How much is it?
+fifty four plus ten. How much is it?
+fifty four plus thirteen. How much is it?
+fifty four plus thirty five. How much is it?
+fifty four plus thirty four. How much is it?
+fifty four plus thirty three. How much is it?
+fifty four plus thirty. How much is it?
+fifty four plus three. How much is it?
+fifty four plus twelve. How much is it?
+fifty four plus twenty four. How much is it?
+fifty four plus twenty one. How much is it?
+fifty four plus twenty three. How much is it?
+fifty four plus twenty two. How much is it?
+fifty four plus two. How much is it?
+fifty four take away eleven. How much is it?
+fifty four take away four. How much is it?
+fifty four take away one. How much is it?
+fifty four take away thirty four. How much is it?
+fifty four take away thirty two. How much is it?
+fifty four take away three. How much is it?
+fifty four take away twenty one. How much is it?
+fifty four take away twenty three. How much is it?
+fifty four take away two. How much is it?
+fifty nine take away eight. How much is it?
+fifty nine take away eighteen. How much is it?
+fifty nine take away forty eight. How much is it?
+fifty nine take away forty four. How much is it?
+fifty nine take away forty nine. How much is it?
+fifty nine take away forty seven. How much is it?
+fifty nine take away forty three. How much is it?
+fifty nine take away forty two. How much is it?
+fifty nine take away four. How much is it?
+fifty nine take away nine. How much is it?
+fifty nine take away one. How much is it?
+fifty nine take away seventeen. How much is it?
+fifty nine take away six. How much is it?
+fifty nine take away sixteen. How much is it?
+fifty nine take away thirty four. How much is it?
+fifty nine take away thirty nine. How much is it?
+fifty nine take away thirty two. How much is it?
+fifty nine take away thirty. How much is it?
+fifty nine take away three. How much is it?
+fifty nine take away twenty four. How much is it?
+fifty nine take away twenty two. How much is it?
+fifty nine take away twenty. How much is it?
+fifty nine take away two. How much is it?
+fifty one plus eight. How much is it?
+fifty one plus five. How much is it?
+fifty one plus four. How much is it?
+fifty one plus fourteen. How much is it?
+fifty one plus one. How much is it?
+fifty one plus seven. How much is it?
+fifty one plus seventeen. How much is it?
+fifty one plus six. How much is it?
+fifty one plus thirteen. How much is it?
+fifty one plus thirty five. How much is it?
+fifty one plus thirty one. How much is it?
+fifty one plus thirty seven. How much is it?
+fifty one plus three. How much is it?
+fifty one plus twenty eight. How much is it?
+fifty one plus twenty five. How much is it?
+fifty one plus twenty two. How much is it?
+fifty one plus twenty. How much is it?
+fifty one plus two. How much is it?
+fifty one take away eleven. How much is it?
+fifty one take away forty one. How much is it?
+fifty one take away forty. How much is it?
+fifty one take away one. How much is it?
+fifty one take away ten. How much is it?
+fifty one take away thirty one. How much is it?
+fifty one take away thirty. How much is it?
+fifty one take away twenty one. How much is it?
+fifty plus eight. How much is it?
+fifty plus eleven. How much is it?
+fifty plus fifteen. How much is it?
+fifty plus five. How much is it?
+fifty plus forty. How much is it?
+fifty plus four. How much is it?
+fifty plus nine. How much is it?
+fifty plus nineteen. How much is it?
+fifty plus one. How much is it?
+fifty plus seven. How much is it?
+fifty plus six. How much is it?
+fifty plus ten. How much is it?
+fifty plus thirty eight. How much is it?
+fifty plus thirty four. How much is it?
+fifty plus thirty nine. How much is it?
+fifty plus thirty two. How much is it?
+fifty plus thirty. How much is it?
+fifty plus three. How much is it?
+fifty plus twenty five. How much is it?
+fifty plus twenty four. How much is it?
+fifty plus twenty nine. How much is it?
+fifty plus twenty. How much is it?
+fifty plus two. How much is it?
+fifty seven plus eleven. How much is it?
+fifty seven plus one. How much is it?
+fifty seven plus ten. How much is it?
+fifty seven plus thirty one. How much is it?
+fifty seven plus thirty two. How much is it?
+fifty seven plus thirty. How much is it?
+fifty seven plus twenty one. How much is it?
+fifty seven plus twenty two. How much is it?
+fifty seven plus twenty. How much is it?
+fifty seven plus two. How much is it?
+fifty seven take away eleven. How much is it?
+fifty seven take away fifteen. How much is it?
+fifty seven take away five. How much is it?
+fifty seven take away forty three. How much is it?
+fifty seven take away four. How much is it?
+fifty seven take away one. How much is it?
+fifty seven take away seven. How much is it?
+fifty seven take away six. How much is it?
+fifty seven take away ten. How much is it?
+fifty seven take away three. How much is it?
+fifty seven take away twelve. How much is it?
+fifty seven take away twenty one. How much is it?
+fifty seven take away twenty six. How much is it?
+fifty seven take away twenty three. How much is it?
+fifty seven take away two. How much is it?
+fifty six plus one. How much is it?
+fifty six plus ten. How much is it?
+fifty six plus thirty one. How much is it?
+fifty six plus thirty three. How much is it?
+fifty six plus thirty two. How much is it?
+fifty six plus thirty. How much is it?
+fifty six plus three. How much is it?
+fifty six plus twenty three. How much is it?
+fifty six plus twenty two. How much is it?
+fifty six plus two. How much is it?
+fifty six take away eleven. How much is it?
+fifty six take away five. How much is it?
+fifty six take away forty five. How much is it?
+fifty six take away forty four. How much is it?
+fifty six take away forty one. How much is it?
+fifty six take away forty six. How much is it?
+fifty six take away forty three. How much is it?
+fifty six take away forty. How much is it?
+fifty six take away four. How much is it?
+fifty six take away one. How much is it?
+fifty six take away six. How much is it?
+fifty six take away thirty six. How much is it?
+fifty six take away thirty two. How much is it?
+fifty six take away thirty. How much is it?
+fifty six take away three. How much is it?
+fifty six take away twelve. How much is it?
+fifty six take away twenty one. How much is it?
+fifty six take away twenty six. How much is it?
+fifty six take away two. How much is it?
+fifty take away forty. How much is it?
+fifty take away ten. How much is it?
+fifty take away thirty. How much is it?
+fifty take away twenty. How much is it?
+fifty three plus five. How much is it?
+fifty three plus four. How much is it?
+fifty three plus one. How much is it?
+fifty three plus six. How much is it?
+fifty three plus sixteen. How much is it?
+fifty three plus thirty one. How much is it?
+fifty three plus thirty. How much is it?
+fifty three plus three. How much is it?
+fifty three plus twenty four. How much is it?
+fifty three plus twenty one. How much is it?
+fifty three plus twenty six. How much is it?
+fifty three plus twenty two. How much is it?
+fifty three plus two. How much is it?
+fifty three take away eleven. How much is it?
+fifty three take away forty one. How much is it?
+fifty three take away forty three. How much is it?
+fifty three take away forty. How much is it?
+fifty three take away one. How much is it?
+fifty three take away ten. How much is it?
+fifty three take away thirty one. How much is it?
+fifty three take away thirty. How much is it?
+fifty three take away three. How much is it?
+fifty three take away twenty one. How much is it?
+fifty three take away twenty two. How much is it?
+fifty three take away two. How much is it?
+fifty two plus five. How much is it?
+fifty two plus four. How much is it?
+fifty two plus fourteen. How much is it?
+fifty two plus one. How much is it?
+fifty two plus seven. How much is it?
+fifty two plus seventeen. How much is it?
+fifty two plus six. How much is it?
+fifty two plus thirteen. How much is it?
+fifty two plus thirty one. How much is it?
+fifty two plus thirty two. How much is it?
+fifty two plus thirty. How much is it?
+fifty two plus three. How much is it?
+fifty two plus twenty four. How much is it?
+fifty two plus twenty one. How much is it?
+fifty two plus twenty seven. How much is it?
+fifty two plus twenty six. How much is it?
+fifty two plus twenty three. How much is it?
+fifty two plus two. How much is it?
+fifty two take away forty two. How much is it?
+fifty two take away one. How much is it?
+fifty two take away thirty two. How much is it?
+fifty two take away twelve. How much is it?
+fifty two take away twenty one. How much is it?
+fifty two take away twenty. How much is it?
+fifty two take away two. How much is it?
+forty eight plus forty one. How much is it?
+forty eight plus forty. How much is it?
+forty eight plus one. How much is it?
+forty eight plus ten. How much is it?
+forty eight plus thirty. How much is it?
+forty eight plus twenty one. How much is it?
+forty eight plus twenty. How much is it?
+forty eight take away eight. How much is it?
+forty eight take away five. How much is it?
+forty eight take away four. How much is it?
+forty eight take away one. How much is it?
+forty eight take away seven. How much is it?
+forty eight take away six. How much is it?
+forty eight take away thirteen. How much is it?
+forty eight take away thirty four. How much is it?
+forty eight take away thirty one. How much is it?
+forty eight take away thirty six. How much is it?
+forty eight take away thirty three. How much is it?
+forty eight take away thirty. How much is it?
+forty eight take away three. How much is it?
+forty eight take away twenty five. How much is it?
+forty eight take away twenty two. How much is it?
+forty eight take away twenty. How much is it?
+forty five plus forty. How much is it?
+forty five plus four. How much is it?
+forty five plus fourteen. How much is it?
+forty five plus one. How much is it?
+forty five plus ten. How much is it?
+forty five plus thirteen. How much is it?
+forty five plus thirty three. How much is it?
+forty five plus three. How much is it?
+forty five plus twenty one. How much is it?
+forty five plus twenty two. How much is it?
+forty five plus two. How much is it?
+forty five take away five. How much is it?
+forty five take away four. How much is it?
+forty five take away one. How much is it?
+forty five take away thirty five. How much is it?
+forty five take away thirty four. How much is it?
+forty five take away thirty one. How much is it?
+forty five take away thirty two. How much is it?
+forty five take away three. How much is it?
+forty five take away twenty three. How much is it?
+forty five take away twenty. How much is it?
+forty five take away two. How much is it?
+forty four plus eleven. How much is it?
+forty four plus fifteen. How much is it?
+forty four plus five. How much is it?
+forty four plus forty four. How much is it?
+forty four plus forty three. How much is it?
+forty four plus forty two. How much is it?
+forty four plus four. How much is it?
+forty four plus fourteen. How much is it?
+forty four plus one. How much is it?
+forty four plus thirteen. How much is it?
+forty four plus thirty five. How much is it?
+forty four plus thirty one. How much is it?
+forty four plus thirty three. How much is it?
+forty four plus three. How much is it?
+forty four plus twenty four. How much is it?
+forty four plus twenty two. How much is it?
+forty four plus two. How much is it?
+forty four take away four. How much is it?
+forty four take away fourteen. How much is it?
+forty four take away one. How much is it?
+forty four take away ten. How much is it?
+forty four take away thirty four. How much is it?
+forty four take away thirty three. How much is it?
+forty four take away thirty. How much is it?
+forty four take away three. How much is it?
+forty four take away twenty four. How much is it?
+forty four take away twenty one. How much is it?
+forty four take away twenty two. How much is it?
+forty four take away two. How much is it?
+forty nine take away eight. How much is it?
+forty nine take away fifteen. How much is it?
+forty nine take away five. How much is it?
+forty nine take away four. How much is it?
+forty nine take away fourteen. How much is it?
+forty nine take away nine. How much is it?
+forty nine take away seven. How much is it?
+forty nine take away six. How much is it?
+forty nine take away ten. How much is it?
+forty nine take away thirty six. How much is it?
+forty nine take away thirty two. How much is it?
+forty nine take away three. How much is it?
+forty nine take away twelve. How much is it?
+forty nine take away twenty four. How much is it?
+forty nine take away twenty one. How much is it?
+forty nine take away twenty six. How much is it?
+forty nine take away twenty three. How much is it?
+forty nine take away two. How much is it?
+forty one plus eight. How much is it?
+forty one plus eighteen. How much is it?
+forty one plus eleven. How much is it?
+forty one plus five. How much is it?
+forty one plus forty four. How much is it?
+forty one plus forty six. How much is it?
+forty one plus four. How much is it?
+forty one plus fourteen. How much is it?
+forty one plus one. How much is it?
+forty one plus seven. How much is it?
+forty one plus seventeen. How much is it?
+forty one plus six. How much is it?
+forty one plus sixteen. How much is it?
+forty one plus thirty five. How much is it?
+forty one plus thirty one. How much is it?
+forty one plus thirty three. How much is it?
+forty one plus thirty two. How much is it?
+forty one plus three. How much is it?
+forty one plus twenty seven. How much is it?
+forty one plus twenty. How much is it?
+forty one plus two. How much is it?
+forty one take away eleven. How much is it?
+forty one take away one. How much is it?
+forty one take away ten. How much is it?
+forty one take away thirty one. How much is it?
+forty one take away thirty. How much is it?
+forty one take away twenty. How much is it?
+forty plus eight. How much is it?
+forty plus fifteen. How much is it?
+forty plus fifty. How much is it?
+forty plus five. How much is it?
+forty plus forty four. How much is it?
+forty plus forty. How much is it?
+forty plus four. How much is it?
+forty plus nine. How much is it?
+forty plus nineteen. How much is it?
+forty plus one. How much is it?
+forty plus seven. How much is it?
+forty plus six. How much is it?
+forty plus sixteen. How much is it?
+forty plus ten. How much is it?
+forty plus thirty nine. How much is it?
+forty plus thirty two. How much is it?
+forty plus thirty. How much is it?
+forty plus three. How much is it?
+forty plus twenty eight. How much is it?
+forty plus twenty five. How much is it?
+forty plus twenty four. How much is it?
+forty plus twenty one. How much is it?
+forty plus twenty seven. How much is it?
+forty plus twenty. How much is it?
+forty plus two. How much is it?
+forty seven plus eleven. How much is it?
+forty seven plus forty two. How much is it?
+forty seven plus one. How much is it?
+forty seven plus ten. How much is it?
+forty seven plus thirty. How much is it?
+forty seven plus twelve. How much is it?
+forty seven plus twenty one. How much is it?
+forty seven plus twenty two. How much is it?
+forty seven plus twenty. How much is it?
+forty seven plus two. How much is it?
+forty seven take away five. How much is it?
+forty seven take away four. How much is it?
+forty seven take away fourteen. How much is it?
+forty seven take away one. How much is it?
+forty seven take away seven. How much is it?
+forty seven take away six. How much is it?
+forty seven take away sixteen. How much is it?
+forty seven take away thirty four. How much is it?
+forty seven take away thirty one. How much is it?
+forty seven take away thirty seven. How much is it?
+forty seven take away thirty six. How much is it?
+forty seven take away three. How much is it?
+forty seven take away twelve. How much is it?
+forty seven take away twenty four. How much is it?
+forty seven take away twenty two. How much is it?
+forty seven take away two. How much is it?
+forty six plus forty one. How much is it?
+forty six plus forty. How much is it?
+forty six plus one. How much is it?
+forty six plus ten. How much is it?
+forty six plus thirteen. How much is it?
+forty six plus thirty one. How much is it?
+forty six plus thirty three. How much is it?
+forty six plus thirty two. How much is it?
+forty six plus thirty. How much is it?
+forty six plus three. How much is it?
+forty six plus twelve. How much is it?
+forty six plus two. How much is it?
+forty six take away eleven. How much is it?
+forty six take away five. How much is it?
+forty six take away fourteen. How much is it?
+forty six take away one. How much is it?
+forty six take away six. How much is it?
+forty six take away thirty six. How much is it?
+forty six take away thirty two. How much is it?
+forty six take away thirty. How much is it?
+forty six take away three. How much is it?
+forty six take away twenty three. How much is it?
+forty six take away two. How much is it?
+forty take away ten. How much is it?
+forty take away thirty. How much is it?
+forty take away twenty. How much is it?
+forty three plus five. How much is it?
+forty three plus forty five. How much is it?
+forty three plus forty three. How much is it?
+forty three plus forty two. How much is it?
+forty three plus forty. How much is it?
+forty three plus four. How much is it?
+forty three plus one. How much is it?
+forty three plus six. How much is it?
+forty three plus sixteen. How much is it?
+forty three plus thirty six. How much is it?
+forty three plus thirty two. How much is it?
+forty three plus thirty. How much is it?
+forty three plus three. How much is it?
+forty three plus twenty four. How much is it?
+forty three plus twenty three. How much is it?
+forty three plus two. How much is it?
+forty three take away one. How much is it?
+forty three take away ten. How much is it?
+forty three take away thirteen. How much is it?
+forty three take away thirty one. How much is it?
+forty three take away thirty three. How much is it?
+forty three take away thirty. How much is it?
+forty three take away three. How much is it?
+forty three take away twenty one. How much is it?
+forty three take away twenty three. How much is it?
+forty three take away twenty two. How much is it?
+forty three take away two. How much is it?
+forty two plus fifteen. How much is it?
+forty two plus five. How much is it?
+forty two plus forty one. How much is it?
+forty two plus forty two. How much is it?
+forty two plus four. How much is it?
+forty two plus one. How much is it?
+forty two plus seven. How much is it?
+forty two plus six. How much is it?
+forty two plus sixteen. How much is it?
+forty two plus thirty four. How much is it?
+forty two plus thirty. How much is it?
+forty two plus three. How much is it?
+forty two plus twelve. How much is it?
+forty two plus twenty four. How much is it?
+forty two plus two. How much is it?
+forty two take away eleven. How much is it?
+forty two take away one. How much is it?
+forty two take away ten. How much is it?
+forty two take away thirty two. How much is it?
+forty two take away thirty. How much is it?
+forty two take away twelve. How much is it?
+forty two take away twenty one. How much is it?
+forty two take away twenty two. How much is it?
+forty two take away twenty. How much is it?
+forty two take away two. How much is it?
+fourteen plus fifty. How much is it?
+fourteen plus five. How much is it?
+fourteen plus forty one. How much is it?
+fourteen plus forty three. How much is it?
+fourteen plus four. How much is it?
+fourteen plus one. How much is it?
+fourteen plus seventy three. How much is it?
+fourteen plus sixty three. How much is it?
+fourteen plus sixty two. How much is it?
+fourteen plus thirty five. How much is it?
+fourteen plus three. How much is it?
+fourteen plus twenty four. How much is it?
+fourteen plus twenty three. How much is it?
+fourteen plus two. How much is it?
+fourteen take away four. How much is it?
+fourteen take away one. How much is it?
+fourteen take away three. How much is it?
+fourteen take away two. How much is it?
+hat
+hop
+hug
+jog
+nap
+nineteen take away eight. How much is it?
+nineteen take away five. How much is it?
+nineteen take away four. How much is it?
+nineteen take away nine. How much is it?
+nineteen take away one. How much is it?
+nineteen take away seven. How much is it?
+nineteen take away six. How much is it?
+nineteen take away three. How much is it?
+nineteen take away two. How much is it?
+ninety eight take away eight. How much is it?
+ninety eight take away eighteen. How much is it?
+ninety eight take away eighty. How much is it?
+ninety eight take away fifty one. How much is it?
+ninety eight take away fifty seven. How much is it?
+ninety eight take away five. How much is it?
+ninety eight take away forty three. How much is it?
+ninety eight take away four. How much is it?
+ninety eight take away one. How much is it?
+ninety eight take away seven. How much is it?
+ninety eight take away seventeen. How much is it?
+ninety eight take away seventy three. How much is it?
+ninety eight take away six. How much is it?
+ninety eight take away sixty five. How much is it?
+ninety eight take away sixty. How much is it?
+ninety eight take away thirty five. How much is it?
+ninety eight take away thirty one. How much is it?
+ninety eight take away thirty two. How much is it?
+ninety eight take away three. How much is it?
+ninety eight take away twenty one. How much is it?
+ninety eight take away twenty six. How much is it?
+ninety eight take away two. How much is it?
+ninety five plus four. How much is it?
+ninety five plus one. How much is it?
+ninety five plus three. How much is it?
+ninety five plus two. How much is it?
+ninety five take away eleven. How much is it?
+ninety five take away fifty. How much is it?
+ninety five take away five. How much is it?
+ninety five take away forty two. How much is it?
+ninety five take away four. How much is it?
+ninety five take away fourteen. How much is it?
+ninety five take away one. How much is it?
+ninety five take away seventy. How much is it?
+ninety five take away ten. How much is it?
+ninety five take away three. How much is it?
+ninety five take away twenty four. How much is it?
+ninety five take away two. How much is it?
+ninety four plus five. How much is it?
+ninety four plus four. How much is it?
+ninety four plus one. How much is it?
+ninety four plus three. How much is it?
+ninety four plus two. How much is it?
+ninety four take away fifty. How much is it?
+ninety four take away forty two. How much is it?
+ninety four take away four. How much is it?
+ninety four take away one. How much is it?
+ninety four take away seventy one. How much is it?
+ninety four take away seventy. How much is it?
+ninety four take away sixty four. How much is it?
+ninety four take away thirty four. How much is it?
+ninety four take away thirty three. How much is it?
+ninety four take away thirty two. How much is it?
+ninety four take away three. How much is it?
+ninety four take away twenty one. How much is it?
+ninety four take away twenty. How much is it?
+ninety four take away two. How much is it?
+ninety nine take away eight. How much is it?
+ninety nine take away eighty four. How much is it?
+ninety nine take away eighty seven. How much is it?
+ninety nine take away eighty three. How much is it?
+ninety nine take away eleven. How much is it?
+ninety nine take away fifty one. How much is it?
+ninety nine take away fifty six. How much is it?
+ninety nine take away five. How much is it?
+ninety nine take away forty one. How much is it?
+ninety nine take away four. How much is it?
+ninety nine take away nine. How much is it?
+ninety nine take away one. How much is it?
+ninety nine take away seventy. How much is it?
+ninety nine take away six. How much is it?
+ninety nine take away sixteen. How much is it?
+ninety nine take away sixty seven. How much is it?
+ninety nine take away thirty nine. How much is it?
+ninety nine take away thirty six. How much is it?
+ninety nine take away thirty three. How much is it?
+ninety nine take away three. How much is it?
+ninety nine take away twelve. How much is it?
+ninety nine take away twenty eight. How much is it?
+ninety nine take away twenty. How much is it?
+ninety nine take away two. How much is it?
+ninety one plus eight. How much is it?
+ninety one plus five. How much is it?
+ninety one plus four. How much is it?
+ninety one plus one. How much is it?
+ninety one plus seven. How much is it?
+ninety one plus six. How much is it?
+ninety one plus three. How much is it?
+ninety one plus two. How much is it?
+ninety one take away eighty one. How much is it?
+ninety one take away eighty. How much is it?
+ninety one take away fifty one. How much is it?
+ninety one take away fifty. How much is it?
+ninety one take away one. How much is it?
+ninety one take away seventy. How much is it?
+ninety one take away sixty one. How much is it?
+ninety one take away ten. How much is it?
+ninety one take away thirty one. How much is it?
+ninety one take away twenty one. How much is it?
+ninety plus eight. How much is it?
+ninety plus five. How much is it?
+ninety plus four. How much is it?
+ninety plus nine. How much is it?
+ninety plus one. How much is it?
+ninety plus seven. How much is it?
+ninety plus six. How much is it?
+ninety plus three. How much is it?
+ninety plus two. How much is it?
+ninety seven take away eighty seven. How much is it?
+ninety seven take away five. How much is it?
+ninety seven take away forty two. How much is it?
+ninety seven take away four. How much is it?
+ninety seven take away one. How much is it?
+ninety seven take away seven. How much is it?
+ninety seven take away seventy three. How much is it?
+ninety seven take away six. How much is it?
+ninety seven take away sixty seven. How much is it?
+ninety seven take away sixty three. How much is it?
+ninety seven take away three. How much is it?
+ninety seven take away twenty two. How much is it?
+ninety seven take away two. How much is it?
+ninety six take away eighty five. How much is it?
+ninety six take away eighty six. How much is it?
+ninety six take away eighty two. How much is it?
+ninety six take away fifty five. How much is it?
+ninety six take away five. How much is it?
+ninety six take away forty five. How much is it?
+ninety six take away four. How much is it?
+ninety six take away one. How much is it?
+ninety six take away seventy five. How much is it?
+ninety six take away seventy four. How much is it?
+ninety six take away six. How much is it?
+ninety six take away sixty. How much is it?
+ninety six take away thirty three. How much is it?
+ninety six take away thirty two. How much is it?
+ninety six take away three. How much is it?
+ninety six take away twenty one. How much is it?
+ninety six take away twenty two. How much is it?
+ninety six take away two. How much is it?
+ninety take away eighty. How much is it?
+ninety take away fifty. How much is it?
+ninety take away forty. How much is it?
+ninety take away seventy. How much is it?
+ninety take away sixty. How much is it?
+ninety take away ten. How much is it?
+ninety take away thirty. How much is it?
+ninety take away twenty. How much is it?
+ninety three plus five. How much is it?
+ninety three plus four. How much is it?
+ninety three plus one. How much is it?
+ninety three plus six. How much is it?
+ninety three plus three. How much is it?
+ninety three plus two. How much is it?
+ninety three take away eighty one. How much is it?
+ninety three take away eighty three. How much is it?
+ninety three take away eighty two. How much is it?
+ninety three take away eleven. How much is it?
+ninety three take away fifty one. How much is it?
+ninety three take away fifty two. How much is it?
+ninety three take away forty three. How much is it?
+ninety three take away one. How much is it?
+ninety three take away three. How much is it?
+ninety three take away twenty three. How much is it?
+ninety three take away twenty. How much is it?
+ninety three take away two. How much is it?
+ninety two plus five. How much is it?
+ninety two plus four. How much is it?
+ninety two plus one. How much is it?
+ninety two plus seven. How much is it?
+ninety two plus six. How much is it?
+ninety two plus three. How much is it?
+ninety two plus two. How much is it?
+ninety two take away eleven. How much is it?
+ninety two take away forty. How much is it?
+ninety two take away one. How much is it?
+ninety two take away sixty two. How much is it?
+ninety two take away sixty. How much is it?
+ninety two take away two. How much is it?
+or Friday?
+or Monday?
+or Saturday?
+or Sunday?
+or Thursday?
+or Tuesday?
+or Wednesday?
+or bed?
+or bus?
+or cat?
+or cup?
+or dig?
+or dog?
+or hat?
+or hop?
+or hug?
+or jog?
+or nap?
+or pen?
+or run?
+or sit?
+or sun?
+or tap?
+pen
+run
+seventeen plus eleven. How much is it?
+seventeen plus fifty one. How much is it?
+seventeen plus fifty. How much is it?
+seventeen plus forty one. How much is it?
+seventeen plus forty two. How much is it?
+seventeen plus forty. How much is it?
+seventeen plus one. How much is it?
+seventeen plus sixty one. How much is it?
+seventeen plus sixty two. How much is it?
+seventeen plus thirty two. How much is it?
+seventeen plus thirty. How much is it?
+seventeen plus twelve. How much is it?
+seventeen plus twenty two. How much is it?
+seventeen plus two. How much is it?
+seventeen take away five. How much is it?
+seventeen take away four. How much is it?
+seventeen take away one. How much is it?
+seventeen take away seven. How much is it?
+seventeen take away six. How much is it?
+seventeen take away three. How much is it?
+seventeen take away two. How much is it?
+seventy eight plus eleven. How much is it?
+seventy eight plus one. How much is it?
+seventy eight plus ten. How much is it?
+seventy eight take away eight. How much is it?
+seventy eight take away fifty four. How much is it?
+seventy eight take away fifty six. How much is it?
+seventy eight take away fifty three. How much is it?
+seventy eight take away five. How much is it?
+seventy eight take away four. How much is it?
+seventy eight take away one. How much is it?
+seventy eight take away seven. How much is it?
+seventy eight take away six. How much is it?
+seventy eight take away sixteen. How much is it?
+seventy eight take away sixty five. How much is it?
+seventy eight take away sixty. How much is it?
+seventy eight take away thirty one. How much is it?
+seventy eight take away thirty two. How much is it?
+seventy eight take away three. How much is it?
+seventy eight take away twenty six. How much is it?
+seventy eight take away twenty three. How much is it?
+seventy eight take away two. How much is it?
+seventy five plus eleven. How much is it?
+seventy five plus four. How much is it?
+seventy five plus fourteen. How much is it?
+seventy five plus one. How much is it?
+seventy five plus ten. How much is it?
+seventy five plus thirteen. How much is it?
+seventy five plus three. How much is it?
+seventy five plus twelve. How much is it?
+seventy five plus two. How much is it?
+seventy five take away fifty five. How much is it?
+seventy five take away fifty four. How much is it?
+seventy five take away fifty one. How much is it?
+seventy five take away five. How much is it?
+seventy five take away forty four. How much is it?
+seventy five take away four. How much is it?
+seventy five take away fourteen. How much is it?
+seventy five take away one. How much is it?
+seventy five take away sixty. How much is it?
+seventy five take away thirty one. How much is it?
+seventy five take away three. How much is it?
+seventy five take away twenty four. How much is it?
+seventy five take away twenty two. How much is it?
+seventy five take away two. How much is it?
+seventy four plus eleven. How much is it?
+seventy four plus fifteen. How much is it?
+seventy four plus five. How much is it?
+seventy four plus four. How much is it?
+seventy four plus fourteen. How much is it?
+seventy four plus one. How much is it?
+seventy four plus ten. How much is it?
+seventy four plus thirteen. How much is it?
+seventy four plus three. How much is it?
+seventy four plus twelve. How much is it?
+seventy four plus two. How much is it?
+seventy four take away eleven. How much is it?
+seventy four take away fifty one. How much is it?
+seventy four take away forty four. How much is it?
+seventy four take away forty. How much is it?
+seventy four take away four. How much is it?
+seventy four take away fourteen. How much is it?
+seventy four take away one. How much is it?
+seventy four take away sixty four. How much is it?
+seventy four take away sixty three. How much is it?
+seventy four take away sixty. How much is it?
+seventy four take away thirteen. How much is it?
+seventy four take away thirty one. How much is it?
+seventy four take away thirty three. How much is it?
+seventy four take away three. How much is it?
+seventy four take away twenty one. How much is it?
+seventy four take away twenty. How much is it?
+seventy four take away two. How much is it?
+seventy nine take away eight. How much is it?
+seventy nine take away fifty five. How much is it?
+seventy nine take away five. How much is it?
+seventy nine take away forty eight. How much is it?
+seventy nine take away forty five. How much is it?
+seventy nine take away forty four. How much is it?
+seventy nine take away forty three. How much is it?
+seventy nine take away four. How much is it?
+seventy nine take away nine. How much is it?
+seventy nine take away one. How much is it?
+seventy nine take away seven. How much is it?
+seventy nine take away seventeen. How much is it?
+seventy nine take away six. How much is it?
+seventy nine take away sixty seven. How much is it?
+seventy nine take away sixty three. How much is it?
+seventy nine take away sixty two. How much is it?
+seventy nine take away thirty eight. How much is it?
+seventy nine take away thirty four. How much is it?
+seventy nine take away three. How much is it?
+seventy nine take away twenty nine. How much is it?
+seventy nine take away twenty six. How much is it?
+seventy nine take away two. How much is it?
+seventy one plus eight. How much is it?
+seventy one plus eighteen. How much is it?
+seventy one plus eleven. How much is it?
+seventy one plus five. How much is it?
+seventy one plus four. How much is it?
+seventy one plus fourteen. How much is it?
+seventy one plus one. How much is it?
+seventy one plus seven. How much is it?
+seventy one plus six. How much is it?
+seventy one plus sixteen. How much is it?
+seventy one plus thirteen. How much is it?
+seventy one plus three. How much is it?
+seventy one plus two. How much is it?
+seventy one take away eleven. How much is it?
+seventy one take away fifty. How much is it?
+seventy one take away forty. How much is it?
+seventy one take away one. How much is it?
+seventy one take away sixty one. How much is it?
+seventy one take away ten. How much is it?
+seventy one take away thirty. How much is it?
+seventy one take away twenty one. How much is it?
+seventy plus eight. How much is it?
+seventy plus fifteen. How much is it?
+seventy plus five. How much is it?
+seventy plus four. How much is it?
+seventy plus fourteen. How much is it?
+seventy plus nine. How much is it?
+seventy plus nineteen. How much is it?
+seventy plus one. How much is it?
+seventy plus seven. How much is it?
+seventy plus seventeen. How much is it?
+seventy plus six. How much is it?
+seventy plus sixteen. How much is it?
+seventy plus thirteen. How much is it?
+seventy plus three. How much is it?
+seventy plus twelve. How much is it?
+seventy plus two. How much is it?
+seventy seven plus eleven. How much is it?
+seventy seven plus one. How much is it?
+seventy seven plus ten. How much is it?
+seventy seven plus twelve. How much is it?
+seventy seven plus two. How much is it?
+seventy seven take away fifteen. How much is it?
+seventy seven take away fifty four. How much is it?
+seventy seven take away fifty two. How much is it?
+seventy seven take away five. How much is it?
+seventy seven take away one. How much is it?
+seventy seven take away seven. How much is it?
+seventy seven take away six. How much is it?
+seventy seven take away sixty five. How much is it?
+seventy seven take away sixty seven. How much is it?
+seventy seven take away three. How much is it?
+seventy seven take away twenty seven. How much is it?
+seventy seven take away twenty. How much is it?
+seventy seven take away two. How much is it?
+seventy six plus eleven. How much is it?
+seventy six plus one. How much is it?
+seventy six plus ten. How much is it?
+seventy six plus thirteen. How much is it?
+seventy six plus three. How much is it?
+seventy six plus twelve. How much is it?
+seventy six plus two. How much is it?
+seventy six take away fifty four. How much is it?
+seventy six take away fifty six. How much is it?
+seventy six take away fifty two. How much is it?
+seventy six take away five. How much is it?
+seventy six take away one. How much is it?
+seventy six take away six. How much is it?
+seventy six take away sixty four. How much is it?
+seventy six take away sixty one. How much is it?
+seventy six take away ten. How much is it?
+seventy six take away three. How much is it?
+seventy six take away twenty five. How much is it?
+seventy six take away twenty. How much is it?
+seventy six take away two. How much is it?
+seventy take away fifty. How much is it?
+seventy take away forty. How much is it?
+seventy take away sixty. How much is it?
+seventy take away ten. How much is it?
+seventy take away thirty. How much is it?
+seventy take away twenty. How much is it?
+seventy three plus eleven. How much is it?
+seventy three plus fifteen. How much is it?
+seventy three plus five. How much is it?
+seventy three plus four. How much is it?
+seventy three plus fourteen. How much is it?
+seventy three plus one. How much is it?
+seventy three plus six. How much is it?
+seventy three plus sixteen. How much is it?
+seventy three plus ten. How much is it?
+seventy three plus thirteen. How much is it?
+seventy three plus three. How much is it?
+seventy three plus two. How much is it?
+seventy three take away eleven. How much is it?
+seventy three take away forty three. How much is it?
+seventy three take away forty two. How much is it?
+seventy three take away one. How much is it?
+seventy three take away sixty one. How much is it?
+seventy three take away sixty. How much is it?
+seventy three take away thirteen. How much is it?
+seventy three take away thirty two. How much is it?
+seventy three take away three. How much is it?
+seventy three take away twenty one. How much is it?
+seventy three take away twenty two. How much is it?
+seventy three take away two. How much is it?
+seventy two plus eleven. How much is it?
+seventy two plus fifteen. How much is it?
+seventy two plus five. How much is it?
+seventy two plus four. How much is it?
+seventy two plus fourteen. How much is it?
+seventy two plus one. How much is it?
+seventy two plus seven. How much is it?
+seventy two plus seventeen. How much is it?
+seventy two plus six. How much is it?
+seventy two plus sixteen. How much is it?
+seventy two plus ten. How much is it?
+seventy two plus three. How much is it?
+seventy two plus twelve. How much is it?
+seventy two plus two. How much is it?
+seventy two take away eleven. How much is it?
+seventy two take away fifty. How much is it?
+seventy two take away forty two. How much is it?
+seventy two take away one. How much is it?
+seventy two take away sixty one. How much is it?
+seventy two take away thirty one. How much is it?
+seventy two take away thirty two. How much is it?
+seventy two take away thirty. How much is it?
+seventy two take away twelve. How much is it?
+seventy two take away twenty two. How much is it?
+seventy two take away twenty. How much is it?
+seventy two take away two. How much is it?
+sit
+sixteen plus eleven. How much is it?
+sixteen plus fifty one. How much is it?
+sixteen plus fifty two. How much is it?
+sixteen plus fifty. How much is it?
+sixteen plus forty one. How much is it?
+sixteen plus forty three. How much is it?
+sixteen plus forty two. How much is it?
+sixteen plus one. How much is it?
+sixteen plus seventy one. How much is it?
+sixteen plus seventy two. How much is it?
+sixteen plus sixty. How much is it?
+sixteen plus thirty three. How much is it?
+sixteen plus three. How much is it?
+sixteen plus twenty three. How much is it?
+sixteen plus twenty. How much is it?
+sixteen plus two. How much is it?
+sixteen take away five. How much is it?
+sixteen take away four. How much is it?
+sixteen take away one. How much is it?
+sixteen take away six. How much is it?
+sixteen take away three. How much is it?
+sixteen take away two. How much is it?
+sixty eight plus eleven. How much is it?
+sixty eight plus one. How much is it?
+sixty eight plus ten. How much is it?
+sixty eight plus twenty one. How much is it?
+sixty eight plus twenty. How much is it?
+sixty eight take away eight. How much is it?
+sixty eight take away eighteen. How much is it?
+sixty eight take away eleven. How much is it?
+sixty eight take away fifty five. How much is it?
+sixty eight take away five. How much is it?
+sixty eight take away forty two. How much is it?
+sixty eight take away four. How much is it?
+sixty eight take away one. How much is it?
+sixty eight take away seven. How much is it?
+sixty eight take away six. How much is it?
+sixty eight take away ten. How much is it?
+sixty eight take away thirty four. How much is it?
+sixty eight take away thirty one. How much is it?
+sixty eight take away three. How much is it?
+sixty eight take away twenty eight. How much is it?
+sixty eight take away twenty four. How much is it?
+sixty eight take away twenty three. How much is it?
+sixty eight take away two. How much is it?
+sixty five plus four. How much is it?
+sixty five plus one. How much is it?
+sixty five plus ten. How much is it?
+sixty five plus three. How much is it?
+sixty five plus twelve. How much is it?
+sixty five plus twenty four. How much is it?
+sixty five plus twenty one. How much is it?
+sixty five plus twenty three. How much is it?
+sixty five plus twenty two. How much is it?
+sixty five plus two. How much is it?
+sixty five take away fifty five. How much is it?
+sixty five take away fifty one. How much is it?
+sixty five take away fifty two. How much is it?
+sixty five take away fifty. How much is it?
+sixty five take away five. How much is it?
+sixty five take away forty five. How much is it?
+sixty five take away forty two. How much is it?
+sixty five take away forty. How much is it?
+sixty five take away four. How much is it?
+sixty five take away fourteen. How much is it?
+sixty five take away one. How much is it?
+sixty five take away thirty four. How much is it?
+sixty five take away thirty one. How much is it?
+sixty five take away thirty two. How much is it?
+sixty five take away thirty. How much is it?
+sixty five take away three. How much is it?
+sixty five take away twelve. How much is it?
+sixty five take away twenty four. How much is it?
+sixty five take away twenty. How much is it?
+sixty five take away two. How much is it?
+sixty four plus eleven. How much is it?
+sixty four plus fifteen. How much is it?
+sixty four plus five. How much is it?
+sixty four plus four. How much is it?
+sixty four plus fourteen. How much is it?
+sixty four plus one. How much is it?
+sixty four plus thirteen. How much is it?
+sixty four plus three. How much is it?
+sixty four plus twelve. How much is it?
+sixty four plus twenty one. How much is it?
+sixty four plus twenty two. How much is it?
+sixty four plus two. How much is it?
+sixty four take away eleven. How much is it?
+sixty four take away fifty four. How much is it?
+sixty four take away forty four. How much is it?
+sixty four take away forty two. How much is it?
+sixty four take away four. How much is it?
+sixty four take away one. How much is it?
+sixty four take away thirteen. How much is it?
+sixty four take away thirty one. How much is it?
+sixty four take away thirty three. How much is it?
+sixty four take away thirty two. How much is it?
+sixty four take away three. How much is it?
+sixty four take away twenty four. How much is it?
+sixty four take away twenty one. How much is it?
+sixty four take away two. How much is it?
+sixty nine take away eight. How much is it?
+sixty nine take away five. How much is it?
+sixty nine take away forty six. How much is it?
+sixty nine take away four. How much is it?
+sixty nine take away nine. How much is it?
+sixty nine take away one. How much is it?
+sixty nine take away seven. How much is it?
+sixty nine take away six. How much is it?
+sixty nine take away thirty three. How much is it?
+sixty nine take away three. How much is it?
+sixty nine take away twenty nine. How much is it?
+sixty nine take away twenty. How much is it?
+sixty nine take away two. How much is it?
+sixty one plus eight. How much is it?
+sixty one plus eleven. How much is it?
+sixty one plus fifteen. How much is it?
+sixty one plus five. How much is it?
+sixty one plus four. How much is it?
+sixty one plus one. How much is it?
+sixty one plus seven. How much is it?
+sixty one plus seventeen. How much is it?
+sixty one plus six. How much is it?
+sixty one plus sixteen. How much is it?
+sixty one plus ten. How much is it?
+sixty one plus three. How much is it?
+sixty one plus twelve. How much is it?
+sixty one plus twenty eight. How much is it?
+sixty one plus twenty four. How much is it?
+sixty one plus twenty one. How much is it?
+sixty one plus twenty seven. How much is it?
+sixty one plus twenty two. How much is it?
+sixty one plus two. How much is it?
+sixty one take away fifty one. How much is it?
+sixty one take away forty one. How much is it?
+sixty one take away one. How much is it?
+sixty one take away ten. How much is it?
+sixty one take away twenty. How much is it?
+sixty plus eight. How much is it?
+sixty plus five. How much is it?
+sixty plus four. How much is it?
+sixty plus nine. How much is it?
+sixty plus one. How much is it?
+sixty plus seven. How much is it?
+sixty plus six. How much is it?
+sixty plus thirteen. How much is it?
+sixty plus three. How much is it?
+sixty plus twelve. How much is it?
+sixty plus twenty five. How much is it?
+sixty plus twenty nine. How much is it?
+sixty plus twenty six. How much is it?
+sixty plus twenty three. How much is it?
+sixty plus twenty two. How much is it?
+sixty plus two. How much is it?
+sixty seven plus eleven. How much is it?
+sixty seven plus one. How much is it?
+sixty seven plus ten. How much is it?
+sixty seven plus twelve. How much is it?
+sixty seven plus twenty one. How much is it?
+sixty seven plus twenty. How much is it?
+sixty seven plus two. How much is it?
+sixty seven take away fifteen. How much is it?
+sixty seven take away fifty two. How much is it?
+sixty seven take away five. How much is it?
+sixty seven take away forty. How much is it?
+sixty seven take away four. How much is it?
+sixty seven take away one. How much is it?
+sixty seven take away seven. How much is it?
+sixty seven take away six. How much is it?
+sixty seven take away thirty four. How much is it?
+sixty seven take away thirty one. How much is it?
+sixty seven take away thirty. How much is it?
+sixty seven take away three. How much is it?
+sixty seven take away twenty four. How much is it?
+sixty seven take away twenty. How much is it?
+sixty seven take away two. How much is it?
+sixty six plus eleven. How much is it?
+sixty six plus one. How much is it?
+sixty six plus ten. How much is it?
+sixty six plus thirteen. How much is it?
+sixty six plus three. How much is it?
+sixty six plus twelve. How much is it?
+sixty six plus twenty one. How much is it?
+sixty six plus twenty three. How much is it?
+sixty six plus twenty two. How much is it?
+sixty six plus twenty. How much is it?
+sixty six plus two. How much is it?
+sixty six take away eleven. How much is it?
+sixty six take away fifty four. How much is it?
+sixty six take away fifty two. How much is it?
+sixty six take away five. How much is it?
+sixty six take away forty four. How much is it?
+sixty six take away forty six. How much is it?
+sixty six take away four. How much is it?
+sixty six take away one. How much is it?
+sixty six take away six. How much is it?
+sixty six take away thirteen. How much is it?
+sixty six take away thirty one. How much is it?
+sixty six take away thirty six. How much is it?
+sixty six take away thirty three. How much is it?
+sixty six take away thirty two. How much is it?
+sixty six take away three. How much is it?
+sixty six take away twelve. How much is it?
+sixty six take away twenty four. How much is it?
+sixty six take away twenty one. How much is it?
+sixty six take away twenty six. How much is it?
+sixty six take away twenty three. How much is it?
+sixty six take away twenty. How much is it?
+sixty six take away two. How much is it?
+sixty take away fifty. How much is it?
+sixty take away forty. How much is it?
+sixty take away ten. How much is it?
+sixty take away thirty. How much is it?
+sixty take away twenty. How much is it?
+sixty three plus eleven. How much is it?
+sixty three plus fifteen. How much is it?
+sixty three plus five. How much is it?
+sixty three plus four. How much is it?
+sixty three plus one. How much is it?
+sixty three plus six. How much is it?
+sixty three plus thirteen. How much is it?
+sixty three plus three. How much is it?
+sixty three plus twenty four. How much is it?
+sixty three plus twenty one. How much is it?
+sixty three plus twenty six. How much is it?
+sixty three plus twenty three. How much is it?
+sixty three plus twenty two. How much is it?
+sixty three plus twenty. How much is it?
+sixty three plus two. How much is it?
+sixty three take away eleven. How much is it?
+sixty three take away fifty two. How much is it?
+sixty three take away forty one. How much is it?
+sixty three take away forty two. How much is it?
+sixty three take away one. How much is it?
+sixty three take away thirty one. How much is it?
+sixty three take away thirty three. How much is it?
+sixty three take away three. How much is it?
+sixty three take away twenty one. How much is it?
+sixty three take away twenty three. How much is it?
+sixty three take away twenty two. How much is it?
+sixty three take away two. How much is it?
+sixty two plus eleven. How much is it?
+sixty two plus five. How much is it?
+sixty two plus four. How much is it?
+sixty two plus fourteen. How much is it?
+sixty two plus one. How much is it?
+sixty two plus seven. How much is it?
+sixty two plus six. How much is it?
+sixty two plus thirteen. How much is it?
+sixty two plus three. How much is it?
+sixty two plus twelve. How much is it?
+sixty two plus twenty two. How much is it?
+sixty two plus two. How much is it?
+sixty two take away fifty two. How much is it?
+sixty two take away fifty. How much is it?
+sixty two take away forty one. How much is it?
+sixty two take away forty two. How much is it?
+sixty two take away forty. How much is it?
+sixty two take away one. How much is it?
+sixty two take away thirty. How much is it?
+sixty two take away twelve. How much is it?
+sixty two take away twenty two. How much is it?
+sixty two take away two. How much is it?
+sun
+tap
+ten plus eighty. How much is it?
+ten plus fifty. How much is it?
+ten plus forty. How much is it?
+ten plus seventy. How much is it?
+ten plus sixty. How much is it?
+ten plus ten. How much is it?
+ten plus thirty. How much is it?
+ten plus twenty. How much is it?
+thirteen plus eleven. How much is it?
+thirteen plus fifty four. How much is it?
+thirteen plus five. How much is it?
+thirteen plus forty four. How much is it?
+thirteen plus forty six. How much is it?
+thirteen plus forty three. How much is it?
+thirteen plus forty. How much is it?
+thirteen plus four. How much is it?
+thirteen plus one. How much is it?
+thirteen plus seventy five. How much is it?
+thirteen plus seventy one. How much is it?
+thirteen plus seventy three. How much is it?
+thirteen plus six. How much is it?
+thirteen plus sixty four. How much is it?
+thirteen plus sixty one. How much is it?
+thirteen plus sixty six. How much is it?
+thirteen plus sixty three. How much is it?
+thirteen plus sixty two. How much is it?
+thirteen plus sixty. How much is it?
+thirteen plus thirteen. How much is it?
+thirteen plus thirty six. How much is it?
+thirteen plus three. How much is it?
+thirteen plus two. How much is it?
+thirteen take away one. How much is it?
+thirteen take away three. How much is it?
+thirteen take away two. How much is it?
+thirty eight plus fifty one. How much is it?
+thirty eight plus fifty. How much is it?
+thirty eight plus one. How much is it?
+thirty eight plus ten. How much is it?
+thirty eight plus thirty one. How much is it?
+thirty eight plus thirty. How much is it?
+thirty eight plus twenty one. How much is it?
+thirty eight plus twenty. How much is it?
+thirty eight take away eight. How much is it?
+thirty eight take away five. How much is it?
+thirty eight take away fourteen. How much is it?
+thirty eight take away one. How much is it?
+thirty eight take away six. How much is it?
+thirty eight take away ten. How much is it?
+thirty eight take away thirteen. How much is it?
+thirty eight take away three. How much is it?
+thirty eight take away twenty five. How much is it?
+thirty eight take away twenty four. How much is it?
+thirty eight take away twenty seven. How much is it?
+thirty eight take away two. How much is it?
+thirty five plus fifty three. How much is it?
+thirty five plus four. How much is it?
+thirty five plus one. How much is it?
+thirty five plus ten. How much is it?
+thirty five plus thirty four. How much is it?
+thirty five plus thirty one. How much is it?
+thirty five plus three. How much is it?
+thirty five plus twenty four. How much is it?
+thirty five plus twenty three. How much is it?
+thirty five plus twenty two. How much is it?
+thirty five plus twenty. How much is it?
+thirty five plus two. How much is it?
+thirty five take away fifteen. How much is it?
+thirty five take away five. How much is it?
+thirty five take away four. How much is it?
+thirty five take away fourteen. How much is it?
+thirty five take away one. How much is it?
+thirty five take away ten. How much is it?
+thirty five take away three. How much is it?
+thirty five take away twelve. How much is it?
+thirty five take away twenty four. How much is it?
+thirty five take away two. How much is it?
+thirty four plus five. How much is it?
+thirty four plus forty three. How much is it?
+thirty four plus forty two. How much is it?
+thirty four plus four. How much is it?
+thirty four plus one. How much is it?
+thirty four plus thirty four. How much is it?
+thirty four plus thirty one. How much is it?
+thirty four plus thirty three. How much is it?
+thirty four plus thirty two. How much is it?
+thirty four plus thirty. How much is it?
+thirty four plus three. How much is it?
+thirty four plus two. How much is it?
+thirty four take away eleven. How much is it?
+thirty four take away four. How much is it?
+thirty four take away fourteen. How much is it?
+thirty four take away one. How much is it?
+thirty four take away ten. How much is it?
+thirty four take away three. How much is it?
+thirty four take away twelve. How much is it?
+thirty four take away twenty two. How much is it?
+thirty four take away two. How much is it?
+thirty nine take away eight. How much is it?
+thirty nine take away five. How much is it?
+thirty nine take away four. How much is it?
+thirty nine take away fourteen. How much is it?
+thirty nine take away nineteen. How much is it?
+thirty nine take away one. How much is it?
+thirty nine take away seven. How much is it?
+thirty nine take away six. How much is it?
+thirty nine take away sixteen. How much is it?
+thirty nine take away thirteen. How much is it?
+thirty nine take away three. How much is it?
+thirty nine take away twenty eight. How much is it?
+thirty nine take away twenty five. How much is it?
+thirty nine take away twenty nine. How much is it?
+thirty nine take away twenty six. How much is it?
+thirty nine take away two. How much is it?
+thirty one plus eight. How much is it?
+thirty one plus eleven. How much is it?
+thirty one plus fifty four. How much is it?
+thirty one plus fifty one. How much is it?
+thirty one plus fifty three. How much is it?
+thirty one plus five. How much is it?
+thirty one plus forty. How much is it?
+thirty one plus four. How much is it?
+thirty one plus one. How much is it?
+thirty one plus seven. How much is it?
+thirty one plus six. How much is it?
+thirty one plus thirty. How much is it?
+thirty one plus three. How much is it?
+thirty one plus twelve. How much is it?
+thirty one plus twenty. How much is it?
+thirty one plus two. How much is it?
+thirty one take away eleven. How much is it?
+thirty one take away one. How much is it?
+thirty one take away ten. How much is it?
+thirty one take away twenty one. How much is it?
+thirty one take away twenty. How much is it?
+thirty plus eight. How much is it?
+thirty plus eleven. How much is it?
+thirty plus fifty five. How much is it?
+thirty plus fifty nine. How much is it?
+thirty plus fifty one. How much is it?
+thirty plus fifty six. How much is it?
+thirty plus fifty two. How much is it?
+thirty plus fifty. How much is it?
+thirty plus five. How much is it?
+thirty plus forty eight. How much is it?
+thirty plus forty. How much is it?
+thirty plus four. How much is it?
+thirty plus nine. How much is it?
+thirty plus nineteen. How much is it?
+thirty plus one. How much is it?
+thirty plus seven. How much is it?
+thirty plus six. How much is it?
+thirty plus sixteen. How much is it?
+thirty plus sixty. How much is it?
+thirty plus ten. How much is it?
+thirty plus thirty five. How much is it?
+thirty plus thirty four. How much is it?
+thirty plus thirty one. How much is it?
+thirty plus thirty three. How much is it?
+thirty plus thirty. How much is it?
+thirty plus three. How much is it?
+thirty plus twenty eight. How much is it?
+thirty plus twenty. How much is it?
+thirty plus two. How much is it?
+thirty seven plus fifty two. How much is it?
+thirty seven plus fifty. How much is it?
+thirty seven plus forty one. How much is it?
+thirty seven plus forty two. How much is it?
+thirty seven plus one. How much is it?
+thirty seven plus ten. How much is it?
+thirty seven plus thirty one. How much is it?
+thirty seven plus thirty. How much is it?
+thirty seven plus twelve. How much is it?
+thirty seven plus two. How much is it?
+thirty seven take away fifteen. How much is it?
+thirty seven take away five. How much is it?
+thirty seven take away four. How much is it?
+thirty seven take away fourteen. How much is it?
+thirty seven take away one. How much is it?
+thirty seven take away seven. How much is it?
+thirty seven take away six. How much is it?
+thirty seven take away sixteen. How much is it?
+thirty seven take away thirteen. How much is it?
+thirty seven take away three. How much is it?
+thirty seven take away twenty four. How much is it?
+thirty seven take away twenty seven. How much is it?
+thirty seven take away two. How much is it?
+thirty six plus fifty one. How much is it?
+thirty six plus forty one. How much is it?
+thirty six plus forty three. How much is it?
+thirty six plus forty. How much is it?
+thirty six plus one. How much is it?
+thirty six plus ten. How much is it?
+thirty six plus thirty. How much is it?
+thirty six plus three. How much is it?
+thirty six plus twenty two. How much is it?
+thirty six plus twenty. How much is it?
+thirty six plus two. How much is it?
+thirty six take away fifteen. How much is it?
+thirty six take away five. How much is it?
+thirty six take away four. How much is it?
+thirty six take away fourteen. How much is it?
+thirty six take away one. How much is it?
+thirty six take away six. How much is it?
+thirty six take away sixteen. How much is it?
+thirty six take away ten. How much is it?
+thirty six take away three. How much is it?
+thirty six take away twelve. How much is it?
+thirty six take away twenty five. How much is it?
+thirty six take away twenty one. How much is it?
+thirty six take away twenty six. How much is it?
+thirty six take away twenty three. How much is it?
+thirty six take away twenty two. How much is it?
+thirty six take away twenty. How much is it?
+thirty six take away two. How much is it?
+thirty take away ten. How much is it?
+thirty take away twenty. How much is it?
+thirty three plus fifty four. How much is it?
+thirty three plus fifty one. How much is it?
+thirty three plus fifty three. How much is it?
+thirty three plus fifty two. How much is it?
+thirty three plus five. How much is it?
+thirty three plus forty six. How much is it?
+thirty three plus four. How much is it?
+thirty three plus fourteen. How much is it?
+thirty three plus one. How much is it?
+thirty three plus six. How much is it?
+thirty three plus thirteen. How much is it?
+thirty three plus thirty six. How much is it?
+thirty three plus thirty three. How much is it?
+thirty three plus three. How much is it?
+thirty three plus two. How much is it?
+thirty three take away eleven. How much is it?
+thirty three take away one. How much is it?
+thirty three take away ten. How much is it?
+thirty three take away twelve. How much is it?
+thirty three take away twenty one. How much is it?
+thirty three take away twenty two. How much is it?
+thirty three take away twenty. How much is it?
+thirty three take away two. How much is it?
+thirty two plus fifty four. How much is it?
+thirty two plus fifty one. How much is it?
+thirty two plus fifty seven. How much is it?
+thirty two plus fifty. How much is it?
+thirty two plus five. How much is it?
+thirty two plus forty four. How much is it?
+thirty two plus forty three. How much is it?
+thirty two plus forty two. How much is it?
+thirty two plus four. How much is it?
+thirty two plus one. How much is it?
+thirty two plus seven. How much is it?
+thirty two plus six. How much is it?
+thirty two plus ten. How much is it?
+thirty two plus thirty five. How much is it?
+thirty two plus thirty two. How much is it?
+thirty two plus three. How much is it?
+thirty two plus two. How much is it?
+thirty two take away eleven. How much is it?
+thirty two take away one. How much is it?
+thirty two take away ten. How much is it?
+thirty two take away twelve. How much is it?
+thirty two take away twenty one. How much is it?
+thirty two take away twenty two. How much is it?
+thirty two take away twenty. How much is it?
+thirty two take away two. How much is it?
+twelve plus five. How much is it?
+twelve plus forty five. How much is it?
+twelve plus four. How much is it?
+twelve plus fourteen. How much is it?
+twelve plus one. How much is it?
+twelve plus seven. How much is it?
+twelve plus seventy one. How much is it?
+twelve plus seventy six. How much is it?
+twelve plus seventy. How much is it?
+twelve plus six. How much is it?
+twelve plus sixty four. How much is it?
+twelve plus sixty six. How much is it?
+twelve plus three. How much is it?
+twelve plus twenty seven. How much is it?
+twelve plus twenty two. How much is it?
+twelve plus two. How much is it?
+twelve take away one. How much is it?
+twelve take away two. How much is it?
+twenty eight plus fifty one. How much is it?
+twenty eight plus fifty. How much is it?
+twenty eight plus forty one. How much is it?
+twenty eight plus one. How much is it?
+twenty eight plus sixty. How much is it?
+twenty eight plus thirty. How much is it?
+twenty eight plus twenty. How much is it?
+twenty eight take away eight. How much is it?
+twenty eight take away eleven. How much is it?
+twenty eight take away fifteen. How much is it?
+twenty eight take away five. How much is it?
+twenty eight take away four. How much is it?
+twenty eight take away fourteen. How much is it?
+twenty eight take away one. How much is it?
+twenty eight take away seven. How much is it?
+twenty eight take away seventeen. How much is it?
+twenty eight take away six. How much is it?
+twenty eight take away sixteen. How much is it?
+twenty eight take away three. How much is it?
+twenty eight take away twelve. How much is it?
+twenty eight take away two. How much is it?
+twenty five plus fifty three. How much is it?
+twenty five plus forty four. How much is it?
+twenty five plus four. How much is it?
+twenty five plus fourteen. How much is it?
+twenty five plus one. How much is it?
+twenty five plus ten. How much is it?
+twenty five plus thirty one. How much is it?
+twenty five plus thirty two. How much is it?
+twenty five plus three. How much is it?
+twenty five plus twelve. How much is it?
+twenty five plus twenty three. How much is it?
+twenty five plus two. How much is it?
+twenty five take away eleven. How much is it?
+twenty five take away fifteen. How much is it?
+twenty five take away five. How much is it?
+twenty five take away four. How much is it?
+twenty five take away one. How much is it?
+twenty five take away ten. How much is it?
+twenty five take away thirteen. How much is it?
+twenty five take away three. How much is it?
+twenty five take away twelve. How much is it?
+twenty five take away two. How much is it?
+twenty four plus eleven. How much is it?
+twenty four plus fifteen. How much is it?
+twenty four plus fifty one. How much is it?
+twenty four plus fifty. How much is it?
+twenty four plus five. How much is it?
+twenty four plus forty. How much is it?
+twenty four plus four. How much is it?
+twenty four plus one. How much is it?
+twenty four plus sixty five. How much is it?
+twenty four plus sixty one. How much is it?
+twenty four plus sixty three. How much is it?
+twenty four plus sixty. How much is it?
+twenty four plus ten. How much is it?
+twenty four plus thirteen. How much is it?
+twenty four plus thirty two. How much is it?
+twenty four plus three. How much is it?
+twenty four plus twelve. How much is it?
+twenty four plus twenty three. How much is it?
+twenty four plus two. How much is it?
+twenty four take away four. How much is it?
+twenty four take away one. How much is it?
+twenty four take away three. How much is it?
+twenty four take away two. How much is it?
+twenty nine take away eight. How much is it?
+twenty nine take away eleven. How much is it?
+twenty nine take away fifteen. How much is it?
+twenty nine take away five. How much is it?
+twenty nine take away four. How much is it?
+twenty nine take away fourteen. How much is it?
+twenty nine take away nine. How much is it?
+twenty nine take away nineteen. How much is it?
+twenty nine take away seven. How much is it?
+twenty nine take away seventeen. How much is it?
+twenty nine take away six. How much is it?
+twenty nine take away three. How much is it?
+twenty nine take away twelve. How much is it?
+twenty nine take away two. How much is it?
+twenty one plus eight. How much is it?
+twenty one plus eighteen. How much is it?
+twenty one plus fifty seven. How much is it?
+twenty one plus five. How much is it?
+twenty one plus forty eight. How much is it?
+twenty one plus forty. How much is it?
+twenty one plus four. How much is it?
+twenty one plus one. How much is it?
+twenty one plus seven. How much is it?
+twenty one plus six. How much is it?
+twenty one plus sixteen. How much is it?
+twenty one plus sixty one. How much is it?
+twenty one plus three. How much is it?
+twenty one plus twenty eight. How much is it?
+twenty one plus twenty five. How much is it?
+twenty one plus twenty four. How much is it?
+twenty one plus twenty one. How much is it?
+twenty one plus twenty seven. How much is it?
+twenty one plus two. How much is it?
+twenty one take away one. How much is it?
+twenty plus eight. How much is it?
+twenty plus fifty seven. How much is it?
+twenty plus fifty. How much is it?
+twenty plus five. How much is it?
+twenty plus forty eight. How much is it?
+twenty plus forty five. How much is it?
+twenty plus forty four. How much is it?
+twenty plus forty one. How much is it?
+twenty plus forty seven. How much is it?
+twenty plus forty. How much is it?
+twenty plus four. How much is it?
+twenty plus nine. How much is it?
+twenty plus one. How much is it?
+twenty plus seven. How much is it?
+twenty plus seventy. How much is it?
+twenty plus six. How much is it?
+twenty plus sixty. How much is it?
+twenty plus ten. How much is it?
+twenty plus thirteen. How much is it?
+twenty plus thirty one. How much is it?
+twenty plus thirty. How much is it?
+twenty plus three. How much is it?
+twenty plus twenty eight. How much is it?
+twenty plus twenty nine. How much is it?
+twenty plus twenty six. How much is it?
+twenty plus twenty. How much is it?
+twenty plus two. How much is it?
+twenty seven plus forty two. How much is it?
+twenty seven plus one. How much is it?
+twenty seven plus sixty two. How much is it?
+twenty seven plus thirty. How much is it?
+twenty seven plus twelve. How much is it?
+twenty seven plus two. How much is it?
+twenty seven take away eleven. How much is it?
+twenty seven take away fifteen. How much is it?
+twenty seven take away five. How much is it?
+twenty seven take away four. How much is it?
+twenty seven take away fourteen. How much is it?
+twenty seven take away one. How much is it?
+twenty seven take away seven. How much is it?
+twenty seven take away seventeen. How much is it?
+twenty seven take away six. How much is it?
+twenty seven take away sixteen. How much is it?
+twenty seven take away ten. How much is it?
+twenty seven take away three. How much is it?
+twenty seven take away twelve. How much is it?
+twenty seven take away two. How much is it?
+twenty six plus eleven. How much is it?
+twenty six plus forty two. How much is it?
+twenty six plus forty. How much is it?
+twenty six plus one. How much is it?
+twenty six plus sixty two. How much is it?
+twenty six plus sixty. How much is it?
+twenty six plus thirty one. How much is it?
+twenty six plus thirty. How much is it?
+twenty six plus three. How much is it?
+twenty six plus twenty one. How much is it?
+twenty six plus twenty. How much is it?
+twenty six plus two. How much is it?
+twenty six take away eleven. How much is it?
+twenty six take away fifteen. How much is it?
+twenty six take away five. How much is it?
+twenty six take away four. How much is it?
+twenty six take away fourteen. How much is it?
+twenty six take away one. How much is it?
+twenty six take away six. How much is it?
+twenty six take away sixteen. How much is it?
+twenty six take away ten. How much is it?
+twenty six take away thirteen. How much is it?
+twenty six take away three. How much is it?
+twenty six take away twelve. How much is it?
+twenty six take away two. How much is it?
+twenty three plus fifty one. How much is it?
+twenty three plus five. How much is it?
+twenty three plus forty five. How much is it?
+twenty three plus four. How much is it?
+twenty three plus one. How much is it?
+twenty three plus six. How much is it?
+twenty three plus sixty five. How much is it?
+twenty three plus sixty one. How much is it?
+twenty three plus sixty three. How much is it?
+twenty three plus thirty. How much is it?
+twenty three plus three. How much is it?
+twenty three plus twenty five. How much is it?
+twenty three plus twenty six. How much is it?
+twenty three plus twenty two. How much is it?
+twenty three plus twenty. How much is it?
+twenty three plus two. How much is it?
+twenty three take away one. How much is it?
+twenty three take away three. How much is it?
+twenty three take away two. How much is it?
+twenty two plus fifty one. How much is it?
+twenty two plus fifty seven. How much is it?
+twenty two plus fifty two. How much is it?
+twenty two plus five. How much is it?
+twenty two plus forty two. How much is it?
+twenty two plus forty. How much is it?
+twenty two plus four. How much is it?
+twenty two plus one. How much is it?
+twenty two plus seven. How much is it?
+twenty two plus six. How much is it?
+twenty two plus ten. How much is it?
+twenty two plus thirty five. How much is it?
+twenty two plus thirty six. How much is it?
+twenty two plus thirty three. How much is it?
+twenty two plus three. How much is it?
+twenty two plus twenty five. How much is it?
+twenty two plus twenty two. How much is it?
+twenty two plus two. How much is it?
+twenty two take away one. How much is it?
+twenty two take away two. How much is it?

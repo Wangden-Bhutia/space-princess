@@ -2406,6 +2406,228 @@ __test3.check7A=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},keep
 {const _sc7a=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc7a.call(this,N);const b=__test3.check7A();if(b.length)r.bad.check7A=b;return r}}
 Object.assign(__test3,{SKILLS,skillStats,profile,mixups,learnHTML,lgRecord,get LG(){return LG},setLG:v=>{LG=v}});
 </script>
+<script id="p7b">
+// ---------- Part 7B: Class 1 games (NCERT Class 1), each opened by what she has mastered ----------
+const cap1=s=>String(s).charAt(0).toUpperCase()+String(s).slice(1);
+const TENW=["","ten","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+const nw=n=>n<=20?NUMW[n]:TENW[Math.floor(n/10)]+(n%10?" "+NUMW[n%10]:"");
+const rev=n=>n%10?(n%10)*10+Math.floor(n/10):null;
+const uniq10=(a,lo,hi,want)=>{const s=[];a.forEach(x=>{if(x!=null&&x>=lo&&x<=hi&&x%10===0&&!s.includes(x))s.push(x)});let g=0;while(s.length<want&&g++<99){const y=s[0]+R(-3,3)*10;if(y>=lo&&y<=hi&&!s.includes(y))s.push(y)}return shuffle(s.slice(0,want))}; // money: whole tens only
+const uniqN=(a,lo,hi,want)=>{const s=[];a.forEach(x=>{if(x!=null&&x>=lo&&x<=hi&&!s.includes(x))s.push(x)});let g=0;while(s.length<want&&g++<99){const y=s[0]+R(-12,12);if(y>=lo&&y<=hi&&!s.includes(y))s.push(y)}return shuffle(s.slice(0,want))};
+const rods=(n,z)=>{z=z||1;const t=Math.floor(n/10),o=n%10;return `<div class="rods" style="--z:${z}">${'<i class="ten"></i>'.repeat(t)}<span class="ones">${'<b></b>'.repeat(o)}</span></div>`};
+// 1) Big Numbers: 21 to 99
+function num99Gen(l){const lo=l<1?21:11,hi=l<1?50:99,k=pick([["find","build"],["find","build","after"],["find","build","after","before","bigger"],["build","after","before","between","bigger","tens"]][l]),nc=l<1?3:4;
+ const n=R(lo,hi);
+ if(k==="find")return {prompt:"Find the number!",show:"🔊",say:`Find the number ${nw(n)}!`,choices:uniqN([n,rev(n),n+10,n-10,n+1],lo,99,nc),ans:n,item:`N99:${n}`,
+  hint:`${cap1(nw(n))}: ${NUMW[Math.floor(n/10)]} tens and ${NUMW[n%10]} ones. Look at the tens first!`};
+ if(k==="build")return {prompt:"How many?",show:rods(n),say:"How many? Count the tens, then the ones.",choices:uniqN([n,n+10,n-10,rev(n),n+1],10,99,nc),ans:n,item:`NB:${n}`,
+  hint:`Count the tens: ${TENW.slice(1,Math.floor(n/10)+1).join(", ")}. Then the ones. ${nw(n)}!`};
+ if(k==="after"||k==="before"){const m=k==="after"?Math.min(n,98):Math.max(n,12),a=k==="after"?m+1:m-1;
+  return {prompt:k==="after"?`What comes after ${m}?`:`What comes before ${m}?`,show:`<div class="seq">${k==="after"?`${m} → ?`:`? → ${m}`}</div>`,say:`What number comes ${k} ${nw(m)}?`,
+   choices:uniqN([a,k==="after"?m-1:m+1,a+10,rev(a)],10,99,nc),ans:a,item:`NA:${m}${k==="after"?"+":"-"}`,hint:k==="after"?`Count on one: ${nw(m)}, ${nw(a)}!`:`Count back one: ${nw(m)}, ${nw(a)}!`}}
+ if(k==="between"){const a=Math.min(Math.max(n,11),97),b=a+2;return {prompt:`What comes between ${a} and ${b}?`,show:`<div class="seq">${a} ? ${b}</div>`,say:`What number comes between ${nw(a)} and ${nw(b)}?`,
+  choices:uniqN([a+1,a,b,a+11],10,99,nc),ans:a+1,item:`NA:${a+1}~`,hint:`Count: ${nw(a)}, ${nw(a+1)}, ${nw(b)}!`}}
+ if(k==="bigger"){let a=n,b=Math.random()<.5&&rev(n)&&rev(n)!==n?rev(n):(Math.random()<.5?n+R(1,9):n-R(1,9)*10);b=Math.max(11,Math.min(99,b));if(b===a)b=a<99?a+1:a-1;
+  const big=Math.max(a,b),sm=Math.min(a,b),same=Math.floor(a/10)===Math.floor(b/10);
+  return {prompt:"Which is bigger?",show:"",say:"Which number is bigger?",choices:shuffle([a,b]).map(x=>({label:`<span style="font-size:1.3em">${x}</span>`,val:x})),ans:big,item:`NG:${sm}|${big}`,
+   hint:same?`Same tens. Look at the ones: ${NUMW[big%10]} is more than ${NUMW[sm%10]}. ${nw(big)} is bigger!`:`Look at the tens first: ${nw(big)} has more tens. It is bigger!`}}
+ const s=R(1,6)*10,a=s+30;return {prompt:"Count in tens!",show:`<div class="seq">${s}, ${s+10}, ${s+20}, ?</div>`,say:`Count in tens: ${nw(s)}, ${nw(s+10)}, ${nw(s+20)}. What comes next?`,
+  choices:uniqN([a,a+1,a-10+1,a+10],10,99,nc),ans:a,item:`NT:${a}`,hint:`Add one more ten: ${nw(s+20)}, ${nw(a)}!`}}
+// 2) Big Sums: adding and taking away with two-digit numbers, no carrying (NCERT Class 1, chapter 8)
+function add99Gen(l){const k=pick([["tens"],["tens","ones"],["ones","subones","subtens"],["two","twosub","ones","subones"]][l]);let a,b,op="+";
+ if(k==="tens"){a=R(1,5)*10;b=R(1,9-a/10)*10}
+ else if(k==="ones"){do{a=R(11,95)}while(a%10>8);b=R(1,9-a%10)}
+ else if(k==="subones"){do{a=R(12,99)}while(a%10<1);b=R(1,a%10);op="−"}
+ else if(k==="subtens"){a=R(3,9)*10;b=R(1,a/10-1)*10;op="−"}
+ else if(k==="two"){do{a=R(11,78)}while(a%10>8||Math.floor(a/10)>7);b=R(1,8-Math.floor(a/10))*10+R(0,9-a%10)}
+ else{do{a=R(25,99)}while(a%10<1||a<21);b=R(1,Math.floor(a/10)-1)*10+R(0,a%10);op="−"}
+ const ans=op==="+"?a+b:a-b,ti=Math.floor(ans/10),oi=ans%10;
+ return {prompt:`${a} ${op} ${b} = ?`,show:l<=1?`<div class="rodpair">${rods(a,.8)}<span class="op">${op}</span>${rods(b,.8)}</div>`:`<div class="seq">${a} ${op} ${b}</div>`,
+  say:`${nw(a)} ${op==="+"?"plus":"take away"} ${nw(b)}. How much is it?`,choices:uniqN([ans,ans+10,ans-10,ans+1,ans-1],0,99,4),ans,item:`AB:${a}${op==="+"?"+":"-"}${b}`,
+  hint:`Do the ones, then the tens. ${NUMW[ti]} tens and ${NUMW[oi]} ones: ${nw(ans)}!`}}
+// 3) My Day: parts of the day, daily routine, days of the week
+const DAYS=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const PARTS=[["morning","🌅","The sun comes up in the morning."],["afternoon","🌞","The sun is high in the afternoon."],["evening","🌇","The sun goes down in the evening."],["night","🌙","The moon comes out at night."]];
+const ROUT=[["wake up","⏰"],["brush your teeth","🪥"],["eat breakfast","🥣"],["go to school","🎒"],["come home","🏡"],["eat dinner","🍲"],["go to sleep","🛏️"]];
+function daysGen(l){const k=pick([["part","routine"],["part","routine","after"],["after","before","routine","week"],["after","before","between","routine","week"]][l]);
+ if(k==="part"){const p=pick(PARTS),ch=shuffle(PARTS).slice(0,l<1?3:4);if(!ch.includes(p))ch[0]=p;
+  return {prompt:`Find ${p[0]}!`,show:"🔊",say:`Which picture shows ${p[0]}?`,choices:shuffle(ch).map(x=>({label:`<span style="font-size:1.6em">${x[1]}</span>`,val:x[0]})),ans:p[0],item:`DY:part:${p[0]}`,hint:p[2]}}
+ if(k==="routine"){const i=R(0,ROUT.length-2),a=ROUT[i+1],ds=shuffle(ROUT.filter((x,j)=>Math.abs(j-(i+1))>=2&&j!==i)).slice(0,2);
+  return {prompt:"What comes next?",show:`<div class="bigpic">${ROUT[i][1]} → ?</div>`,say:`First we ${ROUT[i][0]}. What do we do next?`,choices:shuffle([a,...ds]).map(x=>({label:`<span style="font-size:1.6em">${x[1]}</span>`,val:x[0]})),
+   ans:a[0],item:`DY:next:${a[0]}`,hint:`After we ${ROUT[i][0]}, we ${a[0]}.`}}
+ if(k==="week")return {prompt:"How many days in a week?",show:`<div class="wk">${DAYS.map(d=>`<i>${d.slice(0,2)}</i>`).join("")}</div>`,say:"How many days are there in one week?",choices:[5,6,7,8].map(x=>x),ans:7,item:"DY:week",
+  hint:"Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday. Seven days!"};
+ const i=R(0,6),a=k==="after"?DAYS[(i+1)%7]:k==="before"?DAYS[(i+6)%7]:DAYS[(i+1)%7],q2=k==="between"?DAYS[(i+2)%7]:null;
+ const ch=shuffle([a,...shuffle(DAYS.filter(d=>d!==a&&d!==DAYS[i]&&d!==q2)).slice(0,2)]);
+ const ask=k==="after"?`What day comes after ${DAYS[i]}?`:k==="before"?`What day comes before ${DAYS[i]}?`:`What day comes between ${DAYS[i]} and ${q2}?`;
+ return {prompt:ask,show:"🔊",say:`${ask} ${ch.slice(0,-1).join(", ")}, or ${ch[ch.length-1]}?`,sayParts:[ask,...ch.map((c,j)=>j===ch.length-1?`or ${c}?`:c)],choices:ch.map(x=>({label:x,val:x,small:true})),ans:a,
+  item:`DY:${k}:${k==="before"?DAYS[i]:a}`,hint:`Say the days in order: ${DAYS.join(", ")}.`}}
+// 4) Word Fun: a or an, one or many, opposites, naming and action words, capital letters and full stops
+const AN_W=[["apple","🍎"],["egg","🥚"],["ant","🐜"],["owl","🦉"],["umbrella","☂️"],["orange","🍊"],["octopus","🐙"]],A_W=[["cat","🐱"],["dog","🐶"],["pen","🖊️"],["bus","🚌"],["hen","🐔"],["cup","🥤"],["hat","🎩"],["bed","🛏️"],["fish","🐟"]];
+const PLW=[["cat","🐱"],["dog","🐶"],["hen","🐔"],["cup","🥤"],["pen","🖊️"],["pig","🐷"],["hat","🎩"],["ant","🐜"],["egg","🥚"]];
+const OPP=[["big","🐘","small","🐭"],["hot","🔥","cold","🧊"],["happy","😀","sad","😢"],["fast","🐇","slow","🐢"],["day","☀️","night","🌙"],["up","⬆️","down","⬇️"],["tall","🦒","short","🐧"]];
+const VERBS=["run","hop","sit","dig","nap","hug","tap","jog"],NOUNS=["cat","sun","hat","pen","bus","cup","dog","bed"];
+function words2Gen(l){const k=pick([["aan","plural"],["aan","plural","opp"],["opp","action","plural","aan"],["action","punct","opp","aan","naming"]][l]);
+ if(k==="aan"){const an=Math.random()<.5,w=pick(an?AN_W:A_W),art=an?"an":"a";return {prompt:"a or an?",show:`<div class="bigpic">${w[1]}</div><div class="seq">___ ${w[0]}</div>`,say:`Which word goes before ${w[0]}: a, or an?`,
+  sayParts:[`Which word goes before ${w[0]}:`,"a, or an?"],choices:[{label:"a",val:"a"},{label:"an",val:"an"}],ans:art,item:`GA:${w[0]}`,
+  hint:an?`${cap1(w[0])} starts with a vowel sound. We say an ${w[0]}!`:`${cap1(w[0])} does not start with a vowel sound. We say a ${w[0]}!`}}
+ if(k==="plural"){const w=pick(PLW),n=Math.random()<.5?1:R(2,4),ans=n>1?w[0]+"s":w[0];return {prompt:"Which word?",show:`<div class="bigpic">${w[1].repeat(n)}</div>`,say:"Which word goes with the picture?",
+  choices:shuffle([w[0],w[0]+"s"]).map(x=>({label:x,val:x})),ans,item:`GP:${ans}`,hint:n>1?`More than one ${w[0]}: we add s. ${cap1(ans)}!`:`Just one: ${w[0]}!`}}
+ if(k==="opp"){const p=pick(OPP),flip=Math.random()<.5,[a,ae,b,be]=flip?[p[2],p[3],p[0],p[1]]:p,ds=shuffle(OPP.filter(x=>x!==p)).slice(0,2).map(x=>Math.random()<.5?[x[0],x[1]]:[x[2],x[3]]);
+  return {prompt:`Opposite of ${a}?`,show:`<div class="bigpic">${ae}</div>`,say:`This is ${a}. Which picture shows the opposite of ${a}?`,choices:shuffle([[b,be],...ds]).map(x=>({label:`<span style="font-size:1.6em">${x[1]}</span>`,val:x[0]})),
+   ans:b,item:`GO:${a}`,hint:`The opposite of ${a} is ${b}!`}}
+ if(k==="action"||k==="naming"){const v=k==="action",a=pick(v?VERBS:NOUNS),ds=shuffle(v?NOUNS:VERBS).slice(0,2),ch=shuffle([a,...ds]);
+  const ask=v?"Which is an action word, something you can do?":"Which is a naming word, the name of a thing?";
+  return {prompt:v?"Find the action word!":"Find the naming word!",show:"🔊",say:`${ask} ${ch[0]}, ${ch[1]}, or ${ch[2]}?`,sayParts:[ask,ch[0],ch[1],`or ${ch[2]}?`],choices:ch.map(x=>({label:x,val:x})),ans:a,item:`GV:${a}`,
+   hint:v?`You can ${a}! ${cap1(a)} is an action word.`:`A ${a} is a thing. ${cap1(a)} is a naming word.`}}
+ const s=pick(SENT.filter(x=>x[3]<=Math.max(1,LP.g|0)&&!/^I /.test(x[0])))[0],low=s[0].toLowerCase()+s.slice(1),nos=s.replace(/\.$/,""),ch=shuffle([s,low,nos]);
+ return {prompt:"Which is written right?",show:"",say:"Which sentence is written the right way? Look for a capital letter at the start and a full stop at the end.",
+  sayParts:["Which sentence is written the right way?","Look for a capital letter at the start and a full stop at the end."],choices:ch.map(x=>({label:x,val:x,small:true})),ans:s,item:`GC:${s}`,
+  hint:"A sentence starts with a capital letter and ends with a full stop."}}
+// 5) Solid Shapes and where things are
+const SOL={sphere:["⚽","ball"],cube:["🎲","dice"],cylinder:["🥫","tin"],cone:["🍦","ice cream cone"],cuboid:["📦","box"]},SOLS=Object.keys(SOL);
+function solidSVG(k,z){z=z||90;const C="var(--accent)",D="var(--accent-dk)",L="var(--gold-l)";const g={
+ sphere:`<defs><radialGradient id="sg" cx="35%" cy="35%" r="70%"><stop offset="0" stop-color="${L}"/><stop offset="1" stop-color="${D}"/></radialGradient></defs><circle cx="50" cy="52" r="38" fill="url(#sg)"/>`,
+ cube:`<polygon points="20,35 50,20 80,35 50,50" fill="${L}"/><polygon points="20,35 50,50 50,88 20,73" fill="${C}"/><polygon points="80,35 50,50 50,88 80,73" fill="${D}"/>`,
+ cuboid:`<polygon points="8,40 58,24 92,36 42,52" fill="${L}"/><polygon points="8,40 42,52 42,82 8,70" fill="${C}"/><polygon points="92,36 42,52 42,82 92,66" fill="${D}"/>`,
+ cylinder:`<rect x="24" y="24" width="52" height="58" fill="${C}"/><ellipse cx="50" cy="82" rx="26" ry="9" fill="${C}"/><ellipse cx="50" cy="24" rx="26" ry="9" fill="${L}"/><rect x="58" y="24" width="18" height="58" fill="${D}" opacity=".5"/>`,
+ cone:`<polygon points="50,12 22,80 78,80" fill="${C}"/><polygon points="50,12 62,80 78,80" fill="${D}" opacity=".55"/><ellipse cx="50" cy="80" rx="28" ry="9" fill="${L}"/>`}[k];
+ return `<svg class="sol" width="${z}" height="${z}" viewBox="0 0 100 100" aria-label="${k}">${g}</svg>`}
+const POS={on:"on the log",in:"in the log","next to":"next to the log",under:"under the tree"};
+function posScene(p,z){z=z||1;const big=p==="under"?`<img src="assets/tree_main.webp" alt="" style="left:22%;bottom:4%;width:60%">`:`<img src="assets/log_main.webp" alt="" style="left:26%;bottom:6%;width:66%">`;
+ const c={on:"left:42%;bottom:54%;width:26%",in:"left:76%;bottom:30%;width:13%","next to":"left:0%;bottom:4%;width:26%",under:"left:38%;bottom:2%;width:22%"}[p];
+ return `<span class="pos" style="--z:${z}">${big}<img src="assets/chick_awake.webp" alt="" style="${c}"></span>`}
+function solidGen(l){const k=pick([["like"],["like","pos"],["like","name","pos"],["name","roll","pos","like"]][l]),nc=l<1?3:4;
+ if(k==="pos"){const p=pick(Object.keys(POS)),ch=shuffle([p,...shuffle(Object.keys(POS).filter(x=>x!==p)).slice(0,2)]);
+  return {prompt:`Chick ${POS[p]}!`,show:"🔊",say:`Tap the picture where the chick is ${POS[p]}.`,choices:ch.map(x=>({label:posScene(x),val:x})),ans:p,item:`PO:${p}`,hint:`Look for the chick ${POS[p]}!`}}
+ if(k==="roll"){const a=pick(["sphere","cylinder"]),ds=["cube","cuboid"];return {prompt:"Which can roll?",show:"",say:"Which shape can roll?",choices:shuffle([a,...ds]).map(x=>({label:solidSVG(x,80),val:x})),ans:a,item:"S3:roll",
+  hint:"Round shapes can roll. Flat sides make a shape slide!"}}
+ const s=pick(SOLS),ds=shuffle(SOLS.filter(x=>x!==s)).slice(0,nc-1);
+ if(k==="like")return {prompt:`Like a ${SOL[s][1]}!`,show:`<div class="bigpic">${SOL[s][0]}</div>`,say:`Which shape looks like this ${SOL[s][1]}?`,choices:shuffle([s,...ds]).map(x=>({label:solidSVG(x,80),val:x})),ans:s,item:`S3:${s}`,
+  hint:`A ${SOL[s][1]} is a ${s}!`};
+ return {prompt:`Find a ${s}!`,show:solidSVG(s,innerHeight<700?96:124),say:`This shape is a ${s}. Which thing is a ${s}?`,choices:shuffle([s,...ds]).map(x=>({label:`<span style="font-size:1.6em">${SOL[x][0]}</span>`,val:x})),ans:s,item:`S3:${s}`,
+  hint:`A ${SOL[s][1]} is a ${s}!`}}
+// 6) Notes and Shop: ₹10, ₹20, ₹50, ₹100 notes; adding money; paying; what is left
+const NOTES=[10,20,50,100],noteH=v=>`<span class="note n${v}">₹${v}</span>`,moneyH=a=>`<span class="mny">${a.map(noteH).join("")}</span>`;
+const SHOPIT=[["🍎","apple"],["🎈","balloon"],["📒","notebook"],["🧃","juice"],["✏️","pencil"],["🧸","teddy"]];
+function payWith(p){const out=[];let r=p;[50,20,10].forEach(v=>{while(r>=v){out.push(v);r-=v}});return out}
+function shopGen(l){const k=pick([["find","sum"],["find","sum","pay"],["sum","pay"],["pay","left","sum"]][l]);
+ if(k==="find"){const v=pick(NOTES),ch=shuffle([v,...shuffle(NOTES.filter(x=>x!==v)).slice(0,l<1?2:3)]);
+  return {prompt:`Find ₹${v}!`,show:"🔊",say:`Find the ${nw(v)} rupee note!`,choices:ch.map(x=>({label:noteH(x),val:x})),ans:v,item:`MN:${v}`,hint:`Look at the number on the note: ${v}!`}}
+ if(k==="sum"){let a;do{a=Array.from({length:R(2,3)},()=>pick(l<2?[10,20]:[10,20,50]))}while(a.reduce((s,x)=>s+x,0)>90);a.sort((x,y)=>y-x);const t=a.reduce((s,x)=>s+x,0);
+  return {prompt:"How much money?",show:moneyH(a),say:"How much money is this?",choices:uniq10([t,t+10,t-10,t+20],10,90,4).map(x=>({label:`₹${x}`,val:x})),ans:t,item:`MN:sum:${t}`,
+   hint:`Count on from the biggest note: ${a.map(nw).join(", then ")}. ${nw(t)} rupees!`}}
+ const it=pick(SHOPIT),p=R(2,l<2?5:9)*10;
+ if(k==="left"){const have=p<=40?50:100,left=have-p;return {prompt:`₹${have} − ₹${p} = ?`,show:`<div class="bigpic">${it[0]}</div><div class="seq">₹${p}</div>`,say:`You have ${nw(have)} rupees. The ${it[1]} costs ${nw(p)} rupees. How much is left?`,
+  choices:uniq10([left,left+10,left-10,p],0,100,4).map(x=>({label:`₹${x}`,val:x})),ans:left,item:`MN:left:${left}`,hint:`Count up from ${nw(p)} to ${nw(have)}: that is ${nw(left)}!`}}
+ const good=payWith(p),bad1=payWith(p+10),bad2=payWith(Math.max(10,p-10)),ch=shuffle([good,bad1,bad2]);
+ return {prompt:`Pay ₹${p}!`,show:`<div class="bigpic">${it[0]}</div><div class="seq">₹${p}</div>`,say:`The ${it[1]} costs ${nw(p)} rupees. Which money makes ${nw(p)} rupees?`,
+  choices:ch.map(a=>({label:moneyH(a),val:a.reduce((s,x)=>s+x,0)})),ans:p,item:`MN:pay:${p}`,hint:`Add up the notes. They must make ${nw(p)} rupees.`}}
+// 7) Picture Graphs
+const GRA=[["🐝","bees"],["🐞","ladybirds"],["🦋","butterflies"],["🐌","snails"]];
+function graphGen(l){const k=pick([["count","most"],["count","most","fewest"],["most","fewest","count","more"],["more","total","fewest","most"]][l]),rows=shuffle(GRA).slice(0,3),mx=l<1?5:8;
+ let ns;do{ns=rows.map(()=>R(1,mx))}while(new Set(ns).size<3);const tab=`<div class="pg">${rows.map((r,i)=>`<div class="pgr"><span class="pgl">${r[0]}</span><span class="pgi">${r[0].repeat(ns[i])}</span></div>`).join("")}</div>`;
+ const hi=ns.indexOf(Math.max(...ns)),lo=ns.indexOf(Math.min(...ns));
+ if(k==="count"){const i=R(0,2);return {prompt:`How many ${rows[i][1]}?`,show:tab,say:`Look at the picture graph. How many ${rows[i][1]} are there?`,choices:uniqN([ns[i],ns[i]+1,ns[i]-1,ns[(i+1)%3]],1,9,4),ans:ns[i],item:"PG:count",
+  hint:`Count the ${rows[i][1]} in their row!`}}
+ if(k==="most"||k==="fewest"){const j=k==="most"?hi:lo;return {prompt:k==="most"?"Which has the most?":"Which has the fewest?",show:tab,say:k==="most"?"Which animal has the most? Find the longest row.":"Which animal has the fewest? Find the shortest row.",
+  choices:shuffle(rows).map(r=>({label:`<span style="font-size:1.6em">${r[0]}</span>`,val:r[1]})),ans:rows[j][1],item:`PG:${k}`,hint:k==="most"?"The longest row has the most!":"The shortest row has the fewest!"}}
+ if(k==="more"){const d=ns[hi]-ns[lo];return {prompt:`How many more ${rows[hi][1]}?`,show:tab,say:`How many more ${rows[hi][1]} than ${rows[lo][1]}?`,choices:uniqN([d,d+1,d-1,ns[hi]],0,9,4),ans:d,item:"PG:more",
+  hint:`${NUMW[ns[hi]]} ${rows[hi][1]}, ${NUMW[ns[lo]]} ${rows[lo][1]}. Count the extra ones: ${NUMW[d]}!`}}
+ const t=ns.reduce((s,x)=>s+x,0);return {prompt:"How many altogether?",show:tab,say:"How many animals are there altogether?",choices:uniqN([t,t+1,t-1,t+2],1,30,4),ans:t,item:"PG:total",hint:"Count every animal in every row!"}}
+// ---------- games, places, skills ----------
+const C1=[{id:"num99",name:"Big Numbers",icon:"💯",col:"var(--accent)",gen:num99Gen,place:"tree",area:"m",need:["cnt20","tens"]},
+ {id:"add99",name:"Big Sums",icon:"➕",col:"var(--green)",gen:add99Gen,place:"tree",area:"m",need:["add10","take","tens"]},
+ {id:"graph",name:"Picture Graphs",icon:"📊",col:"var(--gold)",gen:graphGen,place:"tree",area:"m",need:["cnt10","more"]},
+ {id:"solid",name:"Solid Shapes",icon:"🎲",col:"var(--rose)",gen:solidGen,place:"pond",area:"m",need:["shapes"]},
+ {id:"words2",name:"Word Fun",icon:"🔡",col:"var(--plum-l)",gen:words2Gen,place:"log",area:"e",need:["blend","words"]},
+ {id:"days",name:"My Day",icon:"📅",col:"var(--accent)",gen:daysGen,place:"home",area:"m",need:["cnt10","letname"]},
+ {id:"shop",name:"Notes and Shop",icon:"🛍️",col:"var(--gold)",gen:shopGen,place:"home",area:"m",need:["coins","add10"]}];
+C1.forEach(c=>{c.lock=()=>!c1Open(c.id)});
+C1.forEach(c=>{const g=c.gen;c.gen=function(l){const x=g(l);if(x.hint)x.hint=cap1(x.hint);if(x.hintParts)x.hintParts=x.hintParts.map(cap1);return x}}); // hints start with a capital letter
+PLANETS.push(...C1.map(c=>({id:c.id,name:c.name,icon:c.icon,col:c.col,maxl:3,gen:c.gen,c1:1,lock:c.lock})));
+C1.forEach(c=>{ZONES.find(z=>z.id===c.place).p.push(c.id);(c.area==="e"?ENG:MATHS).push(c.id)});
+Object.assign(MP,{num99:["N99:","NB:","NA:","NG:","NT:"],add99:["AB:"],graph:["PG:"],solid:["S3:","PO:"],words2:["GA:","GP:","GO:","GV:","GC:"],days:["DY:"],shop:["MN:"]});
+Object.assign(AREA_OF,{num99:"Numbers to 99",add99:"Big sums",graph:"Picture graphs",solid:"Solid shapes",words2:"Word fun",days:"Days and time",shop:"Notes and shop"});
+SKILLS.push(
+ {id:"n99",name:"Numbers to 99",area:"Maths",g:"num99",c1:1,m:k=>/^(N99|NB|NA|NG|NT):/.test(k)},
+ {id:"a99",name:"Adding and taking away to 99",area:"Maths",g:"add99",c1:1,m:k=>k.startsWith("AB:")},
+ {id:"graphs",name:"Picture graphs",area:"Maths",g:"graph",c1:1,m:k=>k.startsWith("PG:")},
+ {id:"solid",name:"Solid shapes",area:"Maths",g:"solid",c1:1,m:k=>k.startsWith("S3:")},
+ {id:"pos",name:"Where things are (on, in, under)",area:"Maths",g:"solid",c1:1,m:k=>k.startsWith("PO:")},
+ {id:"aan",name:"a / an and one / many",area:"Reading",g:"words2",c1:1,m:k=>/^(GA|GP):/.test(k)},
+ {id:"opp",name:"Opposites",area:"Reading",g:"words2",c1:1,m:k=>k.startsWith("GO:")},
+ {id:"wtype",name:"Naming and action words",area:"Reading",g:"words2",c1:1,m:k=>k.startsWith("GV:")},
+ {id:"punct",name:"Capital letters and full stops",area:"Reading",g:"words2",c1:1,m:k=>k.startsWith("GC:")},
+ {id:"days",name:"My day and days of the week",area:"Maths",g:"days",c1:1,m:k=>k.startsWith("DY:")},
+ {id:"notes",name:"Notes and shopping",area:"Maths",g:"shop",c1:1,m:k=>k.startsWith("MN:")});
+// ---------- opening a Class 1 game: when every skill it builds on is strong (8+ answers, 75%+, right on 2+ days) ----------
+if(!S.c1u||typeof S.c1u!=="object")S.c1u={};
+const c1Ready=c=>c.need.every(id=>{const s=SKILLS.find(x=>x.id===id);return s&&skillStats(s).status==="strong"});
+function c1Open(id){const c=C1.find(x=>x.id===id);return !!(c&&(S.c1all||S.c1u[id]))}
+let c1Queue=[];
+function c1Check(){C1.forEach(c=>{if(!S.c1u[c.id]&&c1Ready(c)){S.c1u[c.id]=1;save();if(!S.c1all)c1Queue.push(c)}})}
+const C1TXT={pop:"New game!",say:"A new game is open: {g}, at {p}!",lock:"Keep playing {n} to open {g}!",soon:"🔒"};
+const placeName=id=>(ZONES.find(z=>z.id===id)||{}).name||"";
+const c1Needs=c=>[...new Set(c.need.map(id=>SKILLS.find(s=>s.id===id)).filter(s=>s&&skillStats(s).status!=="strong").map(s=>(PLANETS.find(p=>p.id===s.g)||{name:"Story Corner"}).name))];
+setInterval(()=>{if(window.__stHold)return;if(c1Queue.length&&stCalm()&&!$("stPop").classList.contains("on")){const c=c1Queue.shift(),sp=$("stPop").querySelector(".spt"),t0=sp.textContent;sp.textContent=C1TXT.pop;
+ stPopShow(`<span style="font-size:110px">${c.icon}</span><div style="font-size:26px;font-weight:bold;color:var(--ink)">${c.name}</div>`);say(C1TXT.say.replace("{g}",c.name).replace("{p}",placeName(c.place)));
+ const r=()=>{sp.textContent=t0;$("stPopOk").removeEventListener("click",r)};$("stPopOk").addEventListener("click",r)}},700);
+{const _f=finish;finish=function(){const r=_f.apply(this,arguments);try{c1Check()}catch(e){}return r}}
+c1Check();c1Queue=[]; // already-earned games open quietly on load
+{const _dm=drawMap;drawMap=function(){const r=_dm.apply(this,arguments);C1.forEach(c=>{const b=document.querySelector(`#map .planet[data-pid="${c.id}"]`);if(!b||c1Open(c.id))return;
+  b.classList.add("lock");b.style.filter="grayscale(.75)";const nd=c1Needs(c);b.innerHTML=`<span>${C1TXT.soon}</span><span class="pl">${c.name}</span>`;
+  b.onclick=()=>{sfx.tap();say(C1TXT.lock.replace("{n}",nd.join(" and ")||"more games").replace("{g}",c.name))}});return r}}
+{const _sp=startPlanet;startPlanet=function(p){const c=p&&C1.find(x=>x.id===p.id);if(c&&!c1Open(c.id)){say(C1TXT.lock.replace("{n}",c1Needs(c).join(" and ")||"more games").replace("{g}",c.name));return}return _sp.apply(this,arguments)}}
+{const _pj=pickJourney;pickJourney=function(now){const lk=C1.filter(c=>!c1Open(c.id)).map(c=>c.id),sp=[];[MATHS,ENG].forEach(A=>lk.forEach(id=>{const i=A.indexOf(id);if(i>=0){A.splice(i,1);sp.push([A,i,id])}}));
+  try{return _pj.apply(this,arguments)}finally{sp.reverse().forEach(([A,i,id])=>A.splice(i,0,id))}};__test3.pickJourney=pickJourney}
+// grown-ups: what each Class 1 game needs, and a switch to open them all now
+{const _dp=drawParent;drawParent=function(){const r=_dp.apply(this,arguments);const host=document.querySelector("#parentS .parent");if(!host)return r;
+  const old=document.getElementById("c1Box");if(old)old.remove();
+  const rows=C1.map(c=>{const open=c1Open(c.id),st=c.need.map(id=>{const s=SKILLS.find(x=>x.id===id),x=skillStats(s);return `${s.name} (${x.status==="strong"?"✅":Math.round(x.str*100)+"%"})`});
+   return `<li><b>${c.icon} ${c.name}</b> (${placeName(c.place)}): ${open?"open":"opens when strong in "+st.join(", ")}</li>`}).join("");
+  const gdz=host.querySelector(".gdz");(gdz||host).insertAdjacentHTML(gdz?"beforebegin":"beforeend",`<div id="c1Box" class="c1card"><h3>Class 1 games</h3><ul style="margin:6px 0;padding-left:22px">${rows}</ul>
+   <small>Strong means 8 or more answers, 75% right first time, on at least 2 different days.</small><br><label><input type="checkbox" id="optC1"${S.c1all?" checked":""}> Open all Class 1 games now</label></div>`);
+  $("optC1").onchange=e=>{S.c1all=e.target.checked;save()};return r}}
+document.head.insertAdjacentHTML("beforeend",`<style>
+.c1card{background:rgba(var(--card-rgb),.96);border:2px solid rgba(var(--plum-rgb),.14);border-radius:20px;padding:14px 16px;box-shadow:0 3px 10px rgba(var(--plum-rgb),.10);margin:12px 0}.c1card h3{margin:0 0 10px;font-size:20px;color:var(--ink)}
+.rods{display:inline-flex;align-items:flex-end;gap:calc(5px*var(--z,1));padding:6px;vertical-align:middle}.rods i.ten{display:block;width:calc(14px*var(--z,1));height:calc(110px*var(--z,1));border-radius:4px;
+ background:repeating-linear-gradient(to top,var(--gold) 0,var(--gold) calc(10% - 1px),var(--gold-dk) calc(10% - 1px),var(--gold-dk) 10%);box-shadow:0 0 0 1.5px var(--gold-dk)}
+.rods .ones{display:inline-grid;grid-template-columns:repeat(2,calc(14px*var(--z,1)));gap:3px;margin-left:6px}.rods .ones b{display:block;width:calc(14px*var(--z,1));height:calc(14px*var(--z,1));border-radius:3px;background:var(--accent);box-shadow:0 0 0 1.5px var(--accent-dk)}
+.rodpair{display:flex;align-items:flex-end;justify-content:center;flex-wrap:wrap;gap:4px}.rodpair .op{font-size:40px;font-weight:bold;color:var(--plum);align-self:center}
+.wk{display:flex;gap:4px;justify-content:center;flex-wrap:wrap}.wk i{font-style:normal;background:var(--gold-l);border-radius:10px;padding:6px 8px;font-size:18px;font-weight:bold}
+.sol{display:block;margin:auto}
+.pos{position:relative;display:block;width:calc(132px*var(--z,1));height:calc(92px*var(--z,1))}.pos img{position:absolute;height:auto}
+.note{display:inline-flex;align-items:center;justify-content:center;font-weight:bold;border-radius:6px;margin:2px;color:var(--ink);box-shadow:inset 0 0 0 3px rgba(var(--ink-rgb),.25);font-size:20px;height:44px}
+.note.n10{width:78px;background:var(--accent-l)}.note.n20{width:86px;background:var(--gold-l)}.note.n50{width:94px;background:var(--rose-l)}.note.n100{width:102px;background:var(--plum-l);color:var(--card)}
+.mny{display:inline-flex;flex-wrap:wrap;justify-content:center;max-width:300px}
+.pg{display:inline-block;text-align:left;background:var(--card);border-radius:16px;padding:6px 10px;box-shadow:inset 0 0 0 2px var(--line)}.pgr{display:flex;align-items:center;gap:8px;border-bottom:1px dashed var(--line);padding:3px 0;font-size:26px}
+.pgr:last-child{border:none}.pgl{border-right:2px solid var(--line);padding-right:6px}.pgi{letter-spacing:2px}
+@media (max-width:380px){.pgr{font-size:22px}.rods i.ten{height:calc(90px*var(--z,1))}}
+</style>`);
+// ---------- tests ----------
+__test3.check7B=function(){const bad=[],f=m=>{if(bad.length<30)bad.push(m)},keep={all:S.c1all,u:JSON.stringify(S.c1u),cur};
+ try{C1.forEach(c=>{const P=PLANETS.find(p=>p.id===c.id);if(!P)return f("no planet "+c.id);if(!ZONES.some(z=>z.p.includes(c.id)))f("no place "+c.id);
+  for(let l=0;l<=3;l++)for(let i=0;i<300;i++){let x;try{x=P.gen(l)}catch(e){f(`${c.id} l${l}: ${e.message}`);break}
+   const v=(x.choices||[]).map(y=>typeof y==="object"?y.val:y);if(v.length<2)f(`${c.id} l${l}: ${v.length} choices`);if(!v.some(y=>y===x.ans))f(`${c.id} l${l}: answer missing ${x.ans} in ${v}`);
+   if(new Set(v.map(String)).size!==v.length)f(`${c.id} l${l}: same choice twice ${v}`);if(!x.item||!SKILL_OF(x.item))f(`${c.id}: item ${x.item} has no skill`);if(!x.say||!x.hint)f(`${c.id}: say/hint`);
+   if(typeof x.ans==="number"&&(x.ans<0||x.ans>100))f(`${c.id}: answer ${x.ans}`);if(c.id==="shop"&&/money|left|−/.test(x.prompt+x.say)&&v.some(y=>typeof y==="number"&&y%10))f("shop: money not in tens "+v);if(x.item&&x.item.startsWith("AB:")){const m=x.item.match(/AB:(\d+)([+-])(\d+)/),a=+m[1],b=+m[3];
+    if(m[2]==="+"&&(a%10+b%10>9||a+b>99))f("carry in "+x.item);if(m[2]==="-"&&(a%10<b%10||b>a))f("borrow in "+x.item)}}});
+  if(nw(42)!=="forty two"||nw(90)!=="ninety"||nw(17)!=="seventeen")f("number words");
+  // locked by default, opened by strong skills or the switch
+  S.c1all=false;S.c1u={};if(c1Open("num99"))f("open without skills");if(!bkLocked(PLANETS.find(p=>p.id==="num99")))f("lock not seen by tests");
+  S.c1all=true;if(!c1Open("num99"))f("switch does not open");S.c1all=false;
+  const kM=JSON.stringify(M),kL=JSON.stringify(__test3.LG);try{const L={ev:[]},d=n=>dkey(new Date(Date.now()-n*864e5));
+   for(let i=1;i<=9;i++)["C:1"+i,"P:1"+i].forEach(k=>{M[k]={a:3,f:3,b:4,t:Date.now()};L.ev.push({k,ok:1,d:d(i%2),t:Date.now()})});__test3.setLG(L);c1Check();if(!S.c1u.num99)f("num99 not opened by strong counting 11-20 and tens");
+  }finally{M=JSON.parse(kM);__test3.setLG(JSON.parse(kL))}
+  // each game plays on screen at both sizes without errors
+  S.c1all=true;C1.forEach(c=>{startPlanet(PLANETS.find(p=>p.id===c.id));if(!$("game").classList.contains("on")||!$("choices").children.length)f(c.id+": no screen");clearTimeout(nextT)});
+ }catch(e){f("error "+e.message)}finally{S.c1all=keep.all;S.c1u=JSON.parse(keep.u);c1Queue=[];cur=keep.cur;clearTimeout(nextT);show("start")}return bad};
+{const _sc7b=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc7b.call(this,N);["num99","words2"].forEach(id=>{if(r.bad[id])r.bad[id]=r.bad[id].filter(x=>!(x[1]==="fewer than 3 choices"&&/bigger|a or an|Which word/.test(x[2])));if(r.bad[id]&&!r.bad[id].length)delete r.bad[id]});Object.keys(r.bad).filter(k=>/^words2@g\d$/.test(k)).forEach(k=>{r.bad[k]=r.bad[k].filter(x=>x[1]!=="fewer than 3 choices");if(!r.bad[k].length)delete r.bad[k]}); /* 7B: "which is bigger", "a or an" and "one or many" have two answers by nature */const b=__test3.check7B();if(b.length)r.bad.check7B=b;return r}}
+__test3.phrasesC1=function(n){n=n||400;const L=new Set(),add=t=>{if(t)L.add(String(t))};C1.forEach(c=>{for(let l=0;l<=3;l++)for(let i=0;i<n;i++){const x=c.gen(l);(x.sayParts||[x.say]).forEach(add);(x.hintParts||[x.hint]).forEach(add)}});
+  [C1TXT.say,C1TXT.lock].forEach(()=>0);C1.forEach(c=>{add(C1TXT.say.replace("{g}",c.name).replace("{p}",placeName(c.place)))});return [...L].sort()};
+Object.assign(__test3,{C1,c1Open,c1Check,c1Ready,nw,num99Gen,add99Gen,daysGen,words2Gen,solidGen,shopGen,graphGen});
+</script>
 <script id="batch4">
 // ---------- Batch 4: install app (text-only, no voice) ----------
 (function(){let deferred=null,dismissed=false,installed=false;
