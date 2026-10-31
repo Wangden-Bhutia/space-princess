@@ -185,12 +185,14 @@ body{min-height:100vh;min-height:100dvh}
 <section id="start" class="screen on">
   <div style="display:flex;justify-content:flex-end"><button id="instStart" style="display:none;margin-right:auto;align-self:center;font-size:18px;padding:10px 16px;border-radius:22px;border:2px solid rgba(var(--ink-rgb),.4);background:rgba(var(--plum-rgb),.12);color:var(--ink);font-family:inherit">📲 Install app</button><button class="icon hold" id="gearBtn" aria-label="Grown-ups: press and hold for 2 seconds">⚙️</button></div>
   <div id="gearTip"></div>
-  <h1 id="ttl">🏡 Zippet's Walk Home</h1>
-  <div class="hero" style="font-size:80px">🌳🌼🏡</div>
-  <button class="big" id="advBtn" style="background:linear-gradient(var(--gold-l),var(--gold));color:var(--ink);box-shadow:0 8px 0 var(--gold-dk);font-size:clamp(30px,7vw,48px);padding:20px 34px">🗺️ Today's Adventure</button>
-  <button class="big" id="playBtn">🌳 Pick a place</button>
-  <button class="big alt" id="collBtn1">🌟 My Stickers</button>
-  <div id="days" style="font-size:clamp(20px,4.4vw,30px);color:var(--plum);margin:8px 0;min-height:1.3em"></div>
+  <div class="hero" id="homeHero" aria-hidden="true"></div>
+  <h1 id="ttl">Zippet's Walk Home</h1>
+  <div class="menu" id="homeMenu">
+  <button class="big" id="advBtn"><span class="bi" id="advI"></span><span class="bt">Today's Adventure</span></button>
+  <button class="big" id="playBtn"><span class="bi" id="playI"></span><span class="bt">Pick a place</span></button>
+  <button class="big alt" id="collBtn1"><span class="bi">⭐</span><span class="bt">My Stickers</span></button>
+  </div>
+  <div id="days"></div>
 </section>
 
 <section id="parentS" class="screen">
@@ -1632,8 +1634,8 @@ const HILL_SVG=`<svg class="hillsvg" viewBox="0 0 400 420" preserveAspectRatio="
 <ellipse cx="320" cy="120" rx="70" ry="22" fill="var(--pond)"/><ellipse cx="320" cy="118" rx="40" ry="10" fill="none" stroke="var(--card)" stroke-width="2" opacity=".7"/>
 <ellipse data-k="puddle" cx="66" cy="302" rx="50" ry="13" fill="var(--pond)"/>
 <g data-k="log"><rect x="272" y="286" width="108" height="30" rx="15" fill="var(--accent-dk)"/><ellipse cx="274" cy="301" rx="12" ry="15" fill="var(--gold-l)"/><ellipse cx="274" cy="301" rx="6" ry="8" fill="var(--accent-xxdk)"/></g>
-<rect x="160" y="330" width="80" height="62" fill="var(--rose-l)"/><polygon points="150,332 200,292 250,332" fill="var(--plum)"/><rect x="190" y="356" width="20" height="36" rx="4" fill="var(--accent-dk)"/><rect x="168" y="344" width="16" height="14" fill="var(--gold-l)"/><rect x="216" y="344" width="16" height="14" fill="var(--gold-l)"/>
-</svg>`;
+
+</svg>`; // 6K: the drawn house is gone; Home Door shows the painted cottage with Zippet beside it
 document.head.insertAdjacentHTML("beforeend",`<style>:root{--pond:#CBB0D9}
 .art{display:inline-flex;align-items:center;justify-content:center;line-height:1;vertical-align:middle;object-fit:contain;flex:none}.artb{border-radius:50%;background:var(--grey);font-size:0!important}
 #map.hill{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"tree pond" "puddle log" "home home";gap:12px;padding:12px;margin-top:10px;border-radius:24px;overflow:hidden;background:linear-gradient(var(--sky-top),var(--sky-bottom));min-height:420px}
@@ -1994,7 +1996,7 @@ __test3.check6F=function(){const bad=[],f=m=>{if(bad.length<30)bad.push(m)};
  __test3.checkWordsB().forEach(m=>f("checkWordsB: "+m));
  // F5: heading names the place; drawings tagged
  if(!/data-k="puddle"/.test(HILL_SVG)||!/data-k="log"/.test(HILL_SVG))f("hill drawings not tagged");
- const mz=MZ,on=$("mapS").classList.contains("on");try{ZONES.forEach(z=>{MZ=z.id;drawMap();const c=CAST.find(x=>x.id===z.who),t=$("mapH").textContent.trim();if(t!==c.emoji+" "+z.name)f("heading "+z.id+": "+t)});MZ=null;drawMap();if($("mapH").textContent.trim()!==MAP_ICON+" "+MAP_H2)f("hill heading")}finally{MZ=mz;drawMap();$("mapS").classList.toggle("on",on)}
+ const mz=MZ,on=$("mapS").classList.contains("on");try{ZONES.forEach(z=>{MZ=z.id;drawMap();const t=$("mapHT").textContent.trim();if(t!==z.name)f("heading "+z.id+": "+t)});MZ=null;drawMap();if($("mapHT").textContent.trim()!==MAP_H2)f("hill heading") /* 6K: the heading icon is a picture now, so only the words are compared */}finally{MZ=mz;drawMap();$("mapS").classList.toggle("on",on)}
  // F6
  try{const x=new XMLHttpRequest();x.open("GET","manifest.json",false);x.send();if(x.status===200){const m=JSON.parse(x.responseText);if(m.short_name!=="Zippet"||m.name!=="Zippet's Walk Home")f("manifest")}}catch(e){}
  return bad};
@@ -2084,6 +2086,60 @@ const _sc6d=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6d.call(t
 Object.assign(__test3,{BGS,BG_IDS,bgOf,STORY_SIGHT});
 </script>
 
+<script id="p6k">
+// ---------- Part 6K: painted home screen, picture navigation icons, Home Door cottage, button polish ----------
+const ICON_HILL=`<svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="33" cy="15" r="7" fill="var(--gold)"/><path d="M1 41C8 24 20 22 31 41Z" fill="var(--green-l)"/><path d="M13 42C22 26 36 25 47 42Z" fill="var(--green)"/><rect x="1" y="39" width="46" height="5" rx="2.5" fill="var(--ok)"/></svg>`; // palette only
+const NAV_HILL="Back to the hill",NAV_HOME="Home",HILL_BACKS=["backBtn","back2","bBack","stBack"];
+document.head.insertAdjacentHTML("beforeend",`<style>
+#start #homeHero{margin-top:auto;display:flex;align-items:flex-end;justify-content:center;gap:2px;min-height:136px}
+#start #ttl{margin:6px 0 20px;font-size:clamp(32px,8.6vw,50px);line-height:1.1;text-shadow:none}
+#start #days{margin:14px 0 auto;font-size:clamp(17px,4.4vw,22px);color:var(--plum);min-height:1.3em}
+#homeMenu{display:flex;flex-direction:column;gap:16px;width:min(100%,380px);margin:0 auto}
+#homeMenu .big{display:flex;align-items:center;gap:14px;width:100%;margin:0;min-width:0;min-height:76px;padding:10px 22px 10px 12px;border-radius:40px;font-size:clamp(22px,6vw,28px);text-align:left;line-height:1.15}
+#homeMenu .bi{flex:none;width:56px;height:56px;border-radius:50%;background:rgba(var(--card-rgb),.92);display:flex;align-items:center;justify-content:center;font-size:32px;overflow:hidden}
+#homeMenu .bi .ico{width:42px;height:42px}#homeMenu .bt{flex:1}
+#homeMenu #advBtn{background:linear-gradient(var(--gold-l),var(--gold));color:var(--ink);box-shadow:0 8px 0 var(--gold-dk);min-height:90px;font-size:clamp(25px,6.8vw,32px)}
+#homeMenu #advBtn:active{box-shadow:0 2px 0 var(--gold-dk)}#homeMenu #advBtn .bi{width:66px;height:66px}
+.icon .ico{width:46px;height:46px;display:block;margin:auto}
+#mapH #princess .ico{width:44px;height:44px;vertical-align:middle}
+#map .p-home .hdart{display:flex;align-items:flex-end;justify-content:center;gap:0}
+.pbtn{display:inline-flex!important;align-items:center;justify-content:flex-start;gap:12px;width:min(100%,340px);min-height:68px;padding:8px 22px 8px 10px!important;margin:8px auto!important;border-radius:36px;text-align:left}
+.pbtn .bi{flex:none;width:52px;height:52px;border-radius:50%;background:rgba(var(--card-rgb),.92);display:flex;align-items:center;justify-content:center;overflow:hidden}.pbtn .bi .ico{width:40px;height:40px}.pbtn .bt{flex:1}
+#choices .pbtn{display:flex!important}
+@media (max-height:700px){#start #homeHero{min-height:0;zoom:.72}#start #ttl{margin:2px 0 12px}#homeMenu{gap:10px}#homeMenu .big{min-height:62px}#homeMenu #advBtn{min-height:74px}}
+</style>`);
+function homeArt(){$("homeHero").innerHTML=art("house","main",132)+art("zippet","happy",92)+art("chick","awake",54)}
+function navIcons(){HILL_BACKS.forEach(id=>{const b=$(id);if(b){b.innerHTML=ICON_HILL;b.setAttribute("aria-label",NAV_HILL)}});
+ const h=$("homeBtn");if(h){h.innerHTML=art("house","main",54);h.setAttribute("aria-label",NAV_HOME)}
+ $("advI").innerHTML=art("zippet","happy",56);$("playI").innerHTML=ICON_HILL}
+homeArt();navIcons();$("ttl").textContent=TITLE; // no house emoji in front of the title
+const JBTN_ICON={"🏠":()=>art("house","main",44),"🐾":()=>art("zippet","happy",44)}; // journey card buttons: picture instead of emoji
+function polishBtns(root){root.querySelectorAll("button.big").forEach(b=>{if(b.dataset.pol)return;const t=b.textContent.trim(),k=Object.keys(JBTN_ICON).find(e=>t.startsWith(e));
+  if(k){b.innerHTML=`<span class="bi">${JBTN_ICON[k]()}</span><span class="bt">${t.slice(k.length).trim()}</span>`}b.classList.add("pbtn");b.dataset.pol=1})}
+JDOTS.map=""; // outside an Adventure the journey top bar shows nothing (was a map emoji)
+{const _dm=drawMap;drawMap=function(){const r=_dm.apply(this,arguments);const pr=$("princess");
+  if(MZ){pr.innerHTML="";pr.style.display="none"}else{pr.innerHTML=ICON_HILL;pr.style.display=""}
+  const hb=document.querySelector("#map .p-home");if(hb&&!MZ){const pl=hb.querySelector(".pl");hb.innerHTML=`<span class="hdart">${art("house","main",86)}${art("zippet","happy",50)}</span>`;if(pl)hb.appendChild(pl)}
+  return r};
+ const _jc=journeyCard;journeyCard=function(){const r=_jc.apply(this,arguments);const p=$("prompt");p.textContent=p.textContent.replace(/^🗺️\s*/,"");
+  $("visual").querySelectorAll(".card").forEach(c=>{if(c.firstChild&&c.firstChild.nodeType===3)c.firstChild.textContent=c.firstChild.textContent.replace(/^\s*🗺️\s*/,"")});polishBtns($("choices"));return r};
+ const bkz=()=>{const z=document.querySelector("#map .zback");if(z&&!z.dataset.pol){z.innerHTML=`<span class="bi">${ICON_HILL}</span><span class="bt">${ZBACK}</span>`;z.classList.add("pbtn");z.dataset.pol=1}};
+ const _dm2=drawMap;drawMap=function(){const r=_dm2.apply(this,arguments);bkz();return r}}
+// tests
+__test3.check6K=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},sn=bk6eSnap();
+ try{show("start");const st=$("start").getBoundingClientRect(),g=$("gearBtn").getBoundingClientRect(),hh=$("homeHero").getBoundingClientRect(),d=$("days").getBoundingClientRect();
+  if(st.height<=innerHeight+1){const top=hh.top-g.bottom,bot=st.bottom-d.bottom;if(Math.abs(top-bot)>48)f(`home not centred: ${Math.round(top)} above, ${Math.round(bot)} below`)}
+  if($("homeHero").querySelectorAll(".art").length!==3)f("home hero needs house, Zippet, chick");if(/🏡|🌳|🗺️/.test($("start").textContent))f("emoji left on home");
+  const ws=[...document.querySelectorAll("#homeMenu .big")].map(b=>Math.round(b.getBoundingClientRect().width));if(new Set(ws).size!==1)f("home buttons differ in width "+ws.join(","));
+  HILL_BACKS.forEach(id=>{const b=$(id);if(b&&!b.querySelector("svg.ico"))f(id+": no hill icon");if(b&&/🗺️/.test(b.textContent))f(id+": map emoji")});
+  if(!$("homeBtn").querySelector(".art"))f("homeBtn: no cottage");
+  if(/x="160" y="330"/.test(HILL_SVG))f("drawn house still in the hill");
+  const mz=MZ;MZ=null;show("mapS");drawMap();const hd=document.querySelector("#map .p-home .hdart");if(!hd||hd.querySelectorAll(".art").length!==2)f("Home Door: cottage + Zippet");
+  if(!$("princess").querySelector("svg.ico"))f("hill heading icon");MZ="home";drawMap();if($("princess").style.display!=="none")f("place heading icon should hide");MZ=mz;
+ }catch(e){f("error "+e.message)}finally{g6Restore(sn);MZ=null}return bad};
+{const _sc6k=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6k.call(this,N);const b=__test3.check6K();if(b.length)r.bad.check6K=b;return r}}
+Object.assign(__test3,{ICON_HILL,homeArt,navIcons});
+</script>
 <script id="batch4">
 // ---------- Batch 4: install app (text-only, no voice) ----------
 (function(){let deferred=null,dismissed=false,installed=false;
