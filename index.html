@@ -1670,7 +1670,7 @@ const _epStep6=epStep;epStep=function(){_epStep6();const E=EP;if(!E)return;const
  __test3.check6B=function(){const bad=[],all=[...PLANETS.map(p=>p.id),"build","story"],seen={};
   if(ZONES.length!==5)bad.push("need 5 places");ZONES.forEach(z=>{if(!CAST.find(c=>c.id===z.who))bad.push(z.id+": who");if(!z.intro)bad.push(z.id+": intro");z.p.forEach(id=>{if(seen[id])bad.push(id+" in two places");seen[id]=1})});all.forEach(id=>{if(!seen[id])bad.push(id+": in no place")});
   ["zippet","bear","moose","elephant","chick","blinkle","log","ball","house"].forEach(id=>{if(!ASSET_LIST.find(a=>a.id===id))bad.push("ASSET_LIST missing "+id);const c=CAST.find(x=>x.id===id);if(!c)bad.push("CAST missing "+id);else if(id!=="blinkle"&&!c.emoji)bad.push("no emoji "+id)});
-  if(ASSET_FILES.length!==6+2+12+3+3)bad.push("ASSET_FILES count "+ASSET_FILES.length);
+  if(ASSET_FILES.length!==6+2+12+3+3+(typeof SHOP!=="undefined"?SHOP.filter(p=>!ASSET_LIST.some(a=>a.poses.some(z=>a.id+"_"+z===p.id))).length:0)) /* 6M: gem-shop pictures are offline files too */bad.push("ASSET_FILES count "+ASSET_FILES.length);
   const t=document.createElement("div");t.innerHTML=art("bear","nosuchpose",50);const a=t.firstChild;if(!a||!/^(SPAN|IMG)$/.test(a.tagName)||a.style.width!=="50px"||!(a.getAttribute("aria-label")||a.alt))bad.push("art() fallback");
   Object.keys(SPEAKERS).forEach(e=>{if(!EPI[e])bad.push("SPEAKERS: no episode "+e);if(!CAST.find(c=>c.id===SPEAKERS[e]))bad.push("SPEAKERS: who "+e)});
   const OLD=/\b(Zippy|Twinkle|Tri-Star|Quadra|Starfive|Hexa|Rainbow|Octo|Nova|Queen Ten|Comet|Twelvy|Lucky|Fourteenie|Shimmer|Sixteen Sparkle|Seventeen Swirl|Eighteen Glow|Moonbeam|Twenty Twinkle|Buddies|Buddy|princess|planet)\b/i;
@@ -2150,7 +2150,7 @@ if(typeof S.stSeqFrom!=="number"){S.stSeqFrom=Math.min(Math.floor(S.stars/5),ST_
 function stSeq(from){const out=ST_BASE.slice(0,from),rest=ST_BASE.slice(from),P=PAINTED_ST.slice();let k=0;
  while(rest.length||P.length){if(P.length&&(k%3===0||!rest.length))out.push(P.shift());else out.push(rest.shift());k++}return out}
 ALLST.length=0;ALLST.push(...stSeq(S.stSeqFrom)); // stickerFor(), the collection and the tray all read ALLST
-const stName=t=>{const id=t.slice(4).split("_")[0],c=CAST.find(x=>x.id===id);return c?c.name:"Sticker"};
+let stName=t=>{const id=t.slice(4).split("_")[0],c=CAST.find(x=>x.id===id);return c?c.name:"Sticker"};
 const stImg=(t,z)=>`<img class="art stimg" src="assets/${t.slice(4)}.webp" alt="${stName(t)}" width="${z}" height="${z}" style="width:${z}px;height:${z}px">`;
 const isArtSt=t=>typeof t==="string"&&t.startsWith("art:");
 function fixArtText(el){if(el&&/art:[a-z_]+/.test(el.innerHTML))el.innerHTML=el.innerHTML.replace(/art:[a-z_]+/g,m=>stImg(m,56))}
@@ -2204,6 +2204,55 @@ __test3.check6L=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)};
  return bad};
 {const _sc6l=__test3.selfCheck;__test3.selfCheck=function(N){window.__stHold=true;try{const r=_sc6l.call(this,N);const b=__test3.check6L();if(b.length)r.bad.check6L=b;return r}finally{stShown=Math.floor(S.stars/5);stPending=null;stTick.s=null;window.__stHold=false}}} // tests move stars around; no pop for those
 Object.assign(__test3,{PAINTED_ST,stSeq,meterDraw,stPopShow,stCalm,get stPending(){return stPending}});
+</script>
+<script id="p6m">
+// ---------- Part 6M: the gem shop — spend gems on painted things for the Decorate hill ----------
+const SHOP=[{id:"ball_main",name:"Red ball",cost:2},{id:"flowers_main",name:"Flowers",cost:2},{id:"bee_main",name:"Bee",cost:3},
+ {id:"mushrooms_main",name:"Mushrooms",cost:3},{id:"log_main",name:"Hollow log",cost:4},{id:"tree_main",name:"Big tree",cost:5}];
+const SHOP_TXT={title:"Gem shop",need:"{n} more 💎 — finish a game to win a gem!",got:"New for your hill!",yours:"Yours!"};
+if(!Array.isArray(S.props))S.props=[];
+SHOP.forEach(p=>{const f="assets/"+p.id+".webp";if(!ASSET_FILES.includes(f))ASSET_FILES.push(f)}); // offline download includes them
+{const _ti=trayItems;trayItems=function(){return [...new Set([..._ti.apply(this,arguments),...S.props.map(id=>"art:"+id)])]}} // bought things go into the Decorate tray
+// stName(): props have their own names
+{const _sn=stName;stName=t=>{const p=SHOP.find(x=>"art:"+x.id===t);return p?p.name:_sn(t)}}
+document.head.insertAdjacentHTML("beforeend",`<style>
+#gemBar{display:flex;align-items:center;justify-content:center;gap:6px;font-size:22px;font-weight:bold;color:var(--ink)}
+#shop{margin:10px auto 4px;max-width:560px;padding:10px;border-radius:24px;background:rgba(var(--gold-rgb),.18)}
+#shop h3{margin:0 0 8px;font-size:clamp(20px,5vw,24px);color:var(--plum)}
+#shopRow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.shopIt{border:none;border-radius:18px;background:var(--card);box-shadow:0 4px 0 var(--tile-sh);padding:6px 4px 8px;font:inherit;color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:96px}
+.shopIt:active{transform:translateY(3px);box-shadow:0 1px 0 var(--tile-sh)}
+.shopIt .pr{font-size:15px;letter-spacing:-2px;min-height:20px}.shopIt.own .pr{letter-spacing:0;font-size:15px;color:var(--ok);font-weight:bold}
+.shopIt.poor{opacity:.55}.shopIt.shake{animation:shk .4s}@keyframes shk{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+#shopMsg{min-height:1.3em;font-size:17px;color:var(--plum);margin-top:6px}
+</style>`);
+$("decoS").querySelector(".top>div").insertAdjacentHTML("afterend",`<div id="gemBar" aria-label="Gems">💎 <b id="gemD">0</b></div>`);
+$("decoS").querySelector(".top>span").remove(); // the gem count takes the empty slot on the right
+$("tray").insertAdjacentHTML("afterend",`<div id="shop"><h3>💎 ${SHOP_TXT.title}</h3><div id="shopRow"></div><div id="shopMsg" aria-live="polite"></div></div>`);
+function shopDraw(){$("gemD").textContent=S.gems|0;const r=$("shopRow");r.innerHTML="";
+ SHOP.forEach(p=>{const own=S.props.includes(p.id),b=document.createElement("button");b.className="shopIt"+(own?" own":"")+(!own&&(S.gems|0)<p.cost?" poor":"");
+  b.innerHTML=stImg("art:"+p.id,56)+`<span class="pr">${own?SHOP_TXT.yours:"💎".repeat(p.cost)}</span>`;b.setAttribute("aria-label",`${p.name}: ${own?SHOP_TXT.yours:p.cost+" gems"}`);
+  b.onclick=()=>shopBuy(p,b);r.appendChild(b)})}
+function shopBuy(p,b){if(S.props.includes(p.id)){$("shopMsg").textContent="";return}
+ if((S.gems|0)<p.cost){$("shopMsg").textContent=SHOP_TXT.need.replace("{n}",p.cost-(S.gems|0));b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");try{tone(300,0,.12,"triangle")}catch(e){}return}
+ S.gems-=p.cost;S.props.push(p.id);save();$("shopMsg").textContent="";
+ const sp=$("stPop").querySelector(".spt"),t0=sp.textContent;sp.textContent=SHOP_TXT.got;stPopShow("art:"+p.id);
+ const restore=()=>{sp.textContent=t0;$("stPopOk").removeEventListener("click",restore)};$("stPopOk").addEventListener("click",restore);
+ drawDeco()}
+{const _dd=drawDeco;drawDeco=function(){const r=_dd.apply(this,arguments);shopDraw();return r}}
+{const _rb=resetB3;resetB3=function(){_rb.apply(this,arguments);S.props=[]}}
+// tests
+__test3.check6M=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},g0=S.gems,p0=S.props.slice(),sc=[...document.querySelectorAll(".screen.on")].map(e=>e.id);
+ try{SHOP.forEach(p=>{if(!ASSET_FILES.includes("assets/"+p.id+".webp"))f("asset "+p.id)});
+  S.props=[];S.gems=3;show("decoS");drawDeco();if($("shopRow").children.length!==SHOP.length)f("shop items");if($("gemD").textContent!=="3")f("gem count");
+  const tree=SHOP.find(p=>p.id==="tree_main"),ball=SHOP.find(p=>p.id==="ball_main");
+  shopBuy(tree,$("shopRow").children[5]);if(S.gems!==3||S.props.length)f("bought without enough gems");if(!/more/.test($("shopMsg").textContent))f("no 'more gems' message");
+  shopBuy(ball,$("shopRow").children[0]);if(S.gems!==1||!S.props.includes("ball_main"))f("buy failed");$("stPop").classList.remove("on");
+  if(!trayItems().includes("art:ball_main"))f("bought thing not in the tray");if(!document.querySelector('#tray img[src="assets/ball_main.webp"]'))f("tray picture");
+  const before=S.gems;shopBuy(ball,$("shopRow").children[0]);if(S.gems!==before)f("charged twice");
+ }catch(e){f("error "+e.message)}finally{S.gems=g0;S.props=p0;save();$("stPop").classList.remove("on");document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}return bad};
+{const _sc6m=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6m.call(this,N);const b=__test3.check6M();if(b.length)r.bad.check6M=b;return r}}
+Object.assign(__test3,{SHOP,shopBuy,shopDraw});
 </script>
 <script id="batch4">
 // ---------- Batch 4: install app (text-only, no voice) ----------
