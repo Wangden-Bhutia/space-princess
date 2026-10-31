@@ -2371,4 +2371,78 @@ __test3.checkHill6K2=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)}
  }catch(e){f("error "+e.message)}finally{MZ=mz;document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}return bad};
 {const _sc=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc.call(this,N);const b=__test3.checkHill6K2();if(b.length)r.bad.checkHill6K2=b;return r}}
 Object.assign(__test3,{SCENES,sceneHTML});
+</script>
+<script id="p6o">
+// ---------- Part 6O: no visible scrollbar; screens fit the viewport (safe areas); grown-ups page in cards ----------
+const GU_TXT={title:"For grown-ups",
+ heads:{prog:"📊 Progress",inst:"📲 Install app",about:"📖 About this game",set:"⚙️ Settings",time:"⏱️ Play time each day",lets:"🔤 Letter sounds",off:"⬇️ Offline",pilot:"📝 Pilot notes",reset:"⚠️ Reset progress"},
+ about:[["What it teaches","Counting, adding and take away, numbers, more and fewer, Quick Look, shapes, patterns and measuring; letters, first sounds, 3-letter words, rhymes and Sound Blending."],
+  ["How letters unlock","Letters come in school order: s a t p i n → m d g o → c k e u r → h b f l → j v w x y z q. The next group opens when she gets 8 of the last 10 right first time, or after 30 tries."],
+  ["Quick Look","Seeing small amounts at a glance: dots, ten-frames, and pairs that make 5 and 10."],
+  ["Zippet's Blocks","Build, join, split, make, odd and even pairs, and number stairs."],
+  ["Stars and hints","A first-try answer earns a star ⭐. An answer after a hint earns a sparkle ✨; two sparkles make a star. There is no way to fail: a wrong tap gets a kind hint."],
+  ["Quiet tracking","The game remembers each letter, number, word and fact, and brings weaker ones back now and then (at most 1 question in 4). Progress stays on this device only."]],
+ sw:{optSpeech:["Spoken prompts","Every question is read aloud; 🔊 repeats it."],optSound:["Sound effects","Taps, stars and cheers."],optVibe:["Vibration","A short buzz on Android. iPhone ignores it."]},
+ timeNote:"Counts active play only. She finishes the current question first.",
+ letNew:"Newest group: {r} of the last {n} right first time ({t} tries)."};
+document.head.insertAdjacentHTML("beforeend",`<style>
+html,body{scrollbar-width:none;-ms-overflow-style:none;overscroll-behavior:none}html::-webkit-scrollbar,body::-webkit-scrollbar,*::-webkit-scrollbar{display:none;width:0;height:0}
+*{scrollbar-width:none}
+:root{--sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px)}
+body{min-height:100dvh}
+.screen.on{min-height:calc(100dvh - var(--sat) - var(--sab))}
+#parentS .top>div{font-weight:bold;font-size:clamp(22px,5.6vw,28px)}
+#parentS .parent.gu{background:none;padding:0 4px;max-width:640px;margin:8px auto 16px;font-size:17px;line-height:1.45;display:flex;flex-direction:column;gap:14px}
+.gu .gc{background:rgba(var(--card-rgb),.96);border:2px solid rgba(var(--plum-rgb),.14);border-radius:20px;padding:14px 16px;box-shadow:0 3px 10px rgba(var(--plum-rgb),.10)}
+.gu .gc h3{margin:0 0 10px;font-size:20px;color:var(--ink)}
+.gu .gc .big{margin:4px 0!important;font-size:19px!important;padding:12px 20px!important;min-height:52px;width:100%;max-width:420px}
+.gu .gnote{font-size:15px;color:rgba(var(--ink-rgb),.78);margin:6px 0 0}
+.gu .gab{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}.gu .gab b{display:block;font-size:17px}.gu .gab span{font-size:16px}
+.gu label.gsw{display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 0;border-top:1px solid rgba(var(--plum-rgb),.12);cursor:pointer}.gu label.gsw:first-of-type{border-top:none}
+.gu .gsw .gst{flex:1;display:flex;flex-direction:column}.gu .gsw .gst b{font-size:18px}.gu .gsw .gst small{font-size:15px;color:rgba(var(--ink-rgb),.78);opacity:1!important}
+.gu .gsw input{appearance:none;-webkit-appearance:none;flex:none;width:56px;height:32px;border-radius:16px;background:rgba(var(--plum-rgb),.25);position:relative;margin:0!important;transform:none!important;cursor:pointer;transition:background .15s}
+.gu .gsw input::after{content:"";position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.3);transition:left .15s}
+.gu .gsw input:checked{background:var(--ok)}.gu .gsw input:checked::after{left:27px}.gu .gsw input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.gu #limBtns{display:grid!important;grid-template-columns:repeat(4,1fr);gap:0!important;background:rgba(var(--plum-rgb),.12);border-radius:16px;padding:4px}
+.gu #limBtns .tab{min-height:48px;margin:0;border-radius:12px;font-size:17px;padding:6px 4px;background:none;box-shadow:none;color:var(--ink)}.gu #limBtns .tab.on{background:var(--plum);color:var(--pill-ink)}
+.gu #limInfo{font-size:15px;margin-top:8px;color:rgba(var(--ink-rgb),.78);opacity:1!important}
+.gu .glets{display:flex;flex-wrap:wrap;gap:8px}.gu .glets span{border-radius:14px;padding:6px 12px;font-size:17px;letter-spacing:.06em;border:2px solid rgba(var(--plum-rgb),.18)}
+.gu .glets .u{background:rgba(var(--green-rgb,111,168,74),.18);border-color:var(--green)}.gu .glets .k{background:rgba(var(--plum-rgb),.06);color:rgba(var(--ink-rgb),.7)}
+.gu #letInfo{display:none}
+.gu .pbar{max-width:none!important;height:16px}
+.gu .gdz{border-color:var(--accent-dk);background:rgba(var(--card-rgb),.96)}.gu .gdz h3{color:var(--accent-dk)}
+.gu .gdz #resetBtn{background:var(--card);color:var(--accent-dk);border:3px solid var(--accent-dk);box-shadow:none}
+</style>`);
+function guBuild(){const p=document.querySelector("#parentS .parent");if(!p||p.classList.contains("gu"))return;const H=GU_TXT.heads,$q=s=>p.querySelector(s);
+ const card=(k,cls)=>{const c=document.createElement("section");c.className="gc"+(cls?" "+cls:"");c.dataset.k=k;const h=document.createElement("h3");h.textContent=H[k];c.appendChild(h);return c};
+ const nodes=[...p.childNodes];const C={};["prog","inst","about","set","time","lets","off","pilot"].forEach(k=>C[k]=card(k));C.reset=card("reset","gdz");
+ const progBtn=$("progBtn"),inst=$("instBox"),reset=$("resetBtn"),dl=$("dlBtn").closest("div"),lim=$("limBtns"),limI=$("limInfo"),let_=$("letInfo").closest("div");
+ const pilot=nodes.find(n=>n.nodeType===1&&/PILOT-NOTES/.test(n.textContent)),resetNote=nodes.find(n=>n.nodeType===1&&/^Reset clears/.test(n.textContent.trim()));
+ const timeHead=nodes.find(n=>n.nodeType===1&&/Play time each day/.test(n.textContent)&&!n.id);
+ C.prog.appendChild(progBtn);C.inst.appendChild(inst);
+ const ul=document.createElement("ul");ul.className="gab";GU_TXT.about.forEach(([h,t])=>{const li=document.createElement("li");li.innerHTML=`<b></b><span></span>`;li.children[0].textContent=h;li.children[1].textContent=t;ul.appendChild(li)});C.about.appendChild(ul);
+ [...p.querySelectorAll("label")].forEach(l=>{const i=l.querySelector("input");if(!i)return;l.classList.add("gsw");const st=document.createElement("span");st.className="gst";
+  if(GU_TXT.sw[i.id]){const [a,b]=GU_TXT.sw[i.id];st.innerHTML="<b></b><small></small>";st.children[0].textContent=a;st.children[1].textContent=b}
+  else{const t=l.querySelector("#optBkT"),n=l.querySelector("#optBkN");const bb=document.createElement("b");if(t)bb.appendChild(t);st.appendChild(bb);if(n)st.appendChild(n)}
+  i.setAttribute("role","switch");l.textContent="";l.appendChild(st);l.appendChild(i);C.set.appendChild(l)});
+ C.time.appendChild(lim);C.time.appendChild(limI);const tn=document.createElement("div");tn.className="gnote";tn.textContent=GU_TXT.timeNote;C.time.appendChild(tn);
+ const chips=document.createElement("div");chips.className="glets";chips.id="letChips";C.lets.appendChild(chips);C.lets.appendChild($("letInfo"));const ln=document.createElement("div");ln.className="gnote";ln.id="letNew";C.lets.appendChild(ln);
+ C.off.appendChild(dl);if(pilot){pilot.removeAttribute("style");pilot.className="gnote";C.pilot.appendChild(pilot)}
+ C.reset.appendChild(reset);if(resetNote){resetNote.removeAttribute("style");resetNote.className="gnote";C.reset.appendChild(resetNote)}
+ p.textContent="";p.classList.add("gu");["prog","inst","about","set","time","lets","off","pilot","reset"].forEach(k=>p.appendChild(C[k]));if(timeHead)timeHead.remove();if(let_&&let_.parentNode)let_.remove()}
+function guLetters(){const c=$("letChips");if(!c)return;c.innerHTML="";GROUPS.forEach((g,i)=>{const s=document.createElement("span");s.className=i<=LP.g?"u":"k";s.textContent=(i<=LP.g?"✓ ":"🔒 ")+g.join(" ").toLowerCase();c.appendChild(s)});
+ const n=$("letNew");if(n)n.textContent=LP.g<GROUPS.length-1?GU_TXT.letNew.replace("{r}",LP.hist.reduce((a,b)=>a+b,0)).replace("{n}",LP.hist.length).replace("{t}",LP.n):""}
+guBuild();
+{const _dp=drawParent;drawParent=function(){const r=_dp.apply(this,arguments);guBuild();guLetters();return r}}
+__test3.checkGU6O=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},sc=[...document.querySelectorAll(".screen.on")].map(e=>e.id);
+ try{show("parentS");drawParent();const p=document.querySelector("#parentS .parent");
+  ["progBtn","instBox","optSpeech","optSound","optVibe","optBk","limBtns","limInfo","letInfo","dlBtn","dlBar","dlMsg","resetBtn"].forEach(id=>{if(!$(id)||!p.contains($(id)))f("missing #"+id)});
+  if(p.querySelectorAll(".gc").length!==9)f("need 9 cards");if(!p.querySelector(".gdz #resetBtn")||p.lastElementChild!==p.querySelector(".gdz"))f("reset must be last, in its own zone");
+  if(!/PILOT-NOTES/.test(p.textContent))f("pilot note gone");if($("letChips").children.length!==GROUPS.length)f("letter chips");
+  if(document.documentElement.scrollWidth>innerWidth+1)f("sideways scroll");
+  [...p.querySelectorAll("button,label.gsw")].filter(b=>b.offsetParent).forEach(b=>{const r=b.getBoundingClientRect();if(r.height<47||r.width<47)f("small tap target: "+(b.id||b.textContent.trim().slice(0,20)))});
+  if(getComputedStyle(document.documentElement).scrollbarWidth!=="none")f("scrollbar visible")
+ }catch(e){f("error "+e.message)}finally{document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}return bad};
+{const _sc=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc.call(this,N);const b=__test3.checkGU6O();if(b.length)r.bad.checkGU6O=b;return r}}
+Object.assign(__test3,{GU_TXT,guBuild,guLetters});
 </script></body></html>
