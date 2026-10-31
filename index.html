@@ -1995,7 +1995,7 @@ __test3.check6F=function(){const bad=[],f=m=>{if(bad.length<30)bad.push(m)};
  ["pasta","paint","pinata","tomato","potato","diamond","onion"].forEach(w=>{if(WORDS.some(x=>x[0]===w))f("old word "+w)});
  __test3.checkWordsB().forEach(m=>f("checkWordsB: "+m));
  // F5: heading names the place; drawings tagged
- if(!/data-k="puddle"/.test(HILL_SVG)||!/data-k="log"/.test(HILL_SVG))f("hill drawings not tagged");
+ if(!/data-k="puddle"/.test(HILL_SVG)||!/data-k="log"/.test(HILL_SVG+(typeof hillArt==="function"?hillArt():"")))f("hill drawings not tagged") /* 6N: the log is a painted picture now */;
  const mz=MZ,on=$("mapS").classList.contains("on");try{ZONES.forEach(z=>{MZ=z.id;drawMap();const t=$("mapHT").textContent.trim();if(t!==z.name)f("heading "+z.id+": "+t)});MZ=null;drawMap();if($("mapHT").textContent.trim()!==MAP_H2)f("hill heading") /* 6K: the heading icon is a picture now, so only the words are compared */}finally{MZ=mz;drawMap();$("mapS").classList.toggle("on",on)}
  // F6
  try{const x=new XMLHttpRequest();x.open("GET","manifest.json",false);x.send();if(x.status===200){const m=JSON.parse(x.responseText);if(m.short_name!=="Zippet"||m.name!=="Zippet's Walk Home")f("manifest")}}catch(e){}
@@ -2128,7 +2128,7 @@ JDOTS.map=""; // outside an Adventure the journey top bar shows nothing (was a m
 // tests
 __test3.check6K=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},sn=bk6eSnap();
  try{show("start");const st=$("start").getBoundingClientRect(),g=$("gearBtn").getBoundingClientRect(),hh=$("homeHero").getBoundingClientRect(),d=$("days").getBoundingClientRect();
-  if(st.height<=innerHeight+1){const top=hh.top-g.bottom,bot=st.bottom-d.bottom;if(Math.abs(top-bot)>48)f(`home not centred: ${Math.round(top)} above, ${Math.round(bot)} below`)}
+  if(st.height<=innerHeight+1){const top=hh.top-g.bottom,bot=st.bottom-parseFloat(getComputedStyle($("start")).paddingBottom)-d.bottom; /* 6N: the painted band at the bottom is padding */if(Math.abs(top-bot)>48)f(`home not centred: ${Math.round(top)} above, ${Math.round(bot)} below`)}
   if($("homeHero").querySelectorAll(".art").length!==3)f("home hero needs house, Zippet, chick");if(/🏡|🌳|🗺️/.test($("start").textContent))f("emoji left on home");
   const ws=[...document.querySelectorAll("#homeMenu .big")].map(b=>Math.round(b.getBoundingClientRect().width));if(new Set(ws).size!==1)f("home buttons differ in width "+ws.join(","));
   HILL_BACKS.forEach(id=>{const b=$(id);if(b&&!b.querySelector("svg.ico"))f(id+": no hill icon");if(b&&/🗺️/.test(b.textContent))f(id+": map emoji")});
@@ -2253,6 +2253,41 @@ __test3.check6M=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},g0=S
  }catch(e){f("error "+e.message)}finally{S.gems=g0;S.props=p0;save();$("stPop").classList.remove("on");document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}return bad};
 {const _sc6m=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6m.call(this,N);const b=__test3.check6M();if(b.length)r.bad.check6M=b;return r}}
 Object.assign(__test3,{SHOP,shopBuy,shopDraw});
+</script>
+<script id="p6n">
+// ---------- Part 6N: book-style backdrop on every child screen; painted tree, log and flowers on the hill map ----------
+// A) Hill map: the drawn tree and log become the painted ones; painted flowers and mushrooms dress the hill
+const HILL_ART=[{id:"tree_main",l:-2,t:2,w:40,k:"tree"},{id:"log_main",l:68,t:66,w:30,k:"log"},{id:"mushrooms_main",l:2,t:81,w:16,k:"mushrooms"},{id:"bee_main",l:87,t:16,w:11,k:"bee"}];
+const HILL_SVG_ORIG=HILL_SVG;
+const HILL_SVG_PAINT=HILL_SVG.replace(/<rect x="56" y="70"[^]*?cx="92" cy="80" r="26" fill="var\(--ok\)"\/>/,"").replace(/<g data-k="log">[^]*?<\/g>/,""); // drop the drawn tree and log
+function hillArt(){return `<div class="hillart" aria-hidden="true">${HILL_ART.map(a=>`<img data-k="${a.k}" src="assets/${a.id}.webp" alt="" style="left:${a.l}%;top:${a.t}%;width:${a.w}%">`).join("")}</div>`}
+{const _dm=drawMap;drawMap=function(){const r=_dm.apply(this,arguments);const m=$("map");
+  if(!MZ){const s=m.querySelector(".hillsvg");if(s&&!m.querySelector(".hillart")){s.outerHTML=HILL_SVG_PAINT;m.querySelector(".hillsvg").insertAdjacentHTML("afterend",hillArt())}}return r}}
+// B) Backdrop: cream paper grain, a soft wash of the sky colour at the top (it follows the sky stage), and painted hills,
+//    flowers and mushrooms along the bottom. Grown-up screens and Decorate (which has its own scene) stay plain.
+const BD_NOISE=`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .42 0 0 0 0 .25 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
+const BD_HILLS=`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 90' preserveAspectRatio='none'%3E%3Cpath d='M0 52 C70 18 150 22 230 50 S360 70 400 40 V90 H0Z' fill='%23A6CF86' opacity='.55'/%3E%3Cpath d='M0 72 C90 44 190 52 260 70 S370 80 400 62 V90 H0Z' fill='%236FA84A' opacity='.55'/%3E%3C/svg%3E")`;
+const BD_SCREENS=["start","mapS","game","blocks","storyS","collS","epS","restS"];
+document.head.insertAdjacentHTML("beforeend",`<style>
+#map .hillart{position:absolute;inset:0;z-index:0;pointer-events:none}#map .hillart img{position:absolute;height:auto;display:block}
+${BD_SCREENS.map(id=>"#"+id+".on").join(",")}{
+ background:url(assets/flowers_main.webp) left 4px bottom 2px/86px no-repeat,url(assets/mushrooms_main.webp) right 6px bottom 4px/62px no-repeat,
+ ${BD_HILLS} bottom/100% 92px no-repeat,${BD_NOISE},
+ linear-gradient(to bottom,color-mix(in srgb,var(--sky-top) 45%,var(--card)) 0,var(--card) 300px),var(--card);
+ padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+@media (max-height:700px){${BD_SCREENS.map(id=>"#"+id+".on").join(",")}{background-size:58px,44px,100% 60px,auto,auto,auto;padding-bottom:calc(48px + env(safe-area-inset-bottom,0px))}}
+</style>`);
+// tests
+__test3.check6N=function(){const bad=[],f=m=>{if(bad.length<20)bad.push(m)},mz=MZ,sc=[...document.querySelectorAll(".screen.on")].map(e=>e.id);
+ try{MZ=null;show("mapS");drawMap();const m=$("map");["tree","log","mushrooms","bee"].forEach(k=>{if(!m.querySelector(`.hillart img[data-k="${k}"]`))f("hill: no painted "+k)});
+  if(/r="40" fill="var\(--ok\)"/.test(m.querySelector(".hillsvg").outerHTML))f("drawn tree still on the hill");if(/data-k="log"/.test(m.querySelector(".hillsvg").outerHTML))f("drawn log still on the hill");
+  if(!/data-k="puddle"/.test(m.querySelector(".hillsvg").outerHTML))f("puddle lost");
+  const lab=[...m.querySelectorAll(".zone.place .pl")];lab.forEach(l=>{if(getComputedStyle(l.closest(".zone")).zIndex!=="1")f("place above the art")});
+  BD_SCREENS.forEach(id=>{show(id);const bg=getComputedStyle($(id)).backgroundImage;if(!/flowers_main/.test(bg))f(id+": no backdrop")});
+  ["parentS","decoS"].forEach(id=>{show(id);if(/flowers_main/.test(getComputedStyle($(id)).backgroundImage))f(id+" should stay plain")});
+ }catch(e){f("error "+e.message)}finally{MZ=mz;document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on",sc.includes(e.id)))}return bad};
+{const _sc6n=__test3.selfCheck;__test3.selfCheck=function(N){const r=_sc6n.call(this,N);const b=__test3.check6N();if(b.length)r.bad.check6N=b;return r}}
+Object.assign(__test3,{HILL_ART,hillArt});
 </script>
 <script id="batch4">
 // ---------- Batch 4: install app (text-only, no voice) ----------
